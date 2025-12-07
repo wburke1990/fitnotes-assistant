@@ -1,0 +1,1632 @@
+{
+  "Data": [
+    {
+      "Deleted": false,
+      "Id": "BD803BBE-E14E-4814-8FE3-954F60B9D2F5",
+      "Name": "PIT Saturday",
+      "ColorScheme": {
+        "Green": 0,
+        "Name": "Purple",
+        "Deleted": false,
+        "Red": 111,
+        "Alpha": 1,
+        "IsPro": false,
+        "Id": "4",
+        "Blue": 246,
+        "IsDeletable": false
+      },
+      "Workouts": [
+        {
+          "IsCurrent": false,
+          "Measurements": [],
+          "Id": "49D1FC48-ECB3-43D1-83B5-6B6D6AB31D0D",
+          "IsEveryday": true,
+          "SuperSets": [
+            {
+              "Id": "749F2C5F-8B0C-453D-81FD-6B583E6DE0A8",
+              "Exercises": [
+                {
+                  "Rules": [],
+                  "RestTime": 0,
+                  "SetDetails": [
+                    {
+                      "Primary": 80,
+                      "IsPersonalRecord": false,
+                      "Status": 0,
+                      "RPE": 0,
+                      "Type": 0,
+                      "Secondary": 0,
+                      "Id": "59FD52E7-083C-42C9-898B-9903F04AB257"
+                    }
+                  ],
+                  "WarmupSetDetails": [],
+                  "Id": "F885E5DC-7369-41C5-8F02-F2A82ACF6000",
+                  "Definition": {
+                    "Name": "Side Plank",
+                    "Deleted": false,
+                    "Categories": [
+                      {
+                        "Id": "1da1c21b-6d4b-49ee-b579-98e4a28a4c3b",
+                        "Name": "Abductors",
+                        "Color": {
+                          "Deleted": false,
+                          "Id": "18",
+                          "IsDeletable": false,
+                          "Alpha": 1,
+                          "Red": 118,
+                          "Green": 174,
+                          "Blue": 175,
+                          "Name": "Blue Green 3",
+                          "IsPro": true
+                        }
+                      },
+                      {
+                        "Id": "3",
+                        "Name": "Obliques",
+                        "Color": {
+                          "Deleted": false,
+                          "Id": "2",
+                          "IsDeletable": false,
+                          "Alpha": 1,
+                          "Red": 12,
+                          "Blue": 88,
+                          "Name": "Green",
+                          "Green": 217,
+                          "IsPro": false
+                        }
+                      }
+                    ],
+                    "PrimaryFocusId": 3,
+                    "PersonalRecord": {
+                      "Status": 1,
+                      "Secondary": 0,
+                      "IsPersonalRecord": true,
+                      "Id": "90950255-523D-4B7C-9F17-EFF49FD00586",
+                      "LastStatusUpdate": 779226376.185846,
+                      "Primary": 80,
+                      "Type": 0,
+                      "RPE": 8
+                    },
+                    "LastCompleted": {
+                      "Id": "87A806F6-0F79-4F77-AB2C-5005DF3B4559",
+                      "Status": 1,
+                      "IsPersonalRecord": false,
+                      "Primary": 80,
+                      "LastStatusUpdate": 785613963.045839,
+                      "RPE": 0,
+                      "Secondary": 0,
+                      "Type": 0
+                    },
+                    "Equipment": {
+                      "IsDeletable": false,
+                      "Id": "0",
+                      "Name": "None",
+                      "Deleted": false
+                    },
+                    "SecondaryFocusId": 0,
+                    "Id": "794b8d0c-abe3-4791-bf1a-30af701d165d",
+                    "MaxPrimary": 80,
+                    "MaxSecondary": 0
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "IsCurrent": false,
+          "Measurements": [],
+          "Id": "875D2EC0-D759-4AFC-BA57-D4D33D95FACD",
+          "IsEveryday": true,
+          "SuperSets": [
+            {
+              "Id": "26060A82-80D1-4A79-9C91-57FEC00D727E",
+              "Exercises": [
+                {
+                  "RestTime": 0,
+                  "SetDetails": [
+                    {
+                      "Id": "660A4A99-4582-4800-9929-C422A7803A94",
+                      "RPE": 0,
+                      "Status": 0,
+                      "Secondary": 10,
+                      "IsPersonalRecord": false,
+                      "Primary": 12,
+                      "Type": 0
+                    }
+                  ],
+                  "Id": "2164AECC-F750-4579-AC67-602D88C2BE18",
+                  "Definition": {
+                    "LastCompleted": {
+                      "Type": 0,
+                      "LastStatusUpdate": 785613556.000497,
+                      "Id": "00E01751-3078-4550-8921-F683A87DB706",
+                      "Primary": 24,
+                      "RPE": 0,
+                      "Status": 1,
+                      "Secondary": 10,
+                      "IsPersonalRecord": false
+                    },
+                    "Name": "Bird Dog",
+                    "SecondaryFocusId": 3,
+                    "MaxSecondary": 10,
+                    "MaxPrimary": 24,
+                    "Deleted": false,
+                    "PrimaryFocusId": 1,
+                    "Categories": [
+                      {
+                        "Id": "11",
+                        "Name": "Back (Lower)",
+                        "Color": {
+                          "Green": 217,
+                          "Name": "Green",
+                          "Deleted": false,
+                          "Red": 12,
+                          "Alpha": 1,
+                          "IsPro": false,
+                          "Id": "2",
+                          "Blue": 88,
+                          "IsDeletable": false
+                        }
+                      }
+                    ],
+                    "Equipment": {
+                      "Id": "0",
+                      "Deleted": false,
+                      "Name": "None",
+                      "IsDeletable": false
+                    },
+                    "PersonalRecord": {
+                      "LastStatusUpdate": 779225195.796443,
+                      "Status": 1,
+                      "Primary": 24,
+                      "IsPersonalRecord": true,
+                      "RPE": 2,
+                      "Type": 0,
+                      "Id": "C4A09731-FA81-4636-9B1E-7DA57D3B9750",
+                      "Secondary": 10
+                    },
+                    "Id": "e7bfdf9c-a5d6-4e88-a196-ff98763d1e5b"
+                  },
+                  "WarmupSetDetails": [],
+                  "Rules": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "IsEveryday": true,
+          "SuperSets": [
+            {
+              "Id": "F60A049A-8521-4FE1-9A91-3F9C73568BAF",
+              "Exercises": [
+                {
+                  "SetDetails": [
+                    {
+                      "Status": 0,
+                      "Primary": 30,
+                      "IsPersonalRecord": false,
+                      "Secondary": 0,
+                      "Type": 0,
+                      "RPE": 0,
+                      "Id": "22EA7BC7-8C1A-45AA-A466-C3FA305C6E4C"
+                    }
+                  ],
+                  "Id": "4456B04D-730C-4029-B672-8C0473CCC532",
+                  "WarmupSetDetails": [],
+                  "RestTime": 0,
+                  "Definition": {
+                    "Id": "6FF05577-B66C-472C-91DF-C435A3B0FFCA",
+                    "Categories": [
+                      {
+                        "Color": {
+                          "Green": 140,
+                          "Blue": 157,
+                          "Name": "Pink1",
+                          "Id": "12",
+                          "Deleted": false,
+                          "IsDeletable": false,
+                          "Alpha": 1,
+                          "Red": 255,
+                          "IsPro": true
+                        },
+                        "Id": "5",
+                        "Name": "Abdominals (Lower)"
+                      },
+                      {
+                        "Color": {
+                          "Green": 194,
+                          "Blue": 209,
+                          "Id": "14",
+                          "Name": "Blue 2",
+                          "Deleted": false,
+                          "IsDeletable": false,
+                          "Alpha": 1,
+                          "Red": 53,
+                          "IsPro": true
+                        },
+                        "Id": "D2064B30-8C3D-4794-89DD-77C080535633",
+                        "Name": "Hip Flexors"
+                      }
+                    ],
+                    "MaxPrimary": 30,
+                    "MaxSecondary": 0,
+                    "PersonalRecord": {
+                      "Secondary": 0,
+                      "Id": "15C658AB-CDAD-48EB-9B32-233C08386652",
+                      "Status": 1,
+                      "IsPersonalRecord": true,
+                      "LastStatusUpdate": 783706638.711907,
+                      "Type": 0,
+                      "RPE": 0,
+                      "Primary": 30
+                    },
+                    "Equipment": {
+                      "Deleted": false,
+                      "Id": "0",
+                      "IsDeletable": false,
+                      "Name": "None"
+                    },
+                    "SecondaryFocusId": 0,
+                    "Name": "Slow Scissors",
+                    "PrimaryFocusId": 3,
+                    "LastCompleted": {
+                      "Secondary": 0,
+                      "Id": "1C98D7D4-5660-4A38-882B-AE751E265C6A",
+                      "Status": 1,
+                      "IsPersonalRecord": false,
+                      "LastStatusUpdate": 785613092.030914,
+                      "Type": 0,
+                      "RPE": 0,
+                      "Primary": 30
+                    },
+                    "Deleted": false
+                  },
+                  "Rules": []
+                }
+              ]
+            }
+          ],
+          "IsCurrent": false,
+          "Id": "988E3015-B3C8-43BE-8FFC-0A9D2F6837A1",
+          "Measurements": []
+        },
+        {
+          "IsEveryday": true,
+          "Measurements": [],
+          "IsCurrent": false,
+          "SuperSets": [
+            {
+              "Id": "6F7BD7F2-DBF8-4E02-9787-D8495739DFB7",
+              "Exercises": [
+                {
+                  "Rules": [],
+                  "RestTime": 0,
+                  "SetDetails": [
+                    {
+                      "Status": 0,
+                      "RPE": 0,
+                      "Primary": 13,
+                      "Id": "ABA0387C-C77C-4EB0-A1BB-7BB65B2595E9",
+                      "Type": 0,
+                      "Secondary": 70,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "Status": 0,
+                      "RPE": 0,
+                      "Primary": 13,
+                      "Id": "717F2CA3-BA4E-4438-A9EF-2910AB6CA623",
+                      "Type": 0,
+                      "Secondary": 70,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "Status": 0,
+                      "RPE": 0,
+                      "Primary": 13,
+                      "Id": "D1825A41-9C0B-4F43-989D-C5CAD193BA2B",
+                      "Type": 0,
+                      "Secondary": 70,
+                      "IsPersonalRecord": false
+                    }
+                  ],
+                  "Id": "E7C35329-5B39-4143-97B8-D0567C260AF4",
+                  "Definition": {
+                    "Id": "df758bef-a238-4247-9b50-264b04ebda55",
+                    "Deleted": false,
+                    "Name": "Machine Overhead Press",
+                    "MaxSecondary": 130,
+                    "LastCompleted": {
+                      "LastStatusUpdate": 784067882.759075,
+                      "Secondary": 90,
+                      "Id": "EAE6A618-D3D5-4DA9-A9E9-DCAF0DC1B575",
+                      "Status": 1,
+                      "RPE": 0,
+                      "Type": 0,
+                      "Primary": 5,
+                      "IsPersonalRecord": false
+                    },
+                    "Equipment": {
+                      "Name": "Machine",
+                      "Id": "4",
+                      "Deleted": false,
+                      "IsDeletable": false
+                    },
+                    "PersonalRecord": {
+                      "LastStatusUpdate": 783797925.240201,
+                      "Secondary": 70,
+                      "Id": "18439C31-BCF4-4164-8FE8-A344990C5426",
+                      "Status": 1,
+                      "RPE": 0,
+                      "Type": 0,
+                      "Primary": 13,
+                      "IsPersonalRecord": true
+                    },
+                    "PrimaryFocusId": 1,
+                    "Categories": [
+                      {
+                        "Id": "0",
+                        "Color": {
+                          "Id": "7",
+                          "Red": 25,
+                          "Green": 25,
+                          "IsPro": true,
+                          "IsDeletable": false,
+                          "Name": "Black 1",
+                          "Alpha": 1,
+                          "Blue": 25,
+                          "Deleted": false
+                        },
+                        "Name": "Deltoids"
+                      },
+                      {
+                        "Id": "2",
+                        "Color": {
+                          "Blue": 217,
+                          "Green": 166,
+                          "Deleted": false,
+                          "Red": 12,
+                          "Id": "0",
+                          "IsDeletable": false,
+                          "IsPro": false,
+                          "Alpha": 1,
+                          "Name": "Default"
+                        },
+                        "Name": "Pectorals"
+                      },
+                      {
+                        "Id": "9",
+                        "Color": {
+                          "Id": "19",
+                          "Red": 42,
+                          "Green": 109,
+                          "IsPro": true,
+                          "IsDeletable": false,
+                          "Name": "Blue Green 4",
+                          "Blue": 130,
+                          "Alpha": 1,
+                          "Deleted": false
+                        },
+                        "Name": "Triceps"
+                      },
+                      {
+                        "Id": "8",
+                        "Color": {
+                          "Id": "22",
+                          "Red": 64,
+                          "Green": 89,
+                          "IsPro": true,
+                          "IsDeletable": false,
+                          "Name": "Pastel 1",
+                          "Alpha": 1,
+                          "Blue": 128,
+                          "Deleted": false
+                        },
+                        "Name": "Trapezius"
+                      }
+                    ],
+                    "SecondaryFocusId": 2,
+                    "MaxPrimary": 13
+                  },
+                  "WarmupSetDetails": []
+                }
+              ]
+            }
+          ],
+          "Id": "A20A57E6-F2EF-42CF-868C-7F855672FBE1"
+        },
+        {
+          "IsEveryday": true,
+          "Measurements": [],
+          "IsCurrent": false,
+          "SuperSets": [
+            {
+              "Exercises": [
+                {
+                  "WarmupSetDetails": [],
+                  "SetDetails": [
+                    {
+                      "Primary": 12,
+                      "Id": "76852559-705F-41C4-BA27-C99D2E1A69A6",
+                      "Type": 0,
+                      "Secondary": 100,
+                      "RPE": 0,
+                      "Status": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "Primary": 12,
+                      "Id": "465CEED2-D444-4431-9AF1-0CD845A8DB71",
+                      "Type": 0,
+                      "Secondary": 100,
+                      "RPE": 0,
+                      "Status": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "Primary": 12,
+                      "Id": "30B44671-A51C-4731-B6D8-B8DF3780AA4F",
+                      "Type": 0,
+                      "Secondary": 100,
+                      "RPE": 0,
+                      "Status": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "Primary": 12,
+                      "Id": "00324412-BE44-4720-8FFC-3CCEFA91AE3E",
+                      "Type": 0,
+                      "Secondary": 100,
+                      "RPE": 0,
+                      "Status": 0,
+                      "IsPersonalRecord": false
+                    }
+                  ],
+                  "Rules": [],
+                  "RestTime": 0,
+                  "Definition": {
+                    "MaxPrimary": 13,
+                    "Categories": [
+                      {
+                        "Id": "6",
+                        "Color": {
+                          "Blue": 31,
+                          "Green": 150,
+                          "Deleted": false,
+                          "Red": 106,
+                          "Id": "21",
+                          "IsDeletable": false,
+                          "IsPro": true,
+                          "Alpha": 1,
+                          "Name": "Green 2"
+                        },
+                        "Name": "Adductors"
+                      }
+                    ],
+                    "Id": "776743bc-478c-4509-a235-3b9d33e10398",
+                    "Equipment": {
+                      "Id": "4",
+                      "Deleted": false,
+                      "IsDeletable": false,
+                      "Name": "Machine"
+                    },
+                    "PersonalRecord": {
+                      "RPE": 0,
+                      "LastStatusUpdate": 781035451.425301,
+                      "Secondary": 100,
+                      "Status": 1,
+                      "IsPersonalRecord": true,
+                      "Primary": 12,
+                      "Id": "FB3C0154-3006-45E1-AC1B-2D9F1065FDFB",
+                      "Type": 0
+                    },
+                    "Deleted": false,
+                    "Name": "Hip Adduction",
+                    "PrimaryFocusId": 1,
+                    "MaxSecondary": 140,
+                    "SecondaryFocusId": 2,
+                    "LastCompleted": {
+                      "RPE": 0,
+                      "LastStatusUpdate": 784067884.760138,
+                      "Secondary": 110,
+                      "Status": 1,
+                      "IsPersonalRecord": false,
+                      "Primary": 8,
+                      "Id": "1CEC8842-F538-41B4-BBE0-97BC11CBC806",
+                      "Type": 0
+                    }
+                  },
+                  "Id": "CCC017AD-341A-48ED-92CF-B4D45139937E"
+                }
+              ],
+              "Id": "FD5527F0-E1AB-4280-8536-F7333A0F9458"
+            }
+          ],
+          "Id": "3424A59B-0172-46F3-B992-A142BABD7E45"
+        },
+        {
+          "IsEveryday": true,
+          "Measurements": [],
+          "IsCurrent": false,
+          "SuperSets": [
+            {
+              "Exercises": [
+                {
+                  "Id": "E439A541-4267-4596-BBCB-ABE56F0D5E0A",
+                  "RestTime": 0,
+                  "Definition": {
+                    "LastCompleted": {
+                      "IsPersonalRecord": false,
+                      "Status": 1,
+                      "Secondary": 150,
+                      "Type": 0,
+                      "RPE": 0,
+                      "LastStatusUpdate": 784067886.382262,
+                      "Primary": 9,
+                      "Id": "394580C3-ECF1-48C9-BC07-276158F3A06B"
+                    },
+                    "Id": "a5d3e9a7-7fac-473d-bbff-bbeae3f43849",
+                    "Deleted": false,
+                    "Name": "Hip Abduction ",
+                    "MaxPrimary": 13,
+                    "PrimaryFocusId": 1,
+                    "SecondaryFocusId": 2,
+                    "MaxSecondary": 150,
+                    "Equipment": {
+                      "Name": "Machine",
+                      "Id": "4",
+                      "Deleted": false,
+                      "IsDeletable": false
+                    },
+                    "Categories": [
+                      {
+                        "Id": "1da1c21b-6d4b-49ee-b579-98e4a28a4c3b",
+                        "Name": "Abductors",
+                        "Color": {
+                          "Name": "Blue Green 3",
+                          "IsDeletable": false,
+                          "IsPro": true,
+                          "Alpha": 1,
+                          "Deleted": false,
+                          "Green": 174,
+                          "Red": 118,
+                          "Blue": 175,
+                          "Id": "18"
+                        }
+                      }
+                    ],
+                    "PersonalRecord": {
+                      "IsPersonalRecord": true,
+                      "Status": 1,
+                      "Secondary": 130,
+                      "Type": 0,
+                      "RPE": 0,
+                      "LastStatusUpdate": 781212350.815945,
+                      "Primary": 13,
+                      "Id": "1E7650A0-6188-412F-95B1-76EC2518FAB8"
+                    }
+                  },
+                  "Rules": [],
+                  "WarmupSetDetails": [],
+                  "SetDetails": [
+                    {
+                      "Id": "FACFD8B6-FC13-4528-A9D4-75EF46ECAE54",
+                      "Primary": 12,
+                      "Type": 0,
+                      "IsPersonalRecord": false,
+                      "RPE": 0,
+                      "Status": 0,
+                      "Secondary": 140
+                    },
+                    {
+                      "Id": "7462879D-616E-45FB-8B6C-AEA35A61642C",
+                      "Primary": 12,
+                      "Type": 0,
+                      "IsPersonalRecord": false,
+                      "RPE": 0,
+                      "Status": 0,
+                      "Secondary": 140
+                    },
+                    {
+                      "Id": "3193904C-20E3-402C-A8FF-DC4A2958FAC6",
+                      "Primary": 12,
+                      "Type": 0,
+                      "IsPersonalRecord": false,
+                      "RPE": 0,
+                      "Status": 0,
+                      "Secondary": 140
+                    },
+                    {
+                      "Id": "94A90D15-3558-4937-BA61-4AC14A23AE70",
+                      "Primary": 12,
+                      "Type": 0,
+                      "IsPersonalRecord": false,
+                      "RPE": 0,
+                      "Status": 0,
+                      "Secondary": 140
+                    }
+                  ]
+                }
+              ],
+              "Id": "B352CE17-0D91-4BCF-BDCD-742F714FA4E7"
+            }
+          ],
+          "Id": "FF694532-31F5-4B32-9060-E48579335BBB"
+        },
+        {
+          "IsEveryday": true,
+          "Measurements": [],
+          "IsCurrent": false,
+          "SuperSets": [
+            {
+              "Id": "430887FF-46E9-44E1-81D2-75596CF384DA",
+              "Exercises": [
+                {
+                  "Id": "D39ECE74-95F6-43EE-9969-F9E88DEFABA1",
+                  "RestTime": 0,
+                  "WarmupSetDetails": [],
+                  "Rules": [],
+                  "Definition": {
+                    "LastCompleted": {
+                      "Type": 0,
+                      "Secondary": 130,
+                      "LastStatusUpdate": 784068680.896504,
+                      "RPE": 0,
+                      "IsPersonalRecord": false,
+                      "Status": 1,
+                      "Primary": 6,
+                      "Id": "28E364D0-6B3D-48BD-84D8-9F07A11DFED3"
+                    },
+                    "Deleted": false,
+                    "Id": "bca5fa71-30e7-428c-b6cf-9895d0508274",
+                    "MaxPrimary": 15,
+                    "PrimaryFocusId": 1,
+                    "Name": "Dumbbell Incline Bench Press",
+                    "SecondaryFocusId": 2,
+                    "MaxSecondary": 140,
+                    "Equipment": {
+                      "IsDeletable": false,
+                      "Name": "Double Dumbbell",
+                      "Deleted": false,
+                      "Id": "2"
+                    },
+                    "Categories": [
+                      {
+                        "Color": {
+                          "Id": "0",
+                          "Green": 166,
+                          "IsPro": false,
+                          "IsDeletable": false,
+                          "Deleted": false,
+                          "Red": 12,
+                          "Blue": 217,
+                          "Name": "Default",
+                          "Alpha": 1
+                        },
+                        "Name": "Pectorals",
+                        "Id": "2"
+                      },
+                      {
+                        "Color": {
+                          "Id": "7",
+                          "Alpha": 1,
+                          "IsPro": true,
+                          "IsDeletable": false,
+                          "Deleted": false,
+                          "Red": 25,
+                          "Blue": 25,
+                          "Name": "Black 1",
+                          "Green": 25
+                        },
+                        "Name": "Deltoids",
+                        "Id": "0"
+                      },
+                      {
+                        "Color": {
+                          "Green": 109,
+                          "Alpha": 1,
+                          "IsPro": true,
+                          "IsDeletable": false,
+                          "Deleted": false,
+                          "Red": 42,
+                          "Blue": 130,
+                          "Name": "Blue Green 4",
+                          "Id": "19"
+                        },
+                        "Name": "Triceps",
+                        "Id": "9"
+                      }
+                    ],
+                    "PersonalRecord": {
+                      "Type": 0,
+                      "Secondary": 100,
+                      "LastStatusUpdate": 780760364.830155,
+                      "RPE": 0,
+                      "IsPersonalRecord": true,
+                      "Status": 1,
+                      "Primary": 15,
+                      "Id": "5D171C83-DBFA-4492-B15C-D7080727DF12"
+                    }
+                  },
+                  "SetDetails": [
+                    {
+                      "Id": "A760F33D-D4FF-47D8-BA5C-EDD1C98C9A72",
+                      "Primary": 14,
+                      "IsPersonalRecord": false,
+                      "Type": 0,
+                      "RPE": 0,
+                      "Status": 0,
+                      "Secondary": 100
+                    },
+                    {
+                      "Id": "AAFD7742-8173-4EE6-AE83-B2AF76B8EBE8",
+                      "Primary": 14,
+                      "IsPersonalRecord": false,
+                      "Type": 0,
+                      "RPE": 0,
+                      "Status": 0,
+                      "Secondary": 100
+                    },
+                    {
+                      "Id": "52C255E3-2036-4D20-A82D-2E9EDBC9859F",
+                      "Primary": 14,
+                      "IsPersonalRecord": false,
+                      "Type": 0,
+                      "RPE": 0,
+                      "Status": 0,
+                      "Secondary": 100
+                    },
+                    {
+                      "Id": "90645169-77A6-4B10-B39D-C3DB9D236825",
+                      "Primary": 13,
+                      "IsPersonalRecord": false,
+                      "Type": 0,
+                      "RPE": 0,
+                      "Status": 0,
+                      "Secondary": 100
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "Id": "BEDEF48A-9C86-48E8-A358-5B2555BDBAF8"
+        },
+        {
+          "IsEveryday": true,
+          "Measurements": [],
+          "IsCurrent": false,
+          "SuperSets": [
+            {
+              "Id": "0ACC71DD-98A2-47BC-B32E-1E6EB02DFEFF",
+              "Exercises": [
+                {
+                  "Definition": {
+                    "Id": "FromFile_39",
+                    "Equipment": {
+                      "IsDeletable": false,
+                      "Name": "Machine",
+                      "Deleted": false,
+                      "Id": "4"
+                    },
+                    "PersonalRecord": {
+                      "IsPersonalRecord": true,
+                      "Secondary": 160,
+                      "Status": 1,
+                      "Type": 0,
+                      "RPE": 0,
+                      "Primary": 12,
+                      "Id": "828F1A79-9CD3-46A4-8D88-205555E1E4FE",
+                      "LastStatusUpdate": 784067897.74915
+                    },
+                    "Name": "Chest Supported Row",
+                    "Deleted": false,
+                    "MaxSecondary": 180,
+                    "LastCompleted": {
+                      "IsPersonalRecord": false,
+                      "Secondary": 160,
+                      "Status": 1,
+                      "Type": 0,
+                      "RPE": 0,
+                      "Primary": 12,
+                      "Id": "79882A14-1E7A-4DA0-907F-375F55FA090E",
+                      "LastStatusUpdate": 784068672.161902
+                    },
+                    "MaxPrimary": 13,
+                    "PrimaryFocusId": 1,
+                    "Categories": [
+                      {
+                        "Name": "Latissimus Dorsi",
+                        "Color": {
+                          "Alpha": 1,
+                          "IsPro": true,
+                          "IsDeletable": false,
+                          "Deleted": false,
+                          "Green": 217,
+                          "Red": 12,
+                          "Name": "Green",
+                          "Blue": 88,
+                          "Id": "2"
+                        },
+                        "Id": "16a8f3c5-7b2e-4d91-9f45-8e3d4c9a1b7f"
+                      },
+                      {
+                        "Name": "Trapezius",
+                        "Color": {
+                          "IsPro": true,
+                          "IsDeletable": false,
+                          "Deleted": false,
+                          "Alpha": 1,
+                          "Id": "22",
+                          "Red": 64,
+                          "Green": 89,
+                          "Name": "Pastel 1",
+                          "Blue": 128
+                        },
+                        "Id": "8"
+                      },
+                      {
+                        "Name": "Back (Lower)",
+                        "Color": {
+                          "IsPro": false,
+                          "IsDeletable": false,
+                          "Deleted": false,
+                          "Id": "2",
+                          "Alpha": 1,
+                          "Red": 12,
+                          "Green": 217,
+                          "Blue": 88,
+                          "Name": "Green"
+                        },
+                        "Id": "11"
+                      },
+                      {
+                        "Name": "Biceps",
+                        "Color": {
+                          "IsPro": false,
+                          "IsDeletable": false,
+                          "Deleted": false,
+                          "Id": "5",
+                          "Alpha": 1,
+                          "Red": 5,
+                          "Blue": 246,
+                          "Name": "Blue",
+                          "Green": 108
+                        },
+                        "Id": "1"
+                      }
+                    ],
+                    "SecondaryFocusId": 2
+                  },
+                  "SetDetails": [
+                    {
+                      "Id": "C8C4C77B-61C3-4D00-9175-C36FA32AA68C",
+                      "Primary": 13,
+                      "Type": 0,
+                      "IsPersonalRecord": false,
+                      "RPE": 0,
+                      "Status": 0,
+                      "Secondary": 140
+                    },
+                    {
+                      "Primary": 13,
+                      "Secondary": 140,
+                      "Type": 0,
+                      "RPE": 0,
+                      "Status": 0,
+                      "IsPersonalRecord": false,
+                      "Id": "DB40243D-0BBF-4814-89B3-BC5D1E0A6E49"
+                    },
+                    {
+                      "Primary": 13,
+                      "Secondary": 140,
+                      "Type": 0,
+                      "RPE": 0,
+                      "Status": 0,
+                      "IsPersonalRecord": false,
+                      "Id": "852E563D-0127-4252-969F-C7D5DD4A22CB"
+                    },
+                    {
+                      "Primary": 13,
+                      "Secondary": 140,
+                      "Type": 0,
+                      "RPE": 0,
+                      "Status": 0,
+                      "IsPersonalRecord": false,
+                      "Id": "65E9592B-2032-4920-8FC0-C3369BC0DF1F"
+                    }
+                  ],
+                  "Id": "6DF50CBB-1EC8-4500-8152-873E17503CF9",
+                  "RestTime": 0,
+                  "WarmupSetDetails": [],
+                  "Rules": []
+                }
+              ]
+            }
+          ],
+          "Id": "F57B5078-149E-48E3-B3F4-74ECD9BD434F"
+        },
+        {
+          "IsEveryday": true,
+          "Measurements": [],
+          "IsCurrent": false,
+          "SuperSets": [
+            {
+              "Id": "1B3EE877-B859-4F07-9555-2BEC42AB824E",
+              "Exercises": [
+                {
+                  "Definition": {
+                    "Id": "901f6f4f-cbc5-4a58-8354-dfa97bd5aa38",
+                    "Equipment": {
+                      "Id": "4",
+                      "IsDeletable": false,
+                      "Name": "Machine",
+                      "Deleted": false
+                    },
+                    "PersonalRecord": {
+                      "Type": 0,
+                      "Id": "F01CC465-672E-4F69-8D62-D700BF889F53",
+                      "Primary": 44,
+                      "IsPersonalRecord": true,
+                      "Secondary": 20,
+                      "LastStatusUpdate": 784067899.069593,
+                      "Status": 1,
+                      "RPE": 0
+                    },
+                    "Name": "Tibialis Raise",
+                    "Deleted": false,
+                    "MaxSecondary": 20,
+                    "LastCompleted": {
+                      "Type": 0,
+                      "Id": "FD7BA3EA-4361-4B5D-BF36-A4BCDB1306D7",
+                      "Primary": 44,
+                      "IsPersonalRecord": false,
+                      "Secondary": 20,
+                      "LastStatusUpdate": 784069002.287333,
+                      "Status": 1,
+                      "RPE": 0
+                    },
+                    "MaxPrimary": 44,
+                    "PrimaryFocusId": 1,
+                    "Categories": [
+                      {
+                        "Name": "Tibialis",
+                        "Color": {
+                          "Green": 174,
+                          "Blue": 175,
+                          "IsDeletable": false,
+                          "Id": "18",
+                          "Deleted": false,
+                          "IsPro": true,
+                          "Red": 118,
+                          "Name": "Blue Green 3",
+                          "Alpha": 1
+                        },
+                        "Id": "2e44a7f8-0474-4763-87c8-d8e6c311aa12"
+                      }
+                    ],
+                    "SecondaryFocusId": 2
+                  },
+                  "SetDetails": [
+                    {
+                      "Primary": 42,
+                      "Secondary": 20,
+                      "Type": 0,
+                      "RPE": 0,
+                      "Status": 0,
+                      "IsPersonalRecord": false,
+                      "Id": "247496D0-25BE-4E20-8C88-7114030E4D36"
+                    },
+                    {
+                      "Primary": 42,
+                      "Secondary": 20,
+                      "Type": 0,
+                      "RPE": 0,
+                      "Status": 0,
+                      "IsPersonalRecord": false,
+                      "Id": "B96F09A1-DA09-4672-98C1-EF1A513A5410"
+                    },
+                    {
+                      "Primary": 42,
+                      "Secondary": 20,
+                      "Type": 0,
+                      "RPE": 0,
+                      "Status": 0,
+                      "IsPersonalRecord": false,
+                      "Id": "19ECFB1A-A01A-4C08-9015-D53218C78D80"
+                    },
+                    {
+                      "Primary": 42,
+                      "Secondary": 20,
+                      "Type": 0,
+                      "RPE": 0,
+                      "Status": 0,
+                      "IsPersonalRecord": false,
+                      "Id": "5FBF62B6-965A-4C94-89E9-445E1ADAFB76"
+                    }
+                  ],
+                  "Id": "47B9C9ED-6241-4644-88CD-F1BCE3A01998",
+                  "RestTime": 0,
+                  "WarmupSetDetails": [],
+                  "Rules": []
+                }
+              ]
+            }
+          ],
+          "Id": "7783A21A-8975-485F-A82E-F5AD5CD50DA6"
+        },
+        {
+          "Id": "8E2C51AF-F645-4F75-B6BA-5E13E8705479",
+          "SuperSets": [
+            {
+              "Id": "2F968DE4-8D3E-4E9E-8016-E91A4052FA0B",
+              "Exercises": [
+                {
+                  "Definition": {
+                    "PrimaryFocusId": 1,
+                    "Deleted": false,
+                    "Categories": [
+                      {
+                        "Name": "Calves",
+                        "Color": {
+                          "IsPro": false,
+                          "Blue": 246,
+                          "Name": "Purple",
+                          "IsDeletable": false,
+                          "Id": "4",
+                          "Red": 111,
+                          "Green": 0,
+                          "Alpha": 1,
+                          "Deleted": false
+                        },
+                        "Id": "14"
+                      }
+                    ],
+                    "MaxPrimary": 26,
+                    "Id": "FromFile_8",
+                    "Equipment": {
+                      "Name": "Machine",
+                      "IsDeletable": false,
+                      "Id": "4",
+                      "Deleted": false
+                    },
+                    "MaxSecondary": 90,
+                    "PersonalRecord": {
+                      "IsPersonalRecord": true,
+                      "Status": 1,
+                      "Primary": 26,
+                      "Secondary": 90,
+                      "Id": "4F71AD9A-F2F5-4529-986C-9767665D31D5",
+                      "LastStatusUpdate": 784067901.170575,
+                      "Type": 0,
+                      "RPE": 0
+                    },
+                    "Name": "Seated Calf Raise",
+                    "SecondaryFocusId": 2,
+                    "LastCompleted": {
+                      "IsPersonalRecord": false,
+                      "Status": 1,
+                      "Primary": 26,
+                      "Secondary": 90,
+                      "Id": "78D63CCB-CC48-4BB9-9EA0-82CFAFFC23FD",
+                      "LastStatusUpdate": 784068693.720399,
+                      "Type": 0,
+                      "RPE": 0
+                    }
+                  },
+                  "Id": "B7E3FC85-7D24-477C-8916-586FDE932435",
+                  "RestTime": 0,
+                  "SetDetails": [
+                    {
+                      "Id": "1584ED88-C1F3-45A0-8AE0-D8FEA6365B19",
+                      "Secondary": 90,
+                      "Type": 0,
+                      "RPE": 0,
+                      "Status": 0,
+                      "IsPersonalRecord": false,
+                      "Primary": 25
+                    },
+                    {
+                      "Id": "CA9656DD-1006-4187-899E-CE776804D95D",
+                      "Secondary": 90,
+                      "Type": 0,
+                      "RPE": 0,
+                      "Status": 0,
+                      "IsPersonalRecord": false,
+                      "Primary": 25
+                    },
+                    {
+                      "Id": "D85509B5-36B9-4B26-BE1B-221658CAA42A",
+                      "Secondary": 90,
+                      "Type": 0,
+                      "RPE": 0,
+                      "Status": 0,
+                      "IsPersonalRecord": false,
+                      "Primary": 25
+                    },
+                    {
+                      "Id": "34C3CB50-35DD-49BC-854D-8E6977E9871A",
+                      "Secondary": 90,
+                      "Type": 0,
+                      "RPE": 0,
+                      "Status": 0,
+                      "IsPersonalRecord": false,
+                      "Primary": 25
+                    }
+                  ],
+                  "WarmupSetDetails": [],
+                  "Rules": []
+                }
+              ]
+            }
+          ],
+          "IsCurrent": false,
+          "IsEveryday": true,
+          "Measurements": []
+        },
+        {
+          "Id": "AF445993-263D-47FE-8A9F-D8CB06060641",
+          "SuperSets": [
+            {
+              "Id": "9967B1DB-C84C-440E-B69A-A452D85D18A4",
+              "Exercises": [
+                {
+                  "Id": "FDA30B60-ED52-4000-9713-D80FC2BAA898",
+                  "SetDetails": [
+                    {
+                      "RPE": 0,
+                      "Id": "69757461-21EB-4E2D-8CCF-0CCE48E24E67",
+                      "Type": 0,
+                      "Primary": 40,
+                      "Secondary": 6,
+                      "Status": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "RPE": 0,
+                      "Id": "52859EF7-4092-4694-80DB-ACF8F7696837",
+                      "Type": 0,
+                      "Primary": 40,
+                      "Secondary": 6,
+                      "Status": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "RPE": 0,
+                      "Id": "0FCDF9B5-C23F-4B4B-BD75-0A28AF179AE4",
+                      "Type": 0,
+                      "Primary": 40,
+                      "Secondary": 6,
+                      "Status": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "RPE": 0,
+                      "Id": "A95369F4-8066-4B1D-8494-1CE703027B66",
+                      "Type": 0,
+                      "Primary": 40,
+                      "Secondary": 6,
+                      "Status": 0,
+                      "IsPersonalRecord": false
+                    }
+                  ],
+                  "Rules": [],
+                  "Definition": {
+                    "PrimaryFocusId": 1,
+                    "Deleted": false,
+                    "Categories": [
+                      {
+                        "Id": "0",
+                        "Name": "Deltoids",
+                        "Color": {
+                          "IsDeletable": false,
+                          "Name": "Black 1",
+                          "Id": "7",
+                          "Blue": 25,
+                          "Green": 25,
+                          "Alpha": 1,
+                          "Deleted": false,
+                          "Red": 25,
+                          "IsPro": true
+                        }
+                      }
+                    ],
+                    "MaxPrimary": 48,
+                    "Id": "ea5b30bd-b430-4306-80f5-ddaf7dc95628",
+                    "Equipment": {
+                      "Name": "Machine",
+                      "Id": "4",
+                      "Deleted": false,
+                      "IsDeletable": false
+                    },
+                    "MaxSecondary": 13,
+                    "PersonalRecord": {
+                      "Id": "5470FC42-B39D-4DF1-AD85-E11073B08525",
+                      "Primary": 30,
+                      "Secondary": 13,
+                      "LastStatusUpdate": 784069192.629568,
+                      "Status": 1,
+                      "IsPersonalRecord": true,
+                      "Type": 0,
+                      "RPE": 0
+                    },
+                    "Name": "Machine Lateral Raise",
+                    "SecondaryFocusId": 2,
+                    "LastCompleted": {
+                      "Id": "DAB78B7A-651E-47A2-8116-6C938024D88E",
+                      "Primary": 30,
+                      "Secondary": 13,
+                      "LastStatusUpdate": 784070503.405609,
+                      "Status": 1,
+                      "IsPersonalRecord": false,
+                      "Type": 0,
+                      "RPE": 0
+                    }
+                  },
+                  "WarmupSetDetails": [],
+                  "RestTime": 0
+                }
+              ]
+            }
+          ],
+          "IsCurrent": false,
+          "IsEveryday": true,
+          "Measurements": []
+        },
+        {
+          "Id": "6F4F72B5-D71C-4E2A-BDDB-A9EA36E315B1",
+          "SuperSets": [
+            {
+              "Id": "957F5C23-59C3-44E7-A2CB-39A1AC723DAF",
+              "Exercises": [
+                {
+                  "SetDetails": [
+                    {
+                      "RPE": 0,
+                      "Id": "7BF7E5BD-B43F-43C8-8CD7-5A21D492F41E",
+                      "Type": 0,
+                      "Primary": 32,
+                      "Secondary": 6,
+                      "Status": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "RPE": 0,
+                      "Id": "C7CBE085-8A03-454E-B7D7-1C45DDAAF882",
+                      "Type": 0,
+                      "Primary": 32,
+                      "Secondary": 6,
+                      "Status": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "RPE": 0,
+                      "Id": "B0CC41D4-86FB-4BFB-B0D3-3611EEA4FB2D",
+                      "Type": 0,
+                      "Primary": 32,
+                      "Secondary": 6,
+                      "Status": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "RPE": 0,
+                      "Id": "DB023420-6A52-48D8-B136-BF4259AF58DA",
+                      "Type": 0,
+                      "Primary": 32,
+                      "Secondary": 6,
+                      "Status": 0,
+                      "IsPersonalRecord": false
+                    }
+                  ],
+                  "Id": "3425AE8C-7BA8-4EEE-868D-3D08A82DA15E",
+                  "WarmupSetDetails": [],
+                  "Definition": {
+                    "PrimaryFocusId": 1,
+                    "Deleted": false,
+                    "Categories": [
+                      {
+                        "Color": {
+                          "Deleted": false,
+                          "Red": 140,
+                          "Green": 234,
+                          "IsPro": true,
+                          "Name": "Blue 1",
+                          "IsDeletable": false,
+                          "Alpha": 1,
+                          "Blue": 255,
+                          "Id": "15"
+                        },
+                        "Id": "65e61116-be57-45dd-8422-778ae267095b",
+                        "Name": "Rotator Cuff"
+                      }
+                    ],
+                    "MaxPrimary": 44,
+                    "Id": "14d9b957-6d1c-44f1-bc66-6fa5f1868761",
+                    "Equipment": {
+                      "IsDeletable": false,
+                      "Id": "4",
+                      "Deleted": false,
+                      "Name": "Machine"
+                    },
+                    "MaxSecondary": 13,
+                    "PersonalRecord": {
+                      "Status": 1,
+                      "Type": 0,
+                      "Secondary": 13,
+                      "LastStatusUpdate": 784069203.647578,
+                      "Primary": 30,
+                      "IsPersonalRecord": true,
+                      "RPE": 0,
+                      "Id": "CAA2E678-86B8-4CF5-B691-5FB80A40FBEE"
+                    },
+                    "Name": "Cable External Rotation ",
+                    "SecondaryFocusId": 2,
+                    "LastCompleted": {
+                      "Status": 1,
+                      "Type": 0,
+                      "Secondary": 13,
+                      "LastStatusUpdate": 784070501.724586,
+                      "Primary": 30,
+                      "IsPersonalRecord": false,
+                      "RPE": 0,
+                      "Id": "1366DA9D-50FA-4553-A37A-F8638A5988AE"
+                    }
+                  },
+                  "RestTime": 0,
+                  "Rules": []
+                }
+              ]
+            }
+          ],
+          "IsCurrent": false,
+          "IsEveryday": true,
+          "Measurements": []
+        },
+        {
+          "Id": "8B87C683-9FEC-46A8-94D9-93569A190DA2",
+          "SuperSets": [
+            {
+              "Id": "F0BB8C96-D73A-4686-8DA2-B09C61F863BE",
+              "Exercises": [
+                {
+                  "Id": "83048493-E706-4B0A-8B47-84882D807BE7",
+                  "RestTime": 0,
+                  "SetDetails": [
+                    {
+                      "RPE": 0,
+                      "Status": 0,
+                      "Primary": 15,
+                      "Type": 0,
+                      "Secondary": 60,
+                      "IsPersonalRecord": false,
+                      "Id": "2111FEC6-208C-406B-A0F3-4CCB9F80CA11"
+                    },
+                    {
+                      "RPE": 0,
+                      "Status": 0,
+                      "Primary": 15,
+                      "Type": 0,
+                      "Secondary": 60,
+                      "IsPersonalRecord": false,
+                      "Id": "1A286E3D-286B-44AE-8C9B-A5DCA2AB4AC9"
+                    },
+                    {
+                      "RPE": 0,
+                      "Status": 0,
+                      "Primary": 15,
+                      "Type": 0,
+                      "Secondary": 60,
+                      "IsPersonalRecord": false,
+                      "Id": "FA7DB9B7-AF35-4402-9087-1247BC4C334C"
+                    },
+                    {
+                      "RPE": 0,
+                      "Status": 0,
+                      "Primary": 15,
+                      "Type": 0,
+                      "Secondary": 60,
+                      "IsPersonalRecord": false,
+                      "Id": "711C0D0D-5CE1-4893-A759-539563F56071"
+                    }
+                  ],
+                  "Rules": [],
+                  "WarmupSetDetails": [],
+                  "Definition": {
+                    "SecondaryFocusId": 2,
+                    "LastCompleted": {
+                      "RPE": 0,
+                      "Id": "9228BB95-9334-4E36-A6AE-C9E809531B8A",
+                      "Secondary": 60,
+                      "Type": 0,
+                      "Status": 1,
+                      "Primary": 16,
+                      "IsPersonalRecord": false,
+                      "LastStatusUpdate": 784070500.487117
+                    },
+                    "MaxPrimary": 20,
+                    "Name": "Face Pull",
+                    "Categories": [
+                      {
+                        "Name": "Deltoids",
+                        "Id": "0",
+                        "Color": {
+                          "Id": "7",
+                          "Name": "Black 1",
+                          "Blue": 25,
+                          "Red": 25,
+                          "IsPro": true,
+                          "IsDeletable": false,
+                          "Alpha": 1,
+                          "Green": 25,
+                          "Deleted": false
+                        }
+                      },
+                      {
+                        "Name": "Trapezius",
+                        "Id": "8",
+                        "Color": {
+                          "Id": "22",
+                          "Name": "Pastel 1",
+                          "Blue": 128,
+                          "Red": 64,
+                          "IsPro": true,
+                          "IsDeletable": false,
+                          "Green": 89,
+                          "Alpha": 1,
+                          "Deleted": false
+                        }
+                      },
+                      {
+                        "Name": "Rotator Cuff",
+                        "Id": "65e61116-be57-45dd-8422-778ae267095b",
+                        "Color": {
+                          "Id": "15",
+                          "Name": "Blue 1",
+                          "Blue": 255,
+                          "Red": 140,
+                          "IsPro": true,
+                          "IsDeletable": false,
+                          "Alpha": 1,
+                          "Green": 234,
+                          "Deleted": false
+                        }
+                      }
+                    ],
+                    "PrimaryFocusId": 1,
+                    "MaxSecondary": 63,
+                    "Equipment": {
+                      "Deleted": false,
+                      "Name": "Machine",
+                      "Id": "4",
+                      "IsDeletable": false
+                    },
+                    "PersonalRecord": {
+                      "RPE": 0,
+                      "Id": "D4CC94B0-E12A-4ABE-98B4-A02068123E64",
+                      "Secondary": 60,
+                      "Type": 0,
+                      "Status": 1,
+                      "Primary": 20,
+                      "IsPersonalRecord": true,
+                      "LastStatusUpdate": 781559879.208421
+                    },
+                    "Deleted": false,
+                    "Id": "7f66671d-a820-4926-84c3-1b0b7a995a4f"
+                  }
+                }
+              ]
+            }
+          ],
+          "IsCurrent": false,
+          "IsEveryday": true,
+          "Measurements": []
+        },
+        {
+          "Id": "AE64B5EF-F05E-4C1E-839C-DBA29E440CC2",
+          "SuperSets": [
+            {
+              "Exercises": [
+                {
+                  "Id": "251550FF-B7FF-442C-85D9-E4D1A0C46B04",
+                  "RestTime": 0,
+                  "Definition": {
+                    "Deleted": false,
+                    "LastCompleted": {
+                      "Id": "9B299D4B-9E98-40A0-AE3B-4E80CB6D09CA",
+                      "LastStatusUpdate": 784070499.270047,
+                      "IsPersonalRecord": false,
+                      "Primary": 21,
+                      "Secondary": 45,
+                      "Status": 1,
+                      "Type": 0,
+                      "RPE": 0
+                    },
+                    "MaxPrimary": 25,
+                    "Name": "Cross Bench Lat Pullover",
+                    "Categories": [
+                      {
+                        "Name": "Latissimus Dorsi",
+                        "Color": {
+                          "Alpha": 1,
+                          "IsPro": true,
+                          "IsDeletable": false,
+                          "Deleted": false,
+                          "Green": 217,
+                          "Red": 12,
+                          "Name": "Green",
+                          "Blue": 88,
+                          "Id": "2"
+                        },
+                        "Id": "16a8f3c5-7b2e-4d91-9f45-8e3d4c9a1b7f"
+                      }
+                    ],
+                    "PrimaryFocusId": 1,
+                    "MaxSecondary": 45,
+                    "Equipment": {
+                      "Id": "3",
+                      "Name": "Single Dumbbell",
+                      "IsDeletable": false,
+                      "Deleted": false
+                    },
+                    "PersonalRecord": {
+                      "Id": "9F0CEFF0-0514-4E9A-9FB1-7C2D635D03F5",
+                      "LastStatusUpdate": 784069572.773153,
+                      "IsPersonalRecord": true,
+                      "Primary": 21,
+                      "Secondary": 45,
+                      "Status": 1,
+                      "Type": 0,
+                      "RPE": 0
+                    },
+                    "SecondaryFocusId": 2,
+                    "Id": "3229EC24-B708-452E-9033-2D872C52EAF2"
+                  },
+                  "WarmupSetDetails": [],
+                  "SetDetails": [
+                    {
+                      "RPE": 0,
+                      "Status": 0,
+                      "Primary": 20,
+                      "Type": 0,
+                      "IsPersonalRecord": false,
+                      "Secondary": 45,
+                      "Id": "515B7F11-3042-4A2F-ADAA-A6FFF2BBBE12"
+                    },
+                    {
+                      "RPE": 0,
+                      "Status": 0,
+                      "Primary": 20,
+                      "Type": 0,
+                      "IsPersonalRecord": false,
+                      "Secondary": 45,
+                      "Id": "70942ABE-060B-4A47-96C1-C0BD4FDC9E4B"
+                    },
+                    {
+                      "RPE": 0,
+                      "Status": 0,
+                      "Primary": 20,
+                      "Type": 0,
+                      "IsPersonalRecord": false,
+                      "Secondary": 45,
+                      "Id": "CE56AA38-21D2-4533-851F-83C5BDB6ADC0"
+                    }
+                  ],
+                  "Rules": []
+                }
+              ],
+              "Id": "DE8A572A-1C45-49BD-89A1-54CFE6244145"
+            }
+          ],
+          "IsCurrent": false,
+          "IsEveryday": true,
+          "Measurements": []
+        }
+      ]
+    }
+  ],
+  "Type": "WorkoutDefinitionDTO",
+  "Version": "3.2.0",
+  "IsList": true
+}
