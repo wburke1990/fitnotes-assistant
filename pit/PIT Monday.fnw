@@ -55,7 +55,7 @@
                     },
                     "PrimaryFocusId": 3,
                     "Deleted": false,
-                    "Name": "Reverse Sled",
+                    "Name": "Jump Rope",
                     "Id": "31f86a05-c035-4c79-bd22-40a2af8da000",
                     "MaxSecondary": 690,
                     "SecondaryFocusId": 2,
@@ -1014,10 +1014,10 @@
                   ],
                   "Definition": {
                     "Equipment": {
-                      "Name": "Machine",
-                      "Id": "4",
-                      "IsDeletable": false,
-                      "Deleted": false
+                      "Name": "None",
+                      "Id": "0",
+                      "Deleted": false,
+                      "IsDeletable": false
                     },
                     "PersonalRecord": {
                       "Primary": 24,
@@ -1044,7 +1044,7 @@
                       "Id": "CAE21EB9-93F2-437F-A171-A25765483677"
                     },
                     "Id": "FromFile_6",
-                    "Name": "Hamstring Curl",
+                    "Name": "Monkey Foot Curl",
                     "Categories": [
                       {
                         "Name": "Hamstrings",
@@ -1101,8 +1101,8 @@
                 {
                   "Definition": {
                     "Equipment": {
-                      "Id": "4",
-                      "Name": "Machine",
+                      "Name": "None",
+                      "Id": "0",
                       "Deleted": false,
                       "IsDeletable": false
                     },
@@ -1131,7 +1131,7 @@
                       "Type": 0
                     },
                     "Id": "FromFile_12",
-                    "Name": "Lat Pulldown",
+                    "Name": "Pull-up",
                     "Categories": [
                       {
                         "Name": "Latissimus Dorsi",

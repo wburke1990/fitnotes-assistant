@@ -337,8 +337,8 @@
                   "Id": "39C2A9D4-AF3D-4126-9088-2F5022F20F40",
                   "Definition": {
                     "Equipment": {
-                      "Name": "Machine",
-                      "Id": "4",
+                      "Name": "Barbell",
+                      "Id": "1",
                       "Deleted": false,
                       "IsDeletable": false
                     },
@@ -353,7 +353,7 @@
                       "Type": 0
                     },
                     "MaxSecondary": 130,
-                    "Name": "Machine Overhead Press",
+                    "Name": "Overhead Press",
                     "PrimaryFocusId": 1,
                     "Id": "df758bef-a238-4247-9b50-264b04ebda55",
                     "SecondaryFocusId": 2,
@@ -453,10 +453,10 @@
                   "Definition": {
                     "Id": "776743bc-478c-4509-a235-3b9d33e10398",
                     "Equipment": {
-                      "IsDeletable": false,
-                      "Name": "Machine",
-                      "Id": "4",
-                      "Deleted": false
+                      "Name": "None",
+                      "Id": "0",
+                      "Deleted": false,
+                      "IsDeletable": false
                     },
                     "PersonalRecord": {
                       "RPE": 0,
@@ -468,7 +468,7 @@
                       "LastStatusUpdate": 781035451.425301,
                       "IsPersonalRecord": true
                     },
-                    "Name": "Hip Adduction",
+                    "Name": "Copenhagen Plank",
                     "Deleted": false,
                     "MaxSecondary": 140,
                     "LastCompleted": {
@@ -601,8 +601,8 @@
                   "Definition": {
                     "SecondaryFocusId": 2,
                     "Equipment": {
-                      "Name": "Machine",
-                      "Id": "4",
+                      "Name": "None",
+                      "Id": "0",
                       "Deleted": false,
                       "IsDeletable": false
                     },
@@ -616,7 +616,7 @@
                       "RPE": 0,
                       "IsPersonalRecord": true
                     },
-                    "Name": "Hip Abduction ",
+                    "Name": "Hip Abduction (Monkey Feet)",
                     "Deleted": false,
                     "MaxSecondary": 150,
                     "LastCompleted": {
@@ -821,8 +821,8 @@
                       "Type": 0
                     },
                     "Equipment": {
-                      "Name": "Machine",
-                      "Id": "4",
+                      "Name": "Single Dumbbell",
+                      "Id": "3",
                       "Deleted": false,
                       "IsDeletable": false
                     },
@@ -839,7 +839,7 @@
                     "PrimaryFocusId": 1,
                     "MaxPrimary": 13,
                     "Id": "FromFile_39",
-                    "Name": "Chest Supported Row",
+                    "Name": "Bird Dog Row",
                     "MaxSecondary": 180,
                     "Categories": [
                       {
@@ -974,8 +974,8 @@
                       "LastStatusUpdate": 784069002.287333
                     },
                     "Equipment": {
-                      "Id": "4",
-                      "Name": "Machine",
+                      "Name": "None",
+                      "Id": "0",
                       "Deleted": false,
                       "IsDeletable": false
                     },
@@ -992,7 +992,7 @@
                     "MaxPrimary": 44,
                     "PrimaryFocusId": 1,
                     "Id": "901f6f4f-cbc5-4a58-8354-dfa97bd5aa38",
-                    "Name": "Tibialis Raise",
+                    "Name": "Tibialis Raise (Monkey Feet)",
                     "MaxSecondary": 20,
                     "Categories": [
                       {
@@ -1107,17 +1107,17 @@
                       "Type": 0
                     },
                     "Equipment": {
-                      "Name": "Machine",
-                      "IsDeletable": false,
-                      "Id": "4",
-                      "Deleted": false
+                      "Name": "Single Dumbbell",
+                      "Id": "3",
+                      "Deleted": false,
+                      "IsDeletable": false
                     },
                     "MaxPrimary": 26,
                     "MaxSecondary": 90,
                     "Id": "FromFile_8",
                     "Deleted": false,
                     "PrimaryFocusId": 1,
-                    "Name": "Seated Calf Raise"
+                    "Name": "Single-Leg Calf Raise"
                   },
                   "Id": "2836a38e-2c8d-4ec2-a646-937494b360f4",
                   "RestTime": 0,
@@ -1256,8 +1256,8 @@
                       "LastStatusUpdate": 784070503.405609
                     },
                     "Equipment": {
-                      "Name": "Machine",
-                      "Id": "4",
+                      "Name": "Double Dumbbell",
+                      "Id": "2",
                       "Deleted": false,
                       "IsDeletable": false
                     },
@@ -1266,7 +1266,7 @@
                     "Id": "ea5b30bd-b430-4306-80f5-ddaf7dc95628",
                     "PrimaryFocusId": 1,
                     "Deleted": false,
-                    "Name": "Machine Lateral Raise"
+                    "Name": "Dumbbell Lateral Raise"
                   },
                   "WarmupSetDetails": [],
                   "RestTime": 0
@@ -1365,17 +1365,17 @@
                       "Secondary": 13
                     },
                     "Equipment": {
-                      "IsDeletable": false,
-                      "Id": "4",
+                      "Name": "Double Dumbbell",
+                      "Id": "2",
                       "Deleted": false,
-                      "Name": "Machine"
+                      "IsDeletable": false
                     },
                     "MaxPrimary": 44,
                     "MaxSecondary": 13,
                     "Id": "14d9b957-6d1c-44f1-bc66-6fa5f1868761",
                     "PrimaryFocusId": 1,
                     "Deleted": false,
-                    "Name": "Cable External Rotation "
+                    "Name": "Shoulder External Rotation"
                   },
                   "RestTime": 0,
                   "Rules": []
@@ -1449,7 +1449,7 @@
                       "Primary": 16,
                       "Secondary": 60
                     },
-                    "Name": "Face Pull",
+                    "Name": "Trap 3 Raise",
                     "Id": "7f66671d-a820-4926-84c3-1b0b7a995a4f",
                     "PersonalRecord": {
                       "IsPersonalRecord": true,
@@ -1463,9 +1463,9 @@
                     },
                     "SecondaryFocusId": 2,
                     "Equipment": {
+                      "Name": "Double Dumbbell",
+                      "Id": "2",
                       "Deleted": false,
-                      "Name": "Machine",
-                      "Id": "4",
                       "IsDeletable": false
                     },
                     "Categories": [

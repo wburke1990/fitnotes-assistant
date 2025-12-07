@@ -18,7 +18,7 @@
                 {
                   "Definition": {
                     "SecondaryFocusId": 2,
-                    "Name": "Reverse Sled",
+                    "Name": "Jump Rope",
                     "Categories": [
                       {
                         "Color": {
@@ -1017,10 +1017,10 @@
                     "MaxPrimary": 28,
                     "Id": "FromFile_6",
                     "Equipment": {
-                      "Id": "4",
-                      "IsDeletable": false,
-                      "Name": "Machine",
-                      "Deleted": false
+                      "Name": "None",
+                      "Id": "0",
+                      "Deleted": false,
+                      "IsDeletable": false
                     },
                     "MaxSecondary": 110,
                     "PersonalRecord": {
@@ -1033,7 +1033,7 @@
                       "RPE": 0,
                       "Primary": 24
                     },
-                    "Name": "Hamstring Curl",
+                    "Name": "Monkey Foot Curl",
                     "SecondaryFocusId": 2,
                     "LastCompleted": {
                       "Type": 0,
@@ -1205,17 +1205,17 @@
                       "Secondary": 170
                     },
                     "Equipment": {
-                      "IsDeletable": false,
-                      "Name": "Machine",
+                      "Name": "None",
+                      "Id": "0",
                       "Deleted": false,
-                      "Id": "4"
+                      "IsDeletable": false
                     },
                     "MaxPrimary": 14,
                     "MaxSecondary": 185,
                     "Id": "FromFile_12",
                     "PrimaryFocusId": 1,
                     "Deleted": false,
-                    "Name": "Lat Pulldown"
+                    "Name": "Pull-up"
                   },
                   "SetDetails": [
                     {
@@ -1399,8 +1399,8 @@
                       "Type": 0
                     },
                     "Equipment": {
-                      "Name": "Machine",
-                      "Id": "4",
+                      "Name": "Single Dumbbell",
+                      "Id": "3",
                       "Deleted": false,
                       "IsDeletable": false
                     },
@@ -1409,7 +1409,7 @@
                     "Id": "FromFile_2",
                     "PrimaryFocusId": 1,
                     "Deleted": false,
-                    "Name": "Leg Press"
+                    "Name": "Poliquin Step-Up"
                   }
                 }
               ],
