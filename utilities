@@ -1,0 +1,7 @@
+# Workout Utilities - jq commands for extracting data from .fnw files
+
+# Extract all unique equipment types across all workouts
+cat wh/*.fnw | jq -r '.Data[].Workouts[].SuperSets[].Exercises[].Definition.Equipment.Name' | sort -u
+
+# Create a table mapping each exercise to its equipment
+cat wh/*.fnw | jq -r '.Data[].Workouts[].SuperSets[].Exercises[].Definition | [.Name, .Equipment.Name] | @tsv' | sort -u
