@@ -5,3 +5,13 @@ cat wh/*.fnw | jq -r '.Data[].Workouts[].SuperSets[].Exercises[].Definition.Equi
 
 # Create a table mapping each exercise to its equipment
 cat wh/*.fnw | jq -r '.Data[].Workouts[].SuperSets[].Exercises[].Definition | [.Name, .Equipment.Name] | @tsv' | sort -u
+
+# Create a table mapping each exercise to its muscle group categories
+cat wh/*.fnw | jq -r '.Data[].Workouts[].SuperSets[].Exercises[].Definition | [.Name, ([.Categories[].Name] | join(", "))] | @tsv' | sort -u
+
+# Rename an exercise across all workout files
+# Usage: Replace OLD_NAME and NEW_NAME, then run for each file containing the exercise
+# Example: Renamed "Back Plank" to "Hyperextension"
+for file in wh/*.fnw; do
+  jq '(.Data[].Workouts[].SuperSets[].Exercises[].Definition | select(.Name == "OLD_NAME") | .Name) |= "NEW_NAME"' "$file" > "$file.tmp" && mv "$file.tmp" "$file"
+done

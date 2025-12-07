@@ -1,1443 +1,1379 @@
 {
-  "Type" : "WorkoutDefinitionDTO",
-  "IsList" : true,
-  "Version" : "3.2.0",
-  "Data" : [
+  "Type": "WorkoutDefinitionDTO",
+  "IsList": true,
+  "Version": "3.2.0",
+  "Data": [
     {
-      "Name" : "WH Wednesday ",
-      "Workouts" : [
+      "Name": "WH Wednesday ",
+      "Workouts": [
         {
-          "Measurements" : [
-
-          ],
-          "Id" : "019240DD-4C8A-46C6-A49A-12FBA999A0CF",
-          "IsCurrent" : false,
-          "SuperSets" : [
+          "Measurements": [],
+          "Id": "019240DD-4C8A-46C6-A49A-12FBA999A0CF",
+          "IsCurrent": false,
+          "SuperSets": [
             {
-              "Id" : "2A627198-D4BC-41D0-8B6B-81354BE8DB44",
-              "Exercises" : [
+              "Id": "2A627198-D4BC-41D0-8B6B-81354BE8DB44",
+              "Exercises": [
                 {
-                  "RestTime" : 0,
-                  "SetDetails" : [
+                  "RestTime": 0,
+                  "SetDetails": [
                     {
-                      "Secondary" : 670,
-                      "Type" : 0,
-                      "Id" : "3AFE463E-9832-4557-84CC-D82B80D60120",
-                      "IsPersonalRecord" : false,
-                      "Primary" : 780,
-                      "RPE" : 0,
-                      "Status" : 0
+                      "Secondary": 670,
+                      "Type": 0,
+                      "Id": "3AFE463E-9832-4557-84CC-D82B80D60120",
+                      "IsPersonalRecord": false,
+                      "Primary": 780,
+                      "RPE": 0,
+                      "Status": 0
                     }
                   ],
-                  "WarmupSetDetails" : [
-
-                  ],
-                  "Rules" : [
-
-                  ],
-                  "Id" : "CA911742-7A93-432D-A6C8-B30421F63C87",
-                  "Definition" : {
-                    "PrimaryFocusId" : 3,
-                    "SecondaryFocusId" : 2,
-                    "Id" : "31f86a05-c035-4c79-bd22-40a2af8da000",
-                    "Name" : "Reverse Sled",
-                    "MaxPrimary" : 810,
-                    "MaxSecondary" : 690,
-                    "Equipment" : {
-                      "Id" : "0",
-                      "Name" : "None",
-                      "Deleted" : false,
-                      "IsDeletable" : false
+                  "WarmupSetDetails": [],
+                  "Rules": [],
+                  "Id": "CA911742-7A93-432D-A6C8-B30421F63C87",
+                  "Definition": {
+                    "PrimaryFocusId": 3,
+                    "SecondaryFocusId": 2,
+                    "Id": "31f86a05-c035-4c79-bd22-40a2af8da000",
+                    "Name": "Reverse Sled",
+                    "MaxPrimary": 810,
+                    "MaxSecondary": 690,
+                    "Equipment": {
+                      "Id": "0",
+                      "Name": "None",
+                      "Deleted": false,
+                      "IsDeletable": false
                     },
-                    "PersonalRecord" : {
-                      "LastStatusUpdate" : 781642817.413314,
-                      "Type" : 0,
-                      "Secondary" : 670,
-                      "Primary" : 780,
-                      "Id" : "A3E21379-F231-409A-9BC1-7412D830BA54",
-                      "Status" : 1,
-                      "RPE" : 0,
-                      "IsPersonalRecord" : true
+                    "PersonalRecord": {
+                      "LastStatusUpdate": 781642817.413314,
+                      "Type": 0,
+                      "Secondary": 670,
+                      "Primary": 780,
+                      "Id": "A3E21379-F231-409A-9BC1-7412D830BA54",
+                      "Status": 1,
+                      "RPE": 0,
+                      "IsPersonalRecord": true
                     },
-                    "Categories" : [
+                    "Categories": [
                       {
-                        "Id" : "15",
-                        "Name" : "Cardio",
-                        "Color" : {
-                          "IsPro" : false,
-                          "Deleted" : false,
-                          "Green" : 217,
-                          "Id" : "2",
-                          "Alpha" : 1,
-                          "Red" : 12,
-                          "Name" : "Green",
-                          "Blue" : 88,
-                          "IsDeletable" : false
+                        "Id": "15",
+                        "Name": "Cardio",
+                        "Color": {
+                          "IsPro": false,
+                          "Deleted": false,
+                          "Green": 217,
+                          "Id": "2",
+                          "Alpha": 1,
+                          "Red": 12,
+                          "Name": "Green",
+                          "Blue": 88,
+                          "IsDeletable": false
                         }
                       },
                       {
-                        "Id" : "7",
-                        "Name" : "Quadriceps",
-                        "Color" : {
-                          "IsPro" : true,
-                          "Deleted" : false,
-                          "Green" : 212,
-                          "Id" : "16",
-                          "Alpha" : 1,
-                          "Red" : 148,
-                          "Name" : "Blue Green 1",
-                          "Blue" : 212,
-                          "IsDeletable" : false
+                        "Id": "7",
+                        "Name": "Quadriceps",
+                        "Color": {
+                          "IsPro": true,
+                          "Deleted": false,
+                          "Green": 212,
+                          "Id": "16",
+                          "Alpha": 1,
+                          "Red": 148,
+                          "Name": "Blue Green 1",
+                          "Blue": 212,
+                          "IsDeletable": false
                         }
                       }
                     ],
-                    "LastCompleted" : {
-                      "LastStatusUpdate" : 785612740.165273,
-                      "Type" : 0,
-                      "Secondary" : 690,
-                      "Primary" : 810,
-                      "Id" : "CF9128FA-9F65-4ABA-A756-CFE2D065F3E0",
-                      "Status" : 1,
-                      "RPE" : 0,
-                      "IsPersonalRecord" : false
+                    "LastCompleted": {
+                      "LastStatusUpdate": 785612740.165273,
+                      "Type": 0,
+                      "Secondary": 690,
+                      "Primary": 810,
+                      "Id": "CF9128FA-9F65-4ABA-A756-CFE2D065F3E0",
+                      "Status": 1,
+                      "RPE": 0,
+                      "IsPersonalRecord": false
                     },
-                    "Deleted" : false
+                    "Deleted": false
                   }
                 }
               ]
             }
           ],
-          "IsEveryday" : true
+          "IsEveryday": true
         },
         {
-          "Id" : "C7E0746E-6886-46A2-BD12-36ADDA81F003",
-          "SuperSets" : [
+          "Id": "C7E0746E-6886-46A2-BD12-36ADDA81F003",
+          "SuperSets": [
             {
-              "Exercises" : [
+              "Exercises": [
                 {
-                  "Rules" : [
-
-                  ],
-                  "RestTime" : 0,
-                  "SetDetails" : [
+                  "Rules": [],
+                  "RestTime": 0,
+                  "SetDetails": [
                     {
-                      "Secondary" : 100,
-                      "Type" : 0,
-                      "Id" : "FD83D3A0-CA00-49A9-84BD-8DE01F75142E",
-                      "IsPersonalRecord" : false,
-                      "Primary" : 20,
-                      "RPE" : 0,
-                      "Status" : 0
+                      "Secondary": 100,
+                      "Type": 0,
+                      "Id": "FD83D3A0-CA00-49A9-84BD-8DE01F75142E",
+                      "IsPersonalRecord": false,
+                      "Primary": 20,
+                      "RPE": 0,
+                      "Status": 0
                     },
                     {
-                      "Secondary" : 100,
-                      "Type" : 0,
-                      "Id" : "38C267FB-AE5A-49AB-8754-1422F5163CA6",
-                      "IsPersonalRecord" : false,
-                      "Primary" : 20,
-                      "RPE" : 0,
-                      "Status" : 0
+                      "Secondary": 100,
+                      "Type": 0,
+                      "Id": "38C267FB-AE5A-49AB-8754-1422F5163CA6",
+                      "IsPersonalRecord": false,
+                      "Primary": 20,
+                      "RPE": 0,
+                      "Status": 0
                     },
                     {
-                      "Secondary" : 100,
-                      "Type" : 0,
-                      "Id" : "2FDAA9A9-50BA-47E3-BA54-EDD554DCFC96",
-                      "IsPersonalRecord" : false,
-                      "Primary" : 20,
-                      "RPE" : 0,
-                      "Status" : 0
+                      "Secondary": 100,
+                      "Type": 0,
+                      "Id": "2FDAA9A9-50BA-47E3-BA54-EDD554DCFC96",
+                      "IsPersonalRecord": false,
+                      "Primary": 20,
+                      "RPE": 0,
+                      "Status": 0
                     },
                     {
-                      "Secondary" : 100,
-                      "Type" : 0,
-                      "Id" : "CF27E164-E72B-426B-8347-17BDED6E9874",
-                      "IsPersonalRecord" : false,
-                      "Primary" : 20,
-                      "RPE" : 0,
-                      "Status" : 0
+                      "Secondary": 100,
+                      "Type": 0,
+                      "Id": "CF27E164-E72B-426B-8347-17BDED6E9874",
+                      "IsPersonalRecord": false,
+                      "Primary": 20,
+                      "RPE": 0,
+                      "Status": 0
                     }
                   ],
-                  "WarmupSetDetails" : [
-
-                  ],
-                  "Id" : "C43630C5-8EA1-4AA0-BD35-BA78E85AB7D3",
-                  "Definition" : {
-                    "PrimaryFocusId" : 1,
-                    "SecondaryFocusId" : 2,
-                    "MaxPrimary" : 28,
-                    "Name" : "ATG Split Squat",
-                    "Id" : "c07079c2-0391-4d89-8055-fef1201cb452",
-                    "MaxSecondary" : 120,
-                    "Equipment" : {
-                      "Deleted" : false,
-                      "Name" : "Single Dumbbell",
-                      "Id" : "3",
-                      "IsDeletable" : false
+                  "WarmupSetDetails": [],
+                  "Id": "C43630C5-8EA1-4AA0-BD35-BA78E85AB7D3",
+                  "Definition": {
+                    "PrimaryFocusId": 1,
+                    "SecondaryFocusId": 2,
+                    "MaxPrimary": 28,
+                    "Name": "ATG Split Squat",
+                    "Id": "c07079c2-0391-4d89-8055-fef1201cb452",
+                    "MaxSecondary": 120,
+                    "Equipment": {
+                      "Deleted": false,
+                      "Name": "Single Dumbbell",
+                      "Id": "3",
+                      "IsDeletable": false
                     },
-                    "PersonalRecord" : {
-                      "Type" : 0,
-                      "IsPersonalRecord" : true,
-                      "Status" : 1,
-                      "Id" : "00AAEC18-D957-4593-9DBD-844E53D75D47",
-                      "LastStatusUpdate" : 783034009.576584,
-                      "RPE" : 0,
-                      "Secondary" : 90,
-                      "Primary" : 26
+                    "PersonalRecord": {
+                      "Type": 0,
+                      "IsPersonalRecord": true,
+                      "Status": 1,
+                      "Id": "00AAEC18-D957-4593-9DBD-844E53D75D47",
+                      "LastStatusUpdate": 783034009.576584,
+                      "RPE": 0,
+                      "Secondary": 90,
+                      "Primary": 26
                     },
-                    "Categories" : [
+                    "Categories": [
                       {
-                        "Name" : "Gluteals",
-                        "Id" : "12",
-                        "Color" : {
-                          "Id" : "20",
-                          "Red" : 106,
-                          "Name" : "Green 1",
-                          "Blue" : 134,
-                          "IsDeletable" : false,
-                          "Deleted" : false,
-                          "Alpha" : 1,
-                          "Green" : 167,
-                          "IsPro" : true
+                        "Name": "Gluteals",
+                        "Id": "12",
+                        "Color": {
+                          "Id": "20",
+                          "Red": 106,
+                          "Name": "Green 1",
+                          "Blue": 134,
+                          "IsDeletable": false,
+                          "Deleted": false,
+                          "Alpha": 1,
+                          "Green": 167,
+                          "IsPro": true
                         }
                       },
                       {
-                        "Name" : "Adductors",
-                        "Id" : "6",
-                        "Color" : {
-                          "Blue" : 31,
-                          "Green" : 150,
-                          "Name" : "Green 2",
-                          "Red" : 106,
-                          "Alpha" : 1,
-                          "Deleted" : false,
-                          "Id" : "21",
-                          "IsDeletable" : false,
-                          "IsPro" : true
+                        "Name": "Adductors",
+                        "Id": "6",
+                        "Color": {
+                          "Blue": 31,
+                          "Green": 150,
+                          "Name": "Green 2",
+                          "Red": 106,
+                          "Alpha": 1,
+                          "Deleted": false,
+                          "Id": "21",
+                          "IsDeletable": false,
+                          "IsPro": true
                         }
                       },
                       {
-                        "Name" : "Quadriceps",
-                        "Id" : "7",
-                        "Color" : {
-                          "Blue" : 212,
-                          "Name" : "Blue Green 1",
-                          "Green" : 212,
-                          "Red" : 148,
-                          "Alpha" : 1,
-                          "Deleted" : false,
-                          "Id" : "16",
-                          "IsDeletable" : false,
-                          "IsPro" : true
+                        "Name": "Quadriceps",
+                        "Id": "7",
+                        "Color": {
+                          "Blue": 212,
+                          "Name": "Blue Green 1",
+                          "Green": 212,
+                          "Red": 148,
+                          "Alpha": 1,
+                          "Deleted": false,
+                          "Id": "16",
+                          "IsDeletable": false,
+                          "IsPro": true
                         }
                       },
                       {
-                        "Name" : "Calves",
-                        "Id" : "14",
-                        "Color" : {
-                          "Blue" : 246,
-                          "Name" : "Purple",
-                          "Green" : 0,
-                          "Red" : 111,
-                          "Alpha" : 1,
-                          "Deleted" : false,
-                          "Id" : "4",
-                          "IsDeletable" : false,
-                          "IsPro" : false
+                        "Name": "Calves",
+                        "Id": "14",
+                        "Color": {
+                          "Blue": 246,
+                          "Name": "Purple",
+                          "Green": 0,
+                          "Red": 111,
+                          "Alpha": 1,
+                          "Deleted": false,
+                          "Id": "4",
+                          "IsDeletable": false,
+                          "IsPro": false
                         }
                       }
                     ],
-                    "LastCompleted" : {
-                      "Type" : 0,
-                      "IsPersonalRecord" : false,
-                      "Status" : 1,
-                      "Id" : "3970FB1C-57D7-4C11-A4BF-24F97E16B7AE",
-                      "LastStatusUpdate" : 785614657.149575,
-                      "RPE" : 0,
-                      "Secondary" : 120,
-                      "Primary" : 10
+                    "LastCompleted": {
+                      "Type": 0,
+                      "IsPersonalRecord": false,
+                      "Status": 1,
+                      "Id": "3970FB1C-57D7-4C11-A4BF-24F97E16B7AE",
+                      "LastStatusUpdate": 785614657.149575,
+                      "RPE": 0,
+                      "Secondary": 120,
+                      "Primary": 10
                     },
-                    "Deleted" : false
+                    "Deleted": false
                   }
                 }
               ],
-              "Id" : "4F5CC1E8-67CD-4181-B817-271CDC6F8880"
+              "Id": "4F5CC1E8-67CD-4181-B817-271CDC6F8880"
             }
           ],
-          "IsCurrent" : false,
-          "IsEveryday" : true,
-          "Measurements" : [
-
-          ]
+          "IsCurrent": false,
+          "IsEveryday": true,
+          "Measurements": []
         },
         {
-          "Id" : "70CD2E8A-5C91-4E63-9474-3D5BD9E2FC2C",
-          "SuperSets" : [
+          "Id": "70CD2E8A-5C91-4E63-9474-3D5BD9E2FC2C",
+          "SuperSets": [
             {
-              "Id" : "1ED839D4-492E-4EF7-8F59-602933EC77A1",
-              "Exercises" : [
+              "Id": "1ED839D4-492E-4EF7-8F59-602933EC77A1",
+              "Exercises": [
                 {
-                  "SetDetails" : [
+                  "SetDetails": [
                     {
-                      "Status" : 0,
-                      "Type" : 0,
-                      "Secondary" : 0,
-                      "IsPersonalRecord" : false,
-                      "Id" : "22F98A89-FBAC-4DA0-BCDB-E82019A7AAD9",
-                      "Primary" : 30,
-                      "RPE" : 0
+                      "Status": 0,
+                      "Type": 0,
+                      "Secondary": 0,
+                      "IsPersonalRecord": false,
+                      "Id": "22F98A89-FBAC-4DA0-BCDB-E82019A7AAD9",
+                      "Primary": 30,
+                      "RPE": 0
                     }
                   ],
-                  "Definition" : {
-                    "PersonalRecord" : {
-                      "Secondary" : 0,
-                      "IsPersonalRecord" : true,
-                      "Type" : 0,
-                      "RPE" : 0,
-                      "Id" : "15C658AB-CDAD-48EB-9B32-233C08386652",
-                      "Primary" : 30,
-                      "LastStatusUpdate" : 783706638.711907,
-                      "Status" : 1
+                  "Definition": {
+                    "PersonalRecord": {
+                      "Secondary": 0,
+                      "IsPersonalRecord": true,
+                      "Type": 0,
+                      "RPE": 0,
+                      "Id": "15C658AB-CDAD-48EB-9B32-233C08386652",
+                      "Primary": 30,
+                      "LastStatusUpdate": 783706638.711907,
+                      "Status": 1
                     },
-                    "LastCompleted" : {
-                      "Secondary" : 0,
-                      "IsPersonalRecord" : false,
-                      "Type" : 0,
-                      "RPE" : 0,
-                      "Id" : "1C98D7D4-5660-4A38-882B-AE751E265C6A",
-                      "Primary" : 30,
-                      "LastStatusUpdate" : 785613092.030914,
-                      "Status" : 1
+                    "LastCompleted": {
+                      "Secondary": 0,
+                      "IsPersonalRecord": false,
+                      "Type": 0,
+                      "RPE": 0,
+                      "Id": "1C98D7D4-5660-4A38-882B-AE751E265C6A",
+                      "Primary": 30,
+                      "LastStatusUpdate": 785613092.030914,
+                      "Status": 1
                     },
-                    "PrimaryFocusId" : 3,
-                    "MaxPrimary" : 30,
-                    "Id" : "6FF05577-B66C-472C-91DF-C435A3B0FFCA",
-                    "Deleted" : false,
-                    "Categories" : [
+                    "PrimaryFocusId": 3,
+                    "MaxPrimary": 30,
+                    "Id": "6FF05577-B66C-472C-91DF-C435A3B0FFCA",
+                    "Deleted": false,
+                    "Categories": [
                       {
-                        "Id" : "5",
-                        "Name" : "Abdominals (Lower)",
-                        "Color" : {
-                          "Alpha" : 1,
-                          "IsPro" : true,
-                          "Green" : 140,
-                          "Deleted" : false,
-                          "Blue" : 157,
-                          "IsDeletable" : false,
-                          "Id" : "12",
-                          "Red" : 255,
-                          "Name" : "Pink1"
+                        "Id": "5",
+                        "Name": "Abdominals (Lower)",
+                        "Color": {
+                          "Alpha": 1,
+                          "IsPro": true,
+                          "Green": 140,
+                          "Deleted": false,
+                          "Blue": 157,
+                          "IsDeletable": false,
+                          "Id": "12",
+                          "Red": 255,
+                          "Name": "Pink1"
                         }
                       },
                       {
-                        "Id" : "D2064B30-8C3D-4794-89DD-77C080535633",
-                        "Name" : "Hip Flexors",
-                        "Color" : {
-                          "Alpha" : 1,
-                          "IsPro" : true,
-                          "Green" : 194,
-                          "Deleted" : false,
-                          "Blue" : 209,
-                          "IsDeletable" : false,
-                          "Id" : "14",
-                          "Red" : 53,
-                          "Name" : "Blue 2"
+                        "Id": "D2064B30-8C3D-4794-89DD-77C080535633",
+                        "Name": "Hip Flexors",
+                        "Color": {
+                          "Alpha": 1,
+                          "IsPro": true,
+                          "Green": 194,
+                          "Deleted": false,
+                          "Blue": 209,
+                          "IsDeletable": false,
+                          "Id": "14",
+                          "Red": 53,
+                          "Name": "Blue 2"
                         }
                       }
                     ],
-                    "Name" : "Slow Scissors",
-                    "SecondaryFocusId" : 0,
-                    "MaxSecondary" : 0,
-                    "Equipment" : {
-                      "IsDeletable" : false,
-                      "Id" : "0",
-                      "Name" : "None",
-                      "Deleted" : false
+                    "Name": "Slow Scissors",
+                    "SecondaryFocusId": 0,
+                    "MaxSecondary": 0,
+                    "Equipment": {
+                      "IsDeletable": false,
+                      "Id": "0",
+                      "Name": "None",
+                      "Deleted": false
                     }
                   },
-                  "Rules" : [
-
-                  ],
-                  "Id" : "D730D572-6EF6-40BB-A7C7-440DC60EDA93",
-                  "WarmupSetDetails" : [
-
-                  ],
-                  "RestTime" : 0
+                  "Rules": [],
+                  "Id": "D730D572-6EF6-40BB-A7C7-440DC60EDA93",
+                  "WarmupSetDetails": [],
+                  "RestTime": 0
                 }
               ]
             }
           ],
-          "IsCurrent" : false,
-          "IsEveryday" : true,
-          "Measurements" : [
-
-          ]
+          "IsCurrent": false,
+          "IsEveryday": true,
+          "Measurements": []
         },
         {
-          "Measurements" : [
-
-          ],
-          "SuperSets" : [
+          "Measurements": [],
+          "SuperSets": [
             {
-              "Exercises" : [
+              "Exercises": [
                 {
-                  "Id" : "938CD65D-4687-4289-B8CF-B96C80143F28",
-                  "WarmupSetDetails" : [
-
-                  ],
-                  "Rules" : [
-
-                  ],
-                  "RestTime" : 0,
-                  "SetDetails" : [
+                  "Id": "938CD65D-4687-4289-B8CF-B96C80143F28",
+                  "WarmupSetDetails": [],
+                  "Rules": [],
+                  "RestTime": 0,
+                  "SetDetails": [
                     {
-                      "Secondary" : 115,
-                      "Type" : 0,
-                      "IsPersonalRecord" : false,
-                      "Status" : 0,
-                      "Id" : "5F4E6BB5-19F7-4B5E-86DA-366B542BA0FD",
-                      "Primary" : 8,
-                      "RPE" : 0
+                      "Secondary": 115,
+                      "Type": 0,
+                      "IsPersonalRecord": false,
+                      "Status": 0,
+                      "Id": "5F4E6BB5-19F7-4B5E-86DA-366B542BA0FD",
+                      "Primary": 8,
+                      "RPE": 0
                     },
                     {
-                      "Secondary" : 115,
-                      "Type" : 0,
-                      "IsPersonalRecord" : false,
-                      "Status" : 0,
-                      "Id" : "47FEB526-943D-4D7F-BDA3-CA9C333D4478",
-                      "Primary" : 8,
-                      "RPE" : 0
+                      "Secondary": 115,
+                      "Type": 0,
+                      "IsPersonalRecord": false,
+                      "Status": 0,
+                      "Id": "47FEB526-943D-4D7F-BDA3-CA9C333D4478",
+                      "Primary": 8,
+                      "RPE": 0
                     },
                     {
-                      "Secondary" : 110,
-                      "Type" : 0,
-                      "IsPersonalRecord" : false,
-                      "Status" : 0,
-                      "Id" : "58C0C862-7CA2-4EA2-BE34-C37D8507FC8B",
-                      "Primary" : 8,
-                      "RPE" : 0
+                      "Secondary": 110,
+                      "Type": 0,
+                      "IsPersonalRecord": false,
+                      "Status": 0,
+                      "Id": "58C0C862-7CA2-4EA2-BE34-C37D8507FC8B",
+                      "Primary": 8,
+                      "RPE": 0
                     },
                     {
-                      "Secondary" : 110,
-                      "Type" : 0,
-                      "IsPersonalRecord" : false,
-                      "Status" : 0,
-                      "Id" : "26F14A83-168A-40D1-B917-E3344FCC4170",
-                      "Primary" : 8,
-                      "RPE" : 0
+                      "Secondary": 110,
+                      "Type": 0,
+                      "IsPersonalRecord": false,
+                      "Status": 0,
+                      "Id": "26F14A83-168A-40D1-B917-E3344FCC4170",
+                      "Primary": 8,
+                      "RPE": 0
                     }
                   ],
-                  "Definition" : {
-                    "PersonalRecord" : {
-                      "Secondary" : 100,
-                      "Primary" : 12,
-                      "IsPersonalRecord" : true,
-                      "Status" : 1,
-                      "Type" : 0,
-                      "LastStatusUpdate" : 783706359.550023,
-                      "RPE" : 0,
-                      "Id" : "C4136BA5-214D-4167-92FB-94D742BDADB5"
+                  "Definition": {
+                    "PersonalRecord": {
+                      "Secondary": 100,
+                      "Primary": 12,
+                      "IsPersonalRecord": true,
+                      "Status": 1,
+                      "Type": 0,
+                      "LastStatusUpdate": 783706359.550023,
+                      "RPE": 0,
+                      "Id": "C4136BA5-214D-4167-92FB-94D742BDADB5"
                     },
-                    "LastCompleted" : {
-                      "Secondary" : 125,
-                      "Primary" : 6,
-                      "IsPersonalRecord" : false,
-                      "Status" : 1,
-                      "Type" : 0,
-                      "LastStatusUpdate" : 785614658.264974,
-                      "RPE" : 0,
-                      "Id" : "134F2007-5F44-45CA-806E-C374B82065E9"
+                    "LastCompleted": {
+                      "Secondary": 125,
+                      "Primary": 6,
+                      "IsPersonalRecord": false,
+                      "Status": 1,
+                      "Type": 0,
+                      "LastStatusUpdate": 785614658.264974,
+                      "RPE": 0,
+                      "Id": "134F2007-5F44-45CA-806E-C374B82065E9"
                     },
-                    "PrimaryFocusId" : 1,
-                    "MaxPrimary" : 13,
-                    "Id" : "dc7b0a94-3b17-46a1-9dda-8dfd2a78c659",
-                    "Deleted" : false,
-                    "Categories" : [
+                    "PrimaryFocusId": 1,
+                    "MaxPrimary": 13,
+                    "Id": "dc7b0a94-3b17-46a1-9dda-8dfd2a78c659",
+                    "Deleted": false,
+                    "Categories": [
                       {
-                        "Name" : "Gluteals",
-                        "Id" : "12",
-                        "Color" : {
-                          "Deleted" : false,
-                          "Blue" : 134,
-                          "Red" : 106,
-                          "Name" : "Green 1",
-                          "IsPro" : true,
-                          "IsDeletable" : false,
-                          "Green" : 167,
-                          "Id" : "20",
-                          "Alpha" : 1
+                        "Name": "Gluteals",
+                        "Id": "12",
+                        "Color": {
+                          "Deleted": false,
+                          "Blue": 134,
+                          "Red": 106,
+                          "Name": "Green 1",
+                          "IsPro": true,
+                          "IsDeletable": false,
+                          "Green": 167,
+                          "Id": "20",
+                          "Alpha": 1
                         }
                       },
                       {
-                        "Name" : "Hamstrings",
-                        "Id" : "13",
-                        "Color" : {
-                          "Deleted" : false,
-                          "Blue" : 130,
-                          "Red" : 42,
-                          "Name" : "Blue Green 4",
-                          "IsPro" : true,
-                          "IsDeletable" : false,
-                          "Green" : 109,
-                          "Id" : "19",
-                          "Alpha" : 1
+                        "Name": "Hamstrings",
+                        "Id": "13",
+                        "Color": {
+                          "Deleted": false,
+                          "Blue": 130,
+                          "Red": 42,
+                          "Name": "Blue Green 4",
+                          "IsPro": true,
+                          "IsDeletable": false,
+                          "Green": 109,
+                          "Id": "19",
+                          "Alpha": 1
                         }
                       },
                       {
-                        "Name" : "Trapezius",
-                        "Id" : "8",
-                        "Color" : {
-                          "Deleted" : false,
-                          "Blue" : 128,
-                          "Red" : 64,
-                          "Name" : "Pastel 1",
-                          "IsPro" : true,
-                          "IsDeletable" : false,
-                          "Green" : 89,
-                          "Id" : "22",
-                          "Alpha" : 1
+                        "Name": "Trapezius",
+                        "Id": "8",
+                        "Color": {
+                          "Deleted": false,
+                          "Blue": 128,
+                          "Red": 64,
+                          "Name": "Pastel 1",
+                          "IsPro": true,
+                          "IsDeletable": false,
+                          "Green": 89,
+                          "Id": "22",
+                          "Alpha": 1
                         }
                       },
                       {
-                        "Name" : "Abdominals (Upper)",
-                        "Id" : "4",
-                        "Color" : {
-                          "Deleted" : false,
-                          "Blue" : 255,
-                          "Red" : 140,
-                          "Name" : "Blue 1",
-                          "IsPro" : true,
-                          "IsDeletable" : false,
-                          "Green" : 234,
-                          "Id" : "15",
-                          "Alpha" : 1
+                        "Name": "Abdominals (Upper)",
+                        "Id": "4",
+                        "Color": {
+                          "Deleted": false,
+                          "Blue": 255,
+                          "Red": 140,
+                          "Name": "Blue 1",
+                          "IsPro": true,
+                          "IsDeletable": false,
+                          "Green": 234,
+                          "Id": "15",
+                          "Alpha": 1
                         }
                       },
                       {
-                        "Name" : "Abdominals (Lower)",
-                        "Id" : "5",
-                        "Color" : {
-                          "Deleted" : false,
-                          "Blue" : 157,
-                          "Red" : 255,
-                          "Name" : "Pink1",
-                          "IsPro" : true,
-                          "IsDeletable" : false,
-                          "Green" : 140,
-                          "Id" : "12",
-                          "Alpha" : 1
+                        "Name": "Abdominals (Lower)",
+                        "Id": "5",
+                        "Color": {
+                          "Deleted": false,
+                          "Blue": 157,
+                          "Red": 255,
+                          "Name": "Pink1",
+                          "IsPro": true,
+                          "IsDeletable": false,
+                          "Green": 140,
+                          "Id": "12",
+                          "Alpha": 1
                         }
                       },
                       {
-                        "Name" : "Back (Lower)",
-                        "Id" : "11",
-                        "Color" : {
-                          "Deleted" : false,
-                          "Blue" : 88,
-                          "Red" : 12,
-                          "Name" : "Green",
-                          "IsPro" : false,
-                          "IsDeletable" : false,
-                          "Green" : 217,
-                          "Id" : "2",
-                          "Alpha" : 1
+                        "Name": "Back (Lower)",
+                        "Id": "11",
+                        "Color": {
+                          "Deleted": false,
+                          "Blue": 88,
+                          "Red": 12,
+                          "Name": "Green",
+                          "IsPro": false,
+                          "IsDeletable": false,
+                          "Green": 217,
+                          "Id": "2",
+                          "Alpha": 1
                         }
                       }
                     ],
-                    "Name" : "Romanian Deadlift (RDL)",
-                    "SecondaryFocusId" : 2,
-                    "MaxSecondary" : 125,
-                    "Equipment" : {
-                      "IsDeletable" : false,
-                      "Name" : "Barbell",
-                      "Id" : "1",
-                      "Deleted" : false
+                    "Name": "Romanian Deadlift (RDL)",
+                    "SecondaryFocusId": 2,
+                    "MaxSecondary": 125,
+                    "Equipment": {
+                      "IsDeletable": false,
+                      "Name": "Barbell",
+                      "Id": "1",
+                      "Deleted": false
                     }
                   }
                 }
               ],
-              "Id" : "F3CAEB45-893A-4E03-B6AE-2D8ED0A7F566"
+              "Id": "F3CAEB45-893A-4E03-B6AE-2D8ED0A7F566"
             }
           ],
-          "Id" : "698B0E4D-AFEE-493C-A059-8A26078C886D",
-          "IsEveryday" : true,
-          "IsCurrent" : false
+          "Id": "698B0E4D-AFEE-493C-A059-8A26078C886D",
+          "IsEveryday": true,
+          "IsCurrent": false
         },
         {
-          "IsEveryday" : true,
-          "SuperSets" : [
+          "IsEveryday": true,
+          "SuperSets": [
             {
-              "Exercises" : [
+              "Exercises": [
                 {
-                  "Id" : "A9BC5F77-7C31-4A44-AC39-3F3AD0456405",
-                  "SetDetails" : [
+                  "Id": "A9BC5F77-7C31-4A44-AC39-3F3AD0456405",
+                  "SetDetails": [
                     {
-                      "Status" : 0,
-                      "Type" : 0,
-                      "IsPersonalRecord" : false,
-                      "Secondary" : 0,
-                      "Id" : "7305A60D-F607-47B7-A41A-2B95B966E2E5",
-                      "Primary" : 20,
-                      "RPE" : 0
+                      "Status": 0,
+                      "Type": 0,
+                      "IsPersonalRecord": false,
+                      "Secondary": 0,
+                      "Id": "7305A60D-F607-47B7-A41A-2B95B966E2E5",
+                      "Primary": 20,
+                      "RPE": 0
                     },
                     {
-                      "Id" : "82C1AB98-BF4D-4F56-A063-C879C7287CAF",
-                      "Primary" : 20,
-                      "IsPersonalRecord" : false,
-                      "Secondary" : 0,
-                      "Type" : 0,
-                      "RPE" : 0,
-                      "Status" : 0
+                      "Id": "82C1AB98-BF4D-4F56-A063-C879C7287CAF",
+                      "Primary": 20,
+                      "IsPersonalRecord": false,
+                      "Secondary": 0,
+                      "Type": 0,
+                      "RPE": 0,
+                      "Status": 0
                     },
                     {
-                      "Id" : "DEB35E27-E836-4BE7-BC3F-1640F3C3B69F",
-                      "Primary" : 20,
-                      "IsPersonalRecord" : false,
-                      "Secondary" : 0,
-                      "Type" : 0,
-                      "RPE" : 0,
-                      "Status" : 0
+                      "Id": "DEB35E27-E836-4BE7-BC3F-1640F3C3B69F",
+                      "Primary": 20,
+                      "IsPersonalRecord": false,
+                      "Secondary": 0,
+                      "Type": 0,
+                      "RPE": 0,
+                      "Status": 0
                     }
                   ],
-                  "RestTime" : 0,
-                  "WarmupSetDetails" : [
-
-                  ],
-                  "Rules" : [
-
-                  ],
-                  "Definition" : {
-                    "Id" : "48d38601-7c81-4bf7-9087-0cbf116f4c3b",
-                    "Categories" : [
+                  "RestTime": 0,
+                  "WarmupSetDetails": [],
+                  "Rules": [],
+                  "Definition": {
+                    "Id": "48d38601-7c81-4bf7-9087-0cbf116f4c3b",
+                    "Categories": [
                       {
-                        "Color" : {
-                          "Red" : 255,
-                          "Blue" : 157,
-                          "Id" : "12",
-                          "Deleted" : false,
-                          "Green" : 140,
-                          "Alpha" : 1,
-                          "IsDeletable" : false,
-                          "Name" : "Pink1",
-                          "IsPro" : true
+                        "Color": {
+                          "Red": 255,
+                          "Blue": 157,
+                          "Id": "12",
+                          "Deleted": false,
+                          "Green": 140,
+                          "Alpha": 1,
+                          "IsDeletable": false,
+                          "Name": "Pink1",
+                          "IsPro": true
                         },
-                        "Name" : "Quadratis Lumborum",
-                        "Id" : "507d90fc-ce73-4a2c-a532-802cffb917fe"
+                        "Name": "Quadratis Lumborum",
+                        "Id": "507d90fc-ce73-4a2c-a532-802cffb917fe"
                       }
                     ],
-                    "MaxPrimary" : 20,
-                    "MaxSecondary" : 0,
-                    "Equipment" : {
-                      "Deleted" : false,
-                      "Name" : "None",
-                      "IsDeletable" : false,
-                      "Id" : "0"
+                    "MaxPrimary": 20,
+                    "MaxSecondary": 0,
+                    "Equipment": {
+                      "Deleted": false,
+                      "Name": "None",
+                      "IsDeletable": false,
+                      "Id": "0"
                     },
-                    "SecondaryFocusId" : 2,
-                    "Name" : "QL Raise",
-                    "PrimaryFocusId" : 1,
-                    "LastCompleted" : {
-                      "IsPersonalRecord" : false,
-                      "Id" : "41A4A476-307F-4605-9E11-973D3290D49C",
-                      "LastStatusUpdate" : 785614176.544541,
-                      "RPE" : 0,
-                      "Type" : 0,
-                      "Primary" : 20,
-                      "Secondary" : 0,
-                      "Status" : 1
+                    "SecondaryFocusId": 2,
+                    "Name": "QL Raise",
+                    "PrimaryFocusId": 1,
+                    "LastCompleted": {
+                      "IsPersonalRecord": false,
+                      "Id": "41A4A476-307F-4605-9E11-973D3290D49C",
+                      "LastStatusUpdate": 785614176.544541,
+                      "RPE": 0,
+                      "Type": 0,
+                      "Primary": 20,
+                      "Secondary": 0,
+                      "Status": 1
                     },
-                    "Deleted" : false
+                    "Deleted": false
                   }
                 }
               ],
-              "Id" : "35CC9B61-A463-4905-B2B8-42BBE51ECD2D"
+              "Id": "35CC9B61-A463-4905-B2B8-42BBE51ECD2D"
             }
           ],
-          "Id" : "CAFADD72-4A90-471A-8B76-3BF9BF66CF45",
-          "IsCurrent" : false,
-          "Measurements" : [
-
-          ]
+          "Id": "CAFADD72-4A90-471A-8B76-3BF9BF66CF45",
+          "IsCurrent": false,
+          "Measurements": []
         },
         {
-          "IsEveryday" : true,
-          "SuperSets" : [
+          "IsEveryday": true,
+          "SuperSets": [
             {
-              "Exercises" : [
+              "Exercises": [
                 {
-                  "Definition" : {
-                    "Id" : "e7bfdf9c-a5d6-4e88-a196-ff98763d1e5b",
-                    "Equipment" : {
-                      "IsDeletable" : false,
-                      "Id" : "0",
-                      "Name" : "None",
-                      "Deleted" : false
+                  "Definition": {
+                    "Id": "e7bfdf9c-a5d6-4e88-a196-ff98763d1e5b",
+                    "Equipment": {
+                      "IsDeletable": false,
+                      "Id": "0",
+                      "Name": "None",
+                      "Deleted": false
                     },
-                    "PersonalRecord" : {
-                      "Type" : 0,
-                      "RPE" : 2,
-                      "Primary" : 24,
-                      "Secondary" : 10,
-                      "LastStatusUpdate" : 779225195.796443,
-                      "IsPersonalRecord" : true,
-                      "Status" : 1,
-                      "Id" : "C4A09731-FA81-4636-9B1E-7DA57D3B9750"
+                    "PersonalRecord": {
+                      "Type": 0,
+                      "RPE": 2,
+                      "Primary": 24,
+                      "Secondary": 10,
+                      "LastStatusUpdate": 779225195.796443,
+                      "IsPersonalRecord": true,
+                      "Status": 1,
+                      "Id": "C4A09731-FA81-4636-9B1E-7DA57D3B9750"
                     },
-                    "PrimaryFocusId" : 1,
-                    "LastCompleted" : {
-                      "Type" : 0,
-                      "RPE" : 0,
-                      "Primary" : 24,
-                      "Secondary" : 10,
-                      "LastStatusUpdate" : 785613556.000497,
-                      "IsPersonalRecord" : false,
-                      "Status" : 1,
-                      "Id" : "00E01751-3078-4550-8921-F683A87DB706"
+                    "PrimaryFocusId": 1,
+                    "LastCompleted": {
+                      "Type": 0,
+                      "RPE": 0,
+                      "Primary": 24,
+                      "Secondary": 10,
+                      "LastStatusUpdate": 785613556.000497,
+                      "IsPersonalRecord": false,
+                      "Status": 1,
+                      "Id": "00E01751-3078-4550-8921-F683A87DB706"
                     },
-                    "Name" : "Bird Dog",
-                    "Deleted" : false,
-                    "MaxSecondary" : 10,
-                    "MaxPrimary" : 24,
-                    "SecondaryFocusId" : 3,
-                    "Categories" : [
+                    "Name": "Bird Dog",
+                    "Deleted": false,
+                    "MaxSecondary": 10,
+                    "MaxPrimary": 24,
+                    "SecondaryFocusId": 3,
+                    "Categories": [
                       {
-                        "Color" : {
-                          "IsPro" : false,
-                          "Red" : 12,
-                          "Deleted" : false,
-                          "Alpha" : 1,
-                          "Name" : "Green",
-                          "IsDeletable" : false,
-                          "Green" : 217,
-                          "Blue" : 88,
-                          "Id" : "2"
+                        "Color": {
+                          "IsPro": false,
+                          "Red": 12,
+                          "Deleted": false,
+                          "Alpha": 1,
+                          "Name": "Green",
+                          "IsDeletable": false,
+                          "Green": 217,
+                          "Blue": 88,
+                          "Id": "2"
                         },
-                        "Id" : "11",
-                        "Name" : "Back (Lower)"
+                        "Id": "11",
+                        "Name": "Back (Lower)"
                       }
                     ]
                   },
-                  "WarmupSetDetails" : [
-
-                  ],
-                  "Rules" : [
-
-                  ],
-                  "SetDetails" : [
+                  "WarmupSetDetails": [],
+                  "Rules": [],
+                  "SetDetails": [
                     {
-                      "Id" : "6D2A5AE0-15B0-411E-A230-D80EBF67E41A",
-                      "RPE" : 0,
-                      "Primary" : 24,
-                      "IsPersonalRecord" : false,
-                      "Status" : 0,
-                      "Type" : 0,
-                      "Secondary" : 10
+                      "Id": "6D2A5AE0-15B0-411E-A230-D80EBF67E41A",
+                      "RPE": 0,
+                      "Primary": 24,
+                      "IsPersonalRecord": false,
+                      "Status": 0,
+                      "Type": 0,
+                      "Secondary": 10
                     }
                   ],
-                  "Id" : "7AC79F25-A151-46DD-9383-F70D3BAEE6AF",
-                  "RestTime" : 0
+                  "Id": "7AC79F25-A151-46DD-9383-F70D3BAEE6AF",
+                  "RestTime": 0
                 }
               ],
-              "Id" : "C4C65A11-C8F0-4E28-AA2E-18CC3FFE1F37"
+              "Id": "C4C65A11-C8F0-4E28-AA2E-18CC3FFE1F37"
             }
           ],
-          "Id" : "C5981600-8DCB-4754-9771-EFA0C6E66188",
-          "IsCurrent" : false,
-          "Measurements" : [
-
-          ]
+          "Id": "C5981600-8DCB-4754-9771-EFA0C6E66188",
+          "IsCurrent": false,
+          "Measurements": []
         },
         {
-          "IsEveryday" : true,
-          "SuperSets" : [
+          "IsEveryday": true,
+          "SuperSets": [
             {
-              "Exercises" : [
+              "Exercises": [
                 {
-                  "RestTime" : 0,
-                  "Rules" : [
-
-                  ],
-                  "Id" : "D0DD5C3C-43E5-4282-B782-66025BE74220",
-                  "Definition" : {
-                    "Id" : "794b8d0c-abe3-4791-bf1a-30af701d165d",
-                    "Equipment" : {
-                      "IsDeletable" : false,
-                      "Id" : "0",
-                      "Deleted" : false,
-                      "Name" : "None"
+                  "RestTime": 0,
+                  "Rules": [],
+                  "Id": "D0DD5C3C-43E5-4282-B782-66025BE74220",
+                  "Definition": {
+                    "Id": "794b8d0c-abe3-4791-bf1a-30af701d165d",
+                    "Equipment": {
+                      "IsDeletable": false,
+                      "Id": "0",
+                      "Deleted": false,
+                      "Name": "None"
                     },
-                    "PersonalRecord" : {
-                      "Primary" : 80,
-                      "LastStatusUpdate" : 779226376.185846,
-                      "Id" : "90950255-523D-4B7C-9F17-EFF49FD00586",
-                      "Secondary" : 0,
-                      "Type" : 0,
-                      "RPE" : 8,
-                      "Status" : 1,
-                      "IsPersonalRecord" : true
+                    "PersonalRecord": {
+                      "Primary": 80,
+                      "LastStatusUpdate": 779226376.185846,
+                      "Id": "90950255-523D-4B7C-9F17-EFF49FD00586",
+                      "Secondary": 0,
+                      "Type": 0,
+                      "RPE": 8,
+                      "Status": 1,
+                      "IsPersonalRecord": true
                     },
-                    "PrimaryFocusId" : 3,
-                    "LastCompleted" : {
-                      "Primary" : 80,
-                      "LastStatusUpdate" : 785613963.045839,
-                      "Id" : "87A806F6-0F79-4F77-AB2C-5005DF3B4559",
-                      "Secondary" : 0,
-                      "Type" : 0,
-                      "RPE" : 0,
-                      "Status" : 1,
-                      "IsPersonalRecord" : false
+                    "PrimaryFocusId": 3,
+                    "LastCompleted": {
+                      "Primary": 80,
+                      "LastStatusUpdate": 785613963.045839,
+                      "Id": "87A806F6-0F79-4F77-AB2C-5005DF3B4559",
+                      "Secondary": 0,
+                      "Type": 0,
+                      "RPE": 0,
+                      "Status": 1,
+                      "IsPersonalRecord": false
                     },
-                    "Deleted" : false,
-                    "Name" : "Side Plank",
-                    "MaxSecondary" : 0,
-                    "MaxPrimary" : 80,
-                    "SecondaryFocusId" : 0,
-                    "Categories" : [
+                    "Deleted": false,
+                    "Name": "Side Plank",
+                    "MaxSecondary": 0,
+                    "MaxPrimary": 80,
+                    "SecondaryFocusId": 0,
+                    "Categories": [
                       {
-                        "Id" : "1da1c21b-6d4b-49ee-b579-98e4a28a4c3b",
-                        "Color" : {
-                          "IsPro" : true,
-                          "IsDeletable" : false,
-                          "Id" : "18",
-                          "Alpha" : 1,
-                          "Name" : "Blue Green 3",
-                          "Red" : 118,
-                          "Deleted" : false,
-                          "Blue" : 175,
-                          "Green" : 174
+                        "Id": "1da1c21b-6d4b-49ee-b579-98e4a28a4c3b",
+                        "Color": {
+                          "IsPro": true,
+                          "IsDeletable": false,
+                          "Id": "18",
+                          "Alpha": 1,
+                          "Name": "Blue Green 3",
+                          "Red": 118,
+                          "Deleted": false,
+                          "Blue": 175,
+                          "Green": 174
                         },
-                        "Name" : "Abductors"
+                        "Name": "Abductors"
                       },
                       {
-                        "Id" : "3",
-                        "Color" : {
-                          "IsPro" : false,
-                          "IsDeletable" : false,
-                          "Id" : "2",
-                          "Alpha" : 1,
-                          "Name" : "Green",
-                          "Red" : 12,
-                          "Deleted" : false,
-                          "Blue" : 88,
-                          "Green" : 217
+                        "Id": "3",
+                        "Color": {
+                          "IsPro": false,
+                          "IsDeletable": false,
+                          "Id": "2",
+                          "Alpha": 1,
+                          "Name": "Green",
+                          "Red": 12,
+                          "Deleted": false,
+                          "Blue": 88,
+                          "Green": 217
                         },
-                        "Name" : "Obliques"
+                        "Name": "Obliques"
                       }
                     ]
                   },
-                  "SetDetails" : [
+                  "SetDetails": [
                     {
-                      "Id" : "0F9D5609-E964-40A9-95AC-12C83CCDC903",
-                      "RPE" : 0,
-                      "Primary" : 80,
-                      "IsPersonalRecord" : false,
-                      "Status" : 0,
-                      "Type" : 0,
-                      "Secondary" : 0
+                      "Id": "0F9D5609-E964-40A9-95AC-12C83CCDC903",
+                      "RPE": 0,
+                      "Primary": 80,
+                      "IsPersonalRecord": false,
+                      "Status": 0,
+                      "Type": 0,
+                      "Secondary": 0
                     }
                   ],
-                  "WarmupSetDetails" : [
-
-                  ]
+                  "WarmupSetDetails": []
                 }
               ],
-              "Id" : "0CEB9F78-147C-405F-9CB8-249F80AB0141"
+              "Id": "0CEB9F78-147C-405F-9CB8-249F80AB0141"
             }
           ],
-          "Id" : "50CF0F26-56E2-476E-A7E7-9458C3735D9F",
-          "IsCurrent" : false,
-          "Measurements" : [
-
-          ]
+          "Id": "50CF0F26-56E2-476E-A7E7-9458C3735D9F",
+          "IsCurrent": false,
+          "Measurements": []
         },
         {
-          "IsEveryday" : true,
-          "SuperSets" : [
+          "IsEveryday": true,
+          "SuperSets": [
             {
-              "Exercises" : [
+              "Exercises": [
                 {
-                  "WarmupSetDetails" : [
-
-                  ],
-                  "Id" : "38988E1E-BCF1-4E67-B1EC-04D67E137C3C",
-                  "Rules" : [
+                  "WarmupSetDetails": [],
+                  "Id": "38988E1E-BCF1-4E67-B1EC-04D67E137C3C",
+                  "Rules": [
                     {
-                      "FocusId" : 3,
-                      "DirectionId" : 0,
-                      "Delta" : 0,
-                      "Id" : "F6106AEE-5A4E-4561-AC87-248C108834FF",
-                      "StatusId" : 1
+                      "FocusId": 3,
+                      "DirectionId": 0,
+                      "Delta": 0,
+                      "Id": "F6106AEE-5A4E-4561-AC87-248C108834FF",
+                      "StatusId": 1
                     }
                   ],
-                  "SetDetails" : [
+                  "SetDetails": [
                     {
-                      "Id" : "7BD1B0F7-1D0D-40D5-B1DF-88E0D5C16B9F",
-                      "RPE" : 0,
-                      "Primary" : 120,
-                      "IsPersonalRecord" : false,
-                      "Status" : 0,
-                      "Type" : 0,
-                      "Secondary" : 0
+                      "Id": "7BD1B0F7-1D0D-40D5-B1DF-88E0D5C16B9F",
+                      "RPE": 0,
+                      "Primary": 120,
+                      "IsPersonalRecord": false,
+                      "Status": 0,
+                      "Type": 0,
+                      "Secondary": 0
                     },
                     {
-                      "Id" : "86FC9A56-20AB-41DE-9717-1AC7319C2434",
-                      "RPE" : 0,
-                      "Primary" : 120,
-                      "IsPersonalRecord" : false,
-                      "Status" : 0,
-                      "Type" : 0,
-                      "Secondary" : 0
+                      "Id": "86FC9A56-20AB-41DE-9717-1AC7319C2434",
+                      "RPE": 0,
+                      "Primary": 120,
+                      "IsPersonalRecord": false,
+                      "Status": 0,
+                      "Type": 0,
+                      "Secondary": 0
                     },
                     {
-                      "RPE" : 0,
-                      "Id" : "B7550F1D-4059-44CB-ABDB-1B9BF62D1484",
-                      "Type" : 0,
-                      "Primary" : 120,
-                      "Secondary" : 0,
-                      "Status" : 0,
-                      "IsPersonalRecord" : false
+                      "RPE": 0,
+                      "Id": "B7550F1D-4059-44CB-ABDB-1B9BF62D1484",
+                      "Type": 0,
+                      "Primary": 120,
+                      "Secondary": 0,
+                      "Status": 0,
+                      "IsPersonalRecord": false
                     },
                     {
-                      "RPE" : 0,
-                      "Id" : "244F5F39-F181-4EDD-8626-9982F60DB313",
-                      "Type" : 0,
-                      "Primary" : 120,
-                      "Secondary" : 0,
-                      "Status" : 0,
-                      "IsPersonalRecord" : false
+                      "RPE": 0,
+                      "Id": "244F5F39-F181-4EDD-8626-9982F60DB313",
+                      "Type": 0,
+                      "Primary": 120,
+                      "Secondary": 0,
+                      "Status": 0,
+                      "IsPersonalRecord": false
                     }
                   ],
-                  "RestTime" : 0,
-                  "Definition" : {
-                    "PrimaryFocusId" : 3,
-                    "Deleted" : false,
-                    "Categories" : [
+                  "RestTime": 0,
+                  "Definition": {
+                    "PrimaryFocusId": 3,
+                    "Deleted": false,
+                    "Categories": [
                       {
-                        "Color" : {
-                          "Deleted" : false,
-                          "Red" : 42,
-                          "Alpha" : 1,
-                          "Green" : 109,
-                          "IsDeletable" : false,
-                          "IsPro" : true,
-                          "Id" : "19",
-                          "Name" : "Blue Green 4",
-                          "Blue" : 130
+                        "Color": {
+                          "Deleted": false,
+                          "Red": 42,
+                          "Alpha": 1,
+                          "Green": 109,
+                          "IsDeletable": false,
+                          "IsPro": true,
+                          "Id": "19",
+                          "Name": "Blue Green 4",
+                          "Blue": 130
                         },
-                        "Id" : "13",
-                        "Name" : "Hamstrings"
+                        "Id": "13",
+                        "Name": "Hamstrings"
                       },
                       {
-                        "Color" : {
-                          "Deleted" : false,
-                          "Red" : 106,
-                          "Alpha" : 1,
-                          "Green" : 167,
-                          "IsDeletable" : false,
-                          "IsPro" : true,
-                          "Id" : "20",
-                          "Name" : "Green 1",
-                          "Blue" : 134
+                        "Color": {
+                          "Deleted": false,
+                          "Red": 106,
+                          "Alpha": 1,
+                          "Green": 167,
+                          "IsDeletable": false,
+                          "IsPro": true,
+                          "Id": "20",
+                          "Name": "Green 1",
+                          "Blue": 134
                         },
-                        "Id" : "12",
-                        "Name" : "Gluteals"
+                        "Id": "12",
+                        "Name": "Gluteals"
                       },
                       {
-                        "Color" : {
-                          "Deleted" : false,
-                          "Red" : 12,
-                          "Alpha" : 1,
-                          "Green" : 217,
-                          "IsDeletable" : false,
-                          "IsPro" : false,
-                          "Id" : "2",
-                          "Name" : "Green",
-                          "Blue" : 88
+                        "Color": {
+                          "Deleted": false,
+                          "Red": 12,
+                          "Alpha": 1,
+                          "Green": 217,
+                          "IsDeletable": false,
+                          "IsPro": false,
+                          "Id": "2",
+                          "Name": "Green",
+                          "Blue": 88
                         },
-                        "Id" : "11",
-                        "Name" : "Back (Lower)"
+                        "Id": "11",
+                        "Name": "Back (Lower)"
                       }
                     ],
-                    "MaxPrimary" : 120,
-                    "Id" : "a69c943f-94cb-4110-97bb-47506ea95ae1",
-                    "Equipment" : {
-                      "Id" : "4",
-                      "Deleted" : false,
-                      "IsDeletable" : false,
-                      "Name" : "Machine"
+                    "MaxPrimary": 120,
+                    "Id": "a69c943f-94cb-4110-97bb-47506ea95ae1",
+                    "Equipment": {
+                      "Id": "4",
+                      "Deleted": false,
+                      "IsDeletable": false,
+                      "Name": "Machine"
                     },
-                    "MaxSecondary" : 0,
-                    "PersonalRecord" : {
-                      "Type" : 0,
-                      "RPE" : 0,
-                      "Secondary" : 0,
-                      "Id" : "953D9ECE-1AD5-4A27-A3EB-737699ACEF79",
-                      "Status" : 1,
-                      "LastStatusUpdate" : 779660356.198679,
-                      "IsPersonalRecord" : true,
-                      "Primary" : 120
+                    "MaxSecondary": 0,
+                    "PersonalRecord": {
+                      "Type": 0,
+                      "RPE": 0,
+                      "Secondary": 0,
+                      "Id": "953D9ECE-1AD5-4A27-A3EB-737699ACEF79",
+                      "Status": 1,
+                      "LastStatusUpdate": 779660356.198679,
+                      "IsPersonalRecord": true,
+                      "Primary": 120
                     },
-                    "Name" : "Back Plank",
-                    "SecondaryFocusId" : 0,
-                    "LastCompleted" : {
-                      "Type" : 0,
-                      "RPE" : 0,
-                      "Secondary" : 0,
-                      "Id" : "8846A820-6ABE-420D-80B7-FCBA66EF3AC3",
-                      "Status" : 1,
-                      "LastStatusUpdate" : 785616213.657988,
-                      "IsPersonalRecord" : false,
-                      "Primary" : 110
+                    "Name": "Hyperextension",
+                    "SecondaryFocusId": 0,
+                    "LastCompleted": {
+                      "Type": 0,
+                      "RPE": 0,
+                      "Secondary": 0,
+                      "Id": "8846A820-6ABE-420D-80B7-FCBA66EF3AC3",
+                      "Status": 1,
+                      "LastStatusUpdate": 785616213.657988,
+                      "IsPersonalRecord": false,
+                      "Primary": 110
                     }
                   }
                 }
               ],
-              "Id" : "E7ACBE32-0CF8-4E62-8F6E-E7A2425873F4"
+              "Id": "E7ACBE32-0CF8-4E62-8F6E-E7A2425873F4"
             }
           ],
-          "Id" : "0546F844-0C75-424A-8F6F-B7BCCBD46E99",
-          "IsCurrent" : false,
-          "Measurements" : [
-
-          ]
+          "Id": "0546F844-0C75-424A-8F6F-B7BCCBD46E99",
+          "IsCurrent": false,
+          "Measurements": []
         },
         {
-          "IsEveryday" : true,
-          "SuperSets" : [
+          "IsEveryday": true,
+          "SuperSets": [
             {
-              "Exercises" : [
+              "Exercises": [
                 {
-                  "WarmupSetDetails" : [
-
-                  ],
-                  "RestTime" : 0,
-                  "SetDetails" : [
+                  "WarmupSetDetails": [],
+                  "RestTime": 0,
+                  "SetDetails": [
                     {
-                      "RPE" : 0,
-                      "Id" : "639C075D-45ED-4E70-B860-21B0BCAEA7F0",
-                      "Type" : 0,
-                      "Primary" : 24,
-                      "Status" : 0,
-                      "Secondary" : 100,
-                      "IsPersonalRecord" : false
+                      "RPE": 0,
+                      "Id": "639C075D-45ED-4E70-B860-21B0BCAEA7F0",
+                      "Type": 0,
+                      "Primary": 24,
+                      "Status": 0,
+                      "Secondary": 100,
+                      "IsPersonalRecord": false
                     },
                     {
-                      "RPE" : 0,
-                      "Id" : "E1E9C163-7F2C-48AD-8906-C419A673560A",
-                      "Type" : 0,
-                      "Primary" : 24,
-                      "Status" : 0,
-                      "Secondary" : 100,
-                      "IsPersonalRecord" : false
+                      "RPE": 0,
+                      "Id": "E1E9C163-7F2C-48AD-8906-C419A673560A",
+                      "Type": 0,
+                      "Primary": 24,
+                      "Status": 0,
+                      "Secondary": 100,
+                      "IsPersonalRecord": false
                     },
                     {
-                      "RPE" : 0,
-                      "Id" : "5375AA80-56BF-4A9C-9D10-C79557C55BC8",
-                      "Type" : 0,
-                      "Primary" : 24,
-                      "Status" : 0,
-                      "Secondary" : 100,
-                      "IsPersonalRecord" : false
+                      "RPE": 0,
+                      "Id": "5375AA80-56BF-4A9C-9D10-C79557C55BC8",
+                      "Type": 0,
+                      "Primary": 24,
+                      "Status": 0,
+                      "Secondary": 100,
+                      "IsPersonalRecord": false
                     },
                     {
-                      "RPE" : 0,
-                      "Id" : "DC28AEC5-76BE-432C-B8BA-77C4FFEE88AD",
-                      "Type" : 0,
-                      "Primary" : 24,
-                      "Status" : 0,
-                      "Secondary" : 100,
-                      "IsPersonalRecord" : false
+                      "RPE": 0,
+                      "Id": "DC28AEC5-76BE-432C-B8BA-77C4FFEE88AD",
+                      "Type": 0,
+                      "Primary": 24,
+                      "Status": 0,
+                      "Secondary": 100,
+                      "IsPersonalRecord": false
                     }
                   ],
-                  "Definition" : {
-                    "PrimaryFocusId" : 1,
-                    "Deleted" : false,
-                    "Categories" : [
+                  "Definition": {
+                    "PrimaryFocusId": 1,
+                    "Deleted": false,
+                    "Categories": [
                       {
-                        "Name" : "Calves",
-                        "Id" : "14",
-                        "Color" : {
-                          "Name" : "Purple",
-                          "Alpha" : 1,
-                          "Id" : "4",
-                          "Blue" : 246,
-                          "Red" : 111,
-                          "Green" : 0,
-                          "IsPro" : false,
-                          "IsDeletable" : false,
-                          "Deleted" : false
+                        "Name": "Calves",
+                        "Id": "14",
+                        "Color": {
+                          "Name": "Purple",
+                          "Alpha": 1,
+                          "Id": "4",
+                          "Blue": 246,
+                          "Red": 111,
+                          "Green": 0,
+                          "IsPro": false,
+                          "IsDeletable": false,
+                          "Deleted": false
                         }
                       },
                       {
-                        "Name" : "Hamstrings",
-                        "Id" : "13",
-                        "Color" : {
-                          "Name" : "Blue Green 4",
-                          "Alpha" : 1,
-                          "Id" : "19",
-                          "Blue" : 130,
-                          "Red" : 42,
-                          "Green" : 109,
-                          "IsPro" : true,
-                          "IsDeletable" : false,
-                          "Deleted" : false
+                        "Name": "Hamstrings",
+                        "Id": "13",
+                        "Color": {
+                          "Name": "Blue Green 4",
+                          "Alpha": 1,
+                          "Id": "19",
+                          "Blue": 130,
+                          "Red": 42,
+                          "Green": 109,
+                          "IsPro": true,
+                          "IsDeletable": false,
+                          "Deleted": false
                         }
                       }
                     ],
-                    "MaxPrimary" : 28,
-                    "Id" : "FromFile_6",
-                    "Equipment" : {
-                      "Id" : "4",
-                      "IsDeletable" : false,
-                      "Name" : "Machine",
-                      "Deleted" : false
+                    "MaxPrimary": 28,
+                    "Id": "FromFile_6",
+                    "Equipment": {
+                      "Id": "4",
+                      "IsDeletable": false,
+                      "Name": "Machine",
+                      "Deleted": false
                     },
-                    "MaxSecondary" : 110,
-                    "PersonalRecord" : {
-                      "Type" : 0,
-                      "Status" : 1,
-                      "Id" : "23A4F2F8-68B1-4810-A444-2E1109163C6C",
-                      "IsPersonalRecord" : true,
-                      "LastStatusUpdate" : 781645224.659571,
-                      "Secondary" : 100,
-                      "RPE" : 0,
-                      "Primary" : 24
+                    "MaxSecondary": 110,
+                    "PersonalRecord": {
+                      "Type": 0,
+                      "Status": 1,
+                      "Id": "23A4F2F8-68B1-4810-A444-2E1109163C6C",
+                      "IsPersonalRecord": true,
+                      "LastStatusUpdate": 781645224.659571,
+                      "Secondary": 100,
+                      "RPE": 0,
+                      "Primary": 24
                     },
-                    "Name" : "Hamstring Curl",
-                    "SecondaryFocusId" : 2,
-                    "LastCompleted" : {
-                      "Type" : 0,
-                      "Status" : 1,
-                      "Id" : "CAE21EB9-93F2-437F-A171-A25765483677",
-                      "IsPersonalRecord" : false,
-                      "LastStatusUpdate" : 785616063.634776,
-                      "Secondary" : 110,
-                      "RPE" : 0,
-                      "Primary" : 16
+                    "Name": "Hamstring Curl",
+                    "SecondaryFocusId": 2,
+                    "LastCompleted": {
+                      "Type": 0,
+                      "Status": 1,
+                      "Id": "CAE21EB9-93F2-437F-A171-A25765483677",
+                      "IsPersonalRecord": false,
+                      "LastStatusUpdate": 785616063.634776,
+                      "Secondary": 110,
+                      "RPE": 0,
+                      "Primary": 16
                     }
                   },
-                  "Id" : "281E6E6B-9599-4385-9BA6-EDA8D52135C7",
-                  "Rules" : [
-
-                  ]
+                  "Id": "281E6E6B-9599-4385-9BA6-EDA8D52135C7",
+                  "Rules": []
                 }
               ],
-              "Id" : "767B7EB2-71B7-4D2D-BFFF-5042F85164AD"
+              "Id": "767B7EB2-71B7-4D2D-BFFF-5042F85164AD"
             }
           ],
-          "Id" : "23A8579A-55D1-4F3A-92C8-C2C8E37D56F8",
-          "IsCurrent" : false,
-          "Measurements" : [
-
-          ]
+          "Id": "23A8579A-55D1-4F3A-92C8-C2C8E37D56F8",
+          "IsCurrent": false,
+          "Measurements": []
         },
         {
-          "Id" : "84A0643D-AD3A-415D-B6DD-F3946651F775",
-          "SuperSets" : [
+          "Id": "84A0643D-AD3A-415D-B6DD-F3946651F775",
+          "SuperSets": [
             {
-              "Id" : "483FD293-E79E-42C0-997E-F667A69114B3",
-              "Exercises" : [
+              "Id": "483FD293-E79E-42C0-997E-F667A69114B3",
+              "Exercises": [
                 {
-                  "Definition" : {
-                    "Categories" : [
+                  "Definition": {
+                    "Categories": [
                       {
-                        "Name" : "Back (Lower)",
-                        "Color" : {
-                          "Green" : 217,
-                          "Blue" : 88,
-                          "Red" : 12,
-                          "Alpha" : 1,
-                          "Deleted" : false,
-                          "Id" : "2",
-                          "Name" : "Green",
-                          "IsDeletable" : false,
-                          "IsPro" : false
+                        "Name": "Back (Lower)",
+                        "Color": {
+                          "Green": 217,
+                          "Blue": 88,
+                          "Red": 12,
+                          "Alpha": 1,
+                          "Deleted": false,
+                          "Id": "2",
+                          "Name": "Green",
+                          "IsDeletable": false,
+                          "IsPro": false
                         },
-                        "Id" : "11"
+                        "Id": "11"
                       },
                       {
-                        "Name" : "Biceps",
-                        "Color" : {
-                          "Green" : 108,
-                          "Blue" : 246,
-                          "Red" : 5,
-                          "Alpha" : 1,
-                          "Deleted" : false,
-                          "Id" : "5",
-                          "Name" : "Blue",
-                          "IsDeletable" : false,
-                          "IsPro" : false
+                        "Name": "Biceps",
+                        "Color": {
+                          "Green": 108,
+                          "Blue": 246,
+                          "Red": 5,
+                          "Alpha": 1,
+                          "Deleted": false,
+                          "Id": "5",
+                          "Name": "Blue",
+                          "IsDeletable": false,
+                          "IsPro": false
                         },
-                        "Id" : "1"
+                        "Id": "1"
                       },
                       {
-                        "Name" : "Trapezius",
-                        "Color" : {
-                          "Green" : 89,
-                          "Red" : 64,
-                          "Blue" : 128,
-                          "Alpha" : 1,
-                          "Deleted" : false,
-                          "Id" : "22",
-                          "Name" : "Pastel 1",
-                          "IsDeletable" : false,
-                          "IsPro" : true
+                        "Name": "Trapezius",
+                        "Color": {
+                          "Green": 89,
+                          "Red": 64,
+                          "Blue": 128,
+                          "Alpha": 1,
+                          "Deleted": false,
+                          "Id": "22",
+                          "Name": "Pastel 1",
+                          "IsDeletable": false,
+                          "IsPro": true
                         },
-                        "Id" : "8"
+                        "Id": "8"
                       }
                     ],
-                    "SecondaryFocusId" : 2,
-                    "PersonalRecord" : {
-                      "Type" : 0,
-                      "Status" : 1,
-                      "IsPersonalRecord" : true,
-                      "LastStatusUpdate" : 780680112.689619,
-                      "Id" : "4AC83644-ABB4-43C0-BAC1-40FF367AFC42",
-                      "RPE" : 0,
-                      "Primary" : 13,
-                      "Secondary" : 140
+                    "SecondaryFocusId": 2,
+                    "PersonalRecord": {
+                      "Type": 0,
+                      "Status": 1,
+                      "IsPersonalRecord": true,
+                      "LastStatusUpdate": 780680112.689619,
+                      "Id": "4AC83644-ABB4-43C0-BAC1-40FF367AFC42",
+                      "RPE": 0,
+                      "Primary": 13,
+                      "Secondary": 140
                     },
-                    "LastCompleted" : {
-                      "Type" : 0,
-                      "Status" : 1,
-                      "IsPersonalRecord" : false,
-                      "LastStatusUpdate" : 785616334.704529,
-                      "Id" : "ED117D46-70D4-423C-A271-AB2466FC855B",
-                      "RPE" : 0,
-                      "Primary" : 9,
-                      "Secondary" : 170
+                    "LastCompleted": {
+                      "Type": 0,
+                      "Status": 1,
+                      "IsPersonalRecord": false,
+                      "LastStatusUpdate": 785616334.704529,
+                      "Id": "ED117D46-70D4-423C-A271-AB2466FC855B",
+                      "RPE": 0,
+                      "Primary": 9,
+                      "Secondary": 170
                     },
-                    "Equipment" : {
-                      "Name" : "Machine",
-                      "IsDeletable" : false,
-                      "Id" : "4",
-                      "Deleted" : false
+                    "Equipment": {
+                      "Name": "Machine",
+                      "IsDeletable": false,
+                      "Id": "4",
+                      "Deleted": false
                     },
-                    "MaxPrimary" : 14,
-                    "MaxSecondary" : 185,
-                    "Id" : "FromFile_12",
-                    "Deleted" : false,
-                    "PrimaryFocusId" : 1,
-                    "Name" : "Lat Pulldown"
+                    "MaxPrimary": 14,
+                    "MaxSecondary": 185,
+                    "Id": "FromFile_12",
+                    "Deleted": false,
+                    "PrimaryFocusId": 1,
+                    "Name": "Lat Pulldown"
                   },
-                  "Id" : "9EC23A90-3A68-45D3-B664-B2CD03C9CC53",
-                  "RestTime" : 0,
-                  "SetDetails" : [
+                  "Id": "9EC23A90-3A68-45D3-B664-B2CD03C9CC53",
+                  "RestTime": 0,
+                  "SetDetails": [
                     {
-                      "RPE" : 0,
-                      "Id" : "EBADD8F5-49B7-4EC4-AC89-CE609EA6CD56",
-                      "Type" : 0,
-                      "Primary" : 9,
-                      "Status" : 0,
-                      "Secondary" : 155,
-                      "IsPersonalRecord" : false
+                      "RPE": 0,
+                      "Id": "EBADD8F5-49B7-4EC4-AC89-CE609EA6CD56",
+                      "Type": 0,
+                      "Primary": 9,
+                      "Status": 0,
+                      "Secondary": 155,
+                      "IsPersonalRecord": false
                     },
                     {
-                      "RPE" : 0,
-                      "Id" : "F43E6AB6-7AF1-463E-80A4-51B64E31D4E4",
-                      "Type" : 0,
-                      "Primary" : 9,
-                      "Status" : 0,
-                      "Secondary" : 155,
-                      "IsPersonalRecord" : false
+                      "RPE": 0,
+                      "Id": "F43E6AB6-7AF1-463E-80A4-51B64E31D4E4",
+                      "Type": 0,
+                      "Primary": 9,
+                      "Status": 0,
+                      "Secondary": 155,
+                      "IsPersonalRecord": false
                     },
                     {
-                      "RPE" : 0,
-                      "Id" : "BC43EE94-D5A4-4E23-95DA-C6AAB7136479",
-                      "Type" : 0,
-                      "Primary" : 11,
-                      "Status" : 0,
-                      "Secondary" : 155,
-                      "IsPersonalRecord" : false
+                      "RPE": 0,
+                      "Id": "BC43EE94-D5A4-4E23-95DA-C6AAB7136479",
+                      "Type": 0,
+                      "Primary": 11,
+                      "Status": 0,
+                      "Secondary": 155,
+                      "IsPersonalRecord": false
                     },
                     {
-                      "RPE" : 0,
-                      "Id" : "9A0EED3D-DE51-497C-8647-6A0662B5A44A",
-                      "Type" : 0,
-                      "Primary" : 9,
-                      "Status" : 0,
-                      "Secondary" : 155,
-                      "IsPersonalRecord" : false
+                      "RPE": 0,
+                      "Id": "9A0EED3D-DE51-497C-8647-6A0662B5A44A",
+                      "Type": 0,
+                      "Primary": 9,
+                      "Status": 0,
+                      "Secondary": 155,
+                      "IsPersonalRecord": false
                     }
                   ],
-                  "WarmupSetDetails" : [
-
-                  ],
-                  "Rules" : [
-
-                  ]
+                  "WarmupSetDetails": [],
+                  "Rules": []
                 }
               ]
             }
           ],
-          "IsCurrent" : false,
-          "IsEveryday" : true,
-          "Measurements" : [
-
-          ]
+          "IsCurrent": false,
+          "IsEveryday": true,
+          "Measurements": []
         },
         {
-          "Id" : "1A98BD69-0810-41EB-85D6-3BA958237432",
-          "SuperSets" : [
+          "Id": "1A98BD69-0810-41EB-85D6-3BA958237432",
+          "SuperSets": [
             {
-              "Id" : "05E67803-BF43-4798-B16D-C768A74D21A0",
-              "Exercises" : [
+              "Id": "05E67803-BF43-4798-B16D-C768A74D21A0",
+              "Exercises": [
                 {
-                  "Definition" : {
-                    "Categories" : [
+                  "Definition": {
+                    "Categories": [
                       {
-                        "Id" : "12",
-                        "Name" : "Gluteals",
-                        "Color" : {
-                          "Green" : 167,
-                          "Blue" : 134,
-                          "Deleted" : false,
-                          "Red" : 106,
-                          "Name" : "Green 1",
-                          "Alpha" : 1,
-                          "Id" : "20",
-                          "IsPro" : true,
-                          "IsDeletable" : false
+                        "Id": "12",
+                        "Name": "Gluteals",
+                        "Color": {
+                          "Green": 167,
+                          "Blue": 134,
+                          "Deleted": false,
+                          "Red": 106,
+                          "Name": "Green 1",
+                          "Alpha": 1,
+                          "Id": "20",
+                          "IsPro": true,
+                          "IsDeletable": false
                         }
                       },
                       {
-                        "Id" : "13",
-                        "Name" : "Hamstrings",
-                        "Color" : {
-                          "Green" : 109,
-                          "Blue" : 130,
-                          "Deleted" : false,
-                          "Red" : 42,
-                          "Name" : "Blue Green 4",
-                          "Alpha" : 1,
-                          "Id" : "19",
-                          "IsPro" : true,
-                          "IsDeletable" : false
+                        "Id": "13",
+                        "Name": "Hamstrings",
+                        "Color": {
+                          "Green": 109,
+                          "Blue": 130,
+                          "Deleted": false,
+                          "Red": 42,
+                          "Name": "Blue Green 4",
+                          "Alpha": 1,
+                          "Id": "19",
+                          "IsPro": true,
+                          "IsDeletable": false
                         }
                       },
                       {
-                        "Id" : "7",
-                        "Name" : "Quadriceps",
-                        "Color" : {
-                          "Green" : 212,
-                          "Blue" : 212,
-                          "Deleted" : false,
-                          "Red" : 148,
-                          "Name" : "Blue Green 1",
-                          "Alpha" : 1,
-                          "Id" : "16",
-                          "IsPro" : true,
-                          "IsDeletable" : false
+                        "Id": "7",
+                        "Name": "Quadriceps",
+                        "Color": {
+                          "Green": 212,
+                          "Blue": 212,
+                          "Deleted": false,
+                          "Red": 148,
+                          "Name": "Blue Green 1",
+                          "Alpha": 1,
+                          "Id": "16",
+                          "IsPro": true,
+                          "IsDeletable": false
                         }
                       },
                       {
-                        "Id" : "14",
-                        "Name" : "Calves",
-                        "Color" : {
-                          "Green" : 0,
-                          "Blue" : 246,
-                          "Deleted" : false,
-                          "Red" : 111,
-                          "Name" : "Purple",
-                          "Alpha" : 1,
-                          "Id" : "4",
-                          "IsPro" : false,
-                          "IsDeletable" : false
+                        "Id": "14",
+                        "Name": "Calves",
+                        "Color": {
+                          "Green": 0,
+                          "Blue": 246,
+                          "Deleted": false,
+                          "Red": 111,
+                          "Name": "Purple",
+                          "Alpha": 1,
+                          "Id": "4",
+                          "IsPro": false,
+                          "IsDeletable": false
                         }
                       }
                     ],
-                    "SecondaryFocusId" : 2,
-                    "PersonalRecord" : {
-                      "RPE" : 0,
-                      "Id" : "B9043412-6FCB-4B36-9322-A0230E4CA695",
-                      "Secondary" : 460,
-                      "IsPersonalRecord" : true,
-                      "Primary" : 12,
-                      "LastStatusUpdate" : 785615451.80937,
-                      "Status" : 1,
-                      "Type" : 0
+                    "SecondaryFocusId": 2,
+                    "PersonalRecord": {
+                      "RPE": 0,
+                      "Id": "B9043412-6FCB-4B36-9322-A0230E4CA695",
+                      "Secondary": 460,
+                      "IsPersonalRecord": true,
+                      "Primary": 12,
+                      "LastStatusUpdate": 785615451.80937,
+                      "Status": 1,
+                      "Type": 0
                     },
-                    "LastCompleted" : {
-                      "RPE" : 0,
-                      "Id" : "3B747F9D-F00B-4925-BB4E-4C0480688627",
-                      "Secondary" : 460,
-                      "IsPersonalRecord" : false,
-                      "Primary" : 12,
-                      "LastStatusUpdate" : 785616070.151807,
-                      "Status" : 1,
-                      "Type" : 0
+                    "LastCompleted": {
+                      "RPE": 0,
+                      "Id": "3B747F9D-F00B-4925-BB4E-4C0480688627",
+                      "Secondary": 460,
+                      "IsPersonalRecord": false,
+                      "Primary": 12,
+                      "LastStatusUpdate": 785616070.151807,
+                      "Status": 1,
+                      "Type": 0
                     },
-                    "Equipment" : {
-                      "Id" : "0",
-                      "Name" : "None",
-                      "Deleted" : false,
-                      "IsDeletable" : false
+                    "Equipment": {
+                      "Name": "Machine",
+                      "Id": "4",
+                      "Deleted": false,
+                      "IsDeletable": false
                     },
-                    "MaxPrimary" : 12,
-                    "MaxSecondary" : 460,
-                    "Id" : "FromFile_2",
-                    "PrimaryFocusId" : 1,
-                    "Deleted" : false,
-                    "Name" : "Leg Press"
+                    "MaxPrimary": 12,
+                    "MaxSecondary": 460,
+                    "Id": "FromFile_2",
+                    "PrimaryFocusId": 1,
+                    "Deleted": false,
+                    "Name": "Leg Press"
                   },
-                  "RestTime" : 0,
-                  "Id" : "66111CAB-D9E7-4DC5-BEBA-5F839CA7EFC2",
-                  "SetDetails" : [
+                  "RestTime": 0,
+                  "Id": "66111CAB-D9E7-4DC5-BEBA-5F839CA7EFC2",
+                  "SetDetails": [
                     {
-                      "RPE" : 0,
-                      "Secondary" : 440,
-                      "Primary" : 12,
-                      "Status" : 0,
-                      "IsPersonalRecord" : false,
-                      "Id" : "EA2EB39D-2C21-47EC-B9B2-B9A12202C8BD",
-                      "Type" : 0
+                      "RPE": 0,
+                      "Secondary": 440,
+                      "Primary": 12,
+                      "Status": 0,
+                      "IsPersonalRecord": false,
+                      "Id": "EA2EB39D-2C21-47EC-B9B2-B9A12202C8BD",
+                      "Type": 0
                     },
                     {
-                      "RPE" : 0,
-                      "Secondary" : 440,
-                      "Primary" : 12,
-                      "Status" : 0,
-                      "IsPersonalRecord" : false,
-                      "Id" : "C04CB8FE-8407-46C6-8983-E9DDA06FE027",
-                      "Type" : 0
+                      "RPE": 0,
+                      "Secondary": 440,
+                      "Primary": 12,
+                      "Status": 0,
+                      "IsPersonalRecord": false,
+                      "Id": "C04CB8FE-8407-46C6-8983-E9DDA06FE027",
+                      "Type": 0
                     },
                     {
-                      "RPE" : 0,
-                      "Secondary" : 440,
-                      "Primary" : 12,
-                      "Status" : 0,
-                      "IsPersonalRecord" : false,
-                      "Id" : "7E4DDB39-3334-4E2B-ABEB-2483945621D8",
-                      "Type" : 0
+                      "RPE": 0,
+                      "Secondary": 440,
+                      "Primary": 12,
+                      "Status": 0,
+                      "IsPersonalRecord": false,
+                      "Id": "7E4DDB39-3334-4E2B-ABEB-2483945621D8",
+                      "Type": 0
                     },
                     {
-                      "RPE" : 0,
-                      "Secondary" : 440,
-                      "Primary" : 12,
-                      "Status" : 0,
-                      "IsPersonalRecord" : false,
-                      "Id" : "2D08F75A-DB2C-481A-A10B-FF67F357FC68",
-                      "Type" : 0
+                      "RPE": 0,
+                      "Secondary": 440,
+                      "Primary": 12,
+                      "Status": 0,
+                      "IsPersonalRecord": false,
+                      "Id": "2D08F75A-DB2C-481A-A10B-FF67F357FC68",
+                      "Type": 0
                     }
                   ],
-                  "WarmupSetDetails" : [
-
-                  ],
-                  "Rules" : [
-
-                  ]
+                  "WarmupSetDetails": [],
+                  "Rules": []
                 }
               ]
             }
           ],
-          "IsCurrent" : false,
-          "IsEveryday" : true,
-          "Measurements" : [
-
-          ]
+          "IsCurrent": false,
+          "IsEveryday": true,
+          "Measurements": []
         }
       ],
-      "Deleted" : false,
-      "Id" : "ED24E23D-00B0-4769-B059-9075939DEF3B"
+      "Deleted": false,
+      "Id": "ED24E23D-00B0-4769-B059-9075939DEF3B"
     }
   ]
 }
