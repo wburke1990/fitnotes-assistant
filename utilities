@@ -46,3 +46,26 @@ done
 for file in wh/*.fnw; do
   jq '(.Data[].Workouts[].SuperSets[].Exercises[].Definition | select(.Name == "EXERCISE_NAME") | .Categories) |= [.[] | select(.Name != "CATEGORY_NAME")]' "$file" > "$file.tmp" && mv "$file.tmp" "$file"
 done
+
+# Calculate weekly volume by muscle category
+# Primary muscles count as 1.0 sets, secondary muscles count as 0.5 sets
+# Output: Sorted list of muscle categories with total weekly set volume
+cat wh/*.fnw | jq -r '.Data[].Workouts[].SuperSets[].Exercises[] | {name: .Definition.Name, sets: (.SetDetails | length), primary: .Definition.Categories[0].Name, secondary: [.Definition.Categories[1:][].Name]} | [.name, .sets, .primary, (.secondary | join(","))] | @tsv' | awk -F'\t' '
+{
+    primary = $3
+    sets = $2
+    muscle[primary] += sets
+
+    if ($4 != "") {
+        n = split($4, secondaries, ",")
+        for (i = 1; i <= n; i++) {
+            muscle[secondaries[i]] += sets * 0.5
+        }
+    }
+}
+END {
+    for (m in muscle) {
+        printf "%s\t%.1f\n", m, muscle[m]
+    }
+}
+' | sort -k2 -rn | column -t -s$'\t'
