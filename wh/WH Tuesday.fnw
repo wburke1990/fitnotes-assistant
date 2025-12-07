@@ -359,21 +359,6 @@
                     "SecondaryFocusId": 2,
                     "Categories": [
                       {
-                        "Name": "Pectorals",
-                        "Id": "2",
-                        "Color": {
-                          "Red": 12,
-                          "Alpha": 1,
-                          "Deleted": false,
-                          "Name": "Default",
-                          "IsDeletable": false,
-                          "Green": 166,
-                          "Id": "0",
-                          "Blue": 217,
-                          "IsPro": false
-                        }
-                      },
-                      {
                         "Name": "Deltoids",
                         "Id": "0",
                         "Color": {
@@ -386,6 +371,21 @@
                           "Green": 25,
                           "Blue": 25,
                           "IsPro": true
+                        }
+                      },
+                      {
+                        "Name": "Pectorals",
+                        "Id": "2",
+                        "Color": {
+                          "Red": 12,
+                          "Alpha": 1,
+                          "Deleted": false,
+                          "Name": "Default",
+                          "IsDeletable": false,
+                          "Green": 166,
+                          "Id": "0",
+                          "Blue": 217,
+                          "IsPro": false
                         }
                       },
                       {
@@ -843,19 +843,19 @@
                     "MaxSecondary": 180,
                     "Categories": [
                       {
-                        "Id": "1",
-                        "Name": "Biceps",
+                        "Name": "Latissimus Dorsi",
                         "Color": {
-                          "Name": "Blue",
-                          "Green": 108,
-                          "Id": "5",
-                          "Blue": 246,
-                          "IsPro": false,
                           "Alpha": 1,
-                          "Red": 5,
+                          "IsPro": true,
                           "IsDeletable": false,
-                          "Deleted": false
-                        }
+                          "Deleted": false,
+                          "Green": 217,
+                          "Red": 12,
+                          "Name": "Green",
+                          "Blue": 88,
+                          "Id": "2"
+                        },
+                        "Id": "16a8f3c5-7b2e-4d91-9f45-8e3d4c9a1b7f"
                       },
                       {
                         "Id": "8",
@@ -883,6 +883,21 @@
                           "IsPro": false,
                           "Alpha": 1,
                           "Red": 12,
+                          "IsDeletable": false,
+                          "Deleted": false
+                        }
+                      },
+                      {
+                        "Id": "1",
+                        "Name": "Biceps",
+                        "Color": {
+                          "Name": "Blue",
+                          "Green": 108,
+                          "Id": "5",
+                          "Blue": 246,
+                          "IsPro": false,
+                          "Alpha": 1,
+                          "Red": 5,
                           "IsDeletable": false,
                           "Deleted": false
                         }
@@ -1216,21 +1231,6 @@
                           "Green": 25,
                           "IsPro": true,
                           "Blue": 25
-                        }
-                      },
-                      {
-                        "Id": "3",
-                        "Name": "Obliques",
-                        "Color": {
-                          "Alpha": 1,
-                          "Name": "Green",
-                          "Red": 12,
-                          "Id": "2",
-                          "IsDeletable": false,
-                          "Deleted": false,
-                          "Green": 217,
-                          "IsPro": false,
-                          "Blue": 88
                         }
                       }
                     ],
@@ -1566,7 +1566,23 @@
                       "IsDeletable": false,
                       "Deleted": false
                     },
-                    "Categories": [],
+                    "Categories": [
+                      {
+                        "Name": "Latissimus Dorsi",
+                        "Color": {
+                          "Alpha": 1,
+                          "IsPro": true,
+                          "IsDeletable": false,
+                          "Deleted": false,
+                          "Green": 217,
+                          "Red": 12,
+                          "Name": "Green",
+                          "Blue": 88,
+                          "Id": "2"
+                        },
+                        "Id": "16a8f3c5-7b2e-4d91-9f45-8e3d4c9a1b7f"
+                      }
+                    ],
                     "Deleted": false,
                     "PrimaryFocusId": 1
                   },

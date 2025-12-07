@@ -193,21 +193,6 @@
                     "Name": "Machine Overhead Press",
                     "Categories": [
                       {
-                        "Name": "Pectorals",
-                        "Color": {
-                          "Alpha": 1,
-                          "IsPro": false,
-                          "Deleted": false,
-                          "Green": 166,
-                          "Name": "Default",
-                          "IsDeletable": false,
-                          "Blue": 217,
-                          "Red": 12,
-                          "Id": "0"
-                        },
-                        "Id": "2"
-                      },
-                      {
                         "Name": "Deltoids",
                         "Color": {
                           "Alpha": 1,
@@ -221,6 +206,21 @@
                           "Id": "7"
                         },
                         "Id": "0"
+                      },
+                      {
+                        "Name": "Pectorals",
+                        "Color": {
+                          "Alpha": 1,
+                          "IsPro": false,
+                          "Deleted": false,
+                          "Green": 166,
+                          "Name": "Default",
+                          "IsDeletable": false,
+                          "Blue": 217,
+                          "Red": 12,
+                          "Id": "0"
+                        },
+                        "Id": "2"
                       },
                       {
                         "Name": "Triceps",
@@ -736,19 +736,19 @@
                     "Deleted": false,
                     "Categories": [
                       {
-                        "Id": "1",
+                        "Name": "Latissimus Dorsi",
                         "Color": {
-                          "Blue": 246,
-                          "Green": 108,
                           "Alpha": 1,
-                          "IsPro": false,
-                          "Red": 5,
+                          "IsPro": true,
+                          "IsDeletable": false,
                           "Deleted": false,
-                          "Id": "5",
-                          "Name": "Blue",
-                          "IsDeletable": false
+                          "Green": 217,
+                          "Red": 12,
+                          "Name": "Green",
+                          "Blue": 88,
+                          "Id": "2"
                         },
-                        "Name": "Biceps"
+                        "Id": "16a8f3c5-7b2e-4d91-9f45-8e3d4c9a1b7f"
                       },
                       {
                         "Id": "8",
@@ -779,6 +779,21 @@
                           "IsDeletable": false
                         },
                         "Name": "Back (Lower)"
+                      },
+                      {
+                        "Id": "1",
+                        "Color": {
+                          "Blue": 246,
+                          "Green": 108,
+                          "Alpha": 1,
+                          "IsPro": false,
+                          "Red": 5,
+                          "Deleted": false,
+                          "Id": "5",
+                          "Name": "Blue",
+                          "IsDeletable": false
+                        },
+                        "Name": "Biceps"
                       }
                     ],
                     "MaxPrimary": 13,
@@ -1339,7 +1354,23 @@
                   "Id": "09D231A3-D6C5-46EA-905A-DF671991046A",
                   "WarmupSetDetails": [],
                   "Definition": {
-                    "Categories": [],
+                    "Categories": [
+                      {
+                        "Name": "Latissimus Dorsi",
+                        "Color": {
+                          "Alpha": 1,
+                          "IsPro": true,
+                          "IsDeletable": false,
+                          "Deleted": false,
+                          "Green": 217,
+                          "Red": 12,
+                          "Name": "Green",
+                          "Blue": 88,
+                          "Id": "2"
+                        },
+                        "Id": "16a8f3c5-7b2e-4d91-9f45-8e3d4c9a1b7f"
+                      }
+                    ],
                     "Equipment": {
                       "IsDeletable": false,
                       "Id": "3",
@@ -1449,21 +1480,6 @@
                           "Red": 25
                         },
                         "Name": "Deltoids"
-                      },
-                      {
-                        "Id": "3",
-                        "Color": {
-                          "Red": 12,
-                          "Id": "2",
-                          "Green": 217,
-                          "Deleted": false,
-                          "Blue": 88,
-                          "IsPro": false,
-                          "IsDeletable": false,
-                          "Name": "Green",
-                          "Alpha": 1
-                        },
-                        "Name": "Obliques"
                       }
                     ],
                     "Equipment": {

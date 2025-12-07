@@ -9,9 +9,40 @@ cat wh/*.fnw | jq -r '.Data[].Workouts[].SuperSets[].Exercises[].Definition | [.
 # Create a table mapping each exercise to its muscle group categories
 cat wh/*.fnw | jq -r '.Data[].Workouts[].SuperSets[].Exercises[].Definition | [.Name, ([.Categories[].Name] | join(", "))] | @tsv' | sort -u
 
+# Create a table with primary and secondary categories separated
+cat wh/*.fnw | jq -r '.Data[].Workouts[].SuperSets[].Exercises[].Definition | [.Name, .Categories[0].Name // "None", ([.Categories[1:][].Name] | join(", "))] | @tsv' | sort -u
+
 # Rename an exercise across all workout files
 # Usage: Replace OLD_NAME and NEW_NAME, then run for each file containing the exercise
 # Example: Renamed "Back Plank" to "Hyperextension"
 for file in wh/*.fnw; do
   jq '(.Data[].Workouts[].SuperSets[].Exercises[].Definition | select(.Name == "OLD_NAME") | .Name) |= "NEW_NAME"' "$file" > "$file.tmp" && mv "$file.tmp" "$file"
+done
+
+# Rename a category across all workout files
+# Usage: Replace OLD_CATEGORY and NEW_CATEGORY
+# Example: Fixed "Quadratis Lumborum" to "Quadratus Lumborum"
+for file in wh/*.fnw; do
+  jq '(.Data[].Workouts[].SuperSets[].Exercises[].Definition.Categories[] | select(.Name == "OLD_CATEGORY") | .Name) |= "NEW_CATEGORY"' "$file" > "$file.tmp" && mv "$file.tmp" "$file"
+done
+
+# Add a category to an exercise (when Categories array is empty)
+# Usage: Replace EXERCISE_NAME and update the category object as needed
+# Example: Added "Latissimus Dorsi" category to "Cross Bench Lat Pullover"
+for file in wh/*.fnw; do
+  jq '(.Data[].Workouts[].SuperSets[].Exercises[].Definition | select(.Name == "EXERCISE_NAME") | .Categories) |= [{"Name": "CATEGORY_NAME", "Color": {"Alpha": 1, "IsPro": true, "IsDeletable": false, "Deleted": false, "Green": 217, "Red": 12, "Name": "Green", "Blue": 88, "Id": "2"}, "Id": "UNIQUE_UUID"}]' "$file" > "$file.tmp" && mv "$file.tmp" "$file"
+done
+
+# Add a category to an exercise that already has categories
+# Usage: Replace EXERCISE_NAME and update the category object as needed
+# Example: Added "Forearms" to "Lat Pulldown"
+for file in wh/*.fnw; do
+  jq '(.Data[].Workouts[].SuperSets[].Exercises[].Definition | select(.Name == "EXERCISE_NAME") | .Categories) += [{"Name": "CATEGORY_NAME", "Id": "CATEGORY_ID", "Color": {"Blue": 160, "Alpha": 1, "Red": 246, "Id": "3", "IsDeletable": false, "Green": 12, "Deleted": false, "IsPro": false, "Name": "Pink"}}]' "$file" > "$file.tmp" && mv "$file.tmp" "$file"
+done
+
+# Remove a category from an exercise
+# Usage: Replace EXERCISE_NAME and CATEGORY_NAME
+# Example: Removed "Obliques" from "Side Lying Lateral Raise"
+for file in wh/*.fnw; do
+  jq '(.Data[].Workouts[].SuperSets[].Exercises[].Definition | select(.Name == "EXERCISE_NAME") | .Categories) |= [.[] | select(.Name != "CATEGORY_NAME")]' "$file" > "$file.tmp" && mv "$file.tmp" "$file"
 done
