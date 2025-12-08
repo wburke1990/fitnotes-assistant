@@ -47,6 +47,23 @@ for file in wh/*.fnw; do
   jq '(.Data[].Workouts[].SuperSets[].Exercises[].Definition | select(.Name == "EXERCISE_NAME") | .Categories) |= [.[] | select(.Name != "CATEGORY_NAME")]' "$file" > "$file.tmp" && mv "$file.tmp" "$file"
 done
 
+# Rename an exercise AND update its equipment
+# Usage: Replace OLD_NAME, NEW_NAME, EQUIPMENT_NAME, and EQUIPMENT_ID
+# Example: Changed "Chest Supported Row" to "Bird Dog Row" with Single Dumbbell equipment
+for file in wh/*.fnw; do
+  jq '
+    (.Data[].Workouts[].SuperSets[].Exercises[].Definition | select(.Name == "OLD_NAME")) |= (
+      .Name = "NEW_NAME" |
+      .Equipment = {"Name": "EQUIPMENT_NAME", "Id": "EQUIPMENT_ID", "Deleted": false, "IsDeletable": false}
+    )
+  ' "$file" > "$file.tmp" && mv "$file.tmp" "$file"
+done
+
+# Update workout name inside file (change Data[].Name field)
+# Usage: Replace FILENAME and NEW_WORKOUT_NAME
+# Example: Updated "WH Monday" to "PIT Monday" in pit/PIT Monday.fnw
+jq '.Data[].Name = "NEW_WORKOUT_NAME"' "FILENAME" > /tmp/temp.json && mv /tmp/temp.json "FILENAME"
+
 # Calculate weekly volume by muscle category
 # Primary muscles count as 1.0 sets, secondary muscles count as 0.5 sets
 # Output: Sorted list of muscle categories with total weekly set volume
