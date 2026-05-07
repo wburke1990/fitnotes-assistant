@@ -44,7 +44,9 @@
       "Bash(rm:*)",
       "Bash(chmod:*)",
       "Bash(curl:*)",
-      "Bash(wget:*)"
+      "Bash(wget:*)",
+      "Edit",
+      "Write"
     ],
     "deny": [
       "Bash(sudo:*)",

@@ -8,8 +8,21 @@ polish enough to ship as an App Store companion or PR upstream into FitNotes.
 
 Sessions in this repo are usually driven from the Claude mobile app in
 remote-control mode. The phone does not see permission prompts, so the repo
-pre-approves common actions in `.claude/settings.json`. Don't add tools or
-network calls that require new prompts without flagging it first.
+pre-approves common actions in `.claude/settings.json` — including `Edit`
+and `Write` on any path, plus a wide list of Bash commands. Just edit and
+write files freely; don't pause to ask. Don't add tools or network calls
+that require *new* prompts without flagging it first.
+
+**Never use `cd`** — the sandbox blocks it (it would let you escape the
+project root) and prefix-matching `Bash(cd:*)` permissions are not safe to
+add. Use absolute paths or tool-native flags instead:
+- `uv --directory /Users/wcb/personal/workouts/scripts run <cmd>` instead of
+  `cd scripts && uv run <cmd>`
+- `pytest /Users/wcb/personal/workouts/scripts` instead of `cd` then `pytest`
+- For anything else, pass full paths as arguments
+
+The Bash tool's working directory is the project root and stays there for
+the whole session.
 
 We are running a **no-code-review** workflow: changes go straight to `main`.
 The safety net is tests, not review — so write tests generously, especially
