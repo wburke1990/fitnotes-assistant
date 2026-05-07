@@ -25,6 +25,9 @@ allowed but a last resort.
 (a fix and its tests are two commits). Deviate only when a change feels
 risky or unfinished.
 
+**Never bypass the pre-commit hook with `--no-verify`.** If a check fails,
+fix the underlying issue.
+
 ### Prefer subagents — heavily
 
 Session cost scales **quadratically** with transcript length, so push work
@@ -42,6 +45,14 @@ summary, not raw output.
 
 **Don't `Read` `.fnw` files** — they're large and bloat the transcript.
 Query with `jq`/`grep` via Bash and surface only the result.
+
+## Pre-commit hooks
+
+Run `git config core.hooksPath .githooks` once per clone. (A SessionStart
+hook in `.claude/settings.json` does this automatically inside Claude
+sessions.) The hook runs `ruff check`, `ruff format --check`,
+`mypy --strict`, and `pytest`. Silent on pass; on fail, only the failing
+tool's output is printed and the commit is aborted.
 
 ## Repo layout
 
