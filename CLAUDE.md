@@ -29,6 +29,14 @@ The safety net is tests, not review — so write tests generously, especially
 when touching `scripts/`. Force-push to `main` is allowed (and sometimes
 necessary) but should be a last resort.
 
+**Commit and push proactively.** Once a change is working (tests green,
+behavior verified), commit it and push to `origin/main` without waiting to
+be asked. Don't batch unrelated changes into one commit — split by concern
+when it makes the history clearer (e.g., a behavior fix and the test suite
+that covers it are two commits, not one). This default is enabled because
+the remote-control workflow makes "stop and ask" expensive; deviate only
+when a change feels risky or you're unsure it's done.
+
 ### Prefer subagents — heavily
 
 Claude session cost scales roughly **quadratically** with transcript length
