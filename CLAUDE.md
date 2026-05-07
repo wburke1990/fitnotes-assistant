@@ -10,8 +10,8 @@ permission prompts. `.claude/settings.json` pre-approves `Edit`, `Write`,
 and a wide list of Bash commands — just edit freely. Flag before adding
 tools or network calls that would need *new* prompts.
 
-**Never use `cd`** — the sandbox blocks it and `Bash(cd:*)` isn't safe to
-allow. Use absolute paths or tool-native flags:
+**Never use `cd`** — the sandbox blocks it. Use absolute paths or
+tool-native flags:
 - `uv --directory /Users/wcb/personal/workouts/scripts run <cmd>`
 - `pytest /Users/wcb/personal/workouts/scripts`
 
