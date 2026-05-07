@@ -5,3 +5,12 @@ description = "Generate .fnw workout files with RPE-based programming and volume
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = []
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.3",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
