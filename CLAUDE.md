@@ -34,8 +34,11 @@ into subagents via `Agent` to keep the parent short:
 - Non-trivial implementation planning → `Plan`
 - Run independent subagents **in parallel**
 
-If a task needs more than ~3 tool calls of exploration, delegate it. Ask
-for a 1–2 sentence summary, not raw output.
+**First move for any codebase question is `Agent(Explore, …)`, not `grep`
+or `Read`** — even when one lookup feels like overkill. The trap is "just
+one quick grep" turning into five, all of which the parent re-reads every
+turn for the rest of the session. Ask the subagent for a 1–2 sentence
+summary, not raw output.
 
 **Don't `Read` `.fnw` files** — they're large and bloat the transcript.
 Query with `jq`/`grep` via Bash and surface only the result.
