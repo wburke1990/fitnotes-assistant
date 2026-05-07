@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""
-Example program: Generate a weekly workout split with heavy/medium/light days.
+"""Example program: Generate a weekly workout split with heavy/medium/light days.
 
 Heavy (Mon/Tue): 4 sets, 5-6 reps, RPE 8
 Medium (Wed/Thu): 3 sets, 8-10 reps, RPE 7
@@ -12,19 +11,20 @@ Usage:
 
 import argparse
 from pathlib import Path
+from typing import Any
 
 from common import (
-    load_exercise_mappings,
-    write_workout_file,
     build_exercise,
     build_workout,
-    weight_at_rpe,
     calculate_weekly_volume,
     check_volume_minimums,
+    load_exercise_mappings,
     summarize_volume,
+    weight_at_rpe,
+    write_workout_file,
 )
 from common.builders import SetConfig
-
+from common.io import ExerciseMapping
 
 # Example exercise list with 1RMs (you would customize this)
 EXERCISE_1RMS = {
@@ -60,32 +60,28 @@ def generate_workout_for_day(
     day_name: str,
     intensity: str,
     exercises: list[str],
-    mappings,
-) -> dict:
+    mappings: ExerciseMapping,
+) -> dict[str, Any]:
     """Generate a single day's workout."""
     config = DAY_CONFIGS[intensity]
 
-    workout_exercises = []
+    workout_exercises: list[dict[str, Any]] = []
     for exercise_name in exercises:
         one_rm = EXERCISE_1RMS.get(exercise_name, 0)
+        weight = weight_at_rpe(one_rm, config["reps"], config["rpe"]) if one_rm > 0 else 0
 
-        if one_rm > 0:
-            weight = weight_at_rpe(one_rm, config["reps"], config["rpe"])
-        else:
-            weight = 0  # Bodyweight exercise
-
-        sets = [
+        sets: list[SetConfig] | list[dict[str, Any]] = [
             SetConfig(reps=config["reps"], weight=weight, rpe=config["rpe"])
             for _ in range(config["sets"])
         ]
 
-        exercise = build_exercise(exercise_name, sets, mappings)
-        workout_exercises.append(exercise)
+        workout_exercises.append(build_exercise(exercise_name, sets, mappings))
 
     return build_workout(f"Generated {day_name}", workout_exercises)
 
 
-def main():
+def main() -> None:
+    """Run the weekly-split generator from the command line."""
     parser = argparse.ArgumentParser(description="Generate weekly workout split")
     parser.add_argument(
         "--output-dir",
@@ -128,7 +124,10 @@ def main():
     deficits = [(m, r) for m, r in results.items() if r["deficit"] > 0]
     if deficits:
         for muscle, r in sorted(deficits, key=lambda x: -x[1]["deficit"]):
-            print(f"  {muscle}: {r['current']:.1f}/{r['target']} sets (need {r['deficit']:.1f} more)")
+            current = r["current"]
+            target = r["target"]
+            deficit = r["deficit"]
+            print(f"  {muscle}: {current:.1f}/{target} sets (need {deficit:.1f} more)")
     else:
         print("  All muscles meet minimum volume!")
 

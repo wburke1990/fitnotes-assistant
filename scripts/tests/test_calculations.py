@@ -14,14 +14,13 @@ from common.calculations import (
     weight_at_rpe,
 )
 
-
 # ---------------------------------------------------------------------------
 # RPE <-> RIR
 # ---------------------------------------------------------------------------
 
 
 @pytest.mark.parametrize(
-    "rpe,rir",
+    ("rpe", "rir"),
     [(10, 0), (9, 1), (8, 2), (7, 3), (6.5, 3.5)],
 )
 def test_rpe_rir_round_trip(rpe, rir):
@@ -318,6 +317,6 @@ def test_summarize_volume_empty():
 
 def test_summarize_volume_bar_length_matches_int_sets():
     out = summarize_volume({"Chest": 7.5})
-    chest_line = [ln for ln in out.splitlines() if ln.startswith("Chest")][0]
+    chest_line = next(ln for ln in out.splitlines() if ln.startswith("Chest"))
     # Bar uses int(sets), so 7.5 → 7 hashes
     assert chest_line.count("#") == 7

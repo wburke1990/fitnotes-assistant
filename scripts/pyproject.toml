@@ -9,8 +9,78 @@ dependencies = []
 [dependency-groups]
 dev = [
     "pytest>=9.0.3",
+    "ruff>=0.14",
+    "mypy>=1.18",
 ]
 
 [tool.pytest.ini_options]
 pythonpath = ["."]
 testpaths = ["tests"]
+
+# ---------------------------------------------------------------------------
+# ruff — lint everything we can. Add ignores deliberately, with a reason.
+# ---------------------------------------------------------------------------
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+extend-exclude = [".venv", "__pycache__"]
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    # Formatter compatibility — ruff-format owns these.
+    "COM812",  # missing trailing comma (handled by formatter)
+    "ISC001",  # implicit string concatenation (handled by formatter)
+
+    # Docstring style: D203/D211 and D212/D213 are mutually exclusive pairs.
+    # Keep the no-blank-line-before-class and summary-on-second-line variants.
+    "D203",
+    "D213",
+
+    # Project-wide judgment calls.
+    "D104",    # missing docstring in public package (__init__.py is fine empty)
+    "D100",    # missing docstring in public module (scripts/programs are self-documenting)
+    "D107",    # missing docstring in __init__ (covered by class docstring)
+    "T201",    # print() — programs/ scripts intentionally print to stdout
+    "TRY003",  # long messages outside exception class — overkill for a small repo
+    "EM101",   # raw string in exception — same
+    "EM102",   # f-string in exception — same
+    "PLR0913", # too many arguments — fine for builders
+    "FBT001",  # boolean positional arg — fine for keyword-only callers
+    "FBT002",  # boolean default arg — same
+    "S311",    # pseudo-random — uuid4 is fine for our use
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = [
+    "S101",    # asserts are the whole point of tests
+    "PLR2004", # magic numbers in tests are fine
+    "ANN",     # type annotations not required in tests
+    "D",       # docstrings not required in tests
+    "SLF001",  # tests reach into _private helpers on purpose
+    "INP001",  # tests dir has __init__.py but pytest discovery doesn't care
+]
+"programs/**" = [
+    "INP001",  # entry-point scripts, not an importable package
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+# ---------------------------------------------------------------------------
+# mypy — strict. Type errors are bugs.
+# ---------------------------------------------------------------------------
+[tool.mypy]
+python_version = "3.10"
+strict = true
+warn_unreachable = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+files = ["common", "programs", "tests"]
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+disallow_untyped_decorators = false
+disallow_untyped_calls = false
