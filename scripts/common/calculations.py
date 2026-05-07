@@ -2,6 +2,14 @@
 
 import math
 from collections import defaultdict
+from typing import Any
+
+# Standard barbell plate increment in pounds; weights snap to multiples of this.
+_PLATE_INCREMENT = 2.5
+# Epley formula's denominator constant (reps_at_failure ≈ 30 * (1RM/weight - 1)).
+_EPLEY_DENOMINATOR = 30
+# Default secondary-muscle credit per set when computing weekly volume.
+_SECONDARY_SET_WEIGHT = 0.5
 
 
 # RPE to Reps-in-Reserve (RIR) mapping
@@ -17,8 +25,7 @@ def _rir_to_rpe(rir: float) -> float:
 
 
 def estimated_1rm(weight: float, reps: int) -> float:
-    """
-    Estimate 1RM using Epley formula.
+    """Estimate 1RM using Epley formula.
 
     Args:
         weight: Weight lifted
@@ -29,12 +36,11 @@ def estimated_1rm(weight: float, reps: int) -> float:
     """
     if reps == 1:
         return weight
-    return weight * (1 + reps / 30)
+    return weight * (1 + reps / _EPLEY_DENOMINATOR)
 
 
 def weight_at_rpe(one_rm: float, reps: int, rpe: float) -> float:
-    """
-    Calculate weight for target reps at target RPE.
+    """Calculate weight for target reps at target RPE.
 
     Uses Epley formula adjusted for RPE (reps in reserve).
 
@@ -58,15 +64,14 @@ def weight_at_rpe(one_rm: float, reps: int, rpe: float) -> float:
         return one_rm
 
     # Inverse Epley: weight = 1RM / (1 + reps/30)
-    weight = one_rm / (1 + effective_reps / 30)
+    weight = one_rm / (1 + effective_reps / _EPLEY_DENOMINATOR)
 
     # Round to nearest 2.5 (standard plate increment)
-    return round(weight / 2.5) * 2.5
+    return round(weight / _PLATE_INCREMENT) * _PLATE_INCREMENT
 
 
 def reps_at_rpe(one_rm: float, weight: float, rpe: float) -> int:
-    """
-    Calculate reps achievable at given weight and RPE.
+    """Calculate reps achievable at given weight and RPE.
 
     Args:
         one_rm: Known or estimated 1RM
@@ -87,7 +92,7 @@ def reps_at_rpe(one_rm: float, weight: float, rpe: float) -> int:
     rir = _rpe_to_rir(rpe)
 
     # From Epley: reps = 30 * (1RM/weight - 1)
-    total_reps_possible = 30 * (one_rm / weight - 1)
+    total_reps_possible = _EPLEY_DENOMINATOR * (one_rm / weight - 1)
 
     # Subtract RIR to get target reps
     target_reps = total_reps_possible - rir
@@ -96,8 +101,7 @@ def reps_at_rpe(one_rm: float, weight: float, rpe: float) -> int:
 
 
 def percentage_of_1rm(one_rm: float, percentage: float) -> float:
-    """
-    Calculate weight as percentage of 1RM.
+    """Calculate weight as percentage of 1RM.
 
     Args:
         one_rm: Known or estimated 1RM
@@ -106,12 +110,11 @@ def percentage_of_1rm(one_rm: float, percentage: float) -> float:
     Returns:
         Weight rounded to nearest 2.5
     """
-    return round(one_rm * percentage / 2.5) * 2.5
+    return round(one_rm * percentage / _PLATE_INCREMENT) * _PLATE_INCREMENT
 
 
-def calculate_weekly_volume(workouts: list[dict]) -> dict[str, float]:
-    """
-    Calculate total weekly volume per muscle group.
+def calculate_weekly_volume(workouts: list[dict[str, Any]]) -> dict[str, float]:
+    """Calculate total weekly volume per muscle group.
 
     Primary muscles count as 1.0 sets, secondary muscles as 0.5 sets.
 
@@ -143,13 +146,13 @@ def calculate_weekly_volume(workouts: list[dict]) -> dict[str, float]:
                         # First category is primary (1.0 per set)
                         primary = categories[0].get("Name", "")
                         if primary:
-                            volume[primary] += num_sets * 1.0
+                            volume[primary] += float(num_sets)
 
                         # Remaining categories are secondary (0.5 per set)
                         for cat in categories[1:]:
                             secondary = cat.get("Name", "")
                             if secondary:
-                                volume[secondary] += num_sets * 0.5
+                                volume[secondary] += num_sets * _SECONDARY_SET_WEIGHT
 
     return dict(volume)
 
@@ -158,9 +161,8 @@ def check_volume_minimums(
     volume: dict[str, float],
     targets: dict[str, int] | None = None,
     default_minimum: int = 12,
-) -> dict[str, dict]:
-    """
-    Check if volume meets minimum targets per muscle group.
+) -> dict[str, dict[str, Any]]:
+    """Check if volume meets minimum targets per muscle group.
 
     Args:
         volume: Dict from calculate_weekly_volume()
@@ -176,7 +178,7 @@ def check_volume_minimums(
         {"current": 16.0, "target": 18, "deficit": 2.0, "meets_minimum": False}
     """
     targets = targets or {}
-    results = {}
+    results: dict[str, dict[str, Any]] = {}
 
     # Get all muscles from both volume and targets
     all_muscles = set(volume.keys()) | set(targets.keys())
@@ -197,8 +199,7 @@ def check_volume_minimums(
 
 
 def summarize_volume(volume: dict[str, float]) -> str:
-    """
-    Create a formatted summary of volume by muscle group.
+    """Create a formatted summary of volume by muscle group.
 
     Args:
         volume: Dict from calculate_weekly_volume()
