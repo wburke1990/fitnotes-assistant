@@ -1,5 +1,6 @@
 """Calculations for RPE-based programming and volume tracking."""
 
+import math
 from collections import defaultdict
 
 
@@ -73,7 +74,8 @@ def reps_at_rpe(one_rm: float, weight: float, rpe: float) -> int:
         rpe: Target RPE (6-10 scale)
 
     Returns:
-        Number of reps (minimum 1)
+        Number of reps (minimum 1). Rounded down so the prescription stays
+        conservative — better to leave a rep in the tank than fail mid-set.
 
     Example:
         >>> reps_at_rpe(300, 240, 8)  # How many reps @ RPE 8 with 240lb?
@@ -90,7 +92,7 @@ def reps_at_rpe(one_rm: float, weight: float, rpe: float) -> int:
     # Subtract RIR to get target reps
     target_reps = total_reps_possible - rir
 
-    return max(1, int(round(target_reps)))
+    return max(1, math.floor(target_reps))
 
 
 def percentage_of_1rm(one_rm: float, percentage: float) -> float:
