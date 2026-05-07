@@ -1,4 +1,13 @@
 {
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          { "type": "command", "command": "git config core.hooksPath .githooks" }
+        ]
+      }
+    ]
+  },
   "permissions": {
     "allow": [
       "Bash(git:*)",
@@ -45,8 +54,11 @@
       "Bash(chmod:*)",
       "Bash(curl:*)",
       "Bash(wget:*)",
+      "Bash(.githooks/pre-commit:*)",
       "Edit",
-      "Write"
+      "Write",
+      "Edit(.claude/settings.json)",
+      "Write(.claude/settings.json)"
     ],
     "deny": [
       "Bash(sudo:*)",
