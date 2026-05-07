@@ -1,0 +1,7 @@
+[project]
+name = "workout-generator"
+version = "0.1.0"
+description = "Generate .fnw workout files with RPE-based programming and volume tracking"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
