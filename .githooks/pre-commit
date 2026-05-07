@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+# Pre-commit hook for fitnotes-assistant.
+#
+# Runs ruff lint, ruff format check, mypy strict, and pytest. Stays silent
+# when everything passes (so it doesn't waste tokens during automated commit
+# flows) and prints captured output for any check that fails.
+#
+# Install: `git config core.hooksPath .githooks` (run once per clone).
+
+set -u
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+SCRIPTS_DIR="$REPO_ROOT/scripts"
+
+# Run a check, capturing both streams. On success, swallow output. On failure,
+# print a header and the captured output so the user sees what broke.
+run_check() {
+    local name="$1"
+    shift
+    local output
+    local rc
+
+    output="$("$@" 2>&1)"
+    rc=$?
+
+    if [[ $rc -ne 0 ]]; then
+        printf '\n=== pre-commit: %s FAILED ===\n%s\n' "$name" "$output" >&2
+    fi
+
+    return $rc
+}
+
+failures=0
+
+run_check "ruff check" \
+    uv --directory "$SCRIPTS_DIR" run --quiet ruff check . \
+    || failures=$((failures + 1))
+
+run_check "ruff format" \
+    uv --directory "$SCRIPTS_DIR" run --quiet ruff format --check . \
+    || failures=$((failures + 1))
+
+run_check "mypy --strict" \
+    uv --directory "$SCRIPTS_DIR" run --quiet mypy . \
+    || failures=$((failures + 1))
+
+run_check "pytest" \
+    uv --directory "$SCRIPTS_DIR" run --quiet pytest -q \
+    || failures=$((failures + 1))
+
+if [[ $failures -gt 0 ]]; then
+    printf '\npre-commit: %d check(s) failed; commit aborted.\n' "$failures" >&2
+    exit 1
+fi
+
+exit 0
