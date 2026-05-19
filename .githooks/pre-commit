@@ -1,9 +1,16 @@
 #!/usr/bin/env bash
 # Pre-commit hook for fitnotes-assistant.
 #
-# Runs ruff lint, ruff format check, mypy strict, and pytest. Stays silent
-# when everything passes (so it doesn't waste tokens during automated commit
-# flows) and prints captured output for any check that fails.
+# Runs code quality checks (ruff lint, ruff format, mypy strict, pytest) and
+# security/compliance scans (gitleaks for secrets, pip-audit for CVEs,
+# pip-licenses for license allowlist, shellcheck on this hook). Stays silent
+# when everything passes so it doesn't bloat automated commit transcripts;
+# prints captured output for any check that fails.
+#
+# System tools (gitleaks, shellcheck) are optional — if not on PATH the check
+# is skipped with a one-line notice (interactive shells only). pip-audit is
+# skipped when pypi.org is unreachable so transient network issues don't
+# block commits.
 #
 # Install: `git config core.hooksPath .githooks` (run once per clone).
 
@@ -11,6 +18,11 @@ set -u
 
 REPO_ROOT="$(git rev-parse --show-toplevel)"
 SCRIPTS_DIR="$REPO_ROOT/scripts"
+
+# Allowlist of acceptable dependency licenses. pip-licenses matches strings
+# exactly, so include each variant the ecosystem emits (SPDX id vs classifier
+# string). Add entries deliberately after reviewing the actual license text.
+ALLOWED_LICENSES="MIT;MIT License;BSD;BSD License;BSD-2-Clause;BSD-3-Clause;Apache-2.0;Apache 2.0;Apache Software License;Apache-2.0 OR BSD-2-Clause;Mozilla Public License 2.0 (MPL 2.0);MPL-2.0;Python Software Foundation License;PSF-2.0;ISC License (ISCL);ISC"
 
 # Run a check, capturing both streams. On success, swallow output. On failure,
 # print a header and the captured output so the user sees what broke.
@@ -30,7 +42,17 @@ run_check() {
     return $rc
 }
 
+# Print a one-line skip notice — only when stderr is a TTY, so automated
+# flows (Claude, CI) stay silent. Interactive users see install hints.
+skip_notice() {
+    if [[ -t 2 ]]; then
+        printf 'pre-commit: %s skipped — %s\n' "$1" "$2" >&2
+    fi
+}
+
 failures=0
+
+# --- Code quality -----------------------------------------------------------
 
 run_check "ruff check" \
     uv --directory "$SCRIPTS_DIR" run --quiet ruff check . \
@@ -47,6 +69,50 @@ run_check "mypy --strict" \
 run_check "pytest" \
     uv --directory "$SCRIPTS_DIR" run --quiet pytest -q \
     || failures=$((failures + 1))
+
+# --- Security & compliance --------------------------------------------------
+
+# Secret scanning on staged content only — fast, no network.
+if command -v gitleaks >/dev/null 2>&1; then
+    run_check "gitleaks (secrets)" \
+        gitleaks git --staged --no-banner --redact "$REPO_ROOT" \
+        || failures=$((failures + 1))
+else
+    skip_notice "gitleaks" "binary not on PATH (https://github.com/gitleaks/gitleaks)"
+fi
+
+# Dependency CVE scan against the PyPI advisory database. Skip on network
+# failure so commits aren't blocked when offline.
+if curl -sfI --max-time 4 https://pypi.org/simple/ >/dev/null 2>&1; then
+    run_check "pip-audit (CVEs)" \
+        uv --directory "$SCRIPTS_DIR" run --quiet pip-audit --progress-spinner off \
+        || failures=$((failures + 1))
+else
+    skip_notice "pip-audit" "pypi.org unreachable"
+fi
+
+# License compliance — fails if any installed dependency declares a license
+# outside ALLOWED_LICENSES. Local and fast.
+run_check "pip-licenses (allowlist)" \
+    uv --directory "$SCRIPTS_DIR" run --quiet pip-licenses \
+        --allow-only="$ALLOWED_LICENSES" \
+        --format=plain \
+    || failures=$((failures + 1))
+
+# Lint the hooks themselves so we catch bugs in this file.
+if command -v shellcheck >/dev/null 2>&1; then
+    hook_files=()
+    for f in "$REPO_ROOT"/.githooks/*; do
+        [[ -f "$f" ]] && hook_files+=("$f")
+    done
+    if (( ${#hook_files[@]} > 0 )); then
+        run_check "shellcheck (.githooks)" \
+            shellcheck "${hook_files[@]}" \
+            || failures=$((failures + 1))
+    fi
+else
+    skip_notice "shellcheck" "binary not on PATH (apt-get install shellcheck or brew install shellcheck)"
+fi
 
 if [[ $failures -gt 0 ]]; then
     printf '\npre-commit: %d check(s) failed; commit aborted.\n' "$failures" >&2
