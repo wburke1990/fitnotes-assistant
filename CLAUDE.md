@@ -56,7 +56,8 @@ Query with `jq`/`grep` via Bash and surface only the result.
 Run `git config core.hooksPath .githooks` once per clone. (A SessionStart
 hook in `.claude/settings.json` does this automatically inside Claude
 sessions.) The hook runs `ruff check`, `ruff format --check`,
-`mypy --strict`, and `pytest`. Silent on pass; on fail, only the failing
+`mypy --strict`, `pytest`, and `typos` (plus security/compliance scans
+— see the hook for details). Silent on pass; on fail, only the failing
 tool's output is printed and the commit is aborted.
 
 ## Repo layout

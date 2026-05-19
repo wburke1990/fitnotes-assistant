@@ -13,6 +13,7 @@ dev = [
     "mypy>=1.18",
     "pip-audit>=2.7",
     "pip-licenses>=5.0",
+    "typos>=1.46",
 ]
 
 [tool.pytest.ini_options]
@@ -86,3 +87,6 @@ disallow_untyped_defs = false
 disallow_incomplete_defs = false
 disallow_untyped_decorators = false
 disallow_untyped_calls = false
+
+# typos config lives at the repo root in .typos.toml — it has to sit
+# alongside the files it scans, not inside scripts/.

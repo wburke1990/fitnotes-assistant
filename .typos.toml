@@ -1,0 +1,15 @@
+# typos configuration — runs from the pre-commit hook.
+# https://github.com/crate-ci/typos
+
+[default.extend-words]
+# Gym/anatomy shorthand that typos mis-flags as "dealt".
+delt = "delt"
+delts = "delts"
+
+[default.extend-identifiers]
+# Acronym for Terminal Knee Extension — not a typo of "TAKE".
+TKE = "TKE"
+
+[files]
+# .fnw exports are large binary-ish blobs; uv.lock is generated.
+extend-exclude = ["*.fnw", "uv.lock"]
