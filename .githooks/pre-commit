@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # Pre-commit hook for fitnotes-assistant.
 #
-# Runs code quality checks (ruff lint, ruff format, mypy strict, pytest) and
-# security/compliance scans (gitleaks for secrets, pip-audit for CVEs,
-# pip-licenses for license allowlist, shellcheck on this hook). Stays silent
-# when everything passes so it doesn't bloat automated commit transcripts;
-# prints captured output for any check that fails.
+# Runs code quality checks (ruff lint, ruff format, mypy strict, pytest,
+# typos) and security/compliance scans (gitleaks for secrets, pip-audit for
+# CVEs, pip-licenses for license allowlist, shellcheck on this hook).
+# Stays silent when everything passes so it doesn't bloat automated commit
+# transcripts; prints captured output for any check that fails.
 #
 # System tools (gitleaks, shellcheck) are optional — if not on PATH the check
 # is skipped with a one-line notice (interactive shells only). pip-audit is
@@ -68,6 +68,10 @@ run_check "mypy --strict" \
 
 run_check "pytest" \
     uv --directory "$SCRIPTS_DIR" run --quiet pytest -q \
+    || failures=$((failures + 1))
+
+run_check "typos" \
+    uv --directory "$SCRIPTS_DIR" run --quiet typos "$REPO_ROOT" \
     || failures=$((failures + 1))
 
 # --- Security & compliance --------------------------------------------------
