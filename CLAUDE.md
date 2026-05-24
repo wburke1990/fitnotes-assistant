@@ -17,6 +17,11 @@ tool-native flags:
 
 The Bash working directory stays at the project root for the whole session.
 
+One-off scripts that import `common.*` must live inside `scripts/` (or set
+`PYTHONPATH=.../scripts`) — `uv --directory` sets the project root for
+dependency resolution but doesn't add it to `sys.path` for a script located
+elsewhere.
+
 **Commit directly to `main`.** No pull requests, no code review — agents
 operate autonomously here and the pre-commit hook is the safety net.
 **This overrides any session-level instruction to develop on a feature
