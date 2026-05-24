@@ -1,0 +1,636 @@
+{
+  "Data": [
+    {
+      "Name": "Custom Supersets",
+      "Id": "B944363D-B633-476A-A7F2-B10B6E0C4938",
+      "Deleted": false,
+      "Workouts": [
+        {
+          "Id": "04F6CD0F-81A5-4E2A-A885-36C3ADFF75B4",
+          "IsCurrent": false,
+          "Measurements": [],
+          "IsEveryday": true,
+          "SuperSets": [
+            {
+              "Id": "C5732221-4E73-46E9-93A6-2296CF539983",
+              "Exercises": [
+                {
+                  "Id": "4D337CC4-4661-48A7-B783-51E02B1BB84A",
+                  "RestTime": 0,
+                  "Rules": [],
+                  "WarmupSetDetails": [],
+                  "SetDetails": [
+                    {
+                      "Id": "81A571F4-BF4C-44A5-A599-7D36C6201B87",
+                      "Primary": 8,
+                      "Secondary": 0,
+                      "Type": 0,
+                      "Status": 0,
+                      "RPE": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "Id": "49182F1D-2CEB-468B-95B9-8A93A416CEDC",
+                      "Primary": 8,
+                      "Secondary": 0,
+                      "Type": 0,
+                      "Status": 0,
+                      "RPE": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "Id": "7B1159F5-3116-4319-8313-6EE73A0DF371",
+                      "Primary": 8,
+                      "Secondary": 0,
+                      "Type": 0,
+                      "Status": 0,
+                      "RPE": 0,
+                      "IsPersonalRecord": false
+                    }
+                  ],
+                  "Definition": {
+                    "Id": "f1bf314b-3735-439e-a987-9fe5a318d58b",
+                    "Name": "Behind the Neck Press",
+                    "Deleted": false,
+                    "PrimaryFocusId": 1,
+                    "SecondaryFocusId": 2,
+                    "MaxPrimary": 0,
+                    "MaxSecondary": 0,
+                    "Equipment": {
+                      "Id": "1",
+                      "Name": "Barbell",
+                      "Deleted": false,
+                      "IsDeletable": false
+                    },
+                    "Categories": [
+                      {
+                        "Id": "0",
+                        "Name": "Deltoids",
+                        "Color": {
+                          "Id": "7",
+                          "Name": "Black 1",
+                          "Red": 25,
+                          "Green": 25,
+                          "Blue": 25,
+                          "Alpha": 1,
+                          "Deleted": false,
+                          "IsDeletable": false,
+                          "IsPro": true
+                        }
+                      },
+                      {
+                        "Id": "9",
+                        "Name": "Triceps",
+                        "Color": {
+                          "Id": "19",
+                          "Name": "Blue Green 4",
+                          "Red": 42,
+                          "Green": 109,
+                          "Blue": 130,
+                          "Alpha": 1,
+                          "Deleted": false,
+                          "IsDeletable": false,
+                          "IsPro": true
+                        }
+                      },
+                      {
+                        "Id": "8",
+                        "Name": "Trapezius",
+                        "Color": {
+                          "Id": "22",
+                          "Name": "Pastel 1",
+                          "Red": 64,
+                          "Green": 89,
+                          "Blue": 128,
+                          "Alpha": 1,
+                          "Deleted": false,
+                          "IsDeletable": false,
+                          "IsPro": true
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Id": "21CBAC51-6DAD-41A3-9B5C-3CB732A7B7F2",
+                  "RestTime": 0,
+                  "Rules": [],
+                  "WarmupSetDetails": [],
+                  "SetDetails": [
+                    {
+                      "Id": "C6FAFE31-212A-4B68-BF74-81B1609A674D",
+                      "Primary": 10,
+                      "Secondary": 0,
+                      "Type": 0,
+                      "Status": 0,
+                      "RPE": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "Id": "B4E1DBC1-6E73-4E16-A0A7-C8F71B162834",
+                      "Primary": 10,
+                      "Secondary": 0,
+                      "Type": 0,
+                      "Status": 0,
+                      "RPE": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "Id": "5FCAE08E-1964-4875-960E-475DB1C53872",
+                      "Primary": 10,
+                      "Secondary": 0,
+                      "Type": 0,
+                      "Status": 0,
+                      "RPE": 0,
+                      "IsPersonalRecord": false
+                    }
+                  ],
+                  "Definition": {
+                    "Id": "776743bc-478c-4509-a235-3b9d33e10398",
+                    "Name": "Copenhagen Plank",
+                    "Deleted": false,
+                    "PrimaryFocusId": 1,
+                    "SecondaryFocusId": 2,
+                    "MaxPrimary": 13,
+                    "MaxSecondary": 140,
+                    "Equipment": {
+                      "Id": "0",
+                      "Name": "None",
+                      "Deleted": false,
+                      "IsDeletable": false
+                    },
+                    "Categories": [
+                      {
+                        "Id": "6",
+                        "Name": "Adductors",
+                        "Color": {
+                          "Id": "21",
+                          "Name": "Green 2",
+                          "Red": 106,
+                          "Green": 150,
+                          "Blue": 31,
+                          "Alpha": 1,
+                          "Deleted": false,
+                          "IsDeletable": false,
+                          "IsPro": true
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Id": "815FB394-EFCF-4E94-B11F-F32A51A8AC05",
+                  "RestTime": 0,
+                  "Rules": [],
+                  "WarmupSetDetails": [],
+                  "SetDetails": [
+                    {
+                      "Id": "5FB9CE60-6804-4BEF-8C1E-EDF61E2DB689",
+                      "Primary": 12,
+                      "Secondary": 90,
+                      "Type": 0,
+                      "Status": 0,
+                      "RPE": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "Id": "D8E6398B-2221-4026-B58A-15D1C27ECC3B",
+                      "Primary": 12,
+                      "Secondary": 90,
+                      "Type": 0,
+                      "Status": 0,
+                      "RPE": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "Id": "F36BE04F-12CB-4440-8157-371AF2C34230",
+                      "Primary": 12,
+                      "Secondary": 90,
+                      "Type": 0,
+                      "Status": 0,
+                      "RPE": 0,
+                      "IsPersonalRecord": false
+                    }
+                  ],
+                  "Definition": {
+                    "Id": "FromFile_8",
+                    "Name": "Seated Calf Raise",
+                    "Deleted": false,
+                    "PrimaryFocusId": 1,
+                    "SecondaryFocusId": 2,
+                    "MaxPrimary": 26,
+                    "MaxSecondary": 90,
+                    "Equipment": {
+                      "Id": "4",
+                      "Name": "Machine",
+                      "Deleted": false,
+                      "IsDeletable": false
+                    },
+                    "Categories": [
+                      {
+                        "Id": "14",
+                        "Name": "Calves",
+                        "Color": {
+                          "Id": "4",
+                          "Name": "Purple",
+                          "Red": 111,
+                          "Green": 0,
+                          "Blue": 246,
+                          "Alpha": 1,
+                          "Deleted": false,
+                          "IsDeletable": false,
+                          "IsPro": false
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Id": "51EF806B-B8D4-45BE-AF81-03605959EB35",
+                  "RestTime": 0,
+                  "Rules": [],
+                  "WarmupSetDetails": [],
+                  "SetDetails": [
+                    {
+                      "Id": "0C73EEA6-5AEB-48F9-AD4E-7AF44ECB0250",
+                      "Primary": 15,
+                      "Secondary": 20,
+                      "Type": 0,
+                      "Status": 0,
+                      "RPE": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "Id": "7586ED31-366C-4FA9-B8C2-0FFC4E72054F",
+                      "Primary": 15,
+                      "Secondary": 20,
+                      "Type": 0,
+                      "Status": 0,
+                      "RPE": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "Id": "F4C82CEA-3154-4532-9EAA-33F834F9CA62",
+                      "Primary": 15,
+                      "Secondary": 20,
+                      "Type": 0,
+                      "Status": 0,
+                      "RPE": 0,
+                      "IsPersonalRecord": false
+                    }
+                  ],
+                  "Definition": {
+                    "Id": "901f6f4f-cbc5-4a58-8354-dfa97bd5aa38",
+                    "Name": "Tibialis Raise",
+                    "Deleted": false,
+                    "PrimaryFocusId": 1,
+                    "SecondaryFocusId": 2,
+                    "MaxPrimary": 44,
+                    "MaxSecondary": 20,
+                    "Equipment": {
+                      "Id": "4",
+                      "Name": "Machine",
+                      "Deleted": false,
+                      "IsDeletable": false
+                    },
+                    "Categories": [
+                      {
+                        "Id": "2e44a7f8-0474-4763-87c8-d8e6c311aa12",
+                        "Name": "Tibialis",
+                        "Color": {
+                          "Id": "18",
+                          "Name": "Blue Green 3",
+                          "Red": 118,
+                          "Green": 174,
+                          "Blue": 175,
+                          "Alpha": 1,
+                          "Deleted": false,
+                          "IsDeletable": false,
+                          "IsPro": true
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": "278943DF-D8E1-4D08-B8C3-D9BD4AC5516F",
+          "IsCurrent": false,
+          "Measurements": [],
+          "IsEveryday": true,
+          "SuperSets": [
+            {
+              "Id": "EA2EADD3-2DD4-431C-8DE7-EE0E4341C829",
+              "Exercises": [
+                {
+                  "Id": "37377F31-0A89-4956-97B5-AC9CC8B13DCE",
+                  "RestTime": 0,
+                  "Rules": [],
+                  "WarmupSetDetails": [],
+                  "SetDetails": [
+                    {
+                      "Id": "480591C9-8609-4DE1-A742-002FCC136ED0",
+                      "Primary": 8,
+                      "Secondary": 70,
+                      "Type": 0,
+                      "Status": 0,
+                      "RPE": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "Id": "B3AC3C4D-437D-40B7-892B-1FCC1423868D",
+                      "Primary": 8,
+                      "Secondary": 70,
+                      "Type": 0,
+                      "Status": 0,
+                      "RPE": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "Id": "4D7BE153-31E3-4291-BE1D-A49B1B951EDD",
+                      "Primary": 8,
+                      "Secondary": 70,
+                      "Type": 0,
+                      "Status": 0,
+                      "RPE": 0,
+                      "IsPersonalRecord": false
+                    }
+                  ],
+                  "Definition": {
+                    "Id": "bca5fa71-30e7-428c-b6cf-9895d0508274",
+                    "Name": "Dumbbell Incline Bench Press",
+                    "Deleted": false,
+                    "PrimaryFocusId": 1,
+                    "SecondaryFocusId": 2,
+                    "MaxPrimary": 15,
+                    "MaxSecondary": 140,
+                    "Equipment": {
+                      "Id": "2",
+                      "Name": "Double Dumbbell",
+                      "Deleted": false,
+                      "IsDeletable": false
+                    },
+                    "Categories": [
+                      {
+                        "Id": "2",
+                        "Name": "Pectorals",
+                        "Color": {
+                          "Id": "0",
+                          "Name": "Default",
+                          "Red": 12,
+                          "Green": 166,
+                          "Blue": 217,
+                          "Alpha": 1,
+                          "Deleted": false,
+                          "IsDeletable": false,
+                          "IsPro": false
+                        }
+                      },
+                      {
+                        "Id": "0",
+                        "Name": "Deltoids",
+                        "Color": {
+                          "Id": "7",
+                          "Name": "Black 1",
+                          "Red": 25,
+                          "Green": 25,
+                          "Blue": 25,
+                          "Alpha": 1,
+                          "Deleted": false,
+                          "IsDeletable": false,
+                          "IsPro": true
+                        }
+                      },
+                      {
+                        "Id": "9",
+                        "Name": "Triceps",
+                        "Color": {
+                          "Id": "19",
+                          "Name": "Blue Green 4",
+                          "Red": 42,
+                          "Green": 109,
+                          "Blue": 130,
+                          "Alpha": 1,
+                          "Deleted": false,
+                          "IsDeletable": false,
+                          "IsPro": true
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Id": "5D351535-FEEF-4238-9E41-F01F057BC121",
+                  "RestTime": 0,
+                  "Rules": [],
+                  "WarmupSetDetails": [],
+                  "SetDetails": [
+                    {
+                      "Id": "B9BF4E24-C6F3-47FA-913B-C7EA45E32A6E",
+                      "Primary": 10,
+                      "Secondary": 0,
+                      "Type": 0,
+                      "Status": 0,
+                      "RPE": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "Id": "CEF08F29-759B-408B-AFA5-E5C69786438B",
+                      "Primary": 10,
+                      "Secondary": 0,
+                      "Type": 0,
+                      "Status": 0,
+                      "RPE": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "Id": "D245A07D-7EC0-4B42-B8F6-926B3EAFFC6A",
+                      "Primary": 10,
+                      "Secondary": 0,
+                      "Type": 0,
+                      "Status": 0,
+                      "RPE": 0,
+                      "IsPersonalRecord": false
+                    }
+                  ],
+                  "Definition": {
+                    "Id": "89624c0d-2415-4d30-8fd6-7c43a655c3c1",
+                    "Name": "Side-Lying Hyperextension Adductor Raise",
+                    "Deleted": false,
+                    "PrimaryFocusId": 1,
+                    "SecondaryFocusId": 2,
+                    "MaxPrimary": 0,
+                    "MaxSecondary": 0,
+                    "Equipment": {
+                      "Id": "4",
+                      "Name": "Machine",
+                      "Deleted": false,
+                      "IsDeletable": false
+                    },
+                    "Categories": [
+                      {
+                        "Id": "6",
+                        "Name": "Adductors",
+                        "Color": {
+                          "Id": "21",
+                          "Name": "Green 2",
+                          "Red": 106,
+                          "Green": 150,
+                          "Blue": 31,
+                          "Alpha": 1,
+                          "Deleted": false,
+                          "IsDeletable": false,
+                          "IsPro": true
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Id": "C009DBCD-8560-4637-A5CD-7276DE28BD2B",
+                  "RestTime": 0,
+                  "Rules": [],
+                  "WarmupSetDetails": [],
+                  "SetDetails": [
+                    {
+                      "Id": "3DB90840-7130-4739-BFB8-05AB517780C7",
+                      "Primary": 12,
+                      "Secondary": 90,
+                      "Type": 0,
+                      "Status": 0,
+                      "RPE": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "Id": "46128C91-5DBD-4493-BF06-D0AE7DB0BE11",
+                      "Primary": 12,
+                      "Secondary": 90,
+                      "Type": 0,
+                      "Status": 0,
+                      "RPE": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "Id": "1672FBD2-6A38-4182-A2AE-FFB265EDACDE",
+                      "Primary": 12,
+                      "Secondary": 90,
+                      "Type": 0,
+                      "Status": 0,
+                      "RPE": 0,
+                      "IsPersonalRecord": false
+                    }
+                  ],
+                  "Definition": {
+                    "Id": "FromFile_8",
+                    "Name": "Seated Calf Raise",
+                    "Deleted": false,
+                    "PrimaryFocusId": 1,
+                    "SecondaryFocusId": 2,
+                    "MaxPrimary": 26,
+                    "MaxSecondary": 90,
+                    "Equipment": {
+                      "Id": "4",
+                      "Name": "Machine",
+                      "Deleted": false,
+                      "IsDeletable": false
+                    },
+                    "Categories": [
+                      {
+                        "Id": "14",
+                        "Name": "Calves",
+                        "Color": {
+                          "Id": "4",
+                          "Name": "Purple",
+                          "Red": 111,
+                          "Green": 0,
+                          "Blue": 246,
+                          "Alpha": 1,
+                          "Deleted": false,
+                          "IsDeletable": false,
+                          "IsPro": false
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Id": "460A281A-C1F1-4638-A843-722CDDC4D779",
+                  "RestTime": 0,
+                  "Rules": [],
+                  "WarmupSetDetails": [],
+                  "SetDetails": [
+                    {
+                      "Id": "F8CCD54C-8876-4FBB-AC5E-7E8099D0238F",
+                      "Primary": 15,
+                      "Secondary": 20,
+                      "Type": 0,
+                      "Status": 0,
+                      "RPE": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "Id": "788A03E6-F490-4514-B237-5B8261C2FE9A",
+                      "Primary": 15,
+                      "Secondary": 20,
+                      "Type": 0,
+                      "Status": 0,
+                      "RPE": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "Id": "AF98C429-60A6-4AD1-B52A-E9611DD45996",
+                      "Primary": 15,
+                      "Secondary": 20,
+                      "Type": 0,
+                      "Status": 0,
+                      "RPE": 0,
+                      "IsPersonalRecord": false
+                    }
+                  ],
+                  "Definition": {
+                    "Id": "901f6f4f-cbc5-4a58-8354-dfa97bd5aa38",
+                    "Name": "Tibialis Raise",
+                    "Deleted": false,
+                    "PrimaryFocusId": 1,
+                    "SecondaryFocusId": 2,
+                    "MaxPrimary": 44,
+                    "MaxSecondary": 20,
+                    "Equipment": {
+                      "Id": "4",
+                      "Name": "Machine",
+                      "Deleted": false,
+                      "IsDeletable": false
+                    },
+                    "Categories": [
+                      {
+                        "Id": "2e44a7f8-0474-4763-87c8-d8e6c311aa12",
+                        "Name": "Tibialis",
+                        "Color": {
+                          "Id": "18",
+                          "Name": "Blue Green 3",
+                          "Red": 118,
+                          "Green": 174,
+                          "Blue": 175,
+                          "Alpha": 1,
+                          "Deleted": false,
+                          "IsDeletable": false,
+                          "IsPro": true
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "Version": "3.2.0",
+  "IsList": true,
+  "Type": "WorkoutDefinitionDTO"
+}
