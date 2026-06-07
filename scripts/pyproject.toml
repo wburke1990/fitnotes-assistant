@@ -11,6 +11,8 @@ dev = [
     "pytest>=9.0.3",
     "ruff>=0.14",
     "mypy>=1.18",
+    # pip is seeded into the venv; pin past PYSEC-2026-196 so pip-audit passes.
+    "pip>=26.1.2",
     "pip-audit>=2.7",
     "pip-licenses>=5.0",
     "typos>=1.46",
