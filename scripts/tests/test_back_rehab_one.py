@@ -45,16 +45,25 @@ def test_reps_match_definition():
         for ex in ss["Exercises"]
     }
     assert reps == {
-        "Nordic Hamstring Curl": 6,
+        "Nordic Hamstring Curl": 12,
         "Snatch-Grip Stiff-Legged RDL": 8,
-        "ATG Split Squat": 8,
-        "Hyperextension": 12,
-        "Bird Dog Row": 10,
+        "ATG Split Squat": 12,
+        "Hyperextension": 35,
+        "Bird Dog Row": 12,
     }
 
 
-def test_all_sets_are_bodyweight_placeholder():
+def test_weights_match_definition():
     _, supersets = _supersets()
-    for ss in supersets:
-        for ex in ss["Exercises"]:
-            assert all(sd["Secondary"] == 0 for sd in ex["SetDetails"])
+    weights = {
+        ex["Definition"]["Name"]: ex["SetDetails"][0]["Secondary"]
+        for ss in supersets
+        for ex in ss["Exercises"]
+    }
+    assert weights == {
+        "Nordic Hamstring Curl": 0,
+        "Snatch-Grip Stiff-Legged RDL": 135,
+        "ATG Split Squat": 75,
+        "Hyperextension": 0,
+        "Bird Dog Row": 55,
+    }

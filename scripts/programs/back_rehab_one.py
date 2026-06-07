@@ -4,14 +4,14 @@
 Two supersets, four sets each:
 
 Superset 1 (hamstring posterior-chain pairing):
-    1. Nordic Hamstring Curl        4 x 6
-    2. Snatch-Grip Stiff-Legged RDL 4 x 8   (snatch grip to reach more depth)
+    1. Nordic Hamstring Curl        4 x 12
+    2. Snatch-Grip Stiff-Legged RDL 4 x 8 @ 135  (snatch grip to reach more depth)
 
 Superset 2 (split squat gives the lower back a break before the hyperextensions,
 the row comes right after):
-    1. ATG Split Squat (front rack) 4 x 8
-    2. Hyperextension               4 x 12
-    3. Bird Dog Row                 4 x 10
+    1. ATG Split Squat (front rack) 4 x 12 @ 75
+    2. Hyperextension               4 x 35       (bodyweight for now, load to come)
+    3. Bird Dog Row                 4 x 12 @ 55
 
 Between-set interludes (couch stretch, ATG warmup routine) are part of the
 protocol but intentionally not encoded here -- a .fnw plan has no notes field.
@@ -37,16 +37,16 @@ from common.io import ExerciseMapping
 PLAN_NAME = "Back Rehab 1"
 SETS_PER_EXERCISE = 4
 
-# Each inner list is one superset, in performed order: (exercise name, reps).
-SUPERSETS: list[list[tuple[str, int]]] = [
+# Each inner list is one superset, in performed order: (exercise, reps, weight lb).
+SUPERSETS: list[list[tuple[str, int, int]]] = [
     [
-        ("Nordic Hamstring Curl", 6),
-        ("Snatch-Grip Stiff-Legged RDL", 8),
+        ("Nordic Hamstring Curl", 12, 0),
+        ("Snatch-Grip Stiff-Legged RDL", 8, 135),
     ],
     [
-        ("ATG Split Squat", 8),
-        ("Hyperextension", 12),
-        ("Bird Dog Row", 10),
+        ("ATG Split Squat", 12, 75),
+        ("Hyperextension", 35, 0),
+        ("Bird Dog Row", 12, 55),
     ],
 ]
 
@@ -67,10 +67,10 @@ def build_plan(mappings: ExerciseMapping) -> dict[str, Any]:
         exercises = [
             build_exercise(
                 name,
-                [SetConfig(reps=reps) for _ in range(SETS_PER_EXERCISE)],
+                [SetConfig(reps=reps, weight=weight) for _ in range(SETS_PER_EXERCISE)],
                 mappings,
             )
-            for name, reps in group
+            for name, reps, weight in group
         ]
         supersets.append(build_superset(exercises))
 
