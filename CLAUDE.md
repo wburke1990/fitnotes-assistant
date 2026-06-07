@@ -70,7 +70,9 @@ tool's output is printed and the commit is aborted.
 - `plans/` — per-gym workout plans (`pa/`, `pit/`, `wh/`, …) used while
   traveling
 - `exercises/` — exercise definitions and metadata
-- `scripts/` — uv-managed Python for parsing `.fnw` and generating programs
+- `scripts/` — uv-managed Python for parsing `.fnw` and generating programs.
+  **Building a plan? Read `scripts/programs/README.md` first** — it documents
+  the `.fnw` format and builder API so you don't have to re-derive them.
 - `*_Exercises.txt`, `Exercise_ideas.md`, `ATG_Standards.txt`, `big3.txt` —
   notes, brainstorms, standards
 - `utilities` — jq one-liners for ad-hoc `.fnw` analysis
