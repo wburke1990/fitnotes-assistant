@@ -171,22 +171,40 @@ def build_exercise(
     }
 
 
-def build_superset(exercises: list[dict[str, Any]], name: str = "Set 1") -> dict[str, Any]:
+def build_superset(exercises: list[dict[str, Any]]) -> dict[str, Any]:
     """Build a superset containing one or more exercises.
 
     Args:
         exercises: List of exercise dicts (from build_exercise)
-        name: Block label (e.g. "Set 1"). FitNotes requires a non-empty Name
-            on every superset; the workout builders renumber these sequentially
-            on the way out, so this default only matters for standalone use.
 
     Returns:
-        Superset dict in .fnw format
+        Superset dict in .fnw format. The "Set N" name a multi-exercise block
+        needs is added by the workout builders, since it has to be numbered
+        across the whole workout.
     """
     return {
         "Id": _generate_uuid(),
-        "Name": name,
         "Exercises": exercises,
+    }
+
+
+def _build_block(superset: dict[str, Any], set_number: int) -> dict[str, Any]:
+    """Wrap a single superset in a workout block (one SuperSet per block).
+
+    A block with more than one exercise gets a "Set N" name; FitNotes needs it
+    or it collapses the block's exercises onto the first one's Definition.
+    Single-exercise blocks carry no Name, matching a known-good export.
+    """
+    exercises = superset["Exercises"]
+    inner: dict[str, Any] = {"Id": superset["Id"], "Exercises": exercises}
+    if len(exercises) > 1:
+        inner["Name"] = f"Set {set_number}"
+    return {
+        "Id": _generate_uuid(),
+        "IsCurrent": False,
+        "IsEveryday": True,
+        "Measurements": [],
+        "SuperSets": [inner],
     }
 
 
@@ -196,10 +214,14 @@ def build_workout_from_supersets(
 ) -> dict[str, Any]:
     """Build a complete workout file structure from pre-built supersets.
 
-    Use this when a plan needs several distinct superset groups in one
-    workout (e.g. two separate supersets done back to back). For the simpler
-    cases of one-exercise-per-superset or a single all-in-one superset,
-    prefer build_workout.
+    Use this when a plan needs several distinct superset groups (e.g. two
+    supersets done back to back). For the simpler cases of one-exercise-per-
+    superset or a single all-in-one superset, prefer build_workout.
+
+    In a .fnw routine, ``Data[0].Workouts`` is the ordered list of blocks and
+    each block holds exactly one SuperSet — putting several SuperSets in one
+    block makes FitNotes render only the first. So each superset here becomes
+    its own block, and multi-exercise blocks are numbered "Set 1", "Set 2", ...
 
     Args:
         name: Workout name (e.g., "Back Rehab 1")
@@ -208,12 +230,13 @@ def build_workout_from_supersets(
     Returns:
         Complete workout dict ready to write to .fnw file
     """
-    # FitNotes needs a Name on each SuperSet or it collapses the block onto the
-    # first exercise's Definition. Renumber sequentially ("Set 1", "Set 2", ...)
-    # to match a known-good export, regardless of how the supersets were built.
-    named_supersets = [
-        {**superset, "Name": f"Set {index}"} for index, superset in enumerate(supersets, start=1)
-    ]
+    blocks: list[dict[str, Any]] = []
+    set_number = 0
+    for superset in supersets:
+        if len(superset["Exercises"]) > 1:
+            set_number += 1
+        blocks.append(_build_block(superset, set_number))
+
     return {
         "Version": _FNW_VERSION,
         "IsList": True,
@@ -224,15 +247,7 @@ def build_workout_from_supersets(
                 "Name": name,
                 "Deleted": False,
                 "SortIndex": 0,
-                "Workouts": [
-                    {
-                        "Id": _generate_uuid(),
-                        "IsCurrent": False,
-                        "IsEveryday": True,
-                        "Measurements": [],
-                        "SuperSets": named_supersets,
-                    },
-                ],
+                "Workouts": blocks,
             },
         ],
     }

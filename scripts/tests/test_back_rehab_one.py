@@ -8,7 +8,9 @@ MAPPINGS = load_exercise_mappings()
 
 def _supersets():
     workout = build_plan(MAPPINGS)
-    return workout, workout["Data"][0]["Workouts"][0]["SuperSets"]
+    blocks = workout["Data"][0]["Workouts"]
+    # One SuperSet per block; flatten across blocks in order.
+    return workout, [ss for block in blocks for ss in block["SuperSets"]]
 
 
 def test_plan_name():
@@ -21,8 +23,17 @@ def test_two_supersets():
     assert len(supersets) == 2
 
 
+def test_each_superset_is_its_own_block():
+    # FitNotes only renders the first SuperSet within a block, so each superset
+    # must be its own Workouts[] entry.
+    workout = build_plan(MAPPINGS)
+    blocks = workout["Data"][0]["Workouts"]
+    assert len(blocks) == 2
+    assert all(len(block["SuperSets"]) == 1 for block in blocks)
+
+
 def test_supersets_are_named_for_import():
-    # Each superset needs a Name or FitNotes shows only the first exercise.
+    # Each multi-exercise superset needs a Name or FitNotes collapses it.
     _, supersets = _supersets()
     assert [ss["Name"] for ss in supersets] == ["Set 1", "Set 2"]
 

@@ -24,6 +24,22 @@ API so you don't have to re-derive them from the code each session.
 Load mappings with `load_exercise_mappings()` and write with
 `write_workout_file(workout, path)` (both in `common.io`).
 
+### Workout layout (the part that bites)
+
+A routine is `Data[0]`. **`Data[0].Workouts[]` is the ordered list of blocks,
+and each block holds exactly one `SuperSet`.** FitNotes renders only the *first*
+`SuperSet` in a block, so a plan with two supersets needs two `Workouts[]`
+entries — not one block with two `SuperSets`. The builders handle this: each
+superset you pass becomes its own block.
+
+A multi-exercise block must carry a `Name` (`"Set 1"`, `"Set 2"`, … — assigned
+automatically) or FitNotes collapses its exercises onto the first one's
+`Definition` on import. Single-exercise blocks carry no `Name`. The file also
+needs `Version` `"3.4.2"`, `Type` `"FNWorkoutDefinitionDTO"`, and a `SortIndex`
+on the routine — all set by `build_workout_from_supersets`. When in doubt,
+structurally diff against `plans/back_rehab/Back Rehab 3.fnw` (a known-good
+export) with `jq`.
+
 ### SetDetails semantics
 
 - `Primary` = reps, `Secondary` = weight (int). `0` weight = bodyweight /
