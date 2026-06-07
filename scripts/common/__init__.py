@@ -1,6 +1,11 @@
 """Common utilities for workout generation."""
 
-from .builders import build_exercise, build_superset, build_workout
+from .builders import (
+    build_exercise,
+    build_superset,
+    build_workout,
+    build_workout_from_supersets,
+)
 from .calculations import (
     calculate_weekly_volume,
     check_volume_minimums,
@@ -14,6 +19,7 @@ __all__ = [
     "build_exercise",
     "build_superset",
     "build_workout",
+    "build_workout_from_supersets",
     "calculate_weekly_volume",
     "check_volume_minimums",
     "load_exercise_mappings",

@@ -179,6 +179,47 @@ def build_superset(exercises: list[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
+def build_workout_from_supersets(
+    name: str,
+    supersets: list[dict[str, Any]],
+) -> dict[str, Any]:
+    """Build a complete workout file structure from pre-built supersets.
+
+    Use this when a plan needs several distinct superset groups in one
+    workout (e.g. two separate supersets done back to back). For the simpler
+    cases of one-exercise-per-superset or a single all-in-one superset,
+    prefer build_workout.
+
+    Args:
+        name: Workout name (e.g., "Back Rehab 1")
+        supersets: List of superset dicts (from build_superset), in order
+
+    Returns:
+        Complete workout dict ready to write to .fnw file
+    """
+    return {
+        "Version": "3.2.0",
+        "IsList": True,
+        "Type": "WorkoutDefinitionDTO",
+        "Data": [
+            {
+                "Id": _generate_uuid(),
+                "Name": name,
+                "Deleted": False,
+                "Workouts": [
+                    {
+                        "Id": _generate_uuid(),
+                        "IsCurrent": False,
+                        "IsEveryday": True,
+                        "Measurements": [],
+                        "SuperSets": supersets,
+                    },
+                ],
+            },
+        ],
+    }
+
+
 def build_workout(
     name: str,
     exercises: list[dict[str, Any]],
@@ -200,24 +241,4 @@ def build_workout(
         [build_superset(exercises)] if supersets else [build_superset([ex]) for ex in exercises]
     )
 
-    return {
-        "Version": "3.2.0",
-        "IsList": True,
-        "Type": "WorkoutDefinitionDTO",
-        "Data": [
-            {
-                "Id": _generate_uuid(),
-                "Name": name,
-                "Deleted": False,
-                "Workouts": [
-                    {
-                        "Id": _generate_uuid(),
-                        "IsCurrent": False,
-                        "IsEveryday": True,
-                        "Measurements": [],
-                        "SuperSets": workout_supersets,
-                    },
-                ],
-            },
-        ],
-    }
+    return build_workout_from_supersets(name, workout_supersets)
