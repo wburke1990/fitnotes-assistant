@@ -21,6 +21,12 @@ def test_two_supersets():
     assert len(supersets) == 2
 
 
+def test_supersets_are_named_for_import():
+    # Each superset needs a Name or FitNotes shows only the first exercise.
+    _, supersets = _supersets()
+    assert [ss["Name"] for ss in supersets] == ["Set 1", "Set 2"]
+
+
 def test_superset_exercise_order():
     _, supersets = _supersets()
     names = [[ex["Definition"]["Name"] for ex in ss["Exercises"]] for ss in supersets]

@@ -68,6 +68,7 @@ def test_build_superset_wraps_exercises():
     b = build_exercise("Bird Dog Row", [SetConfig(reps=10)], MAPPINGS)
     ss = build_superset([a, b])
     assert ss["Exercises"] == [a, b]
+    assert ss["Name"]  # FitNotes requires a non-empty superset name
 
 
 def test_build_workout_default_one_superset_per_exercise():
@@ -105,5 +106,18 @@ def test_build_workout_from_supersets_preserves_groups_and_order():
 
     assert workout["Data"][0]["Name"] == "My Plan"
     supersets = _supersets(workout)
-    assert supersets == [ss1, ss2]
+    # Exercises and order preserved; supersets renumbered sequentially.
+    assert [ss["Exercises"] for ss in supersets] == [ss1["Exercises"], ss2["Exercises"]]
+    assert [ss["Name"] for ss in supersets] == ["Set 1", "Set 2"]
     assert [len(ss["Exercises"]) for ss in supersets] == [1, 2]
+
+
+def test_build_workout_from_supersets_uses_fitnotes_import_format():
+    # Regression guard: without these markers FitNotes collapses every exercise
+    # in a superset onto the first one's Definition on import.
+    ss = build_superset([build_exercise("Hyperextension", [SetConfig(reps=12)], MAPPINGS)])
+    workout = build_workout_from_supersets("Plan", [ss])
+    assert workout["Version"] == "3.4.2"
+    assert workout["Type"] == "FNWorkoutDefinitionDTO"
+    assert workout["Data"][0]["SortIndex"] == 0
+    assert all(s["Name"] for s in _supersets(workout))

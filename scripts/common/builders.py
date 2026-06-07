@@ -6,6 +6,13 @@ from typing import Any
 
 from .io import EQUIPMENT_IDS, ExerciseMapping
 
+# Format markers copied from a known-good FitNotes 3.4.2 superset export.
+# Critically, every SuperSet needs a non-empty Name or FitNotes collapses the
+# block's exercises onto the first one's Definition on import (you see only the
+# first exercise). See build_workout_from_supersets.
+_FNW_VERSION = "3.4.2"
+_FNW_TYPE = "FNWorkoutDefinitionDTO"
+
 CATEGORY_COLORS: dict[str, dict[str, Any]] = {
     "default": {
         "Alpha": 1,
@@ -164,17 +171,21 @@ def build_exercise(
     }
 
 
-def build_superset(exercises: list[dict[str, Any]]) -> dict[str, Any]:
+def build_superset(exercises: list[dict[str, Any]], name: str = "Set 1") -> dict[str, Any]:
     """Build a superset containing one or more exercises.
 
     Args:
         exercises: List of exercise dicts (from build_exercise)
+        name: Block label (e.g. "Set 1"). FitNotes requires a non-empty Name
+            on every superset; the workout builders renumber these sequentially
+            on the way out, so this default only matters for standalone use.
 
     Returns:
         Superset dict in .fnw format
     """
     return {
         "Id": _generate_uuid(),
+        "Name": name,
         "Exercises": exercises,
     }
 
@@ -197,22 +208,29 @@ def build_workout_from_supersets(
     Returns:
         Complete workout dict ready to write to .fnw file
     """
+    # FitNotes needs a Name on each SuperSet or it collapses the block onto the
+    # first exercise's Definition. Renumber sequentially ("Set 1", "Set 2", ...)
+    # to match a known-good export, regardless of how the supersets were built.
+    named_supersets = [
+        {**superset, "Name": f"Set {index}"} for index, superset in enumerate(supersets, start=1)
+    ]
     return {
-        "Version": "3.2.0",
+        "Version": _FNW_VERSION,
         "IsList": True,
-        "Type": "WorkoutDefinitionDTO",
+        "Type": _FNW_TYPE,
         "Data": [
             {
                 "Id": _generate_uuid(),
                 "Name": name,
                 "Deleted": False,
+                "SortIndex": 0,
                 "Workouts": [
                     {
                         "Id": _generate_uuid(),
                         "IsCurrent": False,
                         "IsEveryday": True,
                         "Measurements": [],
-                        "SuperSets": supersets,
+                        "SuperSets": named_supersets,
                     },
                 ],
             },
