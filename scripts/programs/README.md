@@ -46,7 +46,10 @@ export) with `jq`.
   fill-in-later, and the builder sets `SecondaryFocusId` to 0 automatically.
 - For `focus="time"` exercises, `Primary` is the set's duration in **seconds**
   (the builder sets `PrimaryFocusId` to 3); `back_rehab_two.py` is the worked
-  example (a timed hip-rehab circuit).
+  example (a timed hip-rehab circuit). The time encoding is inferred from how
+  FitNotes stores timed exercises, not yet diffed against a known-good time
+  export — when you generate the first one, have the user confirm the holds
+  import as `M:SS` rather than rep counts.
 - Number of sets = number of items in the `SetDetails` list.
 
 ### Gotcha: no notes field
@@ -71,10 +74,15 @@ IDs; add new ones there if needed.
 
 ## Pattern to copy
 
-`weekly_split.py` (flat days) and `back_rehab_one.py` (two supersets) are the
-worked examples. A generator factors a `build_*` function (returns the workout
-dict, easy to unit-test) from a `main()` that writes the file. Add tests under
-`tests/` — see `test_back_rehab_one.py`.
+`weekly_split.py` (flat days), `back_rehab_one.py` (two supersets), and
+`back_rehab_two.py` (a `focus="time"` circuit) are the worked examples. A
+generator factors a `build_*` function (returns the workout dict, easy to
+unit-test) from a `main()` that writes the file. Add tests under `tests/` —
+see `test_back_rehab_one.py`.
+
+The program modules carry a `#!/usr/bin/env python3` shebang, so a new one
+must be executable (`chmod +x programs/your_plan.py`) or the pre-commit
+`ruff` check fails with `EXE001` and aborts the commit.
 
 Run one with:
 
