@@ -46,10 +46,8 @@ export) with `jq`.
   fill-in-later, and the builder sets `SecondaryFocusId` to 0 automatically.
 - For `focus="time"` exercises, `Primary` is the set's duration in **seconds**
   (the builder sets `PrimaryFocusId` to 3); `back_rehab_two.py` is the worked
-  example (a timed hip-rehab circuit). The time encoding is inferred from how
-  FitNotes stores timed exercises, not yet diffed against a known-good time
-  export — when you generate the first one, have the user confirm the holds
-  import as `M:SS` rather than rep counts.
+  example (a timed hip-rehab circuit). Verified against a real FitNotes import:
+  the holds display as `M:SS`.
 - Number of sets = number of items in the `SetDetails` list.
 
 ### Gotcha: no notes field
