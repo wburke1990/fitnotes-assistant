@@ -16,7 +16,7 @@ API so you don't have to re-derive them from the code each session.
 | Function | What it makes |
 | --- | --- |
 | `SetConfig(reps, weight=0, rpe=0)` | one set |
-| `build_exercise(name, sets, mappings)` | one exercise; `sets` is a list of `SetConfig` (or dicts). **One list item = one set.** |
+| `build_exercise(name, sets, mappings, *, focus="reps")` | one exercise; `sets` is a list of `SetConfig` (or dicts). **One list item = one set.** Pass `focus="time"` for timed holds (each set's `reps` is then a duration in *seconds*). |
 | `build_superset(exercises)` | one superset group from a list of exercises |
 | `build_workout(name, exercises, *, supersets=False)` | whole workout; `False` = each exercise its own superset, `True` = all in one superset |
 | `build_workout_from_supersets(name, supersets)` | whole workout from **multiple distinct** pre-built supersets (use this when a plan has more than one superset group) |
@@ -44,6 +44,9 @@ export) with `jq`.
 
 - `Primary` = reps, `Secondary` = weight (int). `0` weight = bodyweight /
   fill-in-later, and the builder sets `SecondaryFocusId` to 0 automatically.
+- For `focus="time"` exercises, `Primary` is the set's duration in **seconds**
+  (the builder sets `PrimaryFocusId` to 3); `back_rehab_two.py` is the worked
+  example (a timed hip-rehab circuit).
 - Number of sets = number of items in the `SetDetails` list.
 
 ### Gotcha: no notes field

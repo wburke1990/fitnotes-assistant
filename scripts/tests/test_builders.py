@@ -45,6 +45,20 @@ def test_build_exercise_accepts_dict_sets():
     assert ex["SetDetails"][0]["Secondary"] == 0
 
 
+def test_build_exercise_reps_focus_by_default():
+    ex = build_exercise("Hyperextension", [SetConfig(reps=12)], MAPPINGS)
+    assert ex["Definition"]["PrimaryFocusId"] == 1
+
+
+def test_build_exercise_time_focus_sets_primary_focus_and_seconds():
+    # focus="time" -> PrimaryFocusId 3, with each set's Primary read as seconds.
+    ex = build_exercise("Plank", [SetConfig(reps=240)], MAPPINGS, focus="time")
+    assert ex["Definition"]["PrimaryFocusId"] == 3
+    assert ex["Definition"]["SecondaryFocusId"] == 0
+    assert ex["SetDetails"][0]["Primary"] == 240
+    assert ex["Definition"]["MaxPrimary"] == 240
+
+
 def test_build_exercise_secondary_focus_zero_when_bodyweight():
     ex = build_exercise("Bird Dog Row", [SetConfig(reps=10, weight=0)], MAPPINGS)
     assert ex["Definition"]["SecondaryFocusId"] == 0

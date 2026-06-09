@@ -2,7 +2,7 @@
 
 import uuid
 from dataclasses import dataclass
-from typing import Any
+from typing import Any, Literal
 
 from .io import EQUIPMENT_IDS, ExerciseMapping
 
@@ -53,9 +53,20 @@ CATEGORY_IDS: dict[str, str] = {
 }
 
 
+# PrimaryFocusId values FitNotes understands. "reps" stores the count in a set's
+# Primary field; "time" stores the duration in *seconds* there instead (weight,
+# when present, is always the Secondary focus). 2 = weight is never a primary.
+Focus = Literal["reps", "time"]
+_FOCUS_IDS: dict[Focus, int] = {"reps": 1, "time": 3}
+
+
 @dataclass
 class SetConfig:
-    """Configuration for a single set."""
+    """Configuration for a single set.
+
+    ``reps`` is the Primary measure: a rep count for reps-focused exercises, or
+    a duration in seconds when the exercise is built with ``focus="time"``.
+    """
 
     reps: int
     weight: float = 0
@@ -103,6 +114,8 @@ def build_exercise(
     name: str,
     sets: list[SetConfig] | list[dict[str, Any]],
     mappings: ExerciseMapping,
+    *,
+    focus: Focus = "reps",
 ) -> dict[str, Any]:
     """Build a complete exercise object from name and set configurations.
 
@@ -110,6 +123,9 @@ def build_exercise(
         name: Exercise name (must exist in mappings)
         sets: List of SetConfig or dicts with {reps, weight, rpe?}
         mappings: ExerciseMapping loaded from files
+        focus: Primary measure for the exercise. "reps" (default) treats each
+            set's ``reps`` as a rep count; "time" treats it as a duration in
+            seconds (e.g. a 2-minute hold is ``SetConfig(reps=120)``).
 
     Returns:
         Complete exercise dict in .fnw format
@@ -145,8 +161,8 @@ def build_exercise(
     max_reps = max((s.reps for s in normalized_sets), default=0)
     max_weight = max((s.weight for s in normalized_sets), default=0)
 
-    # 1 = reps, 2 = weight, 3 = time
-    primary_focus_id = 1
+    # Primary is reps or time (3); weight, when present, is the secondary focus.
+    primary_focus_id = _FOCUS_IDS[focus]
     secondary_focus_id = 2 if max_weight > 0 else 0
 
     exercise_id = _generate_uuid()
