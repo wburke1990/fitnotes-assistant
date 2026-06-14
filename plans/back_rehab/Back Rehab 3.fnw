@@ -25,7 +25,7 @@
                     {
                       "Id": "02C668F1-4C7C-45A9-B226-83A08FA13A6B",
                       "Primary": 8,
-                      "Secondary": 0,
+                      "Secondary": 60,
                       "Type": 0,
                       "Status": 0,
                       "RPE": 0,
@@ -34,7 +34,7 @@
                     {
                       "Id": "7B8E0754-810C-4795-9F19-C0DE3FC38A24",
                       "Primary": 8,
-                      "Secondary": 0,
+                      "Secondary": 60,
                       "Type": 0,
                       "Status": 0,
                       "RPE": 0,
@@ -43,7 +43,7 @@
                     {
                       "Id": "C3B17997-E153-4B3D-AD26-8782C83E4889",
                       "Primary": 8,
-                      "Secondary": 0,
+                      "Secondary": 60,
                       "Type": 0,
                       "Status": 0,
                       "RPE": 0,
@@ -56,8 +56,8 @@
                     "Deleted": false,
                     "PrimaryFocusId": 1,
                     "SecondaryFocusId": 2,
-                    "MaxPrimary": 0,
-                    "MaxSecondary": 0,
+                    "MaxPrimary": 8,
+                    "MaxSecondary": 60,
                     "Equipment": {
                       "Id": "1",
                       "Name": "Barbell",
@@ -121,7 +121,7 @@
                   "SetDetails": [
                     {
                       "Id": "C76F50E9-921E-4927-8CEC-A2A49D5182B3",
-                      "Primary": 10,
+                      "Primary": 60,
                       "Secondary": 0,
                       "Type": 0,
                       "Status": 0,
@@ -129,17 +129,8 @@
                       "IsPersonalRecord": false
                     },
                     {
-                      "Id": "986C1DED-D132-40E2-8F46-9736743FEA47",
-                      "Primary": 10,
-                      "Secondary": 0,
-                      "Type": 0,
-                      "Status": 0,
-                      "RPE": 0,
-                      "IsPersonalRecord": false
-                    },
-                    {
-                      "Id": "205B3EAE-ADBC-48A1-A167-B19DEDE85121",
-                      "Primary": 10,
+                      "Id": "C76F50E9-921E-4927-8CEC-A2A49D5182B3",
+                      "Primary": 60,
                       "Secondary": 0,
                       "Type": 0,
                       "Status": 0,
@@ -151,10 +142,10 @@
                     "Id": "776743bc-478c-4509-a235-3b9d33e10398",
                     "Name": "Copenhagen Plank",
                     "Deleted": false,
-                    "PrimaryFocusId": 1,
-                    "SecondaryFocusId": 2,
-                    "MaxPrimary": 13,
-                    "MaxSecondary": 140,
+                    "PrimaryFocusId": 3,
+                    "SecondaryFocusId": 0,
+                    "MaxPrimary": 60,
+                    "MaxSecondary": 0,
                     "Equipment": {
                       "Id": "0",
                       "Name": "None",
@@ -188,8 +179,8 @@
                   "SetDetails": [
                     {
                       "Id": "7D7E4D5B-8697-4D2A-8736-377D9315A16A",
-                      "Primary": 12,
-                      "Secondary": 0,
+                      "Primary": 35,
+                      "Secondary": 20,
                       "Type": 0,
                       "Status": 0,
                       "RPE": 0,
@@ -197,8 +188,8 @@
                     },
                     {
                       "Id": "BA340AD0-1CF5-4818-B8D5-BFE98BB1740F",
-                      "Primary": 12,
-                      "Secondary": 0,
+                      "Primary": 35,
+                      "Secondary": 20,
                       "Type": 0,
                       "Status": 0,
                       "RPE": 0,
@@ -206,8 +197,8 @@
                     },
                     {
                       "Id": "687E7336-E671-4630-809C-F01D662F74A4",
-                      "Primary": 12,
-                      "Secondary": 0,
+                      "Primary": 35,
+                      "Secondary": 20,
                       "Type": 0,
                       "Status": 0,
                       "RPE": 0,
@@ -220,11 +211,11 @@
                     "Deleted": false,
                     "PrimaryFocusId": 1,
                     "SecondaryFocusId": 2,
-                    "MaxPrimary": 0,
-                    "MaxSecondary": 0,
+                    "MaxPrimary": 35,
+                    "MaxSecondary": 20,
                     "Equipment": {
-                      "Id": "4",
-                      "Name": "Machine",
+                      "Id": "3",
+                      "Name": "Single Dumbbell",
                       "Deleted": false,
                       "IsDeletable": false
                     },
@@ -255,8 +246,8 @@
                   "SetDetails": [
                     {
                       "Id": "080C8CF1-DFFF-44A8-A739-B0C1F348A0FB",
-                      "Primary": 15,
-                      "Secondary": 20,
+                      "Primary": 35,
+                      "Secondary": 0,
                       "Type": 0,
                       "Status": 0,
                       "RPE": 0,
@@ -264,8 +255,8 @@
                     },
                     {
                       "Id": "51889886-D6F1-403A-93A1-227C1BC448A9",
-                      "Primary": 15,
-                      "Secondary": 20,
+                      "Primary": 35,
+                      "Secondary": 0,
                       "Type": 0,
                       "Status": 0,
                       "RPE": 0,
@@ -273,8 +264,8 @@
                     },
                     {
                       "Id": "63C67423-4E40-4557-BBDD-4CF06D2DB0F4",
-                      "Primary": 15,
-                      "Secondary": 20,
+                      "Primary": 35,
+                      "Secondary": 0,
                       "Type": 0,
                       "Status": 0,
                       "RPE": 0,
@@ -286,9 +277,9 @@
                     "Name": "Tibialis Raise",
                     "Deleted": false,
                     "PrimaryFocusId": 1,
-                    "SecondaryFocusId": 2,
-                    "MaxPrimary": 44,
-                    "MaxSecondary": 20,
+                    "SecondaryFocusId": 0,
+                    "MaxPrimary": 35,
+                    "MaxSecondary": 0,
                     "Equipment": {
                       "Id": "4",
                       "Name": "Machine",
@@ -337,7 +328,7 @@
                     {
                       "Id": "9D2821BD-7672-42BB-A484-4A6D7EAEF90E",
                       "Primary": 8,
-                      "Secondary": 70,
+                      "Secondary": 55,
                       "Type": 0,
                       "Status": 0,
                       "RPE": 0,
@@ -346,7 +337,7 @@
                     {
                       "Id": "C0B08307-1F77-4FDB-B2B2-1C327154738D",
                       "Primary": 8,
-                      "Secondary": 70,
+                      "Secondary": 55,
                       "Type": 0,
                       "Status": 0,
                       "RPE": 0,
@@ -355,7 +346,7 @@
                     {
                       "Id": "4F415ED0-DEAC-43E5-BA1D-A7F073DB2938",
                       "Primary": 8,
-                      "Secondary": 70,
+                      "Secondary": 55,
                       "Type": 0,
                       "Status": 0,
                       "RPE": 0,
@@ -368,8 +359,8 @@
                     "Deleted": false,
                     "PrimaryFocusId": 1,
                     "SecondaryFocusId": 2,
-                    "MaxPrimary": 15,
-                    "MaxSecondary": 140,
+                    "MaxPrimary": 8,
+                    "MaxSecondary": 55,
                     "Equipment": {
                       "Id": "2",
                       "Name": "Double Dumbbell",
@@ -433,7 +424,7 @@
                   "SetDetails": [
                     {
                       "Id": "6D70C18F-4675-424D-91D0-6C1C92775CE3",
-                      "Primary": 10,
+                      "Primary": 7,
                       "Secondary": 0,
                       "Type": 0,
                       "Status": 0,
@@ -442,7 +433,7 @@
                     },
                     {
                       "Id": "6112B57B-60D5-42A6-94D4-DAC16A43CAB9",
-                      "Primary": 10,
+                      "Primary": 7,
                       "Secondary": 0,
                       "Type": 0,
                       "Status": 0,
@@ -451,7 +442,7 @@
                     },
                     {
                       "Id": "2AE6F9B6-49F1-47C8-8A52-C11D9EF057D0",
-                      "Primary": 10,
+                      "Primary": 7,
                       "Secondary": 0,
                       "Type": 0,
                       "Status": 0,
@@ -464,8 +455,8 @@
                     "Name": "Side-Lying Hyperextension Adductor Raise",
                     "Deleted": false,
                     "PrimaryFocusId": 1,
-                    "SecondaryFocusId": 2,
-                    "MaxPrimary": 0,
+                    "SecondaryFocusId": 0,
+                    "MaxPrimary": 7,
                     "MaxSecondary": 0,
                     "Equipment": {
                       "Id": "4",
@@ -500,8 +491,8 @@
                   "SetDetails": [
                     {
                       "Id": "7136614E-1487-47B9-9558-B9D155F9661E",
-                      "Primary": 12,
-                      "Secondary": 0,
+                      "Primary": 35,
+                      "Secondary": 20,
                       "Type": 0,
                       "Status": 0,
                       "RPE": 0,
@@ -509,8 +500,8 @@
                     },
                     {
                       "Id": "55A5F1BE-F343-403E-8C02-A7EC8F666AC1",
-                      "Primary": 12,
-                      "Secondary": 0,
+                      "Primary": 35,
+                      "Secondary": 20,
                       "Type": 0,
                       "Status": 0,
                       "RPE": 0,
@@ -518,8 +509,8 @@
                     },
                     {
                       "Id": "C3DA0086-338A-4A8A-A7D7-698E492C0FDD",
-                      "Primary": 12,
-                      "Secondary": 0,
+                      "Primary": 35,
+                      "Secondary": 20,
                       "Type": 0,
                       "Status": 0,
                       "RPE": 0,
@@ -532,11 +523,11 @@
                     "Deleted": false,
                     "PrimaryFocusId": 1,
                     "SecondaryFocusId": 2,
-                    "MaxPrimary": 0,
-                    "MaxSecondary": 0,
+                    "MaxPrimary": 35,
+                    "MaxSecondary": 20,
                     "Equipment": {
-                      "Id": "4",
-                      "Name": "Machine",
+                      "Id": "3",
+                      "Name": "Single Dumbbell",
                       "Deleted": false,
                       "IsDeletable": false
                     },
@@ -567,8 +558,8 @@
                   "SetDetails": [
                     {
                       "Id": "43753AD6-E6D8-4DE1-94A3-2E8084C4F5BE",
-                      "Primary": 15,
-                      "Secondary": 20,
+                      "Primary": 35,
+                      "Secondary": 0,
                       "Type": 0,
                       "Status": 0,
                       "RPE": 0,
@@ -576,8 +567,8 @@
                     },
                     {
                       "Id": "6BFF0C36-060F-4595-BAC5-F8FA0707AB1E",
-                      "Primary": 15,
-                      "Secondary": 20,
+                      "Primary": 35,
+                      "Secondary": 0,
                       "Type": 0,
                       "Status": 0,
                       "RPE": 0,
@@ -585,8 +576,8 @@
                     },
                     {
                       "Id": "EB8211CF-83FC-48AD-A8B5-49077C4FA39B",
-                      "Primary": 15,
-                      "Secondary": 20,
+                      "Primary": 35,
+                      "Secondary": 0,
                       "Type": 0,
                       "Status": 0,
                       "RPE": 0,
@@ -598,9 +589,9 @@
                     "Name": "Tibialis Raise",
                     "Deleted": false,
                     "PrimaryFocusId": 1,
-                    "SecondaryFocusId": 2,
-                    "MaxPrimary": 44,
-                    "MaxSecondary": 20,
+                    "SecondaryFocusId": 0,
+                    "MaxPrimary": 35,
+                    "MaxSecondary": 0,
                     "Equipment": {
                       "Id": "4",
                       "Name": "Machine",
