@@ -121,8 +121,8 @@
                   "SetDetails": [
                     {
                       "Id": "C76F50E9-921E-4927-8CEC-A2A49D5182B3",
-                      "Primary": 60,
-                      "Secondary": 0,
+                      "Primary": 2,
+                      "Secondary": 60,
                       "Type": 0,
                       "Status": 0,
                       "RPE": 0,
@@ -130,8 +130,17 @@
                     },
                     {
                       "Id": "C76F50E9-921E-4927-8CEC-A2A49D5182B3",
-                      "Primary": 60,
-                      "Secondary": 0,
+                      "Primary": 2,
+                      "Secondary": 60,
+                      "Type": 0,
+                      "Status": 0,
+                      "RPE": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "Id": "C76F50E9-921E-4927-8CEC-A2A49D5182B3",
+                      "Primary": 2,
+                      "Secondary": 60,
                       "Type": 0,
                       "Status": 0,
                       "RPE": 0,
@@ -142,10 +151,10 @@
                     "Id": "776743bc-478c-4509-a235-3b9d33e10398",
                     "Name": "Copenhagen Plank",
                     "Deleted": false,
-                    "PrimaryFocusId": 3,
-                    "SecondaryFocusId": 0,
-                    "MaxPrimary": 60,
-                    "MaxSecondary": 0,
+                    "PrimaryFocusId": 1,
+                    "SecondaryFocusId": 3,
+                    "MaxPrimary": 2,
+                    "MaxSecondary": 60,
                     "Equipment": {
                       "Id": "0",
                       "Name": "None",
@@ -179,7 +188,7 @@
                   "SetDetails": [
                     {
                       "Id": "7D7E4D5B-8697-4D2A-8736-377D9315A16A",
-                      "Primary": 35,
+                      "Primary": 70,
                       "Secondary": 20,
                       "Type": 0,
                       "Status": 0,
@@ -188,7 +197,7 @@
                     },
                     {
                       "Id": "BA340AD0-1CF5-4818-B8D5-BFE98BB1740F",
-                      "Primary": 35,
+                      "Primary": 70,
                       "Secondary": 20,
                       "Type": 0,
                       "Status": 0,
@@ -197,7 +206,7 @@
                     },
                     {
                       "Id": "687E7336-E671-4630-809C-F01D662F74A4",
-                      "Primary": 35,
+                      "Primary": 70,
                       "Secondary": 20,
                       "Type": 0,
                       "Status": 0,
@@ -211,7 +220,7 @@
                     "Deleted": false,
                     "PrimaryFocusId": 1,
                     "SecondaryFocusId": 2,
-                    "MaxPrimary": 35,
+                    "MaxPrimary": 70,
                     "MaxSecondary": 20,
                     "Equipment": {
                       "Id": "3",
@@ -491,7 +500,7 @@
                   "SetDetails": [
                     {
                       "Id": "7136614E-1487-47B9-9558-B9D155F9661E",
-                      "Primary": 35,
+                      "Primary": 70,
                       "Secondary": 20,
                       "Type": 0,
                       "Status": 0,
@@ -500,7 +509,7 @@
                     },
                     {
                       "Id": "55A5F1BE-F343-403E-8C02-A7EC8F666AC1",
-                      "Primary": 35,
+                      "Primary": 70,
                       "Secondary": 20,
                       "Type": 0,
                       "Status": 0,
@@ -509,7 +518,7 @@
                     },
                     {
                       "Id": "C3DA0086-338A-4A8A-A7D7-698E492C0FDD",
-                      "Primary": 35,
+                      "Primary": 70,
                       "Secondary": 20,
                       "Type": 0,
                       "Status": 0,
@@ -523,7 +532,7 @@
                     "Deleted": false,
                     "PrimaryFocusId": 1,
                     "SecondaryFocusId": 2,
-                    "MaxPrimary": 35,
+                    "MaxPrimary": 70,
                     "MaxSecondary": 20,
                     "Equipment": {
                       "Id": "3",
