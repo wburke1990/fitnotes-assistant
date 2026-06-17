@@ -74,7 +74,7 @@ def test_build_exercise_categories_primary_then_secondary():
     ex = build_exercise("ATG Split Squat", [SetConfig(reps=8)], MAPPINGS)
     names = [c["Name"] for c in ex["Definition"]["Categories"]]
     assert names[0] == "Quadriceps"
-    assert "Adductors" in names
+    assert "Gluteals" in names
 
 
 # ---------------------------------------------------------------------------
