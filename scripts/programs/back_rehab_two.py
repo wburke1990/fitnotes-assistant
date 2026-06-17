@@ -1,28 +1,28 @@
 #!/usr/bin/env python3
 """Generate the "Back Rehab 2" plan as a .fnw file.
 
-A time-based hip rehab circuit from a YouTube routine. Every exercise is a
-timed hold, not reps/weight, so each is built with ``focus="time"`` (durations
-are stored in seconds). Done as a circuit -- each exercise its own block, in
-order -- not as supersets.
+A time-based hip rehab circuit from a YouTube routine. Done as a circuit --
+each exercise its own block, in order -- not as supersets.
 
-Per-side moves are logged as two sets (left then right) of the per-side
-duration; whole-body holds are a single set:
+Per-side moves are logged as a single set of 2 reps (left, right) x the per-side
+hold, so they count as one group-set for volume, not two. The set carries the
+side count in Primary (reps focus) and the hold seconds in Secondary (time
+focus). Whole-body holds are a single timed-hold set (duration in seconds):
 
     Hip strengthening
-        Hip Internal Rotation   2 x 2:00   (per side)
-        Hip Airplane            2 x 2:00   (per side)
-        Side Hip Abduction      2 x 2:00   (per side)
-        Side Hip Adduction      2 x 2:00   (per side)
+        Hip Internal Rotation   1 x (2 reps x 2:00)   (per side)
+        Hip Airplane            1 x (2 reps x 2:00)   (per side)
+        Side Hip Abduction      1 x (2 reps x 2:00)   (per side)
+        Side Hip Adduction      1 x (2 reps x 2:00)   (per side)
     Core strengthening
-        Hip Flexor Lift         2 x 2:00   (per side)
-        QL Plank                2 x 2:00   (per side)
+        Hip Flexor Lift         1 x (2 reps x 2:00)   (per side)
+        QL Plank                1 x (2 reps x 2:00)   (per side)
         Plank                   1 x 4:00
         Wall Back Extension     1 x 4:00
     Hip mobility
         Wall Groin Stretch      1 x 4:00
-        90 90 Push Up           2 x 2:00   (per side)
-        Couch Stretch           2 x 2:00   (per side)
+        90 90 Push Up           1 x (2 reps x 2:00)   (per side)
+        Couch Stretch           1 x (2 reps x 2:00)   (per side)
         Elephant Walk           1 x 4:00
 
 The section headers are documentation only -- a .fnw plan has no notes field.
@@ -48,24 +48,26 @@ PLAN_NAME = "Back Rehab 2"
 
 _MINUTE = 60
 
-# Performed order: (exercise, seconds per set, number of sets). Per-side moves
-# are two sets (left, right); whole-body holds are one set.
-EXERCISES: list[tuple[str, int, int]] = [
+# Performed order: (exercise, seconds per hold, per_side). Per-side moves are
+# one set of 2 reps (left, right) x the hold; whole-body holds are one timed set.
+_SIDES = 2
+
+EXERCISES: list[tuple[str, int, bool]] = [
     # Hip strengthening
-    ("Hip Internal Rotation", 2 * _MINUTE, 2),
-    ("Hip Airplane", 2 * _MINUTE, 2),
-    ("Side Hip Abduction", 2 * _MINUTE, 2),
-    ("Side Hip Adduction", 2 * _MINUTE, 2),
+    ("Hip Internal Rotation", 2 * _MINUTE, True),
+    ("Hip Airplane", 2 * _MINUTE, True),
+    ("Side Hip Abduction", 2 * _MINUTE, True),
+    ("Side Hip Adduction", 2 * _MINUTE, True),
     # Core strengthening
-    ("Hip Flexor Lift", 2 * _MINUTE, 2),
-    ("QL Plank", 2 * _MINUTE, 2),
-    ("Plank", 4 * _MINUTE, 1),
-    ("Wall Back Extension", 4 * _MINUTE, 1),
+    ("Hip Flexor Lift", 2 * _MINUTE, True),
+    ("QL Plank", 2 * _MINUTE, True),
+    ("Plank", 4 * _MINUTE, False),
+    ("Wall Back Extension", 4 * _MINUTE, False),
     # Hip mobility
-    ("Wall Groin Stretch", 4 * _MINUTE, 1),
-    ("90 90 Push Up", 2 * _MINUTE, 2),
-    ("Couch Stretch", 2 * _MINUTE, 2),
-    ("Elephant Walk", 4 * _MINUTE, 1),
+    ("Wall Groin Stretch", 4 * _MINUTE, False),
+    ("90 90 Push Up", 2 * _MINUTE, True),
+    ("Couch Stretch", 2 * _MINUTE, True),
+    ("Elephant Walk", 4 * _MINUTE, False),
 ]
 
 _DEFAULT_OUTPUT_DIR = Path(__file__).resolve().parent.parent.parent / "plans" / "back_rehab"
@@ -80,15 +82,29 @@ def build_plan(mappings: ExerciseMapping) -> dict[str, Any]:
     Returns:
         Complete workout dict ready to write to a .fnw file.
     """
-    exercises = [
-        build_exercise(
-            name,
-            [SetConfig(reps=seconds) for _ in range(sets)],
-            mappings,
-            focus="time",
-        )
-        for name, seconds, sets in EXERCISES
-    ]
+    exercises: list[dict[str, Any]] = []
+    for name, seconds, per_side in EXERCISES:
+        if per_side:
+            # One set of 2 reps (left, right): side count in Primary (reps),
+            # hold seconds in Secondary (time). Counts as one group-set.
+            exercises.append(
+                build_exercise(
+                    name,
+                    [SetConfig(reps=_SIDES, weight=seconds)],
+                    mappings,
+                    focus="reps",
+                    secondary_focus="time",
+                ),
+            )
+        else:
+            exercises.append(
+                build_exercise(
+                    name,
+                    [SetConfig(reps=seconds)],
+                    mappings,
+                    focus="time",
+                ),
+            )
     return build_workout(PLAN_NAME, exercises)
 
 

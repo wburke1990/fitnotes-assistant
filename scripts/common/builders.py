@@ -54,10 +54,16 @@ CATEGORY_IDS: dict[str, str] = {
 
 
 # PrimaryFocusId values FitNotes understands. "reps" stores the count in a set's
-# Primary field; "time" stores the duration in *seconds* there instead (weight,
-# when present, is always the Secondary focus). 2 = weight is never a primary.
+# Primary field; "time" stores the duration in *seconds* there instead. 2 (weight)
+# is never a primary.
 Focus = Literal["reps", "time"]
 _FOCUS_IDS: dict[Focus, int] = {"reps": 1, "time": 3}
+
+# SecondaryFocusId values for the Secondary field (when present): weight (2) or a
+# duration in seconds (3). "time" lets a reps-focused move also carry a hold
+# duration -- e.g. a per-side hold logged as one set of "2 reps x 120s".
+SecondaryFocus = Literal["weight", "time"]
+_SECONDARY_FOCUS_IDS: dict[SecondaryFocus, int] = {"weight": 2, "time": 3}
 
 
 @dataclass
@@ -116,6 +122,7 @@ def build_exercise(
     mappings: ExerciseMapping,
     *,
     focus: Focus = "reps",
+    secondary_focus: SecondaryFocus = "weight",
 ) -> dict[str, Any]:
     """Build a complete exercise object from name and set configurations.
 
@@ -126,6 +133,10 @@ def build_exercise(
         focus: Primary measure for the exercise. "reps" (default) treats each
             set's ``reps`` as a rep count; "time" treats it as a duration in
             seconds (e.g. a 2-minute hold is ``SetConfig(reps=120)``).
+        secondary_focus: How to interpret the Secondary field (a set's
+            ``weight``) when it is non-zero. "weight" (default) is a load;
+            "time" is a hold duration in seconds, letting a reps-focused move
+            also carry a hold (e.g. a per-side hold as one set of 2 reps x 120s).
 
     Returns:
         Complete exercise dict in .fnw format
@@ -161,9 +172,10 @@ def build_exercise(
     max_reps = max((s.reps for s in normalized_sets), default=0)
     max_weight = max((s.weight for s in normalized_sets), default=0)
 
-    # Primary is reps or time (3); weight, when present, is the secondary focus.
+    # Primary is reps (1) or time (3); the secondary value, when present, is a
+    # weight (2) or a hold duration in seconds (3).
     primary_focus_id = _FOCUS_IDS[focus]
-    secondary_focus_id = 2 if max_weight > 0 else 0
+    secondary_focus_id = _SECONDARY_FOCUS_IDS[secondary_focus] if max_weight > 0 else 0
 
     exercise_id = _generate_uuid()
 

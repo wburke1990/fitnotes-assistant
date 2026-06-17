@@ -70,6 +70,22 @@ def test_build_exercise_secondary_focus_weight_when_loaded():
     assert ex["Definition"]["MaxSecondary"] == 50
 
 
+def test_build_exercise_time_secondary_focus():
+    # secondary_focus="time" -> SecondaryFocusId 3, seconds in the Secondary field.
+    # Used for per-side holds logged as one set of "2 reps x 120s".
+    ex = build_exercise(
+        "Side Hip Adduction",
+        [SetConfig(reps=2, weight=120)],
+        MAPPINGS,
+        secondary_focus="time",
+    )
+    assert ex["Definition"]["PrimaryFocusId"] == 1
+    assert ex["Definition"]["SecondaryFocusId"] == 3
+    assert ex["SetDetails"][0]["Primary"] == 2
+    assert ex["SetDetails"][0]["Secondary"] == 120
+    assert ex["Definition"]["MaxSecondary"] == 120
+
+
 def test_build_exercise_categories_primary_then_secondary():
     ex = build_exercise("ATG Split Squat", [SetConfig(reps=8)], MAPPINGS)
     names = [c["Name"] for c in ex["Definition"]["Categories"]]

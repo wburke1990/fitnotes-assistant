@@ -40,24 +40,28 @@ def test_exercise_order():
     assert names == [name for name, _, _ in EXERCISES]
 
 
-def test_every_exercise_is_time_focused():
-    # Whole routine is timed holds: Primary measure is time, no weight.
+def test_every_move_is_one_set():
+    # Each move is a single set: per-side moves fold L/R into one set of 2 reps
+    # so they count as one group-set, not two; whole-body holds are one hold.
     _, exercises = _exercises()
-    for ex in exercises:
-        assert ex["Definition"]["PrimaryFocusId"] == 3
-        assert ex["Definition"]["SecondaryFocusId"] == 0
+    assert all(len(ex["SetDetails"]) == 1 for ex in exercises)
 
 
-def test_set_counts_match_sides():
-    # Per-side moves are two sets (L/R); whole-body holds are one.
+def test_per_side_and_whole_body_encoding():
+    # Per-side: reps focus (Primary=2 sides) + time secondary (seconds held).
+    # Whole-body: time focus (Primary=seconds), no secondary.
     _, exercises = _exercises()
-    counts = {ex["Definition"]["Name"]: len(ex["SetDetails"]) for ex in exercises}
-    assert counts == {name: sets for name, _, sets in EXERCISES}
-
-
-def test_durations_in_seconds():
-    # Primary holds the per-set duration in seconds.
-    _, exercises = _exercises()
-    for ex, (_, seconds, _) in zip(exercises, EXERCISES, strict=True):
-        assert all(sd["Primary"] == seconds for sd in ex["SetDetails"])
-        assert all(sd["Secondary"] == 0 for sd in ex["SetDetails"])
+    by_name = {ex["Definition"]["Name"]: ex for ex in exercises}
+    for name, seconds, per_side in EXERCISES:
+        ex = by_name[name]
+        sd = ex["SetDetails"][0]
+        if per_side:
+            assert ex["Definition"]["PrimaryFocusId"] == 1
+            assert ex["Definition"]["SecondaryFocusId"] == 3
+            assert sd["Primary"] == 2
+            assert sd["Secondary"] == seconds
+        else:
+            assert ex["Definition"]["PrimaryFocusId"] == 3
+            assert ex["Definition"]["SecondaryFocusId"] == 0
+            assert sd["Primary"] == seconds
+            assert sd["Secondary"] == 0
