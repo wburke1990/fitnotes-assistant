@@ -16,7 +16,7 @@ API so you don't have to re-derive them from the code each session.
 | Function | What it makes |
 | --- | --- |
 | `SetConfig(reps, weight=0, rpe=0)` | one set |
-| `build_exercise(name, sets, mappings, *, focus="reps")` | one exercise; `sets` is a list of `SetConfig` (or dicts). **One list item = one set.** Pass `focus="time"` for timed holds (each set's `reps` is then a duration in *seconds*). |
+| `build_exercise(name, sets, mappings, *, focus="reps", secondary_focus="weight")` | one exercise; `sets` is a list of `SetConfig` (or dicts). **One list item = one set.** Pass `focus="time"` for timed holds (each set's `reps` is then a duration in *seconds*). Pass `secondary_focus="time"` to store a hold duration (seconds) in the Secondary field of a reps-focused move — see per-side holds below. |
 | `build_superset(exercises)` | one superset group from a list of exercises |
 | `build_workout(name, exercises, *, supersets=False)` | whole workout; `False` = each exercise its own superset, `True` = all in one superset |
 | `build_workout_from_supersets(name, supersets)` | whole workout from **multiple distinct** pre-built supersets (use this when a plan has more than one superset group) |
@@ -49,6 +49,15 @@ export) with `jq`.
   example (a timed hip-rehab circuit). Verified against a real FitNotes import:
   the holds display as `M:SS`.
 - Number of sets = number of items in the `SetDetails` list.
+- **Per-side / unilateral moves count once.** `calculate_weekly_volume`
+  (`common.calculations`) tallies *sets* (`len(SetDetails)`), never reps, so a
+  per-side hold logged as two sets (left, then right) double-counts the muscle
+  group. Encode it as **one** set of 2 reps × the hold instead:
+  `SetConfig(reps=2, weight=seconds)` with `focus="reps", secondary_focus="time"`
+  (Primary = 2 sides, `SecondaryFocusId` 3 carries the seconds). `back_rehab_two.py`
+  does this for its hip holds; Copenhagen Plank in `Back Rehab 3.fnw` is the same
+  pattern. The same caution applies to reps/weight unilateral lifts — decide up
+  front whether a left+right pair is one group-set or two.
 
 ### Gotcha: no notes field
 
