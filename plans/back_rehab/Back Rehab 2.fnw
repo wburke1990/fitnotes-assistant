@@ -4,28 +4,28 @@
   "Type": "FNWorkoutDefinitionDTO",
   "Data": [
     {
-      "Id": "C6E03AB4-3D44-4E63-B3F2-F1CF0871EA51",
+      "Id": "686C3AAB-3559-4E7E-AE0B-8A45480055A6",
       "Name": "Back Rehab 2",
       "Deleted": false,
       "SortIndex": 0,
       "Workouts": [
         {
-          "Id": "D0F2D12F-50DB-4990-B7A8-5D519793CDF6",
+          "Id": "A5BA7DF6-C8A1-4431-84E4-D8A6389931F3",
           "IsCurrent": false,
           "IsEveryday": true,
           "Measurements": [],
           "SuperSets": [
             {
-              "Id": "DC02E5B2-DD09-4926-98A2-0927DF158272",
+              "Id": "46DAFC47-58DC-43E0-A43A-7996E544A8DC",
               "Exercises": [
                 {
-                  "Id": "6E69D014-7835-4190-8698-FE6512BFAE97",
+                  "Id": "CFC69CFD-DD83-4768-B341-D10748D57D69",
                   "RestTime": 0,
                   "Rules": [],
                   "WarmupSetDetails": [],
                   "SetDetails": [
                     {
-                      "Id": "FEF07AFD-7F1E-440E-B871-B5CCAF89C7A2",
+                      "Id": "5E23CF05-3E3E-42A8-A024-F1A20BD6CE23",
                       "Primary": 2,
                       "Secondary": 120,
                       "RPE": 0,
@@ -35,7 +35,7 @@
                     }
                   ],
                   "Definition": {
-                    "Id": "A44769D0-078D-4C3D-8F09-E3545272F56B",
+                    "Id": "03959FED-CC6B-43C3-8090-9E777DA09242",
                     "Name": "Hip Internal Rotation",
                     "Deleted": false,
                     "Equipment": {
@@ -102,22 +102,22 @@
           ]
         },
         {
-          "Id": "59E5E116-A478-4866-B285-7C218C4F22B0",
+          "Id": "F66A0BB7-10B3-4FEF-8B61-2AE88492279F",
           "IsCurrent": false,
           "IsEveryday": true,
           "Measurements": [],
           "SuperSets": [
             {
-              "Id": "3D6ABA46-B94A-41F4-B37D-4E2B5A47A3A1",
+              "Id": "C34CA3D1-0897-4356-BB27-660AFC86A5C3",
               "Exercises": [
                 {
-                  "Id": "F55F1172-8507-492B-8D22-72412EA06CA8",
+                  "Id": "84BD611A-B1CC-4468-A88F-95EA334B38F9",
                   "RestTime": 0,
                   "Rules": [],
                   "WarmupSetDetails": [],
                   "SetDetails": [
                     {
-                      "Id": "15061FF1-53C6-425B-8C8F-290EEE425E65",
+                      "Id": "72F77B63-CF99-4E04-9732-10682FF91341",
                       "Primary": 2,
                       "Secondary": 120,
                       "RPE": 0,
@@ -127,7 +127,7 @@
                     }
                   ],
                   "Definition": {
-                    "Id": "0016D8C7-9A66-4846-BDC4-C811442BD39F",
+                    "Id": "9C878706-65C8-472E-8925-1115EFCD333A",
                     "Name": "Hip Airplane",
                     "Deleted": false,
                     "Equipment": {
@@ -179,22 +179,22 @@
           ]
         },
         {
-          "Id": "C5FC2A74-EE86-4C69-8738-6A60E5C71D29",
+          "Id": "91A8F2E6-70FD-4A47-ADC5-ED21F02FBFD6",
           "IsCurrent": false,
           "IsEveryday": true,
           "Measurements": [],
           "SuperSets": [
             {
-              "Id": "D9AA833A-AA36-4795-A659-F0C12C9A9174",
+              "Id": "7897C929-A3A9-4AD6-8742-0569C15DD8F4",
               "Exercises": [
                 {
-                  "Id": "49A19041-CE1A-41A3-AD43-478C6CDCDF04",
+                  "Id": "7C448EEF-1056-4C6F-85BF-D93BEEC8EC6C",
                   "RestTime": 0,
                   "Rules": [],
                   "WarmupSetDetails": [],
                   "SetDetails": [
                     {
-                      "Id": "E799C909-A54B-42B2-AE17-F367F8EC75AF",
+                      "Id": "33C65E79-4261-4D8B-B44F-35405AA5D0EC",
                       "Primary": 2,
                       "Secondary": 120,
                       "RPE": 0,
@@ -204,7 +204,7 @@
                     }
                   ],
                   "Definition": {
-                    "Id": "6F9B22D5-DA71-44E9-9B76-55ED074CA091",
+                    "Id": "E8AFAD50-ABBA-4B61-BD32-3BCDFD18E4C5",
                     "Name": "Side Hip Abduction",
                     "Deleted": false,
                     "Equipment": {
@@ -256,22 +256,22 @@
           ]
         },
         {
-          "Id": "0C5CE96F-959B-4A15-92E5-73CBA830BDE3",
+          "Id": "A0DA7FAE-6AFD-42B1-9467-276104D2D992",
           "IsCurrent": false,
           "IsEveryday": true,
           "Measurements": [],
           "SuperSets": [
             {
-              "Id": "6AC4C105-29FD-4418-9920-66971D557798",
+              "Id": "30E0361A-2624-4EA8-AE30-0A2CEA6B57D8",
               "Exercises": [
                 {
-                  "Id": "AC3066EF-D9BF-427B-86BB-C99ADAD8EF2A",
+                  "Id": "9400739D-D74F-45D7-9E89-57460578C91E",
                   "RestTime": 0,
                   "Rules": [],
                   "WarmupSetDetails": [],
                   "SetDetails": [
                     {
-                      "Id": "65559B06-7FEC-4D45-806F-294F0B6B9C6D",
+                      "Id": "C6FCD9DF-532D-4A91-8836-CFD6FCA71E79",
                       "Primary": 2,
                       "Secondary": 120,
                       "RPE": 0,
@@ -281,7 +281,7 @@
                     }
                   ],
                   "Definition": {
-                    "Id": "F841B3FA-BDBD-40CA-B6FA-88353034F091",
+                    "Id": "2ED443B9-ECA0-4B2A-818F-E120E80A90B9",
                     "Name": "Side Hip Adduction",
                     "Deleted": false,
                     "Equipment": {
@@ -318,22 +318,22 @@
           ]
         },
         {
-          "Id": "BA5BA3E5-A9CE-4ED2-967D-7B012734D4CF",
+          "Id": "FB44D6B2-D34B-4D17-A637-0D395C2A8CAE",
           "IsCurrent": false,
           "IsEveryday": true,
           "Measurements": [],
           "SuperSets": [
             {
-              "Id": "6DC05BF2-347B-48EA-92A7-61BF4EDE0A39",
+              "Id": "8486A37F-2D9C-4065-81C0-6270C555ADE1",
               "Exercises": [
                 {
-                  "Id": "E5826279-F9B2-405A-9306-B2F72FE75E4C",
+                  "Id": "52F75C5C-B0AF-43FD-8130-66EC131F3478",
                   "RestTime": 0,
                   "Rules": [],
                   "WarmupSetDetails": [],
                   "SetDetails": [
                     {
-                      "Id": "2400ADC7-8723-4C67-9529-B1A50628EA01",
+                      "Id": "21AC981D-81C4-4832-9C54-2C193E4E05DE",
                       "Primary": 2,
                       "Secondary": 120,
                       "RPE": 0,
@@ -343,7 +343,7 @@
                     }
                   ],
                   "Definition": {
-                    "Id": "08B29392-3BA2-455A-9A13-CF008CE9E4DE",
+                    "Id": "ADC381B3-DC35-4C96-9FA4-245762F28525",
                     "Name": "Hip Flexor Lift",
                     "Deleted": false,
                     "Equipment": {
@@ -380,22 +380,22 @@
           ]
         },
         {
-          "Id": "CFC9D989-7C6E-45F3-BA85-06BD5976BD56",
+          "Id": "C632D832-A7D3-4DDB-83F3-F19AE58599BB",
           "IsCurrent": false,
           "IsEveryday": true,
           "Measurements": [],
           "SuperSets": [
             {
-              "Id": "D9B883D2-5357-4F7A-A295-6ECF87436EBD",
+              "Id": "7A54E958-AD40-450C-8BF0-22EADF7826D6",
               "Exercises": [
                 {
-                  "Id": "D7BF5031-B183-424C-9E99-053B68B93889",
+                  "Id": "E3F03743-EEB2-4AD6-AFA3-7BD706D0F9C3",
                   "RestTime": 0,
                   "Rules": [],
                   "WarmupSetDetails": [],
                   "SetDetails": [
                     {
-                      "Id": "C497D5CD-0DD5-471E-8AE4-6F567A86149B",
+                      "Id": "B5F92FBB-43FD-446A-AD3E-9F7754F5FBF9",
                       "Primary": 2,
                       "Secondary": 120,
                       "RPE": 0,
@@ -405,7 +405,7 @@
                     }
                   ],
                   "Definition": {
-                    "Id": "AB30CC8C-584A-4FA9-B64D-B4D3380FF032",
+                    "Id": "D7E05CC5-B5D9-478D-8E3B-F2629CF0CD93",
                     "Name": "QL Plank",
                     "Deleted": false,
                     "Equipment": {
@@ -472,22 +472,22 @@
           ]
         },
         {
-          "Id": "C6D53B2E-280F-4197-8FFE-0BDA17B8E81C",
+          "Id": "FFCA7955-155F-47D5-B77B-46F489ED9846",
           "IsCurrent": false,
           "IsEveryday": true,
           "Measurements": [],
           "SuperSets": [
             {
-              "Id": "397E0314-6CDA-4A6B-9AC9-4D574E61B539",
+              "Id": "F5320595-51D7-4307-BA24-FC4C234B0C4A",
               "Exercises": [
                 {
-                  "Id": "9DE5D7B6-F791-4BA6-A3E7-B61F609BA98E",
+                  "Id": "F9F66BAC-8CE9-4404-93C8-E61051942784",
                   "RestTime": 0,
                   "Rules": [],
                   "WarmupSetDetails": [],
                   "SetDetails": [
                     {
-                      "Id": "79A56807-A83F-4661-8C97-24F31C286393",
+                      "Id": "2654E701-D24C-4886-9973-AD42C24901C5",
                       "Primary": 240,
                       "Secondary": 0,
                       "RPE": 0,
@@ -497,7 +497,7 @@
                     }
                   ],
                   "Definition": {
-                    "Id": "2EC3A428-5EA3-4467-99A2-7A11612BB6E4",
+                    "Id": "F7BA3EB0-CD08-401A-A567-C53C32699349",
                     "Name": "Plank",
                     "Deleted": false,
                     "Equipment": {
@@ -579,22 +579,22 @@
           ]
         },
         {
-          "Id": "3C96B418-B5FF-42E9-A308-D48E6DD6D4D8",
+          "Id": "F65EEB1D-0440-4C38-AD3A-18669997369E",
           "IsCurrent": false,
           "IsEveryday": true,
           "Measurements": [],
           "SuperSets": [
             {
-              "Id": "A6C77CB1-F3BE-4763-A73E-9D881755BBB7",
+              "Id": "740C3528-908D-4855-88A0-EE5C7EAA69DA",
               "Exercises": [
                 {
-                  "Id": "CD00D146-FAD4-4641-8407-B95AF809F6AB",
+                  "Id": "D3D82402-DFC3-4B26-A838-84D8AA6BC6FC",
                   "RestTime": 0,
                   "Rules": [],
                   "WarmupSetDetails": [],
                   "SetDetails": [
                     {
-                      "Id": "71FA9156-9721-49E8-BE88-18284115D0F2",
+                      "Id": "2D41374D-70B0-4562-90DE-C9A2B79BB961",
                       "Primary": 240,
                       "Secondary": 0,
                       "RPE": 0,
@@ -604,7 +604,7 @@
                     }
                   ],
                   "Definition": {
-                    "Id": "4EF88F10-D7C9-4932-B685-70278B5031B9",
+                    "Id": "BAD19296-240E-4694-9112-6A1DF23F306B",
                     "Name": "Wall Back Extension",
                     "Deleted": false,
                     "Equipment": {
@@ -641,22 +641,22 @@
           ]
         },
         {
-          "Id": "8B253D6A-E50E-4B73-BB9E-70C0BD4F8E35",
+          "Id": "142F566B-4B3D-4353-97FD-DFC5C7FD435B",
           "IsCurrent": false,
           "IsEveryday": true,
           "Measurements": [],
           "SuperSets": [
             {
-              "Id": "842314E8-56EC-47FB-A3D9-161AC55C56FC",
+              "Id": "8FA9367D-33FB-451D-AEF8-8A620CFDE854",
               "Exercises": [
                 {
-                  "Id": "AD946777-E380-418F-9B1A-CDB95D1B3B96",
+                  "Id": "0876A8E2-8957-4E69-AB53-88BD02A43A1C",
                   "RestTime": 0,
                   "Rules": [],
                   "WarmupSetDetails": [],
                   "SetDetails": [
                     {
-                      "Id": "7E71C7B1-3B6A-473B-8E6C-0BDA29FBDCE9",
+                      "Id": "792487B8-7E81-48EB-B7A3-22A7B464C099",
                       "Primary": 240,
                       "Secondary": 0,
                       "RPE": 0,
@@ -666,7 +666,7 @@
                     }
                   ],
                   "Definition": {
-                    "Id": "4F8F26A5-D7CE-4017-85CE-732FD95DC7EE",
+                    "Id": "62BC67A6-0852-4FBB-A098-C21047067C26",
                     "Name": "Wall Groin Stretch",
                     "Deleted": false,
                     "Equipment": {
@@ -675,7 +675,23 @@
                       "Deleted": false,
                       "IsDeletable": false
                     },
-                    "Categories": [],
+                    "Categories": [
+                      {
+                        "Name": "Adductors",
+                        "Id": "6",
+                        "Color": {
+                          "Alpha": 1,
+                          "IsPro": false,
+                          "IsDeletable": false,
+                          "Deleted": false,
+                          "Green": 217,
+                          "Red": 12,
+                          "Name": "Green",
+                          "Blue": 88,
+                          "Id": "2"
+                        }
+                      }
+                    ],
                     "MaxPrimary": 240,
                     "MaxSecondary": 0,
                     "PrimaryFocusId": 3,
@@ -687,22 +703,22 @@
           ]
         },
         {
-          "Id": "C59D5975-A428-4D0E-974F-C01AAF888258",
+          "Id": "06B4D379-0E18-4498-A514-CF76C9E7FE05",
           "IsCurrent": false,
           "IsEveryday": true,
           "Measurements": [],
           "SuperSets": [
             {
-              "Id": "F5780DED-7920-4213-8394-6D1E7AF80A3A",
+              "Id": "99E5A014-A216-46C7-B2AE-E691FA209B39",
               "Exercises": [
                 {
-                  "Id": "740A17C1-B76F-42C4-A0D0-C41252AD6255",
+                  "Id": "DA0089AE-4282-4A34-844B-C8170B81EDC1",
                   "RestTime": 0,
                   "Rules": [],
                   "WarmupSetDetails": [],
                   "SetDetails": [
                     {
-                      "Id": "15F345C7-0114-41D7-AB6B-6F007BD44FAB",
+                      "Id": "E85D2EB3-41E8-4460-9EA2-9F2B0FE5F5CC",
                       "Primary": 2,
                       "Secondary": 120,
                       "RPE": 0,
@@ -712,7 +728,7 @@
                     }
                   ],
                   "Definition": {
-                    "Id": "BECE2B53-4B23-485D-A173-7769405F6EC1",
+                    "Id": "B12132BC-18FC-44B5-8450-1B5184A31A70",
                     "Name": "90 90 Push Up",
                     "Deleted": false,
                     "Equipment": {
@@ -764,22 +780,22 @@
           ]
         },
         {
-          "Id": "EF1C18BA-BD61-4687-A357-54E22B8AA591",
+          "Id": "62BDFE1D-DD08-41F2-9B81-98EA52B4DDC4",
           "IsCurrent": false,
           "IsEveryday": true,
           "Measurements": [],
           "SuperSets": [
             {
-              "Id": "25847811-4B29-463D-BAEA-30A7EF96B846",
+              "Id": "E2D53B69-B2C0-4025-8502-E1703843727D",
               "Exercises": [
                 {
-                  "Id": "FAFE8DA5-762C-4DE8-84DC-62E5DD870C7D",
+                  "Id": "FA1EDE12-3DFC-40A2-83EF-DA13F42E5970",
                   "RestTime": 0,
                   "Rules": [],
                   "WarmupSetDetails": [],
                   "SetDetails": [
                     {
-                      "Id": "F638BB27-149B-48E5-AED1-44F08D6298AC",
+                      "Id": "7660359B-9F5A-4028-BEE6-FADAE551E7D0",
                       "Primary": 2,
                       "Secondary": 120,
                       "RPE": 0,
@@ -789,7 +805,7 @@
                     }
                   ],
                   "Definition": {
-                    "Id": "D8905053-6911-4CA8-98D5-08E22869A7C3",
+                    "Id": "A8AB3837-ACAE-4CCF-B2EE-C648BE095D6D",
                     "Name": "Couch Stretch",
                     "Deleted": false,
                     "Equipment": {
@@ -841,22 +857,22 @@
           ]
         },
         {
-          "Id": "73FF9B0A-0C2F-4B99-9C02-DFB8F4C102BF",
+          "Id": "58B7EBC4-D3EC-4F4F-9E2F-30D220570963",
           "IsCurrent": false,
           "IsEveryday": true,
           "Measurements": [],
           "SuperSets": [
             {
-              "Id": "83C18A86-AF5E-4858-8CFE-7ECF456BC8F3",
+              "Id": "7C6FE64E-0221-4F75-A04A-6DDC0A664857",
               "Exercises": [
                 {
-                  "Id": "76F94CB2-7900-4043-A73A-79063EE06D87",
+                  "Id": "C85C0180-6639-41CC-8C98-7A66911823A4",
                   "RestTime": 0,
                   "Rules": [],
                   "WarmupSetDetails": [],
                   "SetDetails": [
                     {
-                      "Id": "648A309A-9819-4993-BA9E-E609CF0B7366",
+                      "Id": "0E30BC7F-110E-4CAA-85EE-46FAB400FCF0",
                       "Primary": 240,
                       "Secondary": 0,
                       "RPE": 0,
@@ -866,7 +882,7 @@
                     }
                   ],
                   "Definition": {
-                    "Id": "7F2AEA89-C148-44FE-B7F4-3D1CE4A554A7",
+                    "Id": "62549518-9949-4AA7-A707-FA5B2013EAF3",
                     "Name": "Elephant Walk",
                     "Deleted": false,
                     "Equipment": {
