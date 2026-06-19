@@ -66,7 +66,7 @@ def test_weekly_set_counts():
     # per Tue/Thu session (2 sets each) -> 4 total.
     assert counts["Copenhagen Plank"] == 4
     assert counts["Standing Calf Raise"] == 10
-    assert counts["Tibialis Raise"] == 6
+    assert counts["Tibialis Raise"] == 10
     assert counts["Yoga"] == 1
 
 
@@ -79,6 +79,29 @@ def test_copenhagen_and_adductor_never_share_a_superset():
             assert not (
                 "Copenhagen Plank" in names and "Side-Lying Hyperextension Adductor Raise" in names
             ), f"{day.suffix}: Copenhagen and adductor raise share a superset"
+
+
+def test_ss3_adductor_before_hyperextension():
+    # In Tuesday & Thursday SS3, the Side-Lying Hyperextension Adductor Raise
+    # (heavier / less stable) must be sequenced before the regular
+    # Hyperextension for safety.
+    for day in DAYS[1:]:
+        ss3 = _flatten(build_day(day, MAPPINGS))[2]
+        names = [ex["Definition"]["Name"] for ex in ss3["Exercises"]]
+        assert "Side-Lying Hyperextension Adductor Raise" in names
+        assert "Hyperextension" in names
+        assert names.index("Side-Lying Hyperextension Adductor Raise") < names.index(
+            "Hyperextension"
+        ), f"{day.suffix}: adductor raise must come before hyperextension in SS3"
+
+
+def test_calf_and_copenhagen_map_forearms_secondary():
+    # The global registry change adds Forearms as a secondary muscle on both
+    # the Standing Calf Raise and the (weighted) Copenhagen Plank.
+    for name in ("Standing Calf Raise", "Copenhagen Plank"):
+        assert "Forearms" in MAPPINGS.secondary_muscles[name], (
+            f"{name} should map Forearms as a secondary muscle"
+        )
 
 
 def test_prehab_drills_one_set_each():
@@ -172,4 +195,7 @@ def test_key_muscle_volumes_in_range():
     assert 16 <= vol["Calves"] <= 19
     assert 10 <= vol["Adductors"] <= 14
     assert 13 <= vol["Back (Lower)"] <= 16
-    assert vol["Tibialis"] == 6
+    assert vol["Tibialis"] == 10
+    # Forearms is a secondary on the grip-heavy RDL (9 sets), Standing Calf
+    # Raise (10) and Copenhagen Plank (4): (9 + 10 + 4) * 0.5 = 11.5.
+    assert vol["Forearms"] == 11.5
