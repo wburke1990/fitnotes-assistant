@@ -143,19 +143,17 @@ def _days() -> list[Day]:
             [
                 _RDL,
                 _COPENHAGEN,
-                _ADDUCTOR,
                 _CALF,
                 _per_side_hold("Hip Internal Rotation", 2 * _MINUTE),
             ],
             [
                 _NORDIC,
+                _ADDUCTOR,
                 _TIB,
-                _CALF,
                 _per_side_hold("Hip Airplane", 2 * _MINUTE),
             ],
             [
                 _HYPER,
-                _COPENHAGEN,
                 _ADDUCTOR,
                 _CALF,
                 _hold("Plank", 4 * _MINUTE),
@@ -168,19 +166,17 @@ def _days() -> list[Day]:
             [
                 _RDL,
                 _COPENHAGEN,
-                _ADDUCTOR,
-                _TIB,
+                _CALF,
                 _per_side_hold("Side Hip Abduction", 2 * _MINUTE),
             ],
             [
                 _NORDIC,
-                _CALF,
+                _ADDUCTOR,
                 _TIB,
                 _hold("Wall Back Extension", 4 * _MINUTE),
             ],
             [
                 _HYPER,
-                _COPENHAGEN,
                 _ADDUCTOR,
                 _CALF,
                 _per_side_hold("QL Plank", 2 * _MINUTE),

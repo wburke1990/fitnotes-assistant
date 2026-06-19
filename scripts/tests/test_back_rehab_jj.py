@@ -62,10 +62,23 @@ def test_weekly_set_counts():
     # 4 working sets + 2 warm-up sets (bodyweight + empty bar) = 6.
     assert counts["ATG Split Squat"] == 6
     assert counts["Side-Lying Hyperextension Adductor Raise"] == 8
-    assert counts["Copenhagen Plank"] == 8
-    assert counts["Standing Calf Raise"] == 12
-    assert counts["Tibialis Raise"] == 8
+    # Copenhagen is kept out of the adductor supersets, so it appears only once
+    # per Tue/Thu session (2 sets each) -> 4 total.
+    assert counts["Copenhagen Plank"] == 4
+    assert counts["Standing Calf Raise"] == 10
+    assert counts["Tibialis Raise"] == 6
     assert counts["Yoga"] == 1
+
+
+def test_copenhagen_and_adductor_never_share_a_superset():
+    # Copenhagen Plank and the adductor raise are both adductor movements; they
+    # must never sit in the same superset on Tuesday or Thursday.
+    for day in DAYS[1:]:
+        for ss in _flatten(build_day(day, MAPPINGS)):
+            names = {ex["Definition"]["Name"] for ex in ss["Exercises"]}
+            assert not (
+                "Copenhagen Plank" in names and "Side-Lying Hyperextension Adductor Raise" in names
+            ), f"{day.suffix}: Copenhagen and adductor raise share a superset"
 
 
 def test_prehab_drills_one_set_each():
@@ -156,7 +169,7 @@ def test_new_exercises_registered():
 def test_key_muscle_volumes_in_range():
     vol = calculate_weekly_volume(list(build_all(MAPPINGS).values()))
     assert 20 <= vol["Hamstrings"] <= 25
-    assert 18 <= vol["Calves"] <= 21
-    assert 14 <= vol["Adductors"] <= 18
+    assert 16 <= vol["Calves"] <= 19
+    assert 10 <= vol["Adductors"] <= 14
     assert 13 <= vol["Back (Lower)"] <= 16
-    assert vol["Tibialis"] == 8
+    assert vol["Tibialis"] == 6
