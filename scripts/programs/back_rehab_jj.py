@@ -140,22 +140,28 @@ def _days() -> list[Day]:
     tuesday = Day(
         "Tuesday",
         [
+            # SS1: Tibialis sits next to the grip-heavy RDL (grip relief);
+            # Copenhagen stays here, adductor raise stays out.
             [
                 _RDL,
                 _COPENHAGEN,
-                _CALF,
+                _TIB,
                 _per_side_hold("Hip Internal Rotation", 2 * _MINUTE),
             ],
+            # SS2: calf moves here alongside the adductor raise.
             [
                 _NORDIC,
                 _ADDUCTOR,
-                _TIB,
+                _CALF,
                 _per_side_hold("Hip Airplane", 2 * _MINUTE),
             ],
+            # SS3: adductor raise listed BEFORE the regular hyperextension
+            # (heavier/less-stable movement first); tibialis added here too.
             [
-                _HYPER,
                 _ADDUCTOR,
+                _HYPER,
                 _CALF,
+                _TIB,
                 _hold("Plank", 4 * _MINUTE),
             ],
         ],
@@ -163,22 +169,28 @@ def _days() -> list[Day]:
     thursday = Day(
         "Thursday",
         [
+            # SS1: Tibialis sits next to the grip-heavy RDL (grip relief);
+            # Copenhagen stays here, adductor raise stays out.
             [
                 _RDL,
                 _COPENHAGEN,
-                _CALF,
+                _TIB,
                 _per_side_hold("Side Hip Abduction", 2 * _MINUTE),
             ],
+            # SS2: calf moves here alongside the adductor raise.
             [
                 _NORDIC,
                 _ADDUCTOR,
-                _TIB,
+                _CALF,
                 _hold("Wall Back Extension", 4 * _MINUTE),
             ],
+            # SS3: adductor raise listed BEFORE the regular hyperextension
+            # (heavier/less-stable movement first); tibialis added here too.
             [
-                _HYPER,
                 _ADDUCTOR,
+                _HYPER,
                 _CALF,
+                _TIB,
                 _per_side_hold("QL Plank", 2 * _MINUTE),
             ],
         ],
