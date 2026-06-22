@@ -66,7 +66,9 @@ def test_weekly_set_counts():
     # per Tue/Thu session (2 sets each) -> 4 total.
     assert counts["Copenhagen Plank"] == 4
     assert counts["Standing Calf Raise"] == 10
-    assert counts["Tibialis Raise"] == 10
+    # Sunday SS3 Tibialis went from 2 -> 3 sets, so weekly total is now 11.
+    assert counts["Tibialis Raise"] == 11
+    assert counts["Couch Stretch"] == 2
     assert counts["Yoga"] == 1
 
 
@@ -119,14 +121,29 @@ def test_prehab_drills_one_set_each():
 
 def test_atg_split_squat_warmup_loads():
     sunday = build_day(DAYS[0], MAPPINGS)
+    # The two warm-up sets now live in a single ATG entry (SS2), so the
+    # distinct loads are gathered across every set of every ATG entry.
     weights = sorted(
-        ex["SetDetails"][0]["Secondary"]
-        for ss in _flatten(sunday)
-        for ex in ss["Exercises"]
-        if ex["Definition"]["Name"] == "ATG Split Squat"
+        {
+            sd["Secondary"]
+            for ss in _flatten(sunday)
+            for ex in ss["Exercises"]
+            if ex["Definition"]["Name"] == "ATG Split Squat"
+            for sd in ex["SetDetails"]
+        }
     )
     # Bodyweight, empty bar, working sets.
     assert weights == [0, 45, 70]
+
+
+def test_atg_warmup_is_one_entry_with_two_sets():
+    # The bodyweight + empty-bar warm-up sets are merged into ONE ATG entry in
+    # SS2 with two sets [0, 45]; the working sets (70) remain a separate entry.
+    sunday = build_day(DAYS[0], MAPPINGS)
+    ss2 = _flatten(sunday)[1]
+    atg = [ex for ex in ss2["Exercises"] if ex["Definition"]["Name"] == "ATG Split Squat"]
+    assert len(atg) == 1
+    assert [sd["Secondary"] for sd in atg[0]["SetDetails"]] == [0, 45]
 
 
 def test_weighted_copenhagen_preserves_load():
@@ -154,9 +171,10 @@ def test_couch_stretch_is_per_side_timed():
         for ex in ss["Exercises"]
         if ex["Definition"]["Name"] == "Couch Stretch"
     )
-    # 2 sides x 120 seconds, time carried in the Secondary field (focus 3).
-    assert couch["SetDetails"][0]["Primary"] == 2
-    assert couch["SetDetails"][0]["Secondary"] == 120
+    # 2 sets, each 2 sides x 120 seconds, time carried in the Secondary field.
+    assert len(couch["SetDetails"]) == 2
+    assert all(sd["Primary"] == 2 for sd in couch["SetDetails"])
+    assert all(sd["Secondary"] == 120 for sd in couch["SetDetails"])
     assert couch["Definition"]["SecondaryFocusId"] == 3
 
 
@@ -170,6 +188,16 @@ def test_yoga_is_timed_hold():
     )
     assert yoga["Definition"]["PrimaryFocusId"] == 3
     assert yoga["SetDetails"][0]["Primary"] == 120
+
+
+def test_yoga_is_last_in_ss1_and_absent_from_ss2():
+    # Yoga moved into SS1 as the final entry (right after the last RDL set) and
+    # is no longer present in SS2.
+    sunday = _flatten(build_day(DAYS[0], MAPPINGS))
+    ss1_names = [ex["Definition"]["Name"] for ex in sunday[0]["Exercises"]]
+    ss2_names = [ex["Definition"]["Name"] for ex in sunday[1]["Exercises"]]
+    assert ss1_names[-1] == "Yoga"
+    assert "Yoga" not in ss2_names
 
 
 def test_yoga_resolves_in_mappings():
@@ -195,7 +223,7 @@ def test_key_muscle_volumes_in_range():
     assert 16 <= vol["Calves"] <= 19
     assert 10 <= vol["Adductors"] <= 14
     assert 13 <= vol["Back (Lower)"] <= 16
-    assert vol["Tibialis"] == 10
+    assert vol["Tibialis"] == 11
     # Forearms is a secondary on the grip-heavy RDL (9 sets), Standing Calf
     # Raise (10) and Copenhagen Plank (4): (9 + 10 + 4) * 0.5 = 11.5.
     assert vol["Forearms"] == 11.5

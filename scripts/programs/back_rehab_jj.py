@@ -122,18 +122,36 @@ def _days() -> list[Day]:
     sunday = Day(
         "Sunday",
         [
-            [_RDL, _COUCH],
+            # SS1: Couch Stretch gets 2 sets (full quad prep, interspersed
+            # between RDL sets); Yoga moves here as the last entry (after the
+            # final RDL set).
+            [
+                _RDL,
+                Move(
+                    "Couch Stretch",
+                    [SetConfig(reps=_SIDES, weight=2 * _MINUTE) for _ in range(2)],
+                    focus="reps",
+                    secondary_focus="time",
+                ),
+                _hold("Yoga", 2 * _MINUTE),
+            ],
+            # SS2: the two ATG warm-up sets merge into one exercise with two
+            # sets (bodyweight, then empty bar) so they spread across the
+            # Nordic rounds.
             [
                 _NORDIC,
-                _hold("Yoga", 2 * _MINUTE),
-                _reps("ATG Split Squat", reps=12, weight=0, count=1),
-                _reps("ATG Split Squat", reps=12, weight=45, count=1),
+                Move(
+                    "ATG Split Squat",
+                    [SetConfig(reps=12, weight=0), SetConfig(reps=12, weight=45)],
+                ),
                 _CALF,
             ],
+            # SS3: Tibialis bumped to 3 sets (more rest before the split-squat
+            # working sets).
             [
                 _HYPER,
                 _reps("ATG Split Squat", reps=12, weight=70, count=4),
-                _TIB,
+                _reps("Tibialis Raise", reps=35, weight=0, count=3),
             ],
         ],
     )
