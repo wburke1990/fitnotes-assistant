@@ -14,6 +14,20 @@ def _flatten(workout):
     return [ss for block in blocks for ss in block["SuperSets"]]
 
 
+def _superset_blocks(workout):
+    """The supersets that contain more than one exercise (the main SS1-3)."""
+    return [ss for ss in _flatten(workout) if len(ss["Exercises"]) > 1]
+
+
+def _standalone_names(workout):
+    """Ordered names of single-exercise blocks (prehab drills / Yoga)."""
+    return [
+        ss["Exercises"][0]["Definition"]["Name"]
+        for ss in _flatten(workout)
+        if len(ss["Exercises"]) == 1
+    ]
+
+
 def _set_counts(workouts):
     counts: Counter[str] = Counter()
     for workout in workouts:
@@ -32,13 +46,24 @@ def test_three_days_with_expected_names():
     ]
 
 
-def test_each_day_has_three_blocks():
+def test_each_day_has_three_main_supersets():
+    # Each day still has exactly three multi-exercise supersets (SS1-SS3); the
+    # prehab drills (and Sunday's Yoga) now sit in their own standalone blocks.
     for day in DAYS:
         workout = build_day(day, MAPPINGS)
-        blocks = workout["Data"][0]["Workouts"]
-        assert len(blocks) == 3
+        assert len(_superset_blocks(workout)) == 3
         # FitNotes renders only the first SuperSet per block.
+        blocks = workout["Data"][0]["Workouts"]
         assert all(len(block["SuperSets"]) == 1 for block in blocks)
+
+
+def test_block_counts_per_day():
+    # Sunday: SS1, [Yoga], SS2, SS3 = 4 blocks.
+    # Tuesday/Thursday: SS1, [drill], SS2, [drill], SS3, [drill] = 6 blocks.
+    expected = {"Sunday": 4, "Tuesday": 6, "Thursday": 6}
+    for day in DAYS:
+        workout = build_day(day, MAPPINGS)
+        assert len(workout["Data"][0]["Workouts"]) == expected[day.suffix]
 
 
 def test_multi_exercise_blocks_are_named():
@@ -88,7 +113,7 @@ def test_ss3_adductor_before_hyperextension():
     # (heavier / less stable) must be sequenced before the regular
     # Hyperextension for safety.
     for day in DAYS[1:]:
-        ss3 = _flatten(build_day(day, MAPPINGS))[2]
+        ss3 = _superset_blocks(build_day(day, MAPPINGS))[2]
         names = [ex["Definition"]["Name"] for ex in ss3["Exercises"]]
         assert "Side-Lying Hyperextension Adductor Raise" in names
         assert "Hyperextension" in names
@@ -119,6 +144,40 @@ def test_prehab_drills_one_set_each():
         assert counts[drill] == 1
 
 
+def test_prehab_drills_are_standalone_blocks_after_supersets():
+    # Each prehab drill must be its OWN single-exercise block placed
+    # immediately AFTER the superset it follows (the between-superset rest),
+    # not a member of the round-robin superset.
+    main_names = {
+        "Snatch-Grip Stiff-Legged RDL",
+        "Nordic Hamstring Curl",
+        "Hyperextension",
+    }
+    expected = {
+        "Tuesday": ["Hip Internal Rotation", "Hip Airplane", "Plank"],
+        "Thursday": ["Side Hip Abduction", "Wall Back Extension", "QL Plank"],
+    }
+    for day in DAYS[1:]:
+        workout = build_day(day, MAPPINGS)
+        blocks = _flatten(workout)
+        # The standalone drills, in order, match the expected post-SS sequence.
+        assert _standalone_names(workout) == expected[day.suffix]
+        # No drill is a member of any multi-exercise superset.
+        drills = set(expected[day.suffix])
+        for ss in _superset_blocks(workout):
+            ss_names = {ex["Definition"]["Name"] for ex in ss["Exercises"]}
+            assert not (drills & ss_names)
+        # Each drill block directly follows a superset (the block before it is
+        # a multi-exercise superset anchored by an RDL/Nordic/Hyper movement).
+        for i, ss in enumerate(blocks):
+            name = ss["Exercises"][0]["Definition"]["Name"]
+            if name in drills:
+                assert i > 0
+                prev_names = {ex["Definition"]["Name"] for ex in blocks[i - 1]["Exercises"]}
+                assert len(blocks[i - 1]["Exercises"]) > 1
+                assert prev_names & main_names
+
+
 def test_atg_split_squat_warmup_loads():
     sunday = build_day(DAYS[0], MAPPINGS)
     # The two warm-up sets now live in a single ATG entry (SS2), so the
@@ -140,7 +199,7 @@ def test_atg_warmup_is_one_entry_with_two_sets():
     # The bodyweight + empty-bar warm-up sets are merged into ONE ATG entry in
     # SS2 with two sets [0, 45]; the working sets (70) remain a separate entry.
     sunday = build_day(DAYS[0], MAPPINGS)
-    ss2 = _flatten(sunday)[1]
+    ss2 = _superset_blocks(sunday)[1]
     atg = [ex for ex in ss2["Exercises"] if ex["Definition"]["Name"] == "ATG Split Squat"]
     assert len(atg) == 1
     assert [sd["Secondary"] for sd in atg[0]["SetDetails"]] == [0, 45]
@@ -190,14 +249,23 @@ def test_yoga_is_timed_hold():
     assert yoga["SetDetails"][0]["Primary"] == 120
 
 
-def test_yoga_is_last_in_ss1_and_absent_from_ss2():
-    # Yoga moved into SS1 as the final entry (right after the last RDL set) and
-    # is no longer present in SS2.
-    sunday = _flatten(build_day(DAYS[0], MAPPINGS))
-    ss1_names = [ex["Definition"]["Name"] for ex in sunday[0]["Exercises"]]
-    ss2_names = [ex["Definition"]["Name"] for ex in sunday[1]["Exercises"]]
-    assert ss1_names[-1] == "Yoga"
+def test_yoga_is_standalone_block_between_ss1_and_ss2():
+    # Yoga is its own single-exercise block placed immediately AFTER SS1 (the
+    # RDL superset) and BEFORE SS2; it is not a member of any main superset.
+    workout = build_day(DAYS[0], MAPPINGS)
+    blocks = _flatten(workout)
+    # SS1 (RDL), then a standalone Yoga block, then SS2 (Nordic).
+    ss1_names = [ex["Definition"]["Name"] for ex in blocks[0]["Exercises"]]
+    assert "Snatch-Grip Stiff-Legged RDL" in ss1_names
+    assert "Yoga" not in ss1_names
+    assert len(blocks[1]["Exercises"]) == 1
+    assert blocks[1]["Exercises"][0]["Definition"]["Name"] == "Yoga"
+    ss2_names = [ex["Definition"]["Name"] for ex in blocks[2]["Exercises"]]
+    assert "Nordic Hamstring Curl" in ss2_names
     assert "Yoga" not in ss2_names
+    # Yoga appears in no multi-exercise superset.
+    for ss in _superset_blocks(workout):
+        assert "Yoga" not in [ex["Definition"]["Name"] for ex in ss["Exercises"]]
 
 
 def test_yoga_resolves_in_mappings():

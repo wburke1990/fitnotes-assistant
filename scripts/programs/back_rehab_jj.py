@@ -123,8 +123,7 @@ def _days() -> list[Day]:
         "Sunday",
         [
             # SS1: Couch Stretch gets 2 sets (full quad prep, interspersed
-            # between RDL sets); Yoga moves here as the last entry (after the
-            # final RDL set).
+            # between RDL sets).
             [
                 _RDL,
                 Move(
@@ -133,8 +132,10 @@ def _days() -> list[Day]:
                     focus="reps",
                     secondary_focus="time",
                 ),
-                _hold("Yoga", 2 * _MINUTE),
             ],
+            # Yoga: its own block AFTER SS1 (right after the last RDL set) and
+            # before the SS2 split-squat warm-ups.
+            [_hold("Yoga", 2 * _MINUTE)],
             # SS2: the two ATG warm-up sets merge into one exercise with two
             # sets (bodyweight, then empty bar) so they spread across the
             # Nordic rounds.
@@ -164,15 +165,18 @@ def _days() -> list[Day]:
                 _RDL,
                 _COPENHAGEN,
                 _TIB,
-                _per_side_hold("Hip Internal Rotation", 2 * _MINUTE),
             ],
+            # Hip Internal Rotation: its own block AFTER SS1 (done as the
+            # between-superset rest, not interspersed in the round-robin).
+            [_per_side_hold("Hip Internal Rotation", 2 * _MINUTE)],
             # SS2: calf moves here alongside the adductor raise.
             [
                 _NORDIC,
                 _ADDUCTOR,
                 _CALF,
-                _per_side_hold("Hip Airplane", 2 * _MINUTE),
             ],
+            # Hip Airplane: its own block AFTER SS2.
+            [_per_side_hold("Hip Airplane", 2 * _MINUTE)],
             # SS3: adductor raise listed BEFORE the regular hyperextension
             # (heavier/less-stable movement first); tibialis added here too.
             [
@@ -180,8 +184,9 @@ def _days() -> list[Day]:
                 _HYPER,
                 _CALF,
                 _TIB,
-                _hold("Plank", 4 * _MINUTE),
             ],
+            # Plank: its own block AFTER SS3.
+            [_hold("Plank", 4 * _MINUTE)],
         ],
     )
     thursday = Day(
@@ -193,15 +198,17 @@ def _days() -> list[Day]:
                 _RDL,
                 _COPENHAGEN,
                 _TIB,
-                _per_side_hold("Side Hip Abduction", 2 * _MINUTE),
             ],
+            # Side Hip Abduction: its own block AFTER SS1.
+            [_per_side_hold("Side Hip Abduction", 2 * _MINUTE)],
             # SS2: calf moves here alongside the adductor raise.
             [
                 _NORDIC,
                 _ADDUCTOR,
                 _CALF,
-                _hold("Wall Back Extension", 4 * _MINUTE),
             ],
+            # Wall Back Extension: its own block AFTER SS2.
+            [_hold("Wall Back Extension", 4 * _MINUTE)],
             # SS3: adductor raise listed BEFORE the regular hyperextension
             # (heavier/less-stable movement first); tibialis added here too.
             [
@@ -209,8 +216,9 @@ def _days() -> list[Day]:
                 _HYPER,
                 _CALF,
                 _TIB,
-                _per_side_hold("QL Plank", 2 * _MINUTE),
             ],
+            # QL Plank: its own block AFTER SS3.
+            [_per_side_hold("QL Plank", 2 * _MINUTE)],
         ],
     )
     return [sunday, tuesday, thursday]
