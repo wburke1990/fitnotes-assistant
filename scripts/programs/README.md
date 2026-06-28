@@ -40,6 +40,30 @@ on the routine — all set by `build_workout_from_supersets`. When in doubt,
 structurally diff against `plans/back_rehab/Back Rehab 3.fnw` (a known-good
 export) with `jq`.
 
+### Block order is round-robin (decides where an exercise *appears*)
+
+FitNotes performs a superset block round-robin by set number: set 1 of every
+exercise, then set 2 of every exercise, and so on. So **a 1-set exercise inside
+a 3-set superset shows up in round 1, not at the end** — which bit us when
+prehab drills landed next to the first heavy set instead of after it. Three
+consequences for layout:
+
+- **Do-it-after items** (a prehab drill, a finisher, a between-superset rest
+  movement) must be their **own single-exercise block placed after** the
+  superset — not an extra exercise inside it. Otherwise they round-robin to the
+  front.
+- **To spread a warm-up across a lift's rest,** encode it as **one exercise with
+  N sets**, not N separate single-set exercises (which all pile into round 1).
+  The Sunday split-squat on-ramp is one ATG Split Squat entry with 2 sets
+  `[0, 45]` inside the Nordic superset, so bodyweight lands in round 1 and the
+  empty bar in round 2.
+- **Interspersed fillers** (meant to fall *between* the lead's sets) stay
+  *inside* the block with a set count ≤ the lead's; they drop into the gaps.
+  Sunday's Couch Stretch is 2 sets inside the 3-set RDL superset, so a stretch
+  falls in each rest.
+
+`back_rehab_jj.py` is the worked example of all three.
+
 ### SetDetails semantics
 
 - `Primary` = reps, `Secondary` = weight (int). `0` weight = bodyweight /
@@ -78,6 +102,48 @@ files under `exercises/`:
 
 Muscle names should already exist in `builders.CATEGORY_IDS` so they get stable
 IDs; add new ones there if needed.
+
+## Designing supersets to avoid interference
+
+Superset partners must not compete for the same *limiter*, so one recovers while
+the other works. The rules that came out of the back-rehab-JJ build:
+
+- **Don't pair movements that share prime movers.** RDL + hyperextension are both
+  hams / glutes / low-back — you'd be forced to rest between them and the
+  superset buys nothing. A priority lift's fillers must avoid its muscles.
+- **The limiter is a system, not just a muscle.** Grip / forearms, lumbar
+  stabilizers, and CNS all count. A snatch-grip RDL is grip-limited, so its
+  filler is grip-free (tibialis), never a single-dumbbell calf raise (which is
+  itself forearm work). Two grip-heavy or two spine-loading moves in one block
+  interfere even if their target muscles differ.
+- **Same muscle, same session → different supersets, not the same block.** Put
+  one early and one late (Copenhagen Plank in SS1; the side-lying adductor raise
+  in SS2/SS3). They get rest between exposures, and the early movement warms up
+  the later one.
+- **If same-muscle pairing is unavoidable (time-forced), mix range/length.** Do
+  the shortened/harder variant first, the lengthened/lighter one second (Nordic,
+  then a light RDL in the stretched position). It's a compromise — separating
+  them into different supersets is still better.
+- **Order for safety inside a block:** the heaviest / least-stable / highest-skill
+  movement goes first, while the stabilizers are fresh; never pre-fatigue the
+  muscles that protect a riskier lift (side-lying hyper *before* the regular
+  hyperextension). Matters most for rehab work.
+
+Two budgeting heuristics from the same build:
+
+- **Filler count = the lead's rest interval.** ~2–3 non-interfering fillers ≈
+  3–4 min between heavy compound sets. Match filler *duration* to the rest you
+  want: sub-second-rep work (calf, tibialis) adds volume almost free during rest
+  you'd take anyway; long holds / stretches fill long rests productively.
+- **Progress compounds by load, accessories by sets.** A +1 set on a priority
+  lift multiplies across training days and lands on a fatiguing movement — easy
+  to overshoot and bleed into recovery (or the athlete's sport). Add sets to the
+  cheap, non-interfering accessories instead.
+
+When a plan supplements a sport, let the sport cover what it covers and cut that
+lifting volume (the JJ block drops pressing because grappling supplies pecs /
+delts / forearms / back), and place the most DOMS-inducing eccentric work where
+soreness lands on rest or sport-light days.
 
 ## Pattern to copy
 
