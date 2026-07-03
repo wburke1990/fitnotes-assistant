@@ -60,9 +60,9 @@ def test_each_day_has_three_main_supersets():
 def test_block_counts_per_day():
     # Sunday: SS1, [Yoga], SS2, SS3 = 4 blocks.
     # Tuesday: SS1, [drill], SS2, [drill], SS3, [drill] = 6 blocks.
-    # Thursday: SS1, [drill], SS2, [drill], SS3, [drill], [Elephant Walk] = 7
-    # blocks (Elephant Walk is an extra standalone finisher).
-    expected = {"Sunday": 4, "Tuesday": 6, "Thursday": 7}
+    # Thursday: SS1, SS2, [QL Plank], SS3, [Plank], [Elephant Walk] = 6 blocks
+    # (SS1 has no trailing prehab; Elephant Walk is the standalone finisher).
+    expected = {"Sunday": 4, "Tuesday": 6, "Thursday": 6}
     for day in DAYS:
         workout = build_day(day, MAPPINGS)
         assert len(workout["Data"][0]["Workouts"]) == expected[day.suffix]
@@ -140,13 +140,13 @@ def test_prehab_drills_one_set_each():
         "Hip Airplane",
         "Plank",
         "Side Hip Abduction",
-        "90 90 Push Up",
         "QL Plank",
         "Elephant Walk",
     ):
         assert counts[drill] == 1
-    # Wall Back Extension was cut from the program entirely.
+    # Wall Back Extension and 90 90 Push Up were cut from the program entirely.
     assert counts["Wall Back Extension"] == 0
+    assert counts["90 90 Push Up"] == 0
 
 
 def test_prehab_drills_are_standalone_blocks_after_supersets():
@@ -158,10 +158,11 @@ def test_prehab_drills_are_standalone_blocks_after_supersets():
         "Nordic Hamstring Curl",
         "Hyperextension",
     }
-    # The three per-superset prehab drills (one after each of SS1-SS3).
+    # The per-superset prehab drills, in order. Tuesday has one after each of
+    # SS1-SS3; Thursday has none after SS1, QL Plank after SS2, Plank after SS3.
     post_ss = {
         "Tuesday": ["Hip Internal Rotation", "Hip Airplane", "Side Hip Abduction"],
-        "Thursday": ["Plank", "90 90 Push Up", "QL Plank"],
+        "Thursday": ["QL Plank", "Plank"],
     }
     # The full ordered standalone sequence (Thursday appends Elephant Walk as a
     # terminal finisher after the last prehab drill).
@@ -189,6 +190,29 @@ def test_prehab_drills_are_standalone_blocks_after_supersets():
                 prev_names = {ex["Definition"]["Name"] for ex in blocks[i - 1]["Exercises"]}
                 assert len(blocks[i - 1]["Exercises"]) > 1
                 assert prev_names & main_names
+
+
+def test_thursday_block_sequence():
+    # Thursday runs SS1, SS2, [QL Plank], SS3, [Plank], [Elephant Walk]: SS1 has
+    # no trailing prehab (SS2 follows it directly), QL Plank follows SS2, Plank
+    # follows SS3, and Elephant Walk closes the day.
+    thursday = build_day(DAYS[2], MAPPINGS)
+    blocks = _flatten(thursday)
+    sizes = [len(ss["Exercises"]) for ss in blocks]
+    # SS1, SS2 are multi-exercise; then a single QL Plank; SS3 multi-exercise;
+    # then single Plank and single Elephant Walk.
+    assert sizes == [3, 3, 1, 4, 1, 1]
+    # SS1 is directly followed by SS2 (a multi-exercise superset), i.e. no
+    # standalone prehab drill sits between them.
+    assert len(blocks[1]["Exercises"]) > 1
+    assert _standalone_names(thursday) == ["QL Plank", "Plank", "Elephant Walk"]
+
+
+def test_90_90_push_up_absent_everywhere():
+    for day in DAYS:
+        for ss in _flatten(build_day(day, MAPPINGS)):
+            names = {ex["Definition"]["Name"] for ex in ss["Exercises"]}
+            assert "90 90 Push Up" not in names
 
 
 def test_elephant_walk_is_thursday_final_block():
@@ -329,13 +353,13 @@ def test_key_muscle_volumes_in_range():
     assert 10 <= vol["Adductors"] <= 14
     assert 13 <= vol["Back (Lower)"] <= 16
     assert vol["Tibialis"] == 11
-    # Elephant Walk adds Hamstrings (+1.0 primary) and Calves (+0.5 secondary);
-    # 90/90 Push Up adds Abductors (+1.0 primary) and Gluteals (+0.5 secondary);
-    # Wall Back Extension (Back (Lower)) was removed (-1.0).
+    # Elephant Walk adds Hamstrings (+1.0 primary) and Calves (+0.5 secondary).
+    # 90/90 Push Up was removed (dropped Abductors -1.0 primary and Gluteals
+    # -0.5 secondary); Wall Back Extension (Back (Lower)) was removed (-1.0).
     assert vol["Hamstrings"] == 23.5
     assert vol["Calves"] == 18.0
-    assert vol["Abductors"] == 3.0
-    assert vol["Gluteals"] == 19.5
+    assert vol["Abductors"] == 2.0
+    assert vol["Gluteals"] == 19.0
     assert vol["Back (Lower)"] == 13.5
     # Forearms is a secondary on the grip-heavy RDL (9 sets), Standing Calf
     # Raise (10) and Copenhagen Plank (4): (9 + 10 + 4) * 0.5 = 11.5.
