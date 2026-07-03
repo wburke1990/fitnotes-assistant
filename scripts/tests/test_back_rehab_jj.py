@@ -60,8 +60,8 @@ def test_each_day_has_three_main_supersets():
 def test_block_counts_per_day():
     # Sunday: SS1, [Yoga], SS2, SS3 = 4 blocks.
     # Tuesday: SS1, [drill], SS2, [drill], SS3, [drill] = 6 blocks.
-    # Thursday: SS1, SS2, [QL Plank], SS3, [Plank], [Elephant Walk] = 6 blocks
-    # (SS1 has no trailing prehab; Elephant Walk is the standalone finisher).
+    # Thursday: SS1, [QL Plank], SS2, [Plank], SS3, [Elephant Walk] = 6 blocks
+    # (a prehab drill fills every gap; Elephant Walk is the standalone finisher).
     expected = {"Sunday": 4, "Tuesday": 6, "Thursday": 6}
     for day in DAYS:
         workout = build_day(day, MAPPINGS)
@@ -159,16 +159,17 @@ def test_prehab_drills_are_standalone_blocks_after_supersets():
         "Hyperextension",
     }
     # The per-superset prehab drills, in order. Tuesday has one after each of
-    # SS1-SS3; Thursday has none after SS1, QL Plank after SS2, Plank after SS3.
+    # SS1-SS3; Thursday has QL Plank after SS1, Plank after SS2, Elephant Walk
+    # after SS3 (every gap filled).
     post_ss = {
         "Tuesday": ["Hip Internal Rotation", "Hip Airplane", "Side Hip Abduction"],
-        "Thursday": ["QL Plank", "Plank"],
+        "Thursday": ["QL Plank", "Plank", "Elephant Walk"],
     }
-    # The full ordered standalone sequence (Thursday appends Elephant Walk as a
-    # terminal finisher after the last prehab drill).
+    # The full ordered standalone sequence. Every Thursday drill now follows a
+    # superset directly, so the standalone sequence equals post_ss.
     expected = {
         "Tuesday": post_ss["Tuesday"],
-        "Thursday": [*post_ss["Thursday"], "Elephant Walk"],
+        "Thursday": post_ss["Thursday"],
     }
     for day in DAYS[1:]:
         workout = build_day(day, MAPPINGS)
@@ -193,18 +194,15 @@ def test_prehab_drills_are_standalone_blocks_after_supersets():
 
 
 def test_thursday_block_sequence():
-    # Thursday runs SS1, SS2, [QL Plank], SS3, [Plank], [Elephant Walk]: SS1 has
-    # no trailing prehab (SS2 follows it directly), QL Plank follows SS2, Plank
-    # follows SS3, and Elephant Walk closes the day.
+    # Thursday runs SS1, [QL Plank], SS2, [Plank], SS3, [Elephant Walk]: a
+    # prehab drill fills every gap between supersets. QL Plank follows SS1,
+    # Plank follows SS2, and Elephant Walk follows SS3 to close the day.
     thursday = build_day(DAYS[2], MAPPINGS)
     blocks = _flatten(thursday)
     sizes = [len(ss["Exercises"]) for ss in blocks]
-    # SS1, SS2 are multi-exercise; then a single QL Plank; SS3 multi-exercise;
-    # then single Plank and single Elephant Walk.
-    assert sizes == [3, 3, 1, 4, 1, 1]
-    # SS1 is directly followed by SS2 (a multi-exercise superset), i.e. no
-    # standalone prehab drill sits between them.
-    assert len(blocks[1]["Exercises"]) > 1
+    # SS1 (3); single QL Plank; SS2 (3); single Plank; SS3 (4); single
+    # Elephant Walk.
+    assert sizes == [3, 1, 3, 1, 4, 1]
     assert _standalone_names(thursday) == ["QL Plank", "Plank", "Elephant Walk"]
 
 
@@ -217,7 +215,7 @@ def test_90_90_push_up_absent_everywhere():
 
 def test_elephant_walk_is_thursday_final_block():
     # Elephant Walk is a standalone finisher and the very last block of the
-    # Thursday session (after the QL Plank that follows SS3).
+    # Thursday session (the drill that follows SS3).
     thursday = build_day(DAYS[2], MAPPINGS)
     blocks = _flatten(thursday)
     last = blocks[-1]
