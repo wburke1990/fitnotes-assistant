@@ -59,8 +59,10 @@ def test_each_day_has_three_main_supersets():
 
 def test_block_counts_per_day():
     # Sunday: SS1, [Yoga], SS2, SS3 = 4 blocks.
-    # Tuesday/Thursday: SS1, [drill], SS2, [drill], SS3, [drill] = 6 blocks.
-    expected = {"Sunday": 4, "Tuesday": 6, "Thursday": 6}
+    # Tuesday: SS1, [drill], SS2, [drill], SS3, [drill] = 6 blocks.
+    # Thursday: SS1, [drill], SS2, [drill], SS3, [drill], [Elephant Walk] = 7
+    # blocks (Elephant Walk is an extra standalone finisher).
+    expected = {"Sunday": 4, "Tuesday": 6, "Thursday": 7}
     for day in DAYS:
         workout = build_day(day, MAPPINGS)
         assert len(workout["Data"][0]["Workouts"]) == expected[day.suffix]
@@ -138,10 +140,13 @@ def test_prehab_drills_one_set_each():
         "Hip Airplane",
         "Plank",
         "Side Hip Abduction",
-        "Wall Back Extension",
+        "90 90 Push Up",
         "QL Plank",
+        "Elephant Walk",
     ):
         assert counts[drill] == 1
+    # Wall Back Extension was cut from the program entirely.
+    assert counts["Wall Back Extension"] == 0
 
 
 def test_prehab_drills_are_standalone_blocks_after_supersets():
@@ -153,29 +158,61 @@ def test_prehab_drills_are_standalone_blocks_after_supersets():
         "Nordic Hamstring Curl",
         "Hyperextension",
     }
+    # The three per-superset prehab drills (one after each of SS1-SS3).
+    post_ss = {
+        "Tuesday": ["Hip Internal Rotation", "Hip Airplane", "Side Hip Abduction"],
+        "Thursday": ["Plank", "90 90 Push Up", "QL Plank"],
+    }
+    # The full ordered standalone sequence (Thursday appends Elephant Walk as a
+    # terminal finisher after the last prehab drill).
     expected = {
-        "Tuesday": ["Hip Internal Rotation", "Hip Airplane", "Plank"],
-        "Thursday": ["Side Hip Abduction", "Wall Back Extension", "QL Plank"],
+        "Tuesday": post_ss["Tuesday"],
+        "Thursday": [*post_ss["Thursday"], "Elephant Walk"],
     }
     for day in DAYS[1:]:
         workout = build_day(day, MAPPINGS)
         blocks = _flatten(workout)
-        # The standalone drills, in order, match the expected post-SS sequence.
+        # The standalone drills, in order, match the expected sequence.
         assert _standalone_names(workout) == expected[day.suffix]
         # No drill is a member of any multi-exercise superset.
         drills = set(expected[day.suffix])
         for ss in _superset_blocks(workout):
             ss_names = {ex["Definition"]["Name"] for ex in ss["Exercises"]}
             assert not (drills & ss_names)
-        # Each drill block directly follows a superset (the block before it is
-        # a multi-exercise superset anchored by an RDL/Nordic/Hyper movement).
+        # Each per-SS drill block directly follows a superset (the block before
+        # it is a multi-exercise superset anchored by an RDL/Nordic/Hyper move).
+        per_ss_drills = set(post_ss[day.suffix])
         for i, ss in enumerate(blocks):
             name = ss["Exercises"][0]["Definition"]["Name"]
-            if name in drills:
+            if name in per_ss_drills and len(ss["Exercises"]) == 1:
                 assert i > 0
                 prev_names = {ex["Definition"]["Name"] for ex in blocks[i - 1]["Exercises"]}
                 assert len(blocks[i - 1]["Exercises"]) > 1
                 assert prev_names & main_names
+
+
+def test_elephant_walk_is_thursday_final_block():
+    # Elephant Walk is a standalone finisher and the very last block of the
+    # Thursday session (after the QL Plank that follows SS3).
+    thursday = build_day(DAYS[2], MAPPINGS)
+    blocks = _flatten(thursday)
+    last = blocks[-1]
+    assert len(last["Exercises"]) == 1
+    assert last["Exercises"][0]["Definition"]["Name"] == "Elephant Walk"
+
+
+def test_wall_back_extension_removed_everywhere():
+    # Wall Back Extension was cut from the whole program.
+    for day in DAYS:
+        for ss in _flatten(build_day(day, MAPPINGS)):
+            names = {ex["Definition"]["Name"] for ex in ss["Exercises"]}
+            assert "Wall Back Extension" not in names
+
+
+def test_tuesday_ss3_prehab_is_side_hip_abduction():
+    # Tuesday's SS3 prehab drill is now Side Hip Abduction (was Plank).
+    tuesday = build_day(DAYS[1], MAPPINGS)
+    assert _standalone_names(tuesday)[-1] == "Side Hip Abduction"
 
 
 def test_atg_split_squat_warmup_loads():
@@ -292,6 +329,14 @@ def test_key_muscle_volumes_in_range():
     assert 10 <= vol["Adductors"] <= 14
     assert 13 <= vol["Back (Lower)"] <= 16
     assert vol["Tibialis"] == 11
+    # Elephant Walk adds Hamstrings (+1.0 primary) and Calves (+0.5 secondary);
+    # 90/90 Push Up adds Abductors (+1.0 primary) and Gluteals (+0.5 secondary);
+    # Wall Back Extension (Back (Lower)) was removed (-1.0).
+    assert vol["Hamstrings"] == 23.5
+    assert vol["Calves"] == 18.0
+    assert vol["Abductors"] == 3.0
+    assert vol["Gluteals"] == 19.5
+    assert vol["Back (Lower)"] == 13.5
     # Forearms is a secondary on the grip-heavy RDL (9 sets), Standing Calf
     # Raise (10) and Copenhagen Plank (4): (9 + 10 + 4) * 0.5 = 11.5.
     assert vol["Forearms"] == 11.5

@@ -185,8 +185,8 @@ def _days() -> list[Day]:
                 _CALF,
                 _TIB,
             ],
-            # Plank: its own block AFTER SS3.
-            [_hold("Plank", 4 * _MINUTE)],
+            # Side Hip Abduction: its own block AFTER SS3.
+            [_per_side_hold("Side Hip Abduction", 2 * _MINUTE)],
         ],
     )
     thursday = Day(
@@ -199,16 +199,16 @@ def _days() -> list[Day]:
                 _COPENHAGEN,
                 _TIB,
             ],
-            # Side Hip Abduction: its own block AFTER SS1.
-            [_per_side_hold("Side Hip Abduction", 2 * _MINUTE)],
+            # Plank: its own block AFTER SS1.
+            [_hold("Plank", 4 * _MINUTE)],
             # SS2: calf moves here alongside the adductor raise.
             [
                 _NORDIC,
                 _ADDUCTOR,
                 _CALF,
             ],
-            # Wall Back Extension: its own block AFTER SS2.
-            [_hold("Wall Back Extension", 4 * _MINUTE)],
+            # 90/90 Push-Up: its own block AFTER SS2.
+            [_per_side_hold("90 90 Push Up", 2 * _MINUTE)],
             # SS3: adductor raise listed BEFORE the regular hyperextension
             # (heavier/less-stable movement first); tibialis added here too.
             [
@@ -219,6 +219,8 @@ def _days() -> list[Day]:
             ],
             # QL Plank: its own block AFTER SS3.
             [_per_side_hold("QL Plank", 2 * _MINUTE)],
+            # Elephant Walk: its own block as the final movement of the day.
+            [_hold("Elephant Walk", 4 * _MINUTE)],
         ],
     )
     return [sunday, tuesday, thursday]
