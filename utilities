@@ -1,5 +1,37 @@
 # Workout Utilities - jq commands for extracting data from .fnw files
 
+# Summarize a whole plan block-by-block (reps/weight/time interpreted).
+# IMPORTANT: a plan's blocks live in .Data[].Workouts[] — each block holds ONE
+# SuperSet (see scripts/programs/README.md). Iterate Workouts[] with [], never
+# Workouts[0]; hardcoding [0] shows only the first block of many.
+# Focus IDs: Primary/SecondaryFocusId 1=reps, 2=weight, 3=time(sec), 0=none.
+# Usage: jq -rf <(sed -n '/BEGIN summarize/,/END summarize/p' utilities | grep -v '^#') plan.fnw
+#   or paste the program below after `jq -r` against a single .fnw file.
+# BEGIN summarize
+#   def fmtset:
+#     ( if .p_focus == 3 then "\(.Primary)s" else "\(.Primary)" end ) as $pri
+#     | ( if   .s_focus == 0 then ""
+#          elif .s_focus == 2 then " @\(.Secondary)lb"
+#          elif .s_focus == 3 then " x\(.Secondary)s"
+#          else " /\(.Secondary)" end ) as $sec
+#     | $pri + $sec;
+#   .Data[] as $routine
+#   | ($routine.Name), "",
+#     ( $routine.Workouts | to_entries[]
+#       | .value as $blk | (.key+1) as $n
+#       | ($blk.SuperSets[0].Name // null) as $label
+#       | "Block \($n)\( if $label then " (\($label))" else "" end ):",
+#         ( $blk.SuperSets[].Exercises[]
+#           | .Definition as $d
+#           | "   • \($d.Name) [\($d.Equipment.Name)] — "
+#             + ( [ .SetDetails[]
+#                   | { Primary, Secondary,
+#                       p_focus: $d.PrimaryFocusId, s_focus: $d.SecondaryFocusId }
+#                   | fmtset ] | join(", ") )
+#         )
+#     )
+# END summarize
+
 # Extract all unique equipment types across all workouts
 cat wh/*.fnw | jq -r '.Data[].Workouts[].SuperSets[].Exercises[].Definition.Equipment.Name' | sort -u
 

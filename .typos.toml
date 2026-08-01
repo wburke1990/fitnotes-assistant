@@ -12,4 +12,6 @@ TKE = "TKE"
 
 [files]
 # .fnw exports are large binary-ish blobs; uv.lock is generated.
-extend-exclude = ["*.fnw", "uv.lock"]
+# research/ holds verbatim captures of external chatbot prompts — quoted
+# third-party text whose typos aren't ours to "fix".
+extend-exclude = ["*.fnw", "uv.lock", "research/"]
