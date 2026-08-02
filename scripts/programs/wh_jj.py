@@ -74,9 +74,11 @@ def _hold(name: str, seconds: int) -> Move:
 # Gluteal-biased leg press (feet high, deep stretch) -- can't squat for glutes
 # until the back is stronger, so the leg press covers glutes here.
 _LEG_PRESS = _reps("Leg Press", reps=12, weight=360, count=4)
-# Replaces the Nordic curl: WH has a good machine, and it's far lower DOMS than
-# the Nordic (which matters with JJ every day). 4 sets = 4 per leg.
-_CURL = _reps("Single-Leg Hamstring Curl", reps=10, weight=50, count=4)
+# Single-leg machine curl -- logged as "Hamstring Curl" last year (same
+# exercise, so the history carries over). Replaces the Nordic curl: far lower
+# DOMS, which matters with JJ every day. Starting weight from last year's WH
+# plan; 4 sets = 4 per leg.
+_CURL = _reps("Hamstring Curl", reps=16, weight=110, count=4)
 # Quad / knee maintenance -- the feet-high leg press is deliberately glute-biased
 # and won't cover the quads.
 _SPLIT_SQUAT = _reps("ATG Split Squat", reps=12, weight=70, count=2)
@@ -145,7 +147,6 @@ def _days() -> list[Day]:
             [_CALF, _TIB],
             # Core rehab: each its own block (quick, straight).
             [_hold("Side Plank", 80)],
-            [_reps("Bird Dog", reps=12, weight=10, count=3)],
             [_reps("QL Raise", reps=20, weight=0, count=3)],
             [_reps("Slow Scissors", reps=30, weight=0, count=1)],
         ],
