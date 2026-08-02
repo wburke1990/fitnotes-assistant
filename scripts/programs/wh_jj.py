@@ -82,9 +82,10 @@ _LEG_PRESS = _reps("Leg Press", reps=12, weight=360, count=4)
 _CURL = _reps("Hamstring Curl", reps=16, weight=110, count=4)
 # Quad / knee maintenance -- the feet-high leg press is deliberately glute-biased
 # and won't cover the quads. Done with two DBs held at the sides (WH's big
-# dumbbells): less low-back demand than a barbell front rack, and heavier-
-# loadable. Weight is per dumbbell. Logged under ATG Split Squat for continuity.
-_SPLIT_SQUAT = _reps("ATG Split Squat", reps=12, weight=60, count=2)
+# dumbbells): less low-back demand than a barbell front rack. Starting at two 45s
+# for ~12 reps. Weight is the TOTAL of both DBs (matching last year's log, where
+# 120 = two 60s), so the split-squat history stays continuous.
+_SPLIT_SQUAT = _reps("ATG Split Squat", reps=12, weight=90, count=2)
 # Rep-progression filler; sits in the rest of the main lift (~free volume).
 _TIB = _reps("Tibialis Raise", reps=25, weight=20, count=3)
 # Maintenance filler.
