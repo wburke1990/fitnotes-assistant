@@ -87,7 +87,7 @@ def test_weekly_set_counts():
     assert counts["Hip Adduction"] == 12
     assert counts["Hip Abduction"] == 12
     assert counts["Snatch-Grip Stiff-Legged RDL"] == 8
-    assert counts["Hyperextension"] == 6
+    assert counts["Hyperextension"] == 9
     assert counts["QL Raise"] == 3
     assert counts["Side Plank"] == 1
     assert counts["Slow Scissors"] == 1
@@ -99,25 +99,20 @@ def test_progression_targets_clear_twelve_sets():
     # Every muscle we intend to progressively overload must reach the 12-set/wk
     # floor (secondary muscles counted at 0.5).
     vol = calculate_weekly_volume(list(build_all(MAPPINGS).values()))
-    # Back (Lower) is excluded here: the tool counts the stiff-leg RDL's erectors
-    # at 0.5 (secondary), which undercounts them, so it reads ~10 -- but combined
-    # with the hypers the low back is effectively at the floor. See
-    # test_key_muscle_volumes.
-    for muscle in ("Gluteals", "Hamstrings", "Adductors", "Abductors", "Tibialis"):
+    for muscle in ("Gluteals", "Hamstrings", "Adductors", "Abductors", "Tibialis", "Back (Lower)"):
         assert vol[muscle] >= 12, f"{muscle} under the 12-set floor: {vol[muscle]}"
 
 
 def test_key_muscle_volumes():
     vol = calculate_weekly_volume(list(build_all(MAPPINGS).values()))
-    assert vol["Hamstrings"] == 25.0
-    assert vol["Gluteals"] == 21.0
+    assert vol["Hamstrings"] == 26.5
+    assert vol["Gluteals"] == 22.5
     assert vol["Abductors"] == 13.0
     assert vol["Tibialis"] == 12.0
     assert vol["Adductors"] == 12.0
-    # Back (Lower) reads 10 by the tool (RDL erectors counted at 0.5); the
-    # stiff-leg RDL loads them closer to a primary, so with the hypers the low
-    # back is effectively at the floor.
-    assert vol["Back (Lower)"] == 10.0
+    # 9 hyper sets (primary) + the RDL's erectors (0.5 each) = 13; low back is the
+    # hyperextension progression target with the RDL held steady at 155.
+    assert vol["Back (Lower)"] == 13.0
     # Quads are maintenance only (below the floor by design).
     assert vol["Quadriceps"] == 10.0
 
@@ -155,8 +150,9 @@ def test_rdl_never_supersets_with_a_hamstring_movement():
                 )
 
 
-def test_friday_rdl_is_heavier_than_tuesday():
-    def _rdl_weight(suffix):
+def test_rdl_held_steady_at_155():
+    # RDL is held steady at 155 both days while the hyperextension progresses.
+    def _rdl_weights(suffix):
         day = next(d for d in DAYS if d.suffix == suffix)
         rdl = next(
             ex
@@ -164,9 +160,10 @@ def test_friday_rdl_is_heavier_than_tuesday():
             for ex in ss["Exercises"]
             if ex["Definition"]["Name"] == "Snatch-Grip Stiff-Legged RDL"
         )
-        return rdl["SetDetails"][0]["Secondary"]
+        return {sd["Secondary"] for sd in rdl["SetDetails"]}
 
-    assert _rdl_weight("Friday") > _rdl_weight("Tuesday")
+    assert _rdl_weights("Tuesday") == {155}
+    assert _rdl_weights("Friday") == {155}
 
 
 def test_hip_abduction_capped_at_machine_max():

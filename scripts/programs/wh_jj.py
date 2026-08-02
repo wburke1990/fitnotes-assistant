@@ -11,8 +11,9 @@ Programming principles (see scripts/programs/README.md):
     muscles count 0.5. Sets/session for a target = 12 / weekly frequency.
   * High frequency, low per-session volume, so DOMS never accumulates enough
     to compromise the next day's rolling (there are no rest days mid-week).
-  * The heaviest / most soreness-inducing work (heavy RDL) lands Friday so the
-    weekend absorbs it.
+  * RDL is held steady at 155 while the hyperextension progression is the focus.
+    RDL + hypers feed the same posterior chain, so the low back clears its floor
+    (9 hyper sets + the RDL's erectors) even with the RDL not advancing.
   * Supersets pair only non-interfering movements. RDL is grip/spine/hamstring
     limited, so it pairs only with grip-free, non-competing fillers (tibialis,
     calf) and its heavy Friday set stays straight. Hyperextension is always
@@ -92,7 +93,7 @@ _HIP_ADDUCTION = _reps("Hip Adduction", reps=10, weight=110, count=6)
 _HIP_ABDUCTION = _reps("Hip Abduction", reps=12, weight=140, count=6)
 # Bodyweight; the 1-leg + curved-back reps that lead the first sets, and the
 # flat-machine 1-leg static-hold restart, are described in the companion note.
-_HYPER = _reps("Hyperextension", reps=35, weight=0, count=2)
+_HYPER = _reps("Hyperextension", reps=35, weight=0, count=3)
 
 
 @dataclass
@@ -154,9 +155,9 @@ def _days() -> list[Day]:
     friday = Day(
         "Friday",
         [
-            # Heavy RDL first while fresh, paired with calf (non-competing);
-            # the heavy set is the point, calf just fills the rest.
-            [_reps("Snatch-Grip Stiff-Legged RDL", reps=6, weight=165, count=4), _CALF],
+            # RDL held steady at 155 (progression is on the hypers now), paired
+            # with calf (non-competing) in the rest.
+            [_reps("Snatch-Grip Stiff-Legged RDL", reps=8, weight=155, count=4), _CALF],
             # Leg press its own block after the RDL.
             [_LEG_PRESS],
             # Hyperextension last.
