@@ -87,9 +87,10 @@ _CURL = _reps("Hamstring Curl", reps=12, weight=100, count=4)
 # SIDE; weight is the TOTAL of both DBs (two 45s = 90), matching last year's
 # weight logging. Starting 12/side @ 90.
 _SPLIT_SQUAT = _reps("ATG Split Squat", reps=12, weight=90, count=2)
-# Rep-progression filler; sits in the rest of the main lift (~free volume).
-_TIB = _reps("Tibialis Raise", reps=25, weight=20, count=3)
-# Maintenance filler.
+# Rep-progression target, fed as a filler in the RDL's rest (~free volume).
+# 4 sets on each of Tue/Thu/Fri = 12/week.
+_TIB = _reps("Tibialis Raise", reps=25, weight=20, count=4)
+# Maintenance filler (2 sets on Tue/Thu/Fri = 6/week).
 _CALF = _reps("Seated Calf Raise", reps=20, weight=90, count=2)
 # Adductor can still take load; abductor is maxed at the machine's 140, so it
 # progresses by reps only.
@@ -98,6 +99,11 @@ _HIP_ABDUCTION = _reps("Hip Abduction", reps=12, weight=140, count=6)
 # Bodyweight; the 1-leg + curved-back reps that lead the first sets, and the
 # flat-machine 1-leg static-hold restart, are described in the companion note.
 _HYPER = _reps("Hyperextension", reps=35, weight=0, count=3)
+# Wrist prehab, fed into the hip-machine superset (non-competing) on Tue/Thu.
+# Anti-flexion (extensors, the top of the forearm) + rotation balance the heavy
+# gripping from JJ and the raw-grip RDLs, keeping the wrists and elbows healthy.
+_WRIST_ROTATION = _reps("Wrist Rotation", reps=15, weight=10, count=3)
+_WRIST_EXTENSION = _reps("Wrist Extension", reps=15, weight=15, count=3)
 
 
 @dataclass
@@ -118,10 +124,11 @@ def _days() -> list[Day]:
     monday = Day(
         "Monday",
         [
-            # SS1: leg press paired with the single-leg curl (non-competing).
-            [_LEG_PRESS, _CURL],
-            # SS2: split-squat maintenance with tibialis as the filler.
-            [_SPLIT_SQUAT, _TIB],
+            # One superset: leg press + single-leg curl + split squat. Leg press
+            # and split squat both hit quads/glutes, so the split squat (a
+            # maintenance move) runs pre-fatigued -- an accepted trade for the
+            # time saving.
+            [_LEG_PRESS, _CURL, _SPLIT_SQUAT],
             # Hyperextension: its own block, last, nothing spine-loading after.
             [_HYPER],
         ],
@@ -129,26 +136,27 @@ def _days() -> list[Day]:
     tuesday = Day(
         "Tuesday",
         [
-            # SS1: moderate RDL with tibialis (grip-free) in the rest.
-            [_reps("Snatch-Grip Stiff-Legged RDL", reps=8, weight=155, count=4), _TIB],
-            # SS2: adductor / abductor antagonist pair (the hip machine floor).
-            [_HIP_ADDUCTION, _HIP_ABDUCTION],
+            # RDL with calf + tibialis filling its rest (both grip-free, non-
+            # competing). Tibialis matches the RDL's 4 sets; calf stays at 2.
+            [_reps("Snatch-Grip Stiff-Legged RDL", reps=8, weight=155, count=4), _CALF, _TIB],
+            # Hip adduction/abduction antagonist pair, with wrist prehab in the
+            # rest (non-competing with the lower-body machine work).
+            [_HIP_ADDUCTION, _HIP_ABDUCTION, _WRIST_ROTATION, _WRIST_EXTENSION],
         ],
     )
     wednesday = Day(
         "Wednesday",
         [
-            [_LEG_PRESS, _CURL],
-            [_SPLIT_SQUAT, _TIB],
+            [_LEG_PRESS, _CURL, _SPLIT_SQUAT],
             [_HYPER],
         ],
     )
     thursday = Day(
         "Thursday",
         [
-            # SS1: adductor / abductor antagonist pair.
-            [_HIP_ADDUCTION, _HIP_ABDUCTION],
-            # SS2: calf maintenance with tibialis filler.
+            # Hip antagonist pair + wrist prehab.
+            [_HIP_ADDUCTION, _HIP_ABDUCTION, _WRIST_ROTATION, _WRIST_EXTENSION],
+            # Calf (maintenance) + tibialis (the day's tib contribution).
             [_CALF, _TIB],
             # Core rehab: each its own block (quick, straight).
             [_hold("Side Plank", 80)],
@@ -159,9 +167,8 @@ def _days() -> list[Day]:
     friday = Day(
         "Friday",
         [
-            # RDL held steady at 155 (progression is on the hypers now), paired
-            # with calf (non-competing) in the rest.
-            [_reps("Snatch-Grip Stiff-Legged RDL", reps=8, weight=155, count=4), _CALF],
+            # RDL with calf + tibialis filling its rest (mirrors Tuesday).
+            [_reps("Snatch-Grip Stiff-Legged RDL", reps=8, weight=155, count=4), _CALF, _TIB],
             # Leg press its own block after the RDL.
             [_LEG_PRESS],
             # Hyperextension last.

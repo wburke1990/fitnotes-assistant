@@ -60,11 +60,11 @@ def test_one_superset_per_block():
 
 
 def test_block_counts_per_day():
-    # Mon/Wed: [LP+curl], [split+tib], [Hyper]                   = 3
-    # Tue:     [RDL+tib], [hips]                                 = 2
-    # Thu:     [hips], [calf+tib], side plank, QL, scissors      = 5
-    # Fri:     [RDL+calf], [LP], [Hyper]                         = 3
-    expected = {"Monday": 3, "Tuesday": 2, "Wednesday": 3, "Thursday": 5, "Friday": 3}
+    # Mon/Wed: [LP+curl+split], [Hyper]                          = 2
+    # Tue:     [RDL+calf+tib], [hips+grip]                       = 2
+    # Thu:     [hips+grip], [calf+tib], side plank, QL, scissors = 5
+    # Fri:     [RDL+calf+tib], [LP], [Hyper]                     = 3
+    expected = {"Monday": 2, "Tuesday": 2, "Wednesday": 2, "Thursday": 5, "Friday": 3}
     for day in DAYS:
         workout = build_day(day, MAPPINGS)
         assert len(workout["Data"][0]["Workouts"]) == expected[day.suffix]
@@ -83,11 +83,13 @@ def test_weekly_set_counts():
     assert counts["Hamstring Curl"] == 8
     assert counts["ATG Split Squat"] == 4
     assert counts["Tibialis Raise"] == 12
-    assert counts["Seated Calf Raise"] == 4
+    assert counts["Seated Calf Raise"] == 6
     assert counts["Hip Adduction"] == 12
     assert counts["Hip Abduction"] == 12
     assert counts["Snatch-Grip Stiff-Legged RDL"] == 8
     assert counts["Hyperextension"] == 9
+    assert counts["Wrist Rotation"] == 6
+    assert counts["Wrist Extension"] == 6
     assert counts["QL Raise"] == 3
     assert counts["Side Plank"] == 1
     assert counts["Slow Scissors"] == 1
@@ -115,6 +117,9 @@ def test_key_muscle_volumes():
     assert vol["Back (Lower)"] == 13.0
     # Quads are maintenance only (below the floor by design).
     assert vol["Quadriceps"] == 10.0
+    # Wrist prehab (rotation + extension, 6 sets each = 12 primary) plus the RDL's
+    # forearms (8 x 0.5 = 4) = 16.
+    assert vol["Forearms"] == 16.0
 
 
 def test_hyperextension_is_last_and_standalone_on_lifting_days():
@@ -187,3 +192,40 @@ def test_nordic_curl_absent_everywhere():
     # The Nordic curl is dropped in favour of the single-leg machine curl.
     counts = _set_counts(build_all(MAPPINGS).values())
     assert counts["Nordic Hamstring Curl"] == 0
+
+
+def test_wrist_prehab_registered():
+    for name in ("Wrist Rotation", "Wrist Extension"):
+        assert MAPPINGS.equipment[name] == "Single Dumbbell"
+        assert MAPPINGS.primary_muscle[name] == "Forearms"
+
+
+def test_wrist_prehab_shares_the_hip_superset():
+    # Wrist prehab rides in the hip adduction/abduction superset (non-competing)
+    # on Tuesday and Thursday -- never on a lifting day.
+    grip = {"Wrist Rotation", "Wrist Extension"}
+    for suffix in ("Tuesday", "Thursday"):
+        day = next(d for d in DAYS if d.suffix == suffix)
+        hip_block = next(
+            ss
+            for ss in _superset_blocks(build_day(day, MAPPINGS))
+            if any(ex["Definition"]["Name"] == "Hip Adduction" for ex in ss["Exercises"])
+        )
+        names = {ex["Definition"]["Name"] for ex in hip_block["Exercises"]}
+        assert grip <= names, f"{suffix}: wrist prehab not in the hip superset"
+    for suffix in ("Monday", "Wednesday", "Friday"):
+        day = next(d for d in DAYS if d.suffix == suffix)
+        counts = _set_counts([build_day(day, MAPPINGS)])
+        assert counts["Wrist Rotation"] == 0
+        assert counts["Wrist Extension"] == 0
+
+
+def test_mon_wed_are_one_working_superset_plus_hyper():
+    # Monday/Wednesday collapse to a single multi-exercise superset (leg press +
+    # curl + split squat), followed by the standalone hyperextension.
+    for suffix in ("Monday", "Wednesday"):
+        day = next(d for d in DAYS if d.suffix == suffix)
+        supersets = _superset_blocks(build_day(day, MAPPINGS))
+        assert len(supersets) == 1
+        names = {ex["Definition"]["Name"] for ex in supersets[0]["Exercises"]}
+        assert names == {"Leg Press", "Hamstring Curl", "ATG Split Squat"}
