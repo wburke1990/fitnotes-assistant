@@ -77,9 +77,10 @@ def _hold(name: str, seconds: int) -> Move:
 _LEG_PRESS = _reps("Leg Press", reps=12, weight=360, count=4)
 # Single-leg machine curl -- logged as "Hamstring Curl" last year (same
 # exercise, so the history carries over). Replaces the Nordic curl: far lower
-# DOMS, which matters with JJ every day. Reps are per side; starting 12/side
-# @ 90. 4 sets = 4 per leg.
-_CURL = _reps("Hamstring Curl", reps=12, weight=90, count=4)
+# DOMS, which matters with JJ every day. Reps per side; last year's 24 total
+# @ 100 was 12/side, so starting 12/side @ 100 (the machine stack). 4 sets =
+# 4 per leg.
+_CURL = _reps("Hamstring Curl", reps=12, weight=100, count=4)
 # Quad / knee maintenance -- the feet-high leg press is deliberately glute-biased
 # and won't cover the quads. Done with two DBs held at the sides (WH's big
 # dumbbells): less low-back demand than a barbell front rack. NEW convention this
