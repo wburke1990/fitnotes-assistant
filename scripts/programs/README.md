@@ -145,6 +145,38 @@ lifting volume (the JJ block drops pressing because grappling supplies pecs /
 delts / forearms / back), and place the most DOMS-inducing eccentric work where
 soreness lands on rest or sport-light days.
 
+## Volume: the 12-set floor for progression
+
+A muscle needs at least **12 sets per week to be *progressed*** — to add load or
+reps without the injury risk that comes from driving weight into too little
+volume. Below 12 is fine for **maintenance**; the risk only creeps in when you
+push load/reps at low volume, where the gain is mostly CNS drive and form and
+the cost is fatigue and joint stress. This matters most for rehab work, where
+minimizing risk is the whole point.
+
+The rules that fell out of the WH + JJ build:
+
+- **Count per muscle, pooled across every movement — not per movement.** The
+  floor is a property of the muscle's total weekly volume. A single movement can
+  be kept deliberately low-set for safety (the hyperextension is 2 sets, always
+  last, because it leaves the low back acutely weak) as long as the muscle clears
+  12 from *other* work (the RDL feeds the same low back). Drop the RDL and you'd
+  have to raise the hyper sets to keep the muscle above the floor.
+- **Secondary muscles count 0.5.** `calculate_weekly_volume`
+  (`common.calculations`) already does this (`_SECONDARY_SET_WEIGHT = 0.5`): the
+  first category on an exercise is primary (1.0/set), the rest secondary
+  (0.5/set). Check a plan with `check_volume_minimums` (default minimum 12).
+- **Sets/session for a progression target = 12 ÷ its weekly frequency.** 3×/wk →
+  4 sets; 2×/wk → 6 sets (or pair two movements for that muscle). This also caps
+  session length honestly — you can't have both truly-minimal volume *and* safe
+  progressive overload on the same muscle.
+- **A movement that can't add load progresses by reps** (a machine at its weight
+  ceiling, or a light-by-nature move like the tibialis raise). Rep progression
+  still needs the 12-set floor; feed cheap, non-interfering rep-work as superset
+  fillers so the volume costs almost no extra time.
+
+`wh_jj.py` is the worked example.
+
 ## Pattern to copy
 
 `weekly_split.py` (flat days), `back_rehab_one.py` (two supersets), and
