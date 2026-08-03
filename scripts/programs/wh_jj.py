@@ -7,26 +7,30 @@ chain, and back rehab on WH's machines. Five weekday sessions, no weekends.
 
 Programming principles (see scripts/programs/README.md):
   * Per-MUSCLE weekly volume >= 12 sets is required to PROGRESS a muscle
-    (add load or reps); below 12 is fine for maintenance only. Secondary
-    muscles count 0.5. Sets/session for a target = 12 / weekly frequency.
-  * High frequency, low per-session volume, so DOMS never accumulates enough
-    to compromise the next day's rolling (there are no rest days mid-week).
-  * RDL is held steady at 155 while the hyperextension progression is the focus.
-    RDL + hypers feed the same posterior chain, so the low back clears its floor
-    (9 hyper sets + the RDL's erectors) even with the RDL not advancing.
-  * Supersets pair only non-interfering movements. RDL is grip/spine/hamstring
-    limited, so it pairs only with grip-free, non-competing fillers (tibialis,
-    calf) and its heavy Friday set stays straight. Hyperextension is always
-    straight and last (it leaves the low back acutely weak), with nothing
-    spine-loading after it.
+    (add load or reps); below 12 is fine for maintenance. Secondary muscles
+    count 0.5, pooled across every movement.
+  * LOW BACK IS CLUSTERED ONTO MON/WED/FRI and rested Tue/Thu (+ weekend), so it
+    is never trained on consecutive days. RDL lands Mon and Fri only -- the two
+    freshest back days (after the weekend, and before it) -- never on a
+    pre-fatigued back.
+  * The leg superset (leg press + curl + split squat + hyperextension) runs 3
+    rounds on Mon/Wed/Fri. Every floor still clears with margin, so the 4th
+    round isn't needed and the sessions stay short. Hyper sits IN this superset
+    (paired with the leg work), which is how it was actually trained last year.
+  * Hip adduction/abduction (6 rounds) pair with wrist prehab on Tue/Thu; calf,
+    tibialis, and rotator-cuff external rotation fill the second Tue/Thu block.
+  * RDL warm-ups (empty-bar ramp) are stored as warm-up sets, so they add gym
+    time but NOT working volume -- the floors are unaffected.
 
 Progression targets (>=12 sets/wk): Gluteals (leg press), Hamstrings (RDL +
-single-leg curl), Adductors, Abductors (reps only -- machine maxed at 140),
-Tibialis (reps). Maintenance (<12): quads (split squat), calves, core.
+curl), Adductors, Abductors (reps only -- machine maxed at 140), Tibialis
+(reps), low back (hypers). Maintenance: quads (split squat), calves, rotator
+cuff. Wrist prehab runs 12/wk each side (rotation + extension).
 
-RDL is snatch-grip with NO straps (grip trained raw). The hyperextension
-progression detail lives in the companion note (the .fnw has no notes field):
-    plans/wh/WH + JJ - progression notes.txt
+RDL is snatch-grip with NO straps (grip trained raw). Neck work is planned but
+not yet in the file -- pending a machine at the gym (band/manual isometrics work
+meanwhile). The hyperextension progression detail lives in the companion note
+(the .fnw has no notes field): plans/wh/WH + JJ - progression notes.txt
 
 Usage:
     uv --directory scripts run python -m programs.wh_jj
@@ -52,12 +56,13 @@ PLAN_PREFIX = "WH + JJ"
 
 @dataclass
 class Move:
-    """One exercise within a block, with its set configs and focus mode."""
+    """One exercise within a block: its working sets, focus mode, and warm-ups."""
 
     name: str
     sets: list[SetConfig]
     focus: str = "reps"
     secondary_focus: str = "weight"
+    warmups: list[SetConfig] = field(default_factory=list)
 
 
 def _reps(name: str, reps: int, weight: int, count: int) -> Move:
@@ -74,36 +79,61 @@ def _hold(name: str, seconds: int) -> Move:
 
 # Gluteal-biased leg press (feet high, deep stretch) -- can't squat for glutes
 # until the back is stronger, so the leg press covers glutes here.
-_LEG_PRESS = _reps("Leg Press", reps=12, weight=360, count=4)
-# Single-leg machine curl -- logged as "Hamstring Curl" last year (same
-# exercise, so the history carries over). Replaces the Nordic curl: far lower
-# DOMS, which matters with JJ every day. Reps per side; last year's 24 total
-# @ 100 was 12/side, so starting 12/side @ 100 (the machine stack). 4 sets =
-# 4 per leg.
-_CURL = _reps("Hamstring Curl", reps=12, weight=100, count=4)
-# Quad / knee maintenance -- the feet-high leg press is deliberately glute-biased
-# and won't cover the quads. Done with two DBs held at the sides (WH's big
-# dumbbells): less low-back demand than a barbell front rack. Reps are logged PER
-# SIDE; weight is the TOTAL of both DBs (two 45s = 90), matching last year's
-# weight logging. Starting 12/side @ 90.
-_SPLIT_SQUAT = _reps("ATG Split Squat", reps=12, weight=90, count=2)
-# Rep-progression target, fed as a filler in the RDL's rest (~free volume).
-# 4 sets on each of Tue/Thu/Fri = 12/week.
-_TIB = _reps("Tibialis Raise", reps=25, weight=20, count=4)
-# Maintenance filler (2 sets on Tue/Thu/Fri = 6/week).
+_LEG_PRESS = _reps("Leg Press", reps=12, weight=360, count=3)
+# Single-leg machine curl -- logged as "Hamstring Curl" (same exercise as last
+# year, so history carries over). Reps per side; starting 12/side @ 100.
+_CURL = _reps("Hamstring Curl", reps=12, weight=100, count=3)
+# Quad / knee maintenance, two DBs held at the sides (less low-back demand than a
+# barbell front rack). Reps per side; weight = total of both DBs (two 45s = 90).
+# Round 1 is a bodyweight on-ramp; rounds 2-3 are the working sets.
+_SPLIT_SQUAT = Move(
+    "ATG Split Squat",
+    [SetConfig(reps=12, weight=0), SetConfig(reps=12, weight=90), SetConfig(reps=12, weight=90)],
+)
+# Bodyweight hyperextension -- the rehab centerpiece, in the leg superset (how it
+# was trained last year). The 1-leg + curved-back reps that lead the first sets,
+# and the flat-machine 1-leg static-hold restart, are in the companion note.
+_HYPER = _reps("Hyperextension", reps=35, weight=0, count=3)
+# The Mon/Wed/Fri leg superset, run 3 rounds.
+_LEG_SUPERSET = [_LEG_PRESS, _CURL, _SPLIT_SQUAT, _HYPER]
+
+# RDL: snatch-grip, no straps, held steady at 155. Warm-up ramp (empty bar x2,
+# 95, 135) is stored as warm-up sets, so it adds time but not working volume.
+_RDL = Move(
+    "Snatch-Grip Stiff-Legged RDL",
+    [SetConfig(reps=8, weight=155) for _ in range(4)],
+    warmups=[
+        SetConfig(reps=12, weight=45),
+        SetConfig(reps=12, weight=45),
+        SetConfig(reps=12, weight=95),
+        SetConfig(reps=8, weight=135),
+    ],
+)
+
+# Rep-progression target, fed into the rests. 3 sets on Mon/Tue/Thu/Fri = 12/wk.
+_TIB = _reps("Tibialis Raise", reps=25, weight=20, count=3)
+# Maintenance filler, 2 sets on Tue/Thu/Fri = 6/wk.
 _CALF = _reps("Seated Calf Raise", reps=20, weight=90, count=2)
-# Adductor can still take load; abductor is maxed at the machine's 140, so it
-# progresses by reps only.
+# Rotator-cuff prehab (shoulder health) -- rides the Tue/Thu calf/tib block.
+_EXT_ROTATION = _reps("Cable External Rotation", reps=15, weight=12, count=3)
+# Quad stretch (per side, 2 min), riding the RDL rest on Mon/Fri to prep the
+# split squats -- 2 sides x 120s logged as one set.
+_COUCH = Move(
+    "Couch Stretch",
+    [SetConfig(reps=2, weight=120), SetConfig(reps=2, weight=120)],
+    secondary_focus="time",
+)
+
+# Adductor can still take load; abductor is maxed at the machine's 140 ceiling,
+# so it progresses by reps only. 6 rounds each on Tue/Thu = 12/wk.
 _HIP_ADDUCTION = _reps("Hip Adduction", reps=10, weight=110, count=6)
 _HIP_ABDUCTION = _reps("Hip Abduction", reps=12, weight=140, count=6)
-# Bodyweight; the 1-leg + curved-back reps that lead the first sets, and the
-# flat-machine 1-leg static-hold restart, are described in the companion note.
-_HYPER = _reps("Hyperextension", reps=35, weight=0, count=3)
-# Wrist prehab, fed into the hip-machine superset (non-competing) on Tue/Thu.
-# Anti-flexion (extensors, the top of the forearm) + rotation balance the heavy
-# gripping from JJ and the raw-grip RDLs, keeping the wrists and elbows healthy.
-_WRIST_ROTATION = _reps("Wrist Rotation", reps=15, weight=10, count=3)
-_WRIST_EXTENSION = _reps("Wrist Extension", reps=15, weight=15, count=3)
+# Wrist prehab, one of each every round of the 6-round hip superset -> 6/session,
+# 12/wk each. Anti-flexion (extensors) + rotation balance the heavy gripping from
+# JJ and the raw-grip RDLs, keeping the wrists and elbows healthy.
+_WRIST_ROTATION = _reps("Wrist Rotation", reps=15, weight=10, count=6)
+_WRIST_EXTENSION = _reps("Wrist Extension", reps=15, weight=15, count=6)
+_HIP_SUPERSET = [_HIP_ADDUCTION, _HIP_ABDUCTION, _WRIST_ROTATION, _WRIST_EXTENSION]
 
 
 @dataclass
@@ -124,55 +154,45 @@ def _days() -> list[Day]:
     monday = Day(
         "Monday",
         [
-            # One superset: leg press + single-leg curl + split squat. Leg press
-            # and split squat both hit quads/glutes, so the split squat (a
-            # maintenance move) runs pre-fatigued -- an accepted trade for the
-            # time saving.
-            [_LEG_PRESS, _CURL, _SPLIT_SQUAT],
-            # Hyperextension: its own block, last, nothing spine-loading after.
-            [_HYPER],
+            # RDL (fresh back after the weekend) with tibialis + the quad stretch
+            # filling its rest. No calf here -- calf lives on Tue/Thu/Fri.
+            [_RDL, _TIB, _COUCH],
+            # Leg superset, 3 rounds.
+            list(_LEG_SUPERSET),
         ],
     )
     tuesday = Day(
         "Tuesday",
         [
-            # RDL with calf + tibialis filling its rest (both grip-free, non-
-            # competing). Tibialis matches the RDL's 4 sets; calf stays at 2.
-            [_reps("Snatch-Grip Stiff-Legged RDL", reps=8, weight=155, count=4), _CALF, _TIB],
-            # Hip adduction/abduction antagonist pair, with wrist prehab in the
-            # rest (non-competing with the lower-body machine work).
-            [_HIP_ADDUCTION, _HIP_ABDUCTION, _WRIST_ROTATION, _WRIST_EXTENSION],
+            # Hip adduction/abduction (6 rounds) with wrist prehab in the rest.
+            list(_HIP_SUPERSET),
+            # Calf + tibialis + rotator-cuff external rotation.
+            [_CALF, _TIB, _EXT_ROTATION],
         ],
     )
     wednesday = Day(
         "Wednesday",
         [
-            [_LEG_PRESS, _CURL, _SPLIT_SQUAT],
-            [_HYPER],
+            # Leg superset only -- the short day, no low-back-heavy RDL.
+            list(_LEG_SUPERSET),
         ],
     )
     thursday = Day(
         "Thursday",
         [
-            # Hip antagonist pair + wrist prehab.
-            [_HIP_ADDUCTION, _HIP_ABDUCTION, _WRIST_ROTATION, _WRIST_EXTENSION],
-            # Calf (maintenance) + tibialis (the day's tib contribution).
-            [_CALF, _TIB],
-            # Core rehab: each its own block (quick, straight).
-            [_hold("Side Plank", 80)],
-            [_reps("QL Raise", reps=20, weight=0, count=3)],
-            [_reps("Slow Scissors", reps=30, weight=0, count=1)],
+            list(_HIP_SUPERSET),
+            [_CALF, _TIB, _EXT_ROTATION],
         ],
     )
     friday = Day(
         "Friday",
         [
-            # RDL with calf + tibialis filling its rest (mirrors Tuesday).
-            [_reps("Snatch-Grip Stiff-Legged RDL", reps=8, weight=155, count=4), _CALF, _TIB],
-            # Leg press its own block after the RDL.
-            [_LEG_PRESS],
-            # Hyperextension last.
-            [_HYPER],
+            # RDL with calf + tibialis + quad stretch (mirrors Monday).
+            [_RDL, _CALF, _TIB, _COUCH],
+            # Leg superset, 3 rounds.
+            list(_LEG_SUPERSET),
+            # Single Elephant Walk to finish the week.
+            [_hold("Elephant Walk", 240)],
         ],
     )
     return [monday, tuesday, wednesday, thursday, friday]
@@ -190,6 +210,7 @@ def _build_move(move: Move, mappings: ExerciseMapping) -> dict[str, Any]:
         mappings,
         focus=move.focus,  # type: ignore[arg-type]
         secondary_focus=move.secondary_focus,  # type: ignore[arg-type]
+        warmups=move.warmups,
     )
 
 

@@ -8,11 +8,12 @@ from programs.wh_jj import DAYS, PLAN_PREFIX, build_all, build_day
 
 MAPPINGS = load_exercise_mappings()
 
-# Movements that share the hamstrings as a prime mover with the RDL; the RDL
-# must never sit in a superset with any of them (same-muscle interference).
+# Movements sharing hamstrings/low-back with the RDL -- it must never superset
+# with these.
 _HAMSTRING_PARTNERS = {"Hamstring Curl", "Hyperextension"}
-# Grip-free, non-competing fillers the RDL is allowed to pair with.
-_RDL_ALLOWED_PARTNERS = {"Tibialis Raise", "Seated Calf Raise"}
+# Grip-free, non-competing fillers the RDL may pair with.
+_RDL_ALLOWED_PARTNERS = {"Tibialis Raise", "Seated Calf Raise", "Couch Stretch"}
+_LEG_SUPERSET_NAMES = {"Leg Press", "Hamstring Curl", "ATG Split Squat", "Hyperextension"}
 
 
 def _flatten(workout):
@@ -34,6 +35,10 @@ def _set_counts(workouts):
     return counts
 
 
+def _day(suffix):
+    return next(d for d in DAYS if d.suffix == suffix)
+
+
 def test_five_days_with_expected_names():
     workouts = build_all(MAPPINGS)
     assert list(workouts.keys()) == [
@@ -47,27 +52,25 @@ def test_five_days_with_expected_names():
 
 def test_workout_name_matches_day():
     for day in DAYS:
-        workout = build_day(day, MAPPINGS)
-        assert workout["Data"][0]["Name"] == day.plan_name
+        assert build_day(day, MAPPINGS)["Data"][0]["Name"] == day.plan_name
 
 
 def test_one_superset_per_block():
-    # FitNotes renders only the first SuperSet per block, so each block holds
-    # exactly one.
+    # FitNotes renders only the first SuperSet per block, so each holds one.
     for day in DAYS:
         blocks = build_day(day, MAPPINGS)["Data"][0]["Workouts"]
         assert all(len(block["SuperSets"]) == 1 for block in blocks)
 
 
 def test_block_counts_per_day():
-    # Mon/Wed: [LP+curl+split], [Hyper]                          = 2
-    # Tue:     [RDL+calf+tib], [hips+grip]                       = 2
-    # Thu:     [hips+grip], [calf+tib], side plank, QL, scissors = 5
-    # Fri:     [RDL+calf+tib], [LP], [Hyper]                     = 3
-    expected = {"Monday": 2, "Tuesday": 2, "Wednesday": 2, "Thursday": 5, "Friday": 3}
+    # Mon: [RDL+tib+couch], [leg superset]                      = 2
+    # Tue: [hips+wrist], [calf+tib+ext-rot]                     = 2
+    # Wed: [leg superset]                                       = 1
+    # Thu: [hips+wrist], [calf+tib+ext-rot]                     = 2
+    # Fri: [RDL+calf+tib+couch], [leg superset], elephant walk  = 3
+    expected = {"Monday": 2, "Tuesday": 2, "Wednesday": 1, "Thursday": 2, "Friday": 3}
     for day in DAYS:
-        workout = build_day(day, MAPPINGS)
-        assert len(workout["Data"][0]["Workouts"]) == expected[day.suffix]
+        assert len(build_day(day, MAPPINGS)["Data"][0]["Workouts"]) == expected[day.suffix]
 
 
 def test_multi_exercise_blocks_are_named():
@@ -79,27 +82,25 @@ def test_multi_exercise_blocks_are_named():
 
 def test_weekly_set_counts():
     counts = _set_counts(build_all(MAPPINGS).values())
-    assert counts["Leg Press"] == 12
-    assert counts["Hamstring Curl"] == 8
-    assert counts["ATG Split Squat"] == 4
+    assert counts["Leg Press"] == 9
+    assert counts["Hamstring Curl"] == 9
+    # 3 rounds x 3 days: each day is 1 bodyweight on-ramp + 2 working.
+    assert counts["ATG Split Squat"] == 9
+    assert counts["Hyperextension"] == 9
+    # Working sets only; the warm-up ramp lives in WarmupSetDetails.
+    assert counts["Snatch-Grip Stiff-Legged RDL"] == 8
     assert counts["Tibialis Raise"] == 12
     assert counts["Seated Calf Raise"] == 6
+    assert counts["Cable External Rotation"] == 6
+    assert counts["Couch Stretch"] == 4
     assert counts["Hip Adduction"] == 12
     assert counts["Hip Abduction"] == 12
-    assert counts["Snatch-Grip Stiff-Legged RDL"] == 8
-    assert counts["Hyperextension"] == 9
-    assert counts["Wrist Rotation"] == 6
-    assert counts["Wrist Extension"] == 6
-    assert counts["QL Raise"] == 3
-    assert counts["Side Plank"] == 1
-    assert counts["Slow Scissors"] == 1
-    # Bird Dog was cut -- progressed past it.
-    assert counts["Bird Dog"] == 0
+    assert counts["Wrist Rotation"] == 12
+    assert counts["Wrist Extension"] == 12
+    assert counts["Elephant Walk"] == 1
 
 
 def test_progression_targets_clear_twelve_sets():
-    # Every muscle we intend to progressively overload must reach the 12-set/wk
-    # floor (secondary muscles counted at 0.5).
     vol = calculate_weekly_volume(list(build_all(MAPPINGS).values()))
     for muscle in ("Gluteals", "Hamstrings", "Adductors", "Abductors", "Tibialis", "Back (Lower)"):
         assert vol[muscle] >= 12, f"{muscle} under the 12-set floor: {vol[muscle]}"
@@ -107,41 +108,58 @@ def test_progression_targets_clear_twelve_sets():
 
 def test_key_muscle_volumes():
     vol = calculate_weekly_volume(list(build_all(MAPPINGS).values()))
-    assert vol["Hamstrings"] == 26.5
-    assert vol["Gluteals"] == 22.5
-    assert vol["Abductors"] == 13.0
-    assert vol["Tibialis"] == 12.0
-    assert vol["Adductors"] == 12.0
-    # 9 hyper sets (primary) + the RDL's erectors (0.5 each) = 13; low back is the
-    # hyperextension progression target with the RDL held steady at 155.
+    assert vol["Hamstrings"] == 27.0
+    assert vol["Gluteals"] == 22.0
     assert vol["Back (Lower)"] == 13.0
-    # Quads are maintenance only (below the floor by design).
-    assert vol["Quadriceps"] == 10.0
-    # Wrist prehab (rotation + extension, 6 sets each = 12 primary) plus the RDL's
-    # forearms (8 x 0.5 = 4) = 16.
-    assert vol["Forearms"] == 16.0
+    assert vol["Adductors"] == 12.0
+    assert vol["Abductors"] == 12.0
+    assert vol["Tibialis"] == 12.0
+    # Wrist prehab (12 each) + the RDL's forearms = deliberate wrist-health volume.
+    assert vol["Forearms"] == 28.0
+    # Rotator-cuff maintenance.
+    assert vol["Rotator Cuff"] == 6.0
 
 
-def test_hyperextension_is_last_and_standalone_on_lifting_days():
-    # Hyper leaves the low back acutely weak, so it is always the final block of
-    # the day, alone, with nothing spine-loading after it. Mon/Wed/Fri only.
+def test_rdl_warmups_excluded_from_volume():
+    # The RDL warm-up ramp is stored in WarmupSetDetails, so it never inflates
+    # working volume.
+    for suffix in ("Monday", "Friday"):
+        rdl = next(
+            ex
+            for ss in _flatten(build_day(_day(suffix), MAPPINGS))
+            for ex in ss["Exercises"]
+            if ex["Definition"]["Name"] == "Snatch-Grip Stiff-Legged RDL"
+        )
+        assert len(rdl["SetDetails"]) == 4
+        assert len(rdl["WarmupSetDetails"]) == 4
+
+
+def test_leg_superset_on_mwf():
+    # Leg press + curl + split squat + hyper ride one superset on Mon/Wed/Fri.
     for suffix in ("Monday", "Wednesday", "Friday"):
-        day = next(d for d in DAYS if d.suffix == suffix)
-        blocks = _flatten(build_day(day, MAPPINGS))
-        last = blocks[-1]
-        assert len(last["Exercises"]) == 1
-        assert last["Exercises"][0]["Definition"]["Name"] == "Hyperextension"
+        blocks = _superset_blocks(build_day(_day(suffix), MAPPINGS))
+        assert any(
+            {ex["Definition"]["Name"] for ex in ss["Exercises"]} >= _LEG_SUPERSET_NAMES
+            for ss in blocks
+        ), f"{suffix}: leg superset missing an exercise"
+
+
+def test_rdl_only_on_monday_and_friday():
+    # Low back is clustered on Mon/Wed/Fri and rested Tue/Thu; the RDL lands only
+    # on the two freshest back days.
+    expected = {"Monday": 4, "Tuesday": 0, "Wednesday": 0, "Thursday": 0, "Friday": 4}
+    for suffix, count in expected.items():
+        counts = _set_counts([build_day(_day(suffix), MAPPINGS)])
+        assert counts["Snatch-Grip Stiff-Legged RDL"] == count
 
 
 def test_hyperextension_only_on_lifting_days():
-    counts_by_day = {day.suffix: _set_counts([build_day(day, MAPPINGS)]) for day in DAYS}
-    assert counts_by_day["Tuesday"]["Hyperextension"] == 0
-    assert counts_by_day["Thursday"]["Hyperextension"] == 0
+    for suffix in ("Tuesday", "Thursday"):
+        counts = _set_counts([build_day(_day(suffix), MAPPINGS)])
+        assert counts["Hyperextension"] == 0
 
 
 def test_rdl_never_supersets_with_a_hamstring_movement():
-    # The RDL is grip/spine/hamstring limited; it may pair only with grip-free,
-    # non-competing fillers, never with another hamstring movement.
     for day in DAYS:
         for ss in _superset_blocks(build_day(day, MAPPINGS)):
             names = {ex["Definition"]["Name"] for ex in ss["Exercises"]}
@@ -156,24 +174,17 @@ def test_rdl_never_supersets_with_a_hamstring_movement():
 
 
 def test_rdl_held_steady_at_155():
-    # RDL is held steady at 155 both days while the hyperextension progresses.
-    def _rdl_weights(suffix):
-        day = next(d for d in DAYS if d.suffix == suffix)
+    for suffix in ("Monday", "Friday"):
         rdl = next(
             ex
-            for ss in _flatten(build_day(day, MAPPINGS))
+            for ss in _flatten(build_day(_day(suffix), MAPPINGS))
             for ex in ss["Exercises"]
             if ex["Definition"]["Name"] == "Snatch-Grip Stiff-Legged RDL"
         )
-        return {sd["Secondary"] for sd in rdl["SetDetails"]}
-
-    assert _rdl_weights("Tuesday") == {155}
-    assert _rdl_weights("Friday") == {155}
+        assert {sd["Secondary"] for sd in rdl["SetDetails"]} == {155}
 
 
 def test_hip_abduction_capped_at_machine_max():
-    # The machine tops out at 140 lb (maxed last year), so abduction progresses
-    # by reps only -- every set stays at 140.
     for day in DAYS:
         for ss in _flatten(build_day(day, MAPPINGS)):
             for ex in ss["Exercises"]:
@@ -181,17 +192,49 @@ def test_hip_abduction_capped_at_machine_max():
                     assert all(sd["Secondary"] == 140 for sd in ex["SetDetails"])
 
 
+def test_wrist_prehab_in_hip_superset_twelve_per_week():
+    grip = {"Wrist Rotation", "Wrist Extension"}
+    for suffix in ("Tuesday", "Thursday"):
+        hip_block = next(
+            ss
+            for ss in _superset_blocks(build_day(_day(suffix), MAPPINGS))
+            if any(ex["Definition"]["Name"] == "Hip Adduction" for ex in ss["Exercises"])
+        )
+        names = {ex["Definition"]["Name"] for ex in hip_block["Exercises"]}
+        assert grip <= names, f"{suffix}: wrist prehab not in the hip superset"
+    counts = _set_counts(build_all(MAPPINGS).values())
+    assert counts["Wrist Rotation"] == 12
+    assert counts["Wrist Extension"] == 12
+
+
+def test_external_rotation_on_tue_thu_only():
+    for suffix in ("Tuesday", "Thursday"):
+        assert _set_counts([build_day(_day(suffix), MAPPINGS)])["Cable External Rotation"] == 3
+    for suffix in ("Monday", "Wednesday", "Friday"):
+        assert _set_counts([build_day(_day(suffix), MAPPINGS)])["Cable External Rotation"] == 0
+
+
+def test_elephant_walk_is_friday_finisher():
+    blocks = _flatten(build_day(_day("Friday"), MAPPINGS))
+    last = blocks[-1]
+    assert len(last["Exercises"]) == 1
+    assert last["Exercises"][0]["Definition"]["Name"] == "Elephant Walk"
+
+
+def test_split_squat_has_bodyweight_onramp():
+    # Round 1 is a bodyweight on-ramp (0), rounds 2-3 are the working weight.
+    split = next(
+        ex
+        for ss in _flatten(build_day(_day("Monday"), MAPPINGS))
+        for ex in ss["Exercises"]
+        if ex["Definition"]["Name"] == "ATG Split Squat"
+    )
+    assert [sd["Secondary"] for sd in split["SetDetails"]] == [0, 90, 90]
+
+
 def test_hamstring_curl_registered():
-    # The single-leg curl is logged under the existing "Hamstring Curl" name so
-    # last year's history carries over.
     assert MAPPINGS.equipment["Hamstring Curl"] == "Machine"
     assert MAPPINGS.primary_muscle["Hamstring Curl"] == "Hamstrings"
-
-
-def test_nordic_curl_absent_everywhere():
-    # The Nordic curl is dropped in favour of the single-leg machine curl.
-    counts = _set_counts(build_all(MAPPINGS).values())
-    assert counts["Nordic Hamstring Curl"] == 0
 
 
 def test_wrist_prehab_registered():
@@ -200,32 +243,6 @@ def test_wrist_prehab_registered():
         assert MAPPINGS.primary_muscle[name] == "Forearms"
 
 
-def test_wrist_prehab_shares_the_hip_superset():
-    # Wrist prehab rides in the hip adduction/abduction superset (non-competing)
-    # on Tuesday and Thursday -- never on a lifting day.
-    grip = {"Wrist Rotation", "Wrist Extension"}
-    for suffix in ("Tuesday", "Thursday"):
-        day = next(d for d in DAYS if d.suffix == suffix)
-        hip_block = next(
-            ss
-            for ss in _superset_blocks(build_day(day, MAPPINGS))
-            if any(ex["Definition"]["Name"] == "Hip Adduction" for ex in ss["Exercises"])
-        )
-        names = {ex["Definition"]["Name"] for ex in hip_block["Exercises"]}
-        assert grip <= names, f"{suffix}: wrist prehab not in the hip superset"
-    for suffix in ("Monday", "Wednesday", "Friday"):
-        day = next(d for d in DAYS if d.suffix == suffix)
-        counts = _set_counts([build_day(day, MAPPINGS)])
-        assert counts["Wrist Rotation"] == 0
-        assert counts["Wrist Extension"] == 0
-
-
-def test_mon_wed_are_one_working_superset_plus_hyper():
-    # Monday/Wednesday collapse to a single multi-exercise superset (leg press +
-    # curl + split squat), followed by the standalone hyperextension.
-    for suffix in ("Monday", "Wednesday"):
-        day = next(d for d in DAYS if d.suffix == suffix)
-        supersets = _superset_blocks(build_day(day, MAPPINGS))
-        assert len(supersets) == 1
-        names = {ex["Definition"]["Name"] for ex in supersets[0]["Exercises"]}
-        assert names == {"Leg Press", "Hamstring Curl", "ATG Split Squat"}
+def test_nordic_curl_absent_everywhere():
+    counts = _set_counts(build_all(MAPPINGS).values())
+    assert counts["Nordic Hamstring Curl"] == 0

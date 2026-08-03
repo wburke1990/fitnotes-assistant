@@ -123,6 +123,7 @@ def build_exercise(
     *,
     focus: Focus = "reps",
     secondary_focus: SecondaryFocus = "weight",
+    warmups: list[SetConfig] | None = None,
 ) -> dict[str, Any]:
     """Build a complete exercise object from name and set configurations.
 
@@ -137,6 +138,10 @@ def build_exercise(
             ``weight``) when it is non-zero. "weight" (default) is a load;
             "time" is a hold duration in seconds, letting a reps-focused move
             also carry a hold (e.g. a per-side hold as one set of 2 reps x 120s).
+        warmups: Optional warm-up sets, stored in ``WarmupSetDetails``. FitNotes
+            tracks these separately from working sets, and ``calculate_weekly_volume``
+            counts only ``SetDetails`` -- so warm-ups never inflate the weekly
+            volume math (a ramp to a working weight adds gym time, not volume).
 
     Returns:
         Complete exercise dict in .fnw format
@@ -168,6 +173,7 @@ def build_exercise(
     categories.extend(_build_category(s) for s in mappings.secondary_muscles.get(name, []))
 
     set_details = [_build_set_detail(s.reps, s.weight, s.rpe) for s in normalized_sets]
+    warmup_details = [_build_set_detail(w.reps, w.weight, w.rpe) for w in (warmups or [])]
 
     max_reps = max((s.reps for s in normalized_sets), default=0)
     max_weight = max((s.weight for s in normalized_sets), default=0)
@@ -183,7 +189,7 @@ def build_exercise(
         "Id": _generate_uuid(),
         "RestTime": 0,
         "Rules": [],
-        "WarmupSetDetails": [],
+        "WarmupSetDetails": warmup_details,
         "SetDetails": set_details,
         "Definition": {
             "Id": exercise_id,
