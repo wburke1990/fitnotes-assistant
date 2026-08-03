@@ -50,6 +50,7 @@ CATEGORY_IDS: dict[str, str] = {
     "Quadratus Lumborum": "507d90fc-ce73-4a2c-a532-802cffb917fe",
     "Tibialis": "19",
     "Cardio": "15",
+    "Neck": "7c2e9b41-5a83-4d6f-b12e-9f3a6c8d0e57",
 }
 
 

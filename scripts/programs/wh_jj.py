@@ -27,10 +27,10 @@ curl), Adductors, Abductors (reps only -- machine maxed at 140), Tibialis
 (reps), low back (hypers). Maintenance: quads (split squat), calves, rotator
 cuff. Wrist prehab runs 12/wk each side (rotation + extension).
 
-RDL is snatch-grip with NO straps (grip trained raw). Neck work is planned but
-not yet in the file -- pending a machine at the gym (band/manual isometrics work
-meanwhile). The hyperextension progression detail lives in the companion note
-(the .fnw has no notes field): plans/wh/WH + JJ - progression notes.txt
+RDL is snatch-grip with NO straps (grip trained raw). Band neck prehab (flexion
++ extension) rides the Tue/Thu accessory block -- start light, it's new. The
+hyperextension progression detail lives in the companion note (the .fnw has no
+notes field): plans/wh/WH + JJ - progression notes.txt
 
 Usage:
     uv --directory scripts run python -m programs.wh_jj
@@ -116,6 +116,11 @@ _TIB = _reps("Tibialis Raise", reps=25, weight=20, count=3)
 _CALF = _reps("Seated Calf Raise", reps=20, weight=90, count=2)
 # Rotator-cuff prehab (shoulder health) -- rides the Tue/Thu calf/tib block.
 _EXT_ROTATION = _reps("Cable External Rotation", reps=15, weight=12, count=3)
+# Band neck prehab -- the biggest durability gap for 5x/week grappling. New to
+# it, so start conservative (2 sets each) and build up; flexion + extension cover
+# the sagittal plane (guillotine / crank defense), add lateral later.
+_NECK_FLEXION = _reps("Band Neck Flexion", reps=15, weight=0, count=2)
+_NECK_EXTENSION = _reps("Band Neck Extension", reps=15, weight=0, count=2)
 # Quad stretch (per side, 2 min), riding the RDL rest on Mon/Fri to prep the
 # split squats -- 2 sides x 120s logged as one set.
 _COUCH = Move(
@@ -166,8 +171,8 @@ def _days() -> list[Day]:
         [
             # Hip adduction/abduction (6 rounds) with wrist prehab in the rest.
             list(_HIP_SUPERSET),
-            # Calf + tibialis + rotator-cuff external rotation.
-            [_CALF, _TIB, _EXT_ROTATION],
+            # Calf + tibialis + rotator-cuff external rotation + band neck.
+            [_CALF, _TIB, _EXT_ROTATION, _NECK_FLEXION, _NECK_EXTENSION],
         ],
     )
     wednesday = Day(
@@ -181,7 +186,7 @@ def _days() -> list[Day]:
         "Thursday",
         [
             list(_HIP_SUPERSET),
-            [_CALF, _TIB, _EXT_ROTATION],
+            [_CALF, _TIB, _EXT_ROTATION, _NECK_FLEXION, _NECK_EXTENSION],
         ],
     )
     friday = Day(

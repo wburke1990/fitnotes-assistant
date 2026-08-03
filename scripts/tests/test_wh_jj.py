@@ -98,6 +98,8 @@ def test_weekly_set_counts():
     assert counts["Wrist Rotation"] == 12
     assert counts["Wrist Extension"] == 12
     assert counts["Elephant Walk"] == 1
+    assert counts["Band Neck Flexion"] == 4
+    assert counts["Band Neck Extension"] == 4
 
 
 def test_progression_targets_clear_twelve_sets():
@@ -118,6 +120,8 @@ def test_key_muscle_volumes():
     assert vol["Forearms"] == 28.0
     # Rotator-cuff maintenance.
     assert vol["Rotator Cuff"] == 6.0
+    # Band neck prehab -- conservative start (2 sets each x Tue/Thu).
+    assert vol["Neck"] == 8.0
 
 
 def test_rdl_warmups_excluded_from_volume():
@@ -241,6 +245,20 @@ def test_wrist_prehab_registered():
     for name in ("Wrist Rotation", "Wrist Extension"):
         assert MAPPINGS.equipment[name] == "Single Dumbbell"
         assert MAPPINGS.primary_muscle[name] == "Forearms"
+
+
+def test_band_neck_registered_and_on_tue_thu():
+    for name in ("Band Neck Flexion", "Band Neck Extension"):
+        assert MAPPINGS.equipment[name] == "None"
+        assert MAPPINGS.primary_muscle[name] == "Neck"
+    for suffix in ("Tuesday", "Thursday"):
+        counts = _set_counts([build_day(_day(suffix), MAPPINGS)])
+        assert counts["Band Neck Flexion"] == 2
+        assert counts["Band Neck Extension"] == 2
+    for suffix in ("Monday", "Wednesday", "Friday"):
+        counts = _set_counts([build_day(_day(suffix), MAPPINGS)])
+        assert counts["Band Neck Flexion"] == 0
+        assert counts["Band Neck Extension"] == 0
 
 
 def test_nordic_curl_absent_everywhere():
