@@ -47,10 +47,32 @@ def test_each_superset_is_its_own_block():
         assert all(len(block["SuperSets"]) == 1 for block in blocks)
 
 
-def test_short_days_are_a_single_hip_circuit():
-    # Tue/Thu are short: one block, the adduction/abduction/tibialis circuit.
+def test_short_days_are_a_single_hip_and_wrist_circuit():
+    # Tue/Thu are short: one block, ad/ab with wrist prehab filling the rest.
     for suffix in ("Tuesday", "Thursday"):
-        assert _names(_by_suffix(suffix)) == [["Hip Adduction", "Hip Abduction", "Tibialis Raise"]]
+        assert _names(_by_suffix(suffix)) == [
+            ["Hip Adduction", "Hip Abduction", "Wrist Rotation", "Wrist Extension"]
+        ]
+
+
+def test_calf_and_tibs_ride_the_rdl_block_on_full_hinge_days():
+    # Calf + tibialis superset with the RDL on Mon/Fri (the user's ankle work).
+    for suffix in ("Monday", "Friday"):
+        rdl_block = _names(_by_suffix(suffix))[0]
+        assert rdl_block == [
+            "Snatch-Grip Stiff-Legged RDL",
+            "Tibialis Raise",
+            "Seated Calf Raise",
+            "Couch Stretch",
+        ]
+
+
+def test_wrist_prehab_runs_six_rounds_each_short_day():
+    for suffix in ("Tuesday", "Thursday"):
+        ss1 = _blocks(_by_suffix(suffix))[0]
+        counts = {ex["Definition"]["Name"]: len(ex["SetDetails"]) for ex in ss1["Exercises"]}
+        assert counts["Wrist Rotation"] == 6
+        assert counts["Wrist Extension"] == 6
 
 
 def test_rdl_only_on_the_fresh_full_days():

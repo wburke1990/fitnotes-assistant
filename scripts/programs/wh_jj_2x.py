@@ -9,7 +9,8 @@ Now the split is:
   * Mon / Wed / Fri -- FULL lower-body / posterior-chain / back-rehab days
     (not after JJ, so there's time and a fresh back).
   * Tue / Thu -- SHORT sessions right after the JJ class (shower at the gym
-    anyway): one dense hip adduction/abduction machine circuit, nothing more.
+    anyway): one dense hip adduction/abduction machine circuit, with wrist
+    prehab (rotation + extension) filling the rest during the 6 ad/ab rounds.
 
 The WH machines the user doesn't have at home get the emphasis: the leg press
 (loaded for glutes), the hip adduction/abduction machine, and the tibialis
@@ -22,19 +23,22 @@ Must-hit, per the user:
     Tue/Thu stay short and the low back is never trained on consecutive days.
   * Hip adduction + abduction machine -- 6 rounds on each short day = 12/wk each.
   * Leg press -- loaded, gluteal-biased; pools to ~22 across the week.
-  * Tibialis machine -- rep progression, ~18/wk.
+  * Tibialis machine -- rep progression, 12/wk (4 sets on each full day: rides
+    the RDL rest Mon/Fri, a short ankle block on Wed).
 
 Programming principles (see scripts/programs/README.md):
   * Per-MUSCLE weekly volume >= 12 sets to PROGRESS (add load or reps); secondary
     muscles count 0.5, pooled across every movement. Below 12 is maintenance.
   * LOW BACK is trained Mon/Wed/Fri only -- never on consecutive days (Tue/Thu
     carry no low-back work), and the heavy RDL lands on the two freshest days.
-  * With JJ down to 2x/week the old plan's wrist/rotator/neck durability block is
-    dropped to keep Tue/Thu short; fold it back into a M/W/F rest if wanted.
+  * Wrist prehab (rotation + extension) rides the Tue/Thu ad/ab rest -- free
+    rest-work on adjacent machines. Rotator-cuff / neck durability work can fold
+    into a M/W/F rest if wanted (see the companion note).
 
 Progression targets (>=12 sets/wk): Gluteals (leg press), Hamstrings (RDL +
 curl), Back (Lower) (hypers + RDL), Adductors, Abductors (reps only -- machine
-maxed), Tibialis (reps). Maintenance: Quadriceps (split squat), Calves.
+maxed), Tibialis (reps). Maintenance: Quadriceps (split squat), Calves, Forearms
+(wrist prehab, 12/wk each).
 
 The hyperextension progression detail lives in the companion note (a .fnw has no
 notes field): plans/wh/WH + JJ (2x) - progression notes.txt
@@ -119,11 +123,12 @@ _HYPER = _reps("Hyperextension", reps=35, weight=0, count=3)
 # The Mon/Wed/Fri leg superset, run 3 rounds.
 _LEG_SUPERSET = [_LEG_PRESS, _CURL, _SPLIT_SQUAT, _HYPER]
 
-# Tibialis progresses by reps (light fixed load). 3 in the Mon/Fri RDL rest,
-# 6 on each short day (rides the hip circuit) = ~18/wk.
-_TIB = _reps("Tibialis Raise", reps=25, weight=20, count=3)
-_TIB_SHORT = _reps("Tibialis Raise", reps=25, weight=20, count=6)
-# Maintenance calf, 2 sets on Friday.
+# Tibialis progresses by reps (light fixed load): 4 sets on each full day
+# (Mon/Wed/Fri) = 12/wk. Rides the RDL rest on Mon/Fri (4 sets = the 4 RDL
+# rounds); a short ankle block on Wed keeps the frequency at 3x.
+_TIB = _reps("Tibialis Raise", reps=25, weight=20, count=4)
+# Maintenance calf, 2 sets on each full day (Mon/Wed/Fri) = 6/wk direct (plus the
+# leg-press / curl secondaries). Seated (machine), so no grip clash with the RDL.
 _CALF = _reps("Seated Calf Raise", reps=20, weight=90, count=2)
 # Quad stretch (per side, 2 min), riding the RDL rest to prep the split squats --
 # 2 sides x 120s logged as one set (counts once for volume).
@@ -138,7 +143,13 @@ _COUCH = Move(
 # short session is this one dense antagonist machine circuit + tibialis filler.
 _HIP_ADDUCTION = _reps("Hip Adduction", reps=10, weight=110, count=6)
 _HIP_ABDUCTION = _reps("Hip Abduction", reps=12, weight=140, count=6)
-_HIP_CIRCUIT = [_HIP_ADDUCTION, _HIP_ABDUCTION, _TIB_SHORT]
+# Wrist prehab (anti-flexion extensors + rotation) fills the rest during the 6
+# ad/ab rounds -- the machines sit next to each other, so it's free rest-work.
+# 6 each = 12/wk, balancing the heavy JJ gripping and the raw-grip RDLs. This
+# circuit is the whole short session.
+_WRIST_ROTATION = _reps("Wrist Rotation", reps=15, weight=10, count=6)
+_WRIST_EXTENSION = _reps("Wrist Extension", reps=15, weight=15, count=6)
+_HIP_CIRCUIT = [_HIP_ADDUCTION, _HIP_ABDUCTION, _WRIST_ROTATION, _WRIST_EXTENSION]
 
 
 @dataclass
@@ -159,8 +170,9 @@ def _days() -> list[Day]:
     monday = Day(
         "Monday",
         [
-            # RDL on a fresh back, with tibialis + the quad stretch in its rest.
-            [_RDL, _TIB, _COUCH],
+            # RDL on a fresh back, with tibialis + calf + the quad stretch riding
+            # its rest.
+            [_RDL, _TIB, _CALF, _COUCH],
             # Leg superset, 3 rounds.
             list(_LEG_SUPERSET),
         ],
@@ -171,14 +183,17 @@ def _days() -> list[Day]:
         [
             # Leg superset only -- no low-back-heavy RDL mid-week.
             list(_LEG_SUPERSET),
+            # Short ankle block so tibialis (and calf) hit all three full days.
+            [_TIB, _CALF],
         ],
     )
     thursday = Day("Thursday", [list(_HIP_CIRCUIT)])
     friday = Day(
         "Friday",
         [
-            # RDL with calf + tibialis + quad stretch (mirrors Monday, +calf).
-            [_RDL, _CALF, _TIB, _COUCH],
+            # RDL with tibialis + calf + quad stretch riding its rest (mirrors
+            # Monday).
+            [_RDL, _TIB, _CALF, _COUCH],
             # Leg superset, 3 rounds.
             list(_LEG_SUPERSET),
             # Elephant walk to finish -- posterior-chain decompression.

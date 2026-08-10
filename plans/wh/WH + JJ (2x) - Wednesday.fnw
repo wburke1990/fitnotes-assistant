@@ -4,28 +4,28 @@
   "Type": "FNWorkoutDefinitionDTO",
   "Data": [
     {
-      "Id": "47455279-68EF-4610-B0E8-6D0AF36CDEB4",
+      "Id": "5120F9EA-DE37-4BB0-8F30-B17D7FBD64CA",
       "Name": "WH + JJ (2x) - Wednesday",
       "Deleted": false,
       "SortIndex": 0,
       "Workouts": [
         {
-          "Id": "A1296371-C9E5-4261-B754-E87F8053AB04",
+          "Id": "CC7B75B8-C1CF-4CCC-AAEF-5B910916B2C2",
           "IsCurrent": false,
           "IsEveryday": true,
           "Measurements": [],
           "SuperSets": [
             {
-              "Id": "EB4FE846-6F13-47CB-BDF6-49384D767FC0",
+              "Id": "0987263D-A5DF-42FD-8D48-8DADF08BEA2D",
               "Exercises": [
                 {
-                  "Id": "C1DA8A54-962C-437E-A7A6-1F032681DCC2",
+                  "Id": "C675E25D-803A-48B0-9E39-F93640F4DC2C",
                   "RestTime": 0,
                   "Rules": [],
                   "WarmupSetDetails": [],
                   "SetDetails": [
                     {
-                      "Id": "0BE037B6-6320-4043-A9A6-8BEC6F7BDFAC",
+                      "Id": "D0247DDE-50ED-416B-ADC0-57ECF3CA596F",
                       "Primary": 12,
                       "Secondary": 360,
                       "RPE": 0,
@@ -34,7 +34,7 @@
                       "IsPersonalRecord": false
                     },
                     {
-                      "Id": "6AFB1317-4B68-442D-A3B0-42EB735361F1",
+                      "Id": "01DD50A1-C1A7-4FB9-ACD2-BEF3CCF2F91E",
                       "Primary": 12,
                       "Secondary": 360,
                       "RPE": 0,
@@ -43,7 +43,7 @@
                       "IsPersonalRecord": false
                     },
                     {
-                      "Id": "9E4F70C7-03C1-47C8-B801-5BCEC664D309",
+                      "Id": "4A82B565-65E1-431D-8026-75C59D5D5829",
                       "Primary": 12,
                       "Secondary": 360,
                       "RPE": 0,
@@ -53,7 +53,7 @@
                     }
                   ],
                   "Definition": {
-                    "Id": "B3106AAC-F5C5-43A5-B7C1-2597DBF8FD0C",
+                    "Id": "FD948763-657C-4CAB-A091-63263C966DF7",
                     "Name": "Leg Press",
                     "Deleted": false,
                     "Equipment": {
@@ -131,13 +131,13 @@
                   }
                 },
                 {
-                  "Id": "8E0D5F40-103A-42A7-BB1F-8646B5CCDAD2",
+                  "Id": "BA5D8196-6B17-44B9-8FE7-506AFCE3002C",
                   "RestTime": 0,
                   "Rules": [],
                   "WarmupSetDetails": [],
                   "SetDetails": [
                     {
-                      "Id": "F7E96247-CE9C-447E-AA7E-B440CBDBA1E3",
+                      "Id": "2C13E32C-33CA-4EF9-BD64-9AD6EDC4BC03",
                       "Primary": 12,
                       "Secondary": 100,
                       "RPE": 0,
@@ -146,7 +146,7 @@
                       "IsPersonalRecord": false
                     },
                     {
-                      "Id": "83B440B0-E5CA-4917-B527-54BE3F5614EF",
+                      "Id": "BCCFADD1-14B8-4206-992F-6281C7BD155E",
                       "Primary": 12,
                       "Secondary": 100,
                       "RPE": 0,
@@ -155,7 +155,7 @@
                       "IsPersonalRecord": false
                     },
                     {
-                      "Id": "5A8DE795-522E-4351-94C5-78FCAECD8C01",
+                      "Id": "9BBE559D-61DC-4C86-855A-0710201BB882",
                       "Primary": 12,
                       "Secondary": 100,
                       "RPE": 0,
@@ -165,7 +165,7 @@
                     }
                   ],
                   "Definition": {
-                    "Id": "648E8B1B-6044-44F0-AB8A-049D3ADB4E94",
+                    "Id": "D8EBD916-45AF-426F-A2A9-44FE5B8DEE2C",
                     "Name": "Hamstring Curl",
                     "Deleted": false,
                     "Equipment": {
@@ -213,13 +213,13 @@
                   }
                 },
                 {
-                  "Id": "763AD9F9-5A13-43CD-BEC0-D0594764BFCD",
+                  "Id": "51F68513-5F1C-4162-B2EC-987843B7EE67",
                   "RestTime": 0,
                   "Rules": [],
                   "WarmupSetDetails": [],
                   "SetDetails": [
                     {
-                      "Id": "0C62239F-74EA-42C6-BA56-DC35F27B7A1D",
+                      "Id": "26B03BB1-A764-4521-822F-0BFF43659F46",
                       "Primary": 12,
                       "Secondary": 0,
                       "RPE": 0,
@@ -228,7 +228,7 @@
                       "IsPersonalRecord": false
                     },
                     {
-                      "Id": "8543FA9E-EB00-47F1-8FAE-E9090F00A87C",
+                      "Id": "D3C6570F-4944-4B27-8524-87DC887B5C31",
                       "Primary": 12,
                       "Secondary": 90,
                       "RPE": 0,
@@ -237,7 +237,7 @@
                       "IsPersonalRecord": false
                     },
                     {
-                      "Id": "63C4434F-2752-471F-A4AF-E4C04E7D860E",
+                      "Id": "24D13E06-9342-40CF-B030-57DAF6C9800F",
                       "Primary": 12,
                       "Secondary": 90,
                       "RPE": 0,
@@ -247,7 +247,7 @@
                     }
                   ],
                   "Definition": {
-                    "Id": "5625289A-85B0-4B48-9837-6E4F5E1A953D",
+                    "Id": "1A4D5432-E6A6-420F-BADF-C7BE392099FC",
                     "Name": "ATG Split Squat",
                     "Deleted": false,
                     "Equipment": {
@@ -310,13 +310,13 @@
                   }
                 },
                 {
-                  "Id": "C246610F-CEE3-41BA-8707-B57499D437D1",
+                  "Id": "8A847B16-36C2-4500-ADCB-0EEA5C8794D5",
                   "RestTime": 0,
                   "Rules": [],
                   "WarmupSetDetails": [],
                   "SetDetails": [
                     {
-                      "Id": "F6208570-8B79-487D-B969-C4820FDA90E4",
+                      "Id": "C5CBF6E9-7852-407C-8A04-66D913740DAD",
                       "Primary": 35,
                       "Secondary": 0,
                       "RPE": 0,
@@ -325,7 +325,7 @@
                       "IsPersonalRecord": false
                     },
                     {
-                      "Id": "142E24B9-F701-40FC-A9F4-74E2A60A7ED7",
+                      "Id": "24C3D73B-7CB2-45CF-8EED-56077CF3A730",
                       "Primary": 35,
                       "Secondary": 0,
                       "RPE": 0,
@@ -334,7 +334,7 @@
                       "IsPersonalRecord": false
                     },
                     {
-                      "Id": "F16D97F1-F4DC-4149-8821-6B41478ADAF7",
+                      "Id": "408269B0-A930-4C2D-8372-DACC02A19217",
                       "Primary": 35,
                       "Secondary": 0,
                       "RPE": 0,
@@ -344,7 +344,7 @@
                     }
                   ],
                   "Definition": {
-                    "Id": "ECD7ECA7-A258-410B-83CE-B09E027C7D53",
+                    "Id": "0B17C29B-8E19-49DC-A6C4-E2CF7C41E0CF",
                     "Name": "Hyperextension",
                     "Deleted": false,
                     "Equipment": {
@@ -408,6 +408,154 @@
                 }
               ],
               "Name": "Set 1"
+            }
+          ]
+        },
+        {
+          "Id": "4CA2572D-7B8E-4DA1-9E87-31B5656F6FA8",
+          "IsCurrent": false,
+          "IsEveryday": true,
+          "Measurements": [],
+          "SuperSets": [
+            {
+              "Id": "D2E54595-CC8C-47D3-BACC-AD83BA31477D",
+              "Exercises": [
+                {
+                  "Id": "D78138B6-120B-4980-9CB8-7817C96AEE0A",
+                  "RestTime": 0,
+                  "Rules": [],
+                  "WarmupSetDetails": [],
+                  "SetDetails": [
+                    {
+                      "Id": "EDB62DC1-C518-4898-B70B-2E1A89007278",
+                      "Primary": 25,
+                      "Secondary": 20,
+                      "RPE": 0,
+                      "Type": 0,
+                      "Status": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "Id": "9A786874-7048-4107-AEEB-FABF4C120D79",
+                      "Primary": 25,
+                      "Secondary": 20,
+                      "RPE": 0,
+                      "Type": 0,
+                      "Status": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "Id": "7F56CA72-D7BD-4726-A737-7EA8FB4192DE",
+                      "Primary": 25,
+                      "Secondary": 20,
+                      "RPE": 0,
+                      "Type": 0,
+                      "Status": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "Id": "A985939C-6AE1-4FF3-BA6B-0E2DF4748A17",
+                      "Primary": 25,
+                      "Secondary": 20,
+                      "RPE": 0,
+                      "Type": 0,
+                      "Status": 0,
+                      "IsPersonalRecord": false
+                    }
+                  ],
+                  "Definition": {
+                    "Id": "264977C4-FC72-4433-9C8E-17BA3468E099",
+                    "Name": "Tibialis Raise",
+                    "Deleted": false,
+                    "Equipment": {
+                      "Name": "Machine",
+                      "Id": "4",
+                      "Deleted": false,
+                      "IsDeletable": false
+                    },
+                    "Categories": [
+                      {
+                        "Name": "Tibialis",
+                        "Id": "19",
+                        "Color": {
+                          "Alpha": 1,
+                          "IsPro": false,
+                          "IsDeletable": false,
+                          "Deleted": false,
+                          "Green": 217,
+                          "Red": 12,
+                          "Name": "Green",
+                          "Blue": 88,
+                          "Id": "2"
+                        }
+                      }
+                    ],
+                    "MaxPrimary": 25,
+                    "MaxSecondary": 20,
+                    "PrimaryFocusId": 1,
+                    "SecondaryFocusId": 2
+                  }
+                },
+                {
+                  "Id": "9B4B8030-197E-4AE6-96EE-8A547EE214AD",
+                  "RestTime": 0,
+                  "Rules": [],
+                  "WarmupSetDetails": [],
+                  "SetDetails": [
+                    {
+                      "Id": "26156D61-58AC-4949-ABF6-929878BDE685",
+                      "Primary": 20,
+                      "Secondary": 90,
+                      "RPE": 0,
+                      "Type": 0,
+                      "Status": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "Id": "2CB94E77-0586-4373-9F35-57367A60B38C",
+                      "Primary": 20,
+                      "Secondary": 90,
+                      "RPE": 0,
+                      "Type": 0,
+                      "Status": 0,
+                      "IsPersonalRecord": false
+                    }
+                  ],
+                  "Definition": {
+                    "Id": "E424EF3B-CE6D-4066-B094-52F1C4CFEF71",
+                    "Name": "Seated Calf Raise",
+                    "Deleted": false,
+                    "Equipment": {
+                      "Name": "Machine",
+                      "Id": "4",
+                      "Deleted": false,
+                      "IsDeletable": false
+                    },
+                    "Categories": [
+                      {
+                        "Name": "Calves",
+                        "Id": "14",
+                        "Color": {
+                          "Alpha": 1,
+                          "IsPro": false,
+                          "IsDeletable": false,
+                          "Deleted": false,
+                          "Green": 217,
+                          "Red": 12,
+                          "Name": "Green",
+                          "Blue": 88,
+                          "Id": "2"
+                        }
+                      }
+                    ],
+                    "MaxPrimary": 20,
+                    "MaxSecondary": 90,
+                    "PrimaryFocusId": 1,
+                    "SecondaryFocusId": 2
+                  }
+                }
+              ],
+              "Name": "Set 2"
             }
           ]
         }
