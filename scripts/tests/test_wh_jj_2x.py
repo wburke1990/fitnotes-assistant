@@ -1,8 +1,8 @@
-"""Tests for the WH 3-Day plan generator."""
+"""Tests for the WH + JJ (2x) plan generator."""
 
 from common.calculations import calculate_weekly_volume, check_volume_minimums
 from common.io import load_exercise_mappings
-from programs.wh_3day import DAYS, PLAN_PREFIX, build_all, build_day
+from programs.wh_jj_2x import DAYS, PLAN_PREFIX, build_all, build_day
 
 MAPPINGS = load_exercise_mappings()
 
@@ -31,17 +31,12 @@ def _by_suffix(suffix):
     return next(d for d in DAYS if d.suffix == suffix)
 
 
-def test_three_days():
-    assert [d.suffix for d in DAYS] == ["Sunday", "Tuesday", "Thursday"]
+def test_five_weekday_days():
+    assert [d.suffix for d in DAYS] == ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
 
 
 def test_plan_names():
-    workouts = build_all(MAPPINGS)
-    assert set(workouts) == {
-        f"{PLAN_PREFIX} - Sunday",
-        f"{PLAN_PREFIX} - Tuesday",
-        f"{PLAN_PREFIX} - Thursday",
-    }
+    assert set(build_all(MAPPINGS)) == {f"{PLAN_PREFIX} - {d.suffix}" for d in DAYS}
 
 
 def test_each_superset_is_its_own_block():
@@ -52,46 +47,46 @@ def test_each_superset_is_its_own_block():
         assert all(len(block["SuperSets"]) == 1 for block in blocks)
 
 
-def test_tuesday_and_thursday_are_identical():
-    assert _names(_by_suffix("Tuesday")) == _names(_by_suffix("Thursday"))
-
-
-def test_sunday_structure():
-    # SS1 is the RDL block; SS2 is the leg superset; SS3 is the finisher.
-    assert _names(_by_suffix("Sunday")) == [
-        ["Snatch-Grip Stiff-Legged RDL", "Tibialis Raise", "Couch Stretch"],
-        ["Leg Press", "Hamstring Curl", "ATG Split Squat", "Hyperextension"],
-        ["Elephant Walk"],
-    ]
-
-
-def test_short_day_structure():
-    # Hip machine circuit, then the leg-press / curl / hyper circuit.
-    assert _names(_by_suffix("Tuesday")) == [
-        ["Hip Adduction", "Hip Abduction", "Tibialis Raise"],
-        ["Leg Press", "Hamstring Curl", "Hyperextension"],
-    ]
-
-
-def test_rdl_is_fresh_day_only():
-    # The heavy hinge must never land on a post-JJ (Tue/Thu) back.
+def test_short_days_are_a_single_hip_circuit():
+    # Tue/Thu are short: one block, the adduction/abduction/tibialis circuit.
     for suffix in ("Tuesday", "Thursday"):
-        flat = [name for block in _names(_by_suffix(suffix)) for name in block]
-        assert "Snatch-Grip Stiff-Legged RDL" not in flat
+        assert _names(_by_suffix(suffix)) == [["Hip Adduction", "Hip Abduction", "Tibialis Raise"]]
+
+
+def test_rdl_only_on_the_fresh_full_days():
+    # The heavy hinge lands Mon + Fri only, never on a post-JJ (Tue/Thu) back or
+    # on mid-week Wednesday.
+    with_rdl = {
+        d.suffix
+        for d in DAYS
+        if any("Snatch-Grip Stiff-Legged RDL" in block for block in _names(d))
+    }
+    assert with_rdl == {"Monday", "Friday"}
+
+
+def test_low_back_never_on_consecutive_days():
+    # Hyperextension (low back) appears Mon/Wed/Fri only, so no two adjacent
+    # weekdays both train the low back.
+    with_hyper = [
+        any("Hyperextension" in block for block in _names(d))
+        for d in DAYS  # Mon..Fri order
+    ]
+    assert with_hyper == [True, False, True, False, True]
 
 
 def test_rdl_has_warmup_ramp_without_working_volume():
-    ss1 = _blocks(_by_suffix("Sunday"))[0]
+    ss1 = _blocks(_by_suffix("Monday"))[0]
     rdl = next(ex for ex in ss1["Exercises"] if ex["Definition"]["Name"].endswith("RDL"))
     assert len(rdl["SetDetails"]) == 4
     assert len(rdl["WarmupSetDetails"]) == 4
 
 
 def test_hip_machine_runs_six_rounds_each_short_day():
-    ss1 = _blocks(_by_suffix("Tuesday"))[0]
-    counts = {ex["Definition"]["Name"]: len(ex["SetDetails"]) for ex in ss1["Exercises"]}
-    assert counts["Hip Adduction"] == 6
-    assert counts["Hip Abduction"] == 6
+    for suffix in ("Tuesday", "Thursday"):
+        ss1 = _blocks(_by_suffix(suffix))[0]
+        counts = {ex["Definition"]["Name"]: len(ex["SetDetails"]) for ex in ss1["Exercises"]}
+        assert counts["Hip Adduction"] == 6
+        assert counts["Hip Abduction"] == 6
 
 
 def test_progression_targets_clear_the_floor():

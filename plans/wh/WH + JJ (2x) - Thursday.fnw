@@ -1,0 +1,311 @@
+{
+  "Version": "3.4.2",
+  "IsList": true,
+  "Type": "FNWorkoutDefinitionDTO",
+  "Data": [
+    {
+      "Id": "93811E6B-AE04-455A-B5CA-8F3B60BA0584",
+      "Name": "WH + JJ (2x) - Thursday",
+      "Deleted": false,
+      "SortIndex": 0,
+      "Workouts": [
+        {
+          "Id": "89C5EC5F-F458-425F-90ED-DFD0F95A1941",
+          "IsCurrent": false,
+          "IsEveryday": true,
+          "Measurements": [],
+          "SuperSets": [
+            {
+              "Id": "F60DEBEF-9125-4C2C-A150-642F2366C04C",
+              "Exercises": [
+                {
+                  "Id": "53A9B120-0FCC-478C-B64D-E7D72BBA93BA",
+                  "RestTime": 0,
+                  "Rules": [],
+                  "WarmupSetDetails": [],
+                  "SetDetails": [
+                    {
+                      "Id": "D8CCD980-95AF-43F1-B803-D37EC505C5A1",
+                      "Primary": 10,
+                      "Secondary": 110,
+                      "RPE": 0,
+                      "Type": 0,
+                      "Status": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "Id": "1F86421C-60E7-417A-9A76-809FF1BBB498",
+                      "Primary": 10,
+                      "Secondary": 110,
+                      "RPE": 0,
+                      "Type": 0,
+                      "Status": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "Id": "4B839B90-9264-4096-91C8-40497CE4A404",
+                      "Primary": 10,
+                      "Secondary": 110,
+                      "RPE": 0,
+                      "Type": 0,
+                      "Status": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "Id": "E3E13299-F10A-47FA-A74C-ED018D217010",
+                      "Primary": 10,
+                      "Secondary": 110,
+                      "RPE": 0,
+                      "Type": 0,
+                      "Status": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "Id": "C68D20B5-6A89-4669-AC1A-07DC82D9FFCA",
+                      "Primary": 10,
+                      "Secondary": 110,
+                      "RPE": 0,
+                      "Type": 0,
+                      "Status": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "Id": "412F2246-ED3F-4F3A-9CAC-9C5E882753B6",
+                      "Primary": 10,
+                      "Secondary": 110,
+                      "RPE": 0,
+                      "Type": 0,
+                      "Status": 0,
+                      "IsPersonalRecord": false
+                    }
+                  ],
+                  "Definition": {
+                    "Id": "1230FE3F-DFD0-47AA-9363-46D18A020061",
+                    "Name": "Hip Adduction",
+                    "Deleted": false,
+                    "Equipment": {
+                      "Name": "Machine",
+                      "Id": "4",
+                      "Deleted": false,
+                      "IsDeletable": false
+                    },
+                    "Categories": [
+                      {
+                        "Name": "Adductors",
+                        "Id": "6",
+                        "Color": {
+                          "Alpha": 1,
+                          "IsPro": false,
+                          "IsDeletable": false,
+                          "Deleted": false,
+                          "Green": 217,
+                          "Red": 12,
+                          "Name": "Green",
+                          "Blue": 88,
+                          "Id": "2"
+                        }
+                      }
+                    ],
+                    "MaxPrimary": 10,
+                    "MaxSecondary": 110,
+                    "PrimaryFocusId": 1,
+                    "SecondaryFocusId": 2
+                  }
+                },
+                {
+                  "Id": "F1F2CBA0-FA68-4088-8A0C-3C5AE1D29E8D",
+                  "RestTime": 0,
+                  "Rules": [],
+                  "WarmupSetDetails": [],
+                  "SetDetails": [
+                    {
+                      "Id": "0DC8A32F-756B-4C44-9290-63D98B7FE75C",
+                      "Primary": 12,
+                      "Secondary": 140,
+                      "RPE": 0,
+                      "Type": 0,
+                      "Status": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "Id": "11888E96-279D-4031-9966-ADFBBF354919",
+                      "Primary": 12,
+                      "Secondary": 140,
+                      "RPE": 0,
+                      "Type": 0,
+                      "Status": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "Id": "ADD150B9-A550-4133-A0BD-1CA727F3107D",
+                      "Primary": 12,
+                      "Secondary": 140,
+                      "RPE": 0,
+                      "Type": 0,
+                      "Status": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "Id": "FFF48507-D9BC-4122-BAFA-36A0CE4F2DA2",
+                      "Primary": 12,
+                      "Secondary": 140,
+                      "RPE": 0,
+                      "Type": 0,
+                      "Status": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "Id": "09B1B0D0-89B2-46F5-866D-68AF81C9D815",
+                      "Primary": 12,
+                      "Secondary": 140,
+                      "RPE": 0,
+                      "Type": 0,
+                      "Status": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "Id": "1D2D311B-CDE5-41EA-9749-CF45C9EBFAC1",
+                      "Primary": 12,
+                      "Secondary": 140,
+                      "RPE": 0,
+                      "Type": 0,
+                      "Status": 0,
+                      "IsPersonalRecord": false
+                    }
+                  ],
+                  "Definition": {
+                    "Id": "BC9881D7-0BFC-4067-B367-F15D6B1B680B",
+                    "Name": "Hip Abduction",
+                    "Deleted": false,
+                    "Equipment": {
+                      "Name": "Machine",
+                      "Id": "4",
+                      "Deleted": false,
+                      "IsDeletable": false
+                    },
+                    "Categories": [
+                      {
+                        "Name": "Abductors",
+                        "Id": "1da1c21b-6d4b-49ee-b579-98e4a28a4c3b",
+                        "Color": {
+                          "Alpha": 1,
+                          "IsPro": false,
+                          "IsDeletable": false,
+                          "Deleted": false,
+                          "Green": 217,
+                          "Red": 12,
+                          "Name": "Green",
+                          "Blue": 88,
+                          "Id": "2"
+                        }
+                      }
+                    ],
+                    "MaxPrimary": 12,
+                    "MaxSecondary": 140,
+                    "PrimaryFocusId": 1,
+                    "SecondaryFocusId": 2
+                  }
+                },
+                {
+                  "Id": "1CC0B067-9C46-4528-AA86-19C83B7162A9",
+                  "RestTime": 0,
+                  "Rules": [],
+                  "WarmupSetDetails": [],
+                  "SetDetails": [
+                    {
+                      "Id": "A8DF3A9B-B544-4C01-9DF2-0FC328506DB5",
+                      "Primary": 25,
+                      "Secondary": 20,
+                      "RPE": 0,
+                      "Type": 0,
+                      "Status": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "Id": "C445D10E-8245-4D7A-9D4A-E8B967665DF3",
+                      "Primary": 25,
+                      "Secondary": 20,
+                      "RPE": 0,
+                      "Type": 0,
+                      "Status": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "Id": "59524E13-C00D-4020-BC71-6846AE36EFAC",
+                      "Primary": 25,
+                      "Secondary": 20,
+                      "RPE": 0,
+                      "Type": 0,
+                      "Status": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "Id": "BB092956-7783-402C-84D9-850B04F6E8CA",
+                      "Primary": 25,
+                      "Secondary": 20,
+                      "RPE": 0,
+                      "Type": 0,
+                      "Status": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "Id": "6D858B41-C898-40F6-9D68-FF48C870B757",
+                      "Primary": 25,
+                      "Secondary": 20,
+                      "RPE": 0,
+                      "Type": 0,
+                      "Status": 0,
+                      "IsPersonalRecord": false
+                    },
+                    {
+                      "Id": "DB5B658E-FEEB-49B6-8EB7-FE37F2F3CD81",
+                      "Primary": 25,
+                      "Secondary": 20,
+                      "RPE": 0,
+                      "Type": 0,
+                      "Status": 0,
+                      "IsPersonalRecord": false
+                    }
+                  ],
+                  "Definition": {
+                    "Id": "1A1D6209-B90F-4941-A7EA-FF338C4CC56D",
+                    "Name": "Tibialis Raise",
+                    "Deleted": false,
+                    "Equipment": {
+                      "Name": "Machine",
+                      "Id": "4",
+                      "Deleted": false,
+                      "IsDeletable": false
+                    },
+                    "Categories": [
+                      {
+                        "Name": "Tibialis",
+                        "Id": "19",
+                        "Color": {
+                          "Alpha": 1,
+                          "IsPro": false,
+                          "IsDeletable": false,
+                          "Deleted": false,
+                          "Green": 217,
+                          "Red": 12,
+                          "Name": "Green",
+                          "Blue": 88,
+                          "Id": "2"
+                        }
+                      }
+                    ],
+                    "MaxPrimary": 25,
+                    "MaxSecondary": 20,
+                    "PrimaryFocusId": 1,
+                    "SecondaryFocusId": 2
+                  }
+                }
+              ],
+              "Name": "Set 1"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,42 +1,46 @@
 #!/usr/bin/env python3
-"""Generate the "WH 3-Day" plan as three .fnw files.
+"""Generate the "WH + JJ (2x)" 5-day/week plan as five .fnw files.
 
-Built around training jujitsu only TWICE a week (Tue + Thu), three lifts total
-for the long haul: two SHORT sessions right after the Tue/Thu JJ classes (shower
-at the gym anyway), plus one longer standalone session on a non-JJ day -- named
-Sunday here, but use any non-JJ day. The WH machines the user doesn't have at
-home get the emphasis: the leg press (loaded for glutes), the hip
-adduction/abduction machine, and the tibialis ("tip") machine.
+The WH-gym plan for the twice-a-week jujitsu schedule: JJ on Tuesday + Thursday
+only, lifting Monday-Friday. This supersedes the older "WH + JJ" plan (wh_jj.py),
+which assumed JJ ~5x/week and used all five lifts as short post-JJ sessions.
+
+Now the split is:
+  * Mon / Wed / Fri -- FULL lower-body / posterior-chain / back-rehab days
+    (not after JJ, so there's time and a fresh back).
+  * Tue / Thu -- SHORT sessions right after the JJ class (shower at the gym
+    anyway): one dense hip adduction/abduction machine circuit, nothing more.
+
+The WH machines the user doesn't have at home get the emphasis: the leg press
+(loaded for glutes), the hip adduction/abduction machine, and the tibialis
+("tip") machine.
 
 Must-hit, per the user:
-  * Back-rehab progression CONTINUES -- snatch-grip RDL (heavy, on the fresh
-    standalone day only) plus the hyperextension (the low-back progression
-    driver, held across all three days). Low back clears the 12-set floor (~13).
+  * Back-rehab progression CONTINUES -- snatch-grip RDL (heavy, Mon + Fri, the
+    freshest-back days) plus the hyperextension (the low-back progression driver,
+    on Mon/Wed/Fri). Low back clears the 12-set floor (~13) from M/W/F alone, so
+    Tue/Thu stay short and the low back is never trained on consecutive days.
   * Hip adduction + abduction machine -- 6 rounds on each short day = 12/wk each.
-  * Leg press -- loaded, gluteal-biased; pools to ~20 across the week.
-  * Tibialis machine -- 15/wk, rep progression.
+  * Leg press -- loaded, gluteal-biased; pools to ~22 across the week.
+  * Tibialis machine -- rep progression, ~18/wk.
 
 Programming principles (see scripts/programs/README.md):
   * Per-MUSCLE weekly volume >= 12 sets to PROGRESS (add load or reps); secondary
     muscles count 0.5, pooled across every movement. Below 12 is maintenance.
-  * LOW BACK is trained Sun/Tue/Thu -- none consecutive (Mon, Wed, Fri+Sat rest
-    between), so it is never worked on back-to-back days. The heavy RDL lands on
-    the fresh standalone day ONLY, never on a post-JJ back; the hypers carry the
-    low-back progression on the two short days.
-  * The balance/stability work (ATG split squat) stays on the fresh day; the
-    post-JJ short days are machine circuits only, so a tired body isn't asked to
-    stabilise under load.
+  * LOW BACK is trained Mon/Wed/Fri only -- never on consecutive days (Tue/Thu
+    carry no low-back work), and the heavy RDL lands on the two freshest days.
+  * With JJ down to 2x/week the old plan's wrist/rotator/neck durability block is
+    dropped to keep Tue/Thu short; fold it back into a M/W/F rest if wanted.
 
 Progression targets (>=12 sets/wk): Gluteals (leg press), Hamstrings (RDL +
 curl), Back (Lower) (hypers + RDL), Adductors, Abductors (reps only -- machine
-maxed), Tibialis (reps). Maintenance: Quadriceps (split squat), Calves (carried
-by the leg-press / curl secondaries).
+maxed), Tibialis (reps). Maintenance: Quadriceps (split squat), Calves.
 
 The hyperextension progression detail lives in the companion note (a .fnw has no
-notes field): plans/wh/WH 3-Day - progression notes.txt
+notes field): plans/wh/WH + JJ (2x) - progression notes.txt
 
 Usage:
-    uv --directory scripts run python -m programs.wh_3day
+    uv --directory scripts run python -m programs.wh_jj_2x
 """
 
 import argparse
@@ -54,7 +58,7 @@ from common import (
 from common.builders import SetConfig
 from common.io import ExerciseMapping
 
-PLAN_PREFIX = "WH 3-Day"
+PLAN_PREFIX = "WH + JJ (2x)"
 
 
 @dataclass
@@ -82,7 +86,7 @@ def _hold(name: str, seconds: int) -> Move:
 
 # RDL: snatch-grip, NO straps (grip trained raw), held steady at 155 while the
 # hypers progress. Warm-up ramp (empty bar x2, 95, 135) is stored as warm-up
-# sets, so it adds gym time but NOT working volume. Fresh standalone day only.
+# sets, so it adds gym time but NOT working volume. Mon + Fri (freshest backs).
 _RDL = Move(
     "Snatch-Grip Stiff-Legged RDL",
     [SetConfig(reps=8, weight=155) for _ in range(4)],
@@ -95,33 +99,32 @@ _RDL = Move(
 )
 
 # Gluteal-biased leg press (feet high, deep stretch) -- stands in for squats
-# until the back is strong enough. 3 rounds on the fresh day, 4 on each short day.
-_LEG_PRESS_LONG = _reps("Leg Press", reps=12, weight=360, count=3)
-_LEG_PRESS_SHORT = _reps("Leg Press", reps=12, weight=360, count=4)
+# until the back is strong enough. 3 rounds on each full day (Mon/Wed/Fri).
+_LEG_PRESS = _reps("Leg Press", reps=12, weight=360, count=3)
 # Single-leg machine curl, logged as "Hamstring Curl" (same exercise as last
 # year, so history carries over). Reps per side; starting 12/side @ 100.
-_CURL_LONG = _reps("Hamstring Curl", reps=12, weight=100, count=3)
-_CURL_SHORT = _reps("Hamstring Curl", reps=12, weight=100, count=4)
+_CURL = _reps("Hamstring Curl", reps=12, weight=100, count=3)
 # Quad / knee MAINTENANCE, two DBs at the sides (less low-back demand than a
 # barbell front rack). Reps per side; weight = total of both DBs (two 45s = 90).
-# Round 1 is a bodyweight on-ramp; rounds 2-3 are the working sets. Fresh day
-# only -- balance work stays off the post-JJ (tired) days.
+# Round 1 is a bodyweight on-ramp; rounds 2-3 are the working sets.
 _SPLIT_SQUAT = Move(
     "ATG Split Squat",
     [SetConfig(reps=12, weight=0), SetConfig(reps=12, weight=90), SetConfig(reps=12, weight=90)],
 )
-# Bodyweight hyperextension -- the rehab progression driver, held across all
-# three days (Sun 3 + Tue 4 + Thu 4 = 11; +RDL erectors -> low back ~13). The
-# 1-leg + curved-back leading reps and the flat-machine static-hold restart are
-# in the companion note.
-_HYPER_LONG = _reps("Hyperextension", reps=35, weight=0, count=3)
-_HYPER_SHORT = _reps("Hyperextension", reps=35, weight=0, count=4)
+# Bodyweight hyperextension -- the rehab progression driver, in the leg superset
+# on Mon/Wed/Fri (3 each = 9; +RDL erectors -> low back ~13). The 1-leg +
+# curved-back leading reps and the flat-machine static-hold restart are in the
+# companion note.
+_HYPER = _reps("Hyperextension", reps=35, weight=0, count=3)
+# The Mon/Wed/Fri leg superset, run 3 rounds.
+_LEG_SUPERSET = [_LEG_PRESS, _CURL, _SPLIT_SQUAT, _HYPER]
 
-# Tibialis progresses by reps (light fixed load). 3 on the fresh day, 6 on each
-# short day (rides the hip circuit) = 15/wk.
-_TIB_LONG = _reps("Tibialis Raise", reps=25, weight=20, count=3)
+# Tibialis progresses by reps (light fixed load). 3 in the Mon/Fri RDL rest,
+# 6 on each short day (rides the hip circuit) = ~18/wk.
+_TIB = _reps("Tibialis Raise", reps=25, weight=20, count=3)
 _TIB_SHORT = _reps("Tibialis Raise", reps=25, weight=20, count=6)
-
+# Maintenance calf, 2 sets on Friday.
+_CALF = _reps("Seated Calf Raise", reps=20, weight=90, count=2)
 # Quad stretch (per side, 2 min), riding the RDL rest to prep the split squats --
 # 2 sides x 120s logged as one set (counts once for volume).
 _COUCH = Move(
@@ -131,9 +134,11 @@ _COUCH = Move(
 )
 
 # Adductor can still take load; abductor is maxed at the machine's 140 ceiling,
-# so it progresses by reps only. 6 rounds each on Tue/Thu = 12/wk each.
+# so it progresses by reps only. 6 rounds each on Tue/Thu = 12/wk each. The whole
+# short session is this one dense antagonist machine circuit + tibialis filler.
 _HIP_ADDUCTION = _reps("Hip Adduction", reps=10, weight=110, count=6)
 _HIP_ABDUCTION = _reps("Hip Abduction", reps=12, weight=140, count=6)
+_HIP_CIRCUIT = [_HIP_ADDUCTION, _HIP_ABDUCTION, _TIB_SHORT]
 
 
 @dataclass
@@ -150,32 +155,37 @@ class Day:
 
 
 def _days() -> list[Day]:
-    """Build the three-day program definition (Sunday long + Tue/Thu short)."""
-    sunday = Day(
-        "Sunday",
+    """Build the five-day program (Mon/Wed/Fri full, Tue/Thu short post-JJ)."""
+    monday = Day(
+        "Monday",
         [
-            # SS1: heavy RDL on the fresh back, with tibialis + the quad stretch
-            # filling its rest.
-            [_RDL, _TIB_LONG, _COUCH],
-            # SS2: the leg superset, 3 rounds (hyper sits in it, as trained last
-            # year). Split squat round 1 is a bodyweight on-ramp.
-            [_LEG_PRESS_LONG, _CURL_LONG, _SPLIT_SQUAT, _HYPER_LONG],
+            # RDL on a fresh back, with tibialis + the quad stretch in its rest.
+            [_RDL, _TIB, _COUCH],
+            # Leg superset, 3 rounds.
+            list(_LEG_SUPERSET),
+        ],
+    )
+    tuesday = Day("Tuesday", [list(_HIP_CIRCUIT)])
+    wednesday = Day(
+        "Wednesday",
+        [
+            # Leg superset only -- no low-back-heavy RDL mid-week.
+            list(_LEG_SUPERSET),
+        ],
+    )
+    thursday = Day("Thursday", [list(_HIP_CIRCUIT)])
+    friday = Day(
+        "Friday",
+        [
+            # RDL with calf + tibialis + quad stretch (mirrors Monday, +calf).
+            [_RDL, _CALF, _TIB, _COUCH],
+            # Leg superset, 3 rounds.
+            list(_LEG_SUPERSET),
             # Elephant walk to finish -- posterior-chain decompression.
             [_hold("Elephant Walk", 240)],
         ],
     )
-    short_blocks = [
-        # Hip adduction/abduction machine circuit (6 rounds) with tibialis in the
-        # rest -- the machines WH has that home doesn't.
-        [_HIP_ADDUCTION, _HIP_ABDUCTION, _TIB_SHORT],
-        # Leg press + curl + hyperextension circuit (4 rounds). This block is
-        # what keeps glutes/hamstrings/low-back at their weekly floors -- the
-        # hypers here carry the back rehab on the post-JJ days.
-        [_LEG_PRESS_SHORT, _CURL_SHORT, _HYPER_SHORT],
-    ]
-    tuesday = Day("Tuesday", [list(block) for block in short_blocks])
-    thursday = Day("Thursday", [list(block) for block in short_blocks])
-    return [sunday, tuesday, thursday]
+    return [monday, tuesday, wednesday, thursday, friday]
 
 
 DAYS = _days()
@@ -211,13 +221,13 @@ def build_day(day: Day, mappings: ExerciseMapping) -> dict[str, Any]:
 
 
 def build_all(mappings: ExerciseMapping) -> dict[str, dict[str, Any]]:
-    """Build all three days, keyed by full plan name."""
+    """Build all five days, keyed by full plan name."""
     return {day.plan_name: build_day(day, mappings) for day in DAYS}
 
 
 def main() -> None:
-    """Generate the three WH 3-Day days and write them to plans/wh/."""
-    parser = argparse.ArgumentParser(description="Generate the WH 3-Day plan")
+    """Generate the five WH + JJ (2x) days and write them to plans/wh/."""
+    parser = argparse.ArgumentParser(description="Generate the WH + JJ (2x) plan")
     parser.add_argument(
         "--output-dir",
         type=Path,
