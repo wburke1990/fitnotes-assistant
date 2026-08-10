@@ -32,13 +32,15 @@ Programming principles (see scripts/programs/README.md):
   * LOW BACK is trained Mon/Wed/Fri only -- never on consecutive days (Tue/Thu
     carry no low-back work), and the heavy RDL lands on the two freshest days.
   * Wrist prehab (rotation + extension) rides the Tue/Thu ad/ab rest -- free
-    rest-work on adjacent machines. Rotator-cuff / neck durability work can fold
-    into a M/W/F rest if wanted (see the companion note).
+    rest-work on adjacent machines. Rotator cuff is a 2-set finisher at the end
+    of each full day (Mon/Wed/Fri), off the short days so the tight T/Th circuit
+    stays at the ad/ab machines. Band-neck work can still fold in if wanted (see
+    the companion note).
 
 Progression targets (>=12 sets/wk): Gluteals (leg press), Hamstrings (RDL +
 curl), Back (Lower) (hypers + RDL), Adductors, Abductors (reps only -- machine
 maxed), Tibialis (reps). Maintenance: Quadriceps (split squat), Calves, Forearms
-(wrist prehab, 12/wk each).
+(wrist prehab, 12/wk each), Rotator Cuff (external rotation, 6/wk).
 
 The hyperextension progression detail lives in the companion note (a .fnw has no
 notes field): plans/wh/WH + JJ (2x) - progression notes.txt
@@ -137,6 +139,11 @@ _COUCH = Move(
     [SetConfig(reps=2, weight=120), SetConfig(reps=2, weight=120)],
     secondary_focus="time",
 )
+# Rotator-cuff prehab (shoulder health) -- a quick 2-set finisher at the END of
+# each full day (Mon/Wed/Fri), not on the short days: the T/Th rest is a tight
+# dumbbell circuit at the ad/ab machines, and a cable move would drag you off
+# them and eat the rest. 2 sets x 3 days = 6/wk, maintenance (not a 12 floor).
+_EXT_ROTATION = _reps("Cable External Rotation", reps=15, weight=12, count=2)
 
 # Adductor can still take load; abductor is maxed at the machine's 140 ceiling,
 # so it progresses by reps only. 6 rounds each on Tue/Thu = 12/wk each. The whole
@@ -175,6 +182,8 @@ def _days() -> list[Day]:
             [_RDL, _TIB, _CALF, _COUCH],
             # Leg superset, 3 rounds.
             list(_LEG_SUPERSET),
+            # Rotator-cuff finisher.
+            [_EXT_ROTATION],
         ],
     )
     tuesday = Day("Tuesday", [list(_HIP_CIRCUIT)])
@@ -185,6 +194,8 @@ def _days() -> list[Day]:
             list(_LEG_SUPERSET),
             # Short ankle block so tibialis (and calf) hit all three full days.
             [_TIB, _CALF],
+            # Rotator-cuff finisher.
+            [_EXT_ROTATION],
         ],
     )
     thursday = Day("Thursday", [list(_HIP_CIRCUIT)])
@@ -196,6 +207,8 @@ def _days() -> list[Day]:
             [_RDL, _TIB, _CALF, _COUCH],
             # Leg superset, 3 rounds.
             list(_LEG_SUPERSET),
+            # Rotator-cuff finisher.
+            [_EXT_ROTATION],
             # Elephant walk to finish -- posterior-chain decompression.
             [_hold("Elephant Walk", 240)],
         ],

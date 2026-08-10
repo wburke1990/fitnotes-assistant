@@ -75,6 +75,19 @@ def test_wrist_prehab_runs_six_rounds_each_short_day():
         assert counts["Wrist Extension"] == 6
 
 
+def test_rotator_cuff_finishes_the_full_days_only():
+    # Cable external rotation ends each full day (Mon/Wed/Fri) and is absent from
+    # the short T/Th days.
+    with_cuff = {
+        d.suffix for d in DAYS if any("Cable External Rotation" in block for block in _names(d))
+    }
+    assert with_cuff == {"Monday", "Wednesday", "Friday"}
+    # It is a late block, never the first (leg/RDL work leads each full day).
+    for suffix in ("Monday", "Wednesday", "Friday"):
+        blocks = _names(_by_suffix(suffix))
+        assert "Cable External Rotation" not in blocks[0]
+
+
 def test_rdl_only_on_the_fresh_full_days():
     # The heavy hinge lands Mon + Fri only, never on a post-JJ (Tue/Thu) back or
     # on mid-week Wednesday.
