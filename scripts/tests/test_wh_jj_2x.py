@@ -55,16 +55,28 @@ def test_short_days_are_a_single_hip_and_wrist_circuit():
         ]
 
 
-def test_calf_and_tibs_ride_the_rdl_block_on_full_hinge_days():
-    # Calf + tibialis superset with the RDL on Mon/Fri (the user's ankle work).
+def test_rdl_block_is_just_rdl_and_stretches_at_the_platform():
+    # On Mon/Fri the platform block is RDL + stretches only -- no walking off to
+    # the ankle machines. Ankle work lives in the hyper block instead.
     for suffix in ("Monday", "Friday"):
         rdl_block = _names(_by_suffix(suffix))[0]
-        assert rdl_block == [
-            "Snatch-Grip Stiff-Legged RDL",
-            "Tibialis Raise",
-            "Seated Calf Raise",
-            "Couch Stretch",
-        ]
+        assert rdl_block == ["Snatch-Grip Stiff-Legged RDL", "Couch Stretch"]
+
+
+def test_hyper_pairs_with_calf_and_tibs_on_every_full_day():
+    # Hyper is pulled out of the leg superset into its own block with calf/tib
+    # (adjacent machines), on all three full days.
+    for suffix in ("Monday", "Wednesday", "Friday"):
+        blocks = _names(_by_suffix(suffix))
+        assert ["Hyperextension", "Seated Calf Raise", "Tibialis Raise"] in blocks
+
+
+def test_leg_superset_no_longer_contains_the_hyper():
+    # The leg superset is leg press / curl / split squat; hyper moved out.
+    for suffix in ("Monday", "Wednesday", "Friday"):
+        blocks = _names(_by_suffix(suffix))
+        assert ["Leg Press", "Hamstring Curl", "ATG Split Squat"] in blocks
+        assert all("Hyperextension" not in b for b in blocks if "Leg Press" in b)
 
 
 def test_wrist_prehab_runs_six_rounds_each_short_day():

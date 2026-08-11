@@ -23,14 +23,16 @@ Must-hit, per the user:
     Tue/Thu stay short and the low back is never trained on consecutive days.
   * Hip adduction + abduction machine -- 6 rounds on each short day = 12/wk each.
   * Leg press -- loaded, gluteal-biased; pools to ~22 across the week.
-  * Tibialis machine -- rep progression, 12/wk (4 sets on each full day: rides
-    the RDL rest Mon/Fri, a short ankle block on Wed).
+  * Tibialis machine -- rep progression, 12/wk (4 sets on each full day, paired
+    with calf in the hyper block at the adjacent machines).
 
 Programming principles (see scripts/programs/README.md):
   * Per-MUSCLE weekly volume >= 12 sets to PROGRESS (add load or reps); secondary
     muscles count 0.5, pooled across every movement. Below 12 is maintenance.
   * LOW BACK is trained Mon/Wed/Fri only -- never on consecutive days (Tue/Thu
     carry no low-back work), and the heavy RDL lands on the two freshest days.
+    Within a full day the two low-back hits are spread apart: RDL block first,
+    then the leg superset, then the hyper block -- max recovery between them.
   * Wrist prehab (rotation + extension) rides the Tue/Thu ad/ab rest -- free
     rest-work on adjacent machines. Rotator cuff is a 2-set finisher at the end
     of each full day (Mon/Wed/Fri), off the short days so the tight T/Th circuit
@@ -117,26 +119,34 @@ _SPLIT_SQUAT = Move(
     "ATG Split Squat",
     [SetConfig(reps=12, weight=0), SetConfig(reps=12, weight=90), SetConfig(reps=12, weight=90)],
 )
-# Bodyweight hyperextension -- the rehab progression driver, in the leg superset
-# on Mon/Wed/Fri (3 each = 9; +RDL erectors -> low back ~13). The 1-leg +
-# curved-back leading reps and the flat-machine static-hold restart are in the
-# companion note.
-_HYPER = _reps("Hyperextension", reps=35, weight=0, count=3)
-# The Mon/Wed/Fri leg superset, run 3 rounds.
-_LEG_SUPERSET = [_LEG_PRESS, _CURL, _SPLIT_SQUAT, _HYPER]
+# The Mon/Wed/Fri leg superset, run 3 rounds. Hyper is NOT here -- it moved to
+# its own block with calf/tib (see below), which spreads the low-back work (RDL
+# early, hyper late) and keeps the ankle work off the platform.
+_LEG_SUPERSET = [_LEG_PRESS, _CURL, _SPLIT_SQUAT]
 
+# Bodyweight hyperextension -- the rehab progression driver, 3 sets on each full
+# day (Mon/Wed/Fri) = 9; +RDL erectors -> low back ~13. The 1-leg + curved-back
+# leading reps and the flat-machine static-hold restart are in the companion note.
+_HYPER = _reps("Hyperextension", reps=35, weight=0, count=3)
 # Tibialis progresses by reps (light fixed load): 4 sets on each full day
-# (Mon/Wed/Fri) = 12/wk. Rides the RDL rest on Mon/Fri (4 sets = the 4 RDL
-# rounds); a short ankle block on Wed keeps the frequency at 3x.
+# (Mon/Wed/Fri) = 12/wk.
 _TIB = _reps("Tibialis Raise", reps=25, weight=20, count=4)
 # Maintenance calf, 2 sets on each full day (Mon/Wed/Fri) = 6/wk direct (plus the
-# leg-press / curl secondaries). Seated (machine), so no grip clash with the RDL.
+# leg-press / curl secondaries).
 _CALF = _reps("Seated Calf Raise", reps=20, weight=90, count=2)
-# Quad stretch (per side, 2 min), riding the RDL rest to prep the split squats --
-# 2 sides x 120s logged as one set (counts once for volume).
+# The hyper + ankle block: hyper paired with calf + tibialis, whose machines sit
+# next to the hyper machine at WH. Non-interfering (low back vs lower leg), and
+# the calf/tib fill the rest between hyper sets. This is where the ankle work
+# lives now -- off the RDL platform, so the platform is never left unattended.
+_HYPER_BLOCK = [_HYPER, _CALF, _TIB]
+
+# Stretches riding the RDL rest, done AT the platform (so it's never abandoned) --
+# warms up the quads/hip flexors for the split squats. Couch stretch: per side,
+# 2 min, 3 sets = a stretch in three of the four RDL rests. 2 sides x 120s logged
+# as one set (counts once for volume).
 _COUCH = Move(
     "Couch Stretch",
-    [SetConfig(reps=2, weight=120), SetConfig(reps=2, weight=120)],
+    [SetConfig(reps=2, weight=120) for _ in range(3)],
     secondary_focus="time",
 )
 # Rotator-cuff prehab (shoulder health) -- a quick 2-set finisher at the END of
@@ -177,11 +187,12 @@ def _days() -> list[Day]:
     monday = Day(
         "Monday",
         [
-            # RDL on a fresh back, with tibialis + calf + the quad stretch riding
-            # its rest.
-            [_RDL, _TIB, _CALF, _COUCH],
-            # Leg superset, 3 rounds.
+            # RDL on a fresh back, with stretches riding the rest at the platform.
+            [_RDL, _COUCH],
+            # Leg superset (leg press / curl / split squat), 3 rounds.
             list(_LEG_SUPERSET),
+            # Hyper + calf + tibialis (adjacent machines).
+            list(_HYPER_BLOCK),
             # Rotator-cuff finisher.
             [_EXT_ROTATION],
         ],
@@ -190,10 +201,11 @@ def _days() -> list[Day]:
     wednesday = Day(
         "Wednesday",
         [
-            # Leg superset only -- no low-back-heavy RDL mid-week.
+            # Leg superset only -- no low-back-heavy RDL mid-week (back rests
+            # before Thursday JJ).
             list(_LEG_SUPERSET),
-            # Short ankle block so tibialis (and calf) hit all three full days.
-            [_TIB, _CALF],
+            # Hyper + calf + tibialis.
+            list(_HYPER_BLOCK),
             # Rotator-cuff finisher.
             [_EXT_ROTATION],
         ],
@@ -202,11 +214,12 @@ def _days() -> list[Day]:
     friday = Day(
         "Friday",
         [
-            # RDL with tibialis + calf + quad stretch riding its rest (mirrors
-            # Monday).
-            [_RDL, _TIB, _CALF, _COUCH],
+            # RDL with stretches at the platform (mirrors Monday).
+            [_RDL, _COUCH],
             # Leg superset, 3 rounds.
             list(_LEG_SUPERSET),
+            # Hyper + calf + tibialis.
+            list(_HYPER_BLOCK),
             # Rotator-cuff finisher.
             [_EXT_ROTATION],
             # Elephant walk to finish -- posterior-chain decompression.
