@@ -34,10 +34,10 @@ Programming principles (see scripts/programs/README.md):
     Within a full day the two low-back hits are spread apart: RDL block first,
     then the leg superset, then the hyper block -- max recovery between them.
   * Wrist prehab (rotation + extension) rides the Tue/Thu ad/ab rest -- free
-    rest-work on adjacent machines. Rotator cuff is a 2-set finisher at the end
-    of each full day (Mon/Wed/Fri), off the short days so the tight T/Th circuit
-    stays at the ad/ab machines. Band-neck work can still fold in if wanted (see
-    the companion note).
+    rest-work on adjacent machines. Rotator-cuff external rotation rides the
+    Mon/Wed/Fri hyper block (cables next to the hyper), off the short days so the
+    tight T/Th circuit stays at the ad/ab machines. Band-neck work can still fold
+    in if wanted (see the companion note).
 
 Progression targets (>=12 sets/wk): Gluteals (leg press), Hamstrings (RDL +
 curl), Back (Lower) (hypers + RDL), Adductors, Abductors (reps only -- machine
@@ -107,17 +107,25 @@ _RDL = Move(
 )
 
 # Gluteal-biased leg press (feet high, deep stretch) -- stands in for squats
-# until the back is strong enough. 3 rounds on each full day (Mon/Wed/Fri).
-_LEG_PRESS = _reps("Leg Press", reps=12, weight=360, count=3)
+# until the back is strong enough. 3 working rounds on each full day. Carries a
+# warm-up ramp so the big superset isn't hit cold -- matters most on Wednesday,
+# which has no RDL block to warm up inside. Warm-ups don't count toward volume.
+_LEG_PRESS = Move(
+    "Leg Press",
+    [SetConfig(reps=12, weight=360) for _ in range(3)],
+    warmups=[SetConfig(reps=12, weight=180), SetConfig(reps=10, weight=270)],
+)
 # Single-leg machine curl, logged as "Hamstring Curl" (same exercise as last
 # year, so history carries over). Reps per side; starting 12/side @ 100.
 _CURL = _reps("Hamstring Curl", reps=12, weight=100, count=3)
 # Quad / knee MAINTENANCE, two DBs at the sides (less low-back demand than a
 # barbell front rack). Reps per side; weight = total of both DBs (two 45s = 90).
-# Round 1 is a bodyweight on-ramp; rounds 2-3 are the working sets.
+# 3 WORKING sets (9/wk). The bodyweight + light on-ramp is stored as warm-up sets
+# (not counted): done during the RDL rests on Mon/Fri, or up front on Wednesday.
 _SPLIT_SQUAT = Move(
     "ATG Split Squat",
-    [SetConfig(reps=12, weight=0), SetConfig(reps=12, weight=90), SetConfig(reps=12, weight=90)],
+    [SetConfig(reps=12, weight=90) for _ in range(3)],
+    warmups=[SetConfig(reps=12, weight=0), SetConfig(reps=12, weight=50)],
 )
 # The Mon/Wed/Fri leg superset, run 3 rounds. Hyper is NOT here -- it moved to
 # its own block with calf/tib (see below), which spreads the low-back work (RDL
@@ -134,11 +142,12 @@ _TIB = _reps("Tibialis Raise", reps=25, weight=20, count=4)
 # Maintenance calf, 2 sets on each full day (Mon/Wed/Fri) = 6/wk direct (plus the
 # leg-press / curl secondaries).
 _CALF = _reps("Seated Calf Raise", reps=20, weight=90, count=2)
-# The hyper + ankle block: hyper paired with calf + tibialis, whose machines sit
-# next to the hyper machine at WH. Non-interfering (low back vs lower leg), and
-# the calf/tib fill the rest between hyper sets. This is where the ankle work
-# lives now -- off the RDL platform, so the platform is never left unattended.
-_HYPER_BLOCK = [_HYPER, _CALF, _TIB]
+# The hyper block: hyper paired with calf + tibialis + rotator-cuff external
+# rotation, whose machines (and the cables) all sit next to the hyper at WH.
+# Non-interfering (low back vs lower leg vs shoulder), and they fill the rest
+# between hyper sets. This is where the ankle + cuff work lives now -- off the
+# RDL platform, so the platform is never left unattended. (_EXT_ROTATION defined
+# below.)
 
 # Stretches riding the RDL rest, done AT the platform (so it's never abandoned) --
 # warms up the quads/hip flexors for the split squats. Couch stretch: per side,
@@ -149,11 +158,13 @@ _COUCH = Move(
     [SetConfig(reps=2, weight=120) for _ in range(3)],
     secondary_focus="time",
 )
-# Rotator-cuff prehab (shoulder health) -- a quick 2-set finisher at the END of
-# each full day (Mon/Wed/Fri), not on the short days: the T/Th rest is a tight
-# dumbbell circuit at the ad/ab machines, and a cable move would drag you off
-# them and eat the rest. 2 sets x 3 days = 6/wk, maintenance (not a 12 floor).
+# Rotator-cuff prehab (shoulder health): external rotation, the antagonist to all
+# the internal-rotation gripping/pulling in JJ. Light, higher-rep (never heavy --
+# that's how a cuff gets tweaked). 2 sets x 3 full days = 6/wk, maintenance (not a
+# 12 floor). Rides the hyper block on the cables next to the hyper machine -- kept
+# off the short days so the tight T/Th circuit stays at the ad/ab machines.
 _EXT_ROTATION = _reps("Cable External Rotation", reps=15, weight=12, count=2)
+_HYPER_BLOCK = [_HYPER, _CALF, _TIB, _EXT_ROTATION]
 
 # Adductor can still take load; abductor is maxed at the machine's 140 ceiling,
 # so it progresses by reps only. 6 rounds each on Tue/Thu = 12/wk each. The whole
@@ -191,10 +202,8 @@ def _days() -> list[Day]:
             [_RDL, _COUCH],
             # Leg superset (leg press / curl / split squat), 3 rounds.
             list(_LEG_SUPERSET),
-            # Hyper + calf + tibialis (adjacent machines).
+            # Hyper + calf + tibialis + cuff (all adjacent machines/cables).
             list(_HYPER_BLOCK),
-            # Rotator-cuff finisher.
-            [_EXT_ROTATION],
         ],
     )
     tuesday = Day("Tuesday", [list(_HIP_CIRCUIT)])
@@ -202,12 +211,11 @@ def _days() -> list[Day]:
         "Wednesday",
         [
             # Leg superset only -- no low-back-heavy RDL mid-week (back rests
-            # before Thursday JJ).
+            # before Thursday JJ). Leg press + split squat carry warm-up ramps
+            # since there's no RDL block to warm up inside.
             list(_LEG_SUPERSET),
-            # Hyper + calf + tibialis.
+            # Hyper + calf + tibialis + cuff.
             list(_HYPER_BLOCK),
-            # Rotator-cuff finisher.
-            [_EXT_ROTATION],
         ],
     )
     thursday = Day("Thursday", [list(_HIP_CIRCUIT)])
@@ -218,10 +226,8 @@ def _days() -> list[Day]:
             [_RDL, _COUCH],
             # Leg superset, 3 rounds.
             list(_LEG_SUPERSET),
-            # Hyper + calf + tibialis.
+            # Hyper + calf + tibialis + cuff.
             list(_HYPER_BLOCK),
-            # Rotator-cuff finisher.
-            [_EXT_ROTATION],
             # Elephant walk to finish -- posterior-chain decompression.
             [_hold("Elephant Walk", 240)],
         ],

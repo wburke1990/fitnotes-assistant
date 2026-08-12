@@ -63,12 +63,24 @@ def test_rdl_block_is_just_rdl_and_stretches_at_the_platform():
         assert rdl_block == ["Snatch-Grip Stiff-Legged RDL", "Couch Stretch"]
 
 
-def test_hyper_pairs_with_calf_and_tibs_on_every_full_day():
-    # Hyper is pulled out of the leg superset into its own block with calf/tib
-    # (adjacent machines), on all three full days.
+def test_hyper_block_pairs_ankle_and_cuff_work_on_every_full_day():
+    # Hyper is pulled out of the leg superset into its own block with calf, tib,
+    # and rotator-cuff external rotation (adjacent machines/cables).
     for suffix in ("Monday", "Wednesday", "Friday"):
         blocks = _names(_by_suffix(suffix))
-        assert ["Hyperextension", "Seated Calf Raise", "Tibialis Raise"] in blocks
+        assert [
+            "Hyperextension",
+            "Seated Calf Raise",
+            "Tibialis Raise",
+            "Cable External Rotation",
+        ] in blocks
+
+
+def test_external_rotation_is_not_a_standalone_block():
+    # Ext rotation now rides the hyper block, never its own single-exercise block.
+    for day in DAYS:
+        for block in _names(day):
+            assert block != ["Cable External Rotation"]
 
 
 def test_leg_superset_no_longer_contains_the_hyper():
@@ -77,6 +89,33 @@ def test_leg_superset_no_longer_contains_the_hyper():
         blocks = _names(_by_suffix(suffix))
         assert ["Leg Press", "Hamstring Curl", "ATG Split Squat"] in blocks
         assert all("Hyperextension" not in b for b in blocks if "Leg Press" in b)
+
+
+def test_split_squat_has_three_working_sets_plus_uncounted_warmups():
+    # 3 working sets/day (9/wk working), with the bodyweight/light on-ramp stored
+    # as warm-ups that don't count toward volume.
+    for suffix in ("Monday", "Wednesday", "Friday"):
+        split = next(
+            ex
+            for ss in _blocks(_by_suffix(suffix))
+            for ex in ss["Exercises"]
+            if ex["Definition"]["Name"] == "ATG Split Squat"
+        )
+        assert len(split["SetDetails"]) == 3
+        assert all(s["Secondary"] == 90 for s in split["SetDetails"])
+        assert len(split["WarmupSetDetails"]) == 2
+
+
+def test_leg_press_carries_a_warmup_ramp():
+    # The big superset isn't hit cold -- matters most on Wednesday (no RDL block).
+    for suffix in ("Monday", "Wednesday", "Friday"):
+        press = next(
+            ex
+            for ss in _blocks(_by_suffix(suffix))
+            for ex in ss["Exercises"]
+            if ex["Definition"]["Name"] == "Leg Press"
+        )
+        assert len(press["WarmupSetDetails"]) == 2
 
 
 def test_wrist_prehab_runs_six_rounds_each_short_day():

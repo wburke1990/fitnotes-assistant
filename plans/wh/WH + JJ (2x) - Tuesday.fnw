@@ -4,28 +4,28 @@
   "Type": "FNWorkoutDefinitionDTO",
   "Data": [
     {
-      "Id": "83A202F1-6077-43CA-9868-CCBD880DE1EC",
+      "Id": "56D23AF8-B706-4F33-8E7E-C3F33C1BE7F6",
       "Name": "WH + JJ (2x) - Tuesday",
       "Deleted": false,
       "SortIndex": 0,
       "Workouts": [
         {
-          "Id": "681FF0E2-E8FF-497A-91DC-EAE28F9EA051",
+          "Id": "CD1DF3E4-5A51-4F53-90BA-EF759647944D",
           "IsCurrent": false,
           "IsEveryday": true,
           "Measurements": [],
           "SuperSets": [
             {
-              "Id": "25FF3BC6-A97D-4398-9D75-25C8C97EEDA5",
+              "Id": "A1280336-2C5D-4383-BB8A-002DF19743CD",
               "Exercises": [
                 {
-                  "Id": "EB5CA8C1-5763-41A5-B3EF-C93300917B3F",
+                  "Id": "EC7BB42E-EE9D-4544-B5D9-057F30943063",
                   "RestTime": 0,
                   "Rules": [],
                   "WarmupSetDetails": [],
                   "SetDetails": [
                     {
-                      "Id": "3C383660-B52C-4D3D-ACA1-E944F5983E43",
+                      "Id": "86F6E2CA-4E40-401F-AFA0-EA093416BE22",
                       "Primary": 10,
                       "Secondary": 110,
                       "RPE": 0,
@@ -34,7 +34,7 @@
                       "IsPersonalRecord": false
                     },
                     {
-                      "Id": "9EE51826-F8DC-4001-8D32-DFA9B8E29569",
+                      "Id": "E0BFEE79-AF9D-4DED-A370-81E036AA46D9",
                       "Primary": 10,
                       "Secondary": 110,
                       "RPE": 0,
@@ -43,7 +43,7 @@
                       "IsPersonalRecord": false
                     },
                     {
-                      "Id": "1139B6DB-236D-4F1B-A22E-15F208421E75",
+                      "Id": "99FA59C7-979B-4FAD-9320-8AABEA6F2311",
                       "Primary": 10,
                       "Secondary": 110,
                       "RPE": 0,
@@ -52,7 +52,7 @@
                       "IsPersonalRecord": false
                     },
                     {
-                      "Id": "065FA288-1A5D-4E79-A112-1C1D18B16117",
+                      "Id": "875DF8CE-8F04-4789-ADF4-56AFACCDDC5D",
                       "Primary": 10,
                       "Secondary": 110,
                       "RPE": 0,
@@ -61,7 +61,7 @@
                       "IsPersonalRecord": false
                     },
                     {
-                      "Id": "1912A2F4-4A64-4B09-9E1F-C8E92F58993F",
+                      "Id": "D5C82188-9D1A-410D-8482-ADBEAF05D245",
                       "Primary": 10,
                       "Secondary": 110,
                       "RPE": 0,
@@ -70,7 +70,7 @@
                       "IsPersonalRecord": false
                     },
                     {
-                      "Id": "3E709210-1288-454C-AD08-8B0444877117",
+                      "Id": "D303C392-D047-4032-B49A-4C0575821E9E",
                       "Primary": 10,
                       "Secondary": 110,
                       "RPE": 0,
@@ -80,7 +80,7 @@
                     }
                   ],
                   "Definition": {
-                    "Id": "A98C6D09-BD78-4FCC-93B8-D95F15C65302",
+                    "Id": "95D404F0-5EDC-46C4-A03B-F3822C072FC2",
                     "Name": "Hip Adduction",
                     "Deleted": false,
                     "Equipment": {
@@ -113,13 +113,13 @@
                   }
                 },
                 {
-                  "Id": "D0C1A7B4-F205-4047-8244-E7DBC627B0CC",
+                  "Id": "DDD2C5AA-508A-4CD5-9CD9-23BD5299ABDA",
                   "RestTime": 0,
                   "Rules": [],
                   "WarmupSetDetails": [],
                   "SetDetails": [
                     {
-                      "Id": "96AF6DE4-76AB-4B45-8484-3F996DCF12D0",
+                      "Id": "D13B9CF7-A0BC-45AF-8C4E-C41E4FCB9130",
                       "Primary": 12,
                       "Secondary": 140,
                       "RPE": 0,
@@ -128,7 +128,7 @@
                       "IsPersonalRecord": false
                     },
                     {
-                      "Id": "85BC8CD1-C234-4E4C-89F0-6EC0511418EB",
+                      "Id": "314E550B-C612-4E9F-BC17-A7F9C1796503",
                       "Primary": 12,
                       "Secondary": 140,
                       "RPE": 0,
@@ -137,7 +137,7 @@
                       "IsPersonalRecord": false
                     },
                     {
-                      "Id": "20821653-04C4-44A9-9115-B5FEFBC4CCE9",
+                      "Id": "2CE32703-1694-40A7-B2DC-B9979172C42A",
                       "Primary": 12,
                       "Secondary": 140,
                       "RPE": 0,
@@ -146,7 +146,7 @@
                       "IsPersonalRecord": false
                     },
                     {
-                      "Id": "EFE71FA5-7087-4B29-96DC-7C9F7A7F0BF3",
+                      "Id": "8DCEE554-4322-4CD0-9260-B2DD3F4123D2",
                       "Primary": 12,
                       "Secondary": 140,
                       "RPE": 0,
@@ -155,7 +155,7 @@
                       "IsPersonalRecord": false
                     },
                     {
-                      "Id": "8E475D7D-6A4A-4BC5-B14B-230D71435CB4",
+                      "Id": "B0D21153-2856-4702-B1AB-00F491856EC3",
                       "Primary": 12,
                       "Secondary": 140,
                       "RPE": 0,
@@ -164,7 +164,7 @@
                       "IsPersonalRecord": false
                     },
                     {
-                      "Id": "EBC0270A-1676-4C7D-9714-F4811DDF2272",
+                      "Id": "2A55E8D4-9A27-4DC8-ACEB-166931D2551C",
                       "Primary": 12,
                       "Secondary": 140,
                       "RPE": 0,
@@ -174,7 +174,7 @@
                     }
                   ],
                   "Definition": {
-                    "Id": "7EB0F1D5-DA58-4A55-96B9-B25DE54E4191",
+                    "Id": "ABF193F2-0FEB-4A1A-AC10-D2226B424E7D",
                     "Name": "Hip Abduction",
                     "Deleted": false,
                     "Equipment": {
@@ -207,13 +207,13 @@
                   }
                 },
                 {
-                  "Id": "AFDDD534-9D78-47CB-B5A2-4EE1AF370034",
+                  "Id": "74964C72-8B46-4838-BC44-04D959B552E5",
                   "RestTime": 0,
                   "Rules": [],
                   "WarmupSetDetails": [],
                   "SetDetails": [
                     {
-                      "Id": "82A5BF82-027C-4B2F-858B-B24D380B5CE4",
+                      "Id": "8F2A20C3-E3CB-4A5A-AF44-E318F2A8403A",
                       "Primary": 15,
                       "Secondary": 10,
                       "RPE": 0,
@@ -222,7 +222,7 @@
                       "IsPersonalRecord": false
                     },
                     {
-                      "Id": "FD6751CD-F3E8-458E-B7B7-90331D8EC2DB",
+                      "Id": "FE34E502-5451-4A64-BFC9-0032C9F89375",
                       "Primary": 15,
                       "Secondary": 10,
                       "RPE": 0,
@@ -231,7 +231,7 @@
                       "IsPersonalRecord": false
                     },
                     {
-                      "Id": "CC71EEA7-5E07-4F5F-AF19-7BA7F421E4A6",
+                      "Id": "9AD4BE5D-2FEB-444C-801C-89A3FE781455",
                       "Primary": 15,
                       "Secondary": 10,
                       "RPE": 0,
@@ -240,7 +240,7 @@
                       "IsPersonalRecord": false
                     },
                     {
-                      "Id": "F69C388F-4D00-4D4A-A5D0-C90F089CDA00",
+                      "Id": "02CAC5C0-D8F7-4AB2-99E0-354BB12EC7B8",
                       "Primary": 15,
                       "Secondary": 10,
                       "RPE": 0,
@@ -249,7 +249,7 @@
                       "IsPersonalRecord": false
                     },
                     {
-                      "Id": "D8A9B178-AA24-410D-9BA8-A4F99801B197",
+                      "Id": "1272900E-7DA3-4BDC-9327-58BB296AAE7D",
                       "Primary": 15,
                       "Secondary": 10,
                       "RPE": 0,
@@ -258,7 +258,7 @@
                       "IsPersonalRecord": false
                     },
                     {
-                      "Id": "16C589B3-A4EC-49E2-BB09-EFCDFBDEDA00",
+                      "Id": "F1EFEF4B-CB47-4462-B313-66D4A34730B9",
                       "Primary": 15,
                       "Secondary": 10,
                       "RPE": 0,
@@ -268,7 +268,7 @@
                     }
                   ],
                   "Definition": {
-                    "Id": "E950A412-5E2F-409F-8BA0-A48ECB476260",
+                    "Id": "B701FAC8-F4AB-4BF2-90E0-3A02844D4BB1",
                     "Name": "Wrist Rotation",
                     "Deleted": false,
                     "Equipment": {
@@ -301,13 +301,13 @@
                   }
                 },
                 {
-                  "Id": "00FD04EF-4B22-43B2-A116-C24D7CEB0F3C",
+                  "Id": "6F7B935F-4322-4F26-A371-FE553AF92817",
                   "RestTime": 0,
                   "Rules": [],
                   "WarmupSetDetails": [],
                   "SetDetails": [
                     {
-                      "Id": "5CE914B5-8FC5-4827-920E-0ABAC06EF7B5",
+                      "Id": "08DD5B64-FCE4-4FCF-AC43-4413A737DDE0",
                       "Primary": 15,
                       "Secondary": 15,
                       "RPE": 0,
@@ -316,7 +316,7 @@
                       "IsPersonalRecord": false
                     },
                     {
-                      "Id": "F44E1436-0ADB-4DF1-AB04-4A379806376E",
+                      "Id": "09AD7296-D33E-40EF-83C9-29FC22596511",
                       "Primary": 15,
                       "Secondary": 15,
                       "RPE": 0,
@@ -325,7 +325,7 @@
                       "IsPersonalRecord": false
                     },
                     {
-                      "Id": "CEB6FBD6-01D3-47D7-ABE1-A1BB90B2A360",
+                      "Id": "06B46C29-1580-463C-8348-8368F52B1085",
                       "Primary": 15,
                       "Secondary": 15,
                       "RPE": 0,
@@ -334,7 +334,7 @@
                       "IsPersonalRecord": false
                     },
                     {
-                      "Id": "DDEB49C5-DBB6-4ADC-B6A1-29C52F170F41",
+                      "Id": "41B5758B-915C-48ED-A3BE-5F765BCBDC1F",
                       "Primary": 15,
                       "Secondary": 15,
                       "RPE": 0,
@@ -343,7 +343,7 @@
                       "IsPersonalRecord": false
                     },
                     {
-                      "Id": "33A16E01-675C-4FB2-8308-FCDA205294F2",
+                      "Id": "76D5CE73-33B0-409D-ACE8-0DB168E22B53",
                       "Primary": 15,
                       "Secondary": 15,
                       "RPE": 0,
@@ -352,7 +352,7 @@
                       "IsPersonalRecord": false
                     },
                     {
-                      "Id": "87077963-3AE1-411A-B498-A162DE74E274",
+                      "Id": "F76D5249-98FB-4E94-B9D9-856FE55A3B27",
                       "Primary": 15,
                       "Secondary": 15,
                       "RPE": 0,
@@ -362,7 +362,7 @@
                     }
                   ],
                   "Definition": {
-                    "Id": "7BCFB09F-2397-4271-ADC1-CCED7CEDF8CE",
+                    "Id": "E8784471-55B6-4235-9643-4985A7469C90",
                     "Name": "Wrist Extension",
                     "Deleted": false,
                     "Equipment": {
