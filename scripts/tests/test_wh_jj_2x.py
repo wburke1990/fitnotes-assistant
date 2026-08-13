@@ -103,17 +103,19 @@ def test_leg_superset_no_longer_contains_the_hyper():
         assert all("Hyperextension" not in b for b in blocks if "Leg Press" in b)
 
 
-def test_split_squat_has_three_working_sets_plus_uncounted_warmups():
-    # 3 working sets/day (9/wk working), with the bodyweight/light on-ramp stored
+def test_split_squat_working_sets_by_day_plus_uncounted_warmups():
+    # 3 working sets on Mon/Fri (fully warm from the RDL block), 2 on Wednesday
+    # (leave session time to warm the legs up). Bodyweight/light on-ramp is stored
     # as warm-ups that don't count toward volume.
-    for suffix in ("Monday", "Wednesday", "Friday"):
+    expected = {"Monday": 3, "Wednesday": 2, "Friday": 3}
+    for suffix, working in expected.items():
         split = next(
             ex
             for ss in _blocks(_by_suffix(suffix))
             for ex in ss["Exercises"]
             if ex["Definition"]["Name"] == "ATG Split Squat"
         )
-        assert len(split["SetDetails"]) == 3
+        assert len(split["SetDetails"]) == working
         assert all(s["Secondary"] == 90 for s in split["SetDetails"])
         assert len(split["WarmupSetDetails"]) == 2
 

@@ -118,19 +118,31 @@ _LEG_PRESS = Move(
 # Single-leg machine curl, logged as "Hamstring Curl" (same exercise as last
 # year, so history carries over). Reps per side; starting 12/side @ 100.
 _CURL = _reps("Hamstring Curl", reps=12, weight=100, count=3)
+
+
 # Quad / knee MAINTENANCE, two DBs at the sides (less low-back demand than a
 # barbell front rack). Reps per side; weight = total of both DBs (two 45s = 90).
-# 3 WORKING sets (9/wk). The bodyweight + light on-ramp is stored as warm-up sets
-# (not counted): done during the RDL rests on Mon/Fri, or up front on Wednesday.
-_SPLIT_SQUAT = Move(
-    "ATG Split Squat",
-    [SetConfig(reps=12, weight=90) for _ in range(3)],
-    warmups=[SetConfig(reps=12, weight=0), SetConfig(reps=12, weight=50)],
-)
-# The Mon/Wed/Fri leg superset, run 3 rounds. Hyper is NOT here -- it moved to
-# its own block with calf/tib (see below), which spreads the low-back work (RDL
-# early, hyper late) and keeps the ankle work off the platform.
+# The bodyweight + light on-ramp is stored as warm-up sets (not counted). WORKING
+# sets differ by day: 3 on Mon/Fri (you arrive fully warm from the RDL block, and
+# do the split-squat warm-ups during the RDL rests), but 2 on Wednesday -- there's
+# no RDL block, so Wednesday spends session time warming the legs up and runs one
+# fewer working set. 3 + 2 + 3 = 8 working sets/wk.
+def _split_squat(working: int) -> Move:
+    return Move(
+        "ATG Split Squat",
+        [SetConfig(reps=12, weight=90) for _ in range(working)],
+        warmups=[SetConfig(reps=12, weight=0), SetConfig(reps=12, weight=50)],
+    )
+
+
+_SPLIT_SQUAT = _split_squat(3)
+_SPLIT_SQUAT_WED = _split_squat(2)
+# The leg superset (leg press / curl / split squat). Hyper is NOT here -- it moved
+# to its own block with calf/tib (see below), which spreads the low-back work (RDL
+# early, hyper late) and keeps the ankle work off the platform. Wednesday uses a
+# variant with the 2-set split squat.
 _LEG_SUPERSET = [_LEG_PRESS, _CURL, _SPLIT_SQUAT]
+_LEG_SUPERSET_WED = [_LEG_PRESS, _CURL, _SPLIT_SQUAT_WED]
 
 # Bodyweight hyperextension -- the rehab progression driver, 3 sets on each full
 # day (Mon/Wed/Fri) = 9; +RDL erectors -> low back ~13. The 1-leg + curved-back
@@ -210,10 +222,11 @@ def _days() -> list[Day]:
     wednesday = Day(
         "Wednesday",
         [
-            # Leg superset only -- no low-back-heavy RDL mid-week (back rests
-            # before Thursday JJ). Leg press + split squat carry warm-up ramps
-            # since there's no RDL block to warm up inside.
-            list(_LEG_SUPERSET),
+            # Leg superset (2-set split squat -- no RDL block to pre-warm the
+            # legs, so Wednesday spends session time on the leg warm-up and runs
+            # one fewer working set). No RDL mid-week: the back rests, and there's
+            # nothing to hinge-warm-up for since the hypers are very light.
+            list(_LEG_SUPERSET_WED),
             # Hyper + calf + tibialis + cuff.
             list(_HYPER_BLOCK),
         ],
