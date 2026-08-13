@@ -137,11 +137,11 @@ _LEG_SUPERSET = [_LEG_PRESS, _CURL, _SPLIT_SQUAT]
 # leading reps and the flat-machine static-hold restart are in the companion note.
 _HYPER = _reps("Hyperextension", reps=35, weight=0, count=3)
 # Tibialis progresses by reps (light fixed load): 4 sets on each full day
-# (Mon/Wed/Fri) = 12/wk.
+# (Mon/Wed/Fri) = 12/wk. Calf + tib are the REST between hyper sets, so they must
+# be EQUAL -- otherwise a hyper set has no filler to rest against. 4 each covers
+# all 3 hyper sets plus a trailing pair, and keeps tib at its 12 floor.
 _TIB = _reps("Tibialis Raise", reps=25, weight=20, count=4)
-# Maintenance calf, 2 sets on each full day (Mon/Wed/Fri) = 6/wk direct (plus the
-# leg-press / curl secondaries).
-_CALF = _reps("Seated Calf Raise", reps=20, weight=90, count=2)
+_CALF = _reps("Seated Calf Raise", reps=20, weight=90, count=4)
 # The hyper block: hyper paired with calf + tibialis + rotator-cuff external
 # rotation, whose machines (and the cables) all sit next to the hyper at WH.
 # Non-interfering (low back vs lower leg vs shoulder), and they fill the rest

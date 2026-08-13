@@ -76,6 +76,18 @@ def test_hyper_block_pairs_ankle_and_cuff_work_on_every_full_day():
         ] in blocks
 
 
+def test_calf_and_tib_are_equal_as_the_hyper_rest_pairing():
+    # Calf + tib fill the rest between hyper sets, so their set counts must match
+    # (an unequal count leaves a hyper set with no filler to rest against).
+    for suffix in ("Monday", "Wednesday", "Friday"):
+        counts = {
+            ex["Definition"]["Name"]: len(ex["SetDetails"])
+            for ss in _blocks(_by_suffix(suffix))
+            for ex in ss["Exercises"]
+        }
+        assert counts["Seated Calf Raise"] == counts["Tibialis Raise"]
+
+
 def test_external_rotation_is_not_a_standalone_block():
     # Ext rotation now rides the hyper block, never its own single-exercise block.
     for day in DAYS:
