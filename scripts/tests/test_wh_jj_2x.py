@@ -63,15 +63,15 @@ def test_rdl_block_is_just_rdl_and_stretches_at_the_platform():
         assert rdl_block == ["Snatch-Grip Stiff-Legged RDL", "Couch Stretch"]
 
 
-def test_hyper_block_pairs_ankle_and_cuff_work_on_every_full_day():
-    # Hyper is pulled out of the leg superset into its own block with calf, tib,
-    # and rotator-cuff external rotation (adjacent machines/cables).
+def test_hyper_block_opens_with_ankle_work_then_hyper_then_cuff():
+    # Tib + calf lead the block (they open it and rest each hyper set), then hyper,
+    # then rotator-cuff external rotation. Adjacent machines/cables at WH.
     for suffix in ("Monday", "Wednesday", "Friday"):
         blocks = _names(_by_suffix(suffix))
         assert [
-            "Hyperextension",
-            "Seated Calf Raise",
             "Tibialis Raise",
+            "Seated Calf Raise",
+            "Hyperextension",
             "Cable External Rotation",
         ] in blocks
 

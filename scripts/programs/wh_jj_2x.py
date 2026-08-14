@@ -176,7 +176,11 @@ _COUCH = Move(
 # 12 floor). Rides the hyper block on the cables next to the hyper machine -- kept
 # off the short days so the tight T/Th circuit stays at the ad/ab machines.
 _EXT_ROTATION = _reps("Cable External Rotation", reps=15, weight=12, count=2)
-_HYPER_BLOCK = [_HYPER, _CALF, _TIB, _EXT_ROTATION]
+# Order: tib + calf lead, so the block OPENS with them (they warm up the lower
+# leg) and each hyper set gets an ankle pair right before it as its rest. Because
+# tib/calf are 4 and hypers are 3, exactly one tib/calf pair lands at the very end
+# -- one trailing pair instead of the two you'd get with hyper listed first.
+_HYPER_BLOCK = [_TIB, _CALF, _HYPER, _EXT_ROTATION]
 
 # Adductor can still take load; abductor is maxed at the machine's 140 ceiling,
 # so it progresses by reps only. 6 rounds each on Tue/Thu = 12/wk each. The whole
