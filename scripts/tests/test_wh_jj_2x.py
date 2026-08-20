@@ -64,9 +64,10 @@ def test_rdl_block_is_just_rdl_and_stretches_at_the_platform():
 
 
 def test_hyper_block_opens_with_ankle_work_then_hyper_then_cuff():
-    # Tib + calf lead the block (they open it and rest each hyper set), then hyper,
-    # then rotator-cuff external rotation. Adjacent machines/cables at WH.
-    for suffix in ("Monday", "Wednesday", "Friday"):
+    # Mon/Fri: tib + calf lead the block (they open it and rest each hyper set),
+    # then hyper, then rotator-cuff external rotation. (Wednesday folds the split
+    # squat into the front of this block -- see the Wednesday structure test.)
+    for suffix in ("Monday", "Friday"):
         blocks = _names(_by_suffix(suffix))
         assert [
             "Tibialis Raise",
@@ -74,6 +75,18 @@ def test_hyper_block_opens_with_ankle_work_then_hyper_then_cuff():
             "Hyperextension",
             "Cable External Rotation",
         ] in blocks
+
+
+def test_wednesday_stretches_before_the_split_squats():
+    # No RDL block on Wednesday, so the couch stretch rides SS1 (leg press/curl)
+    # and the split squats move to SS2 -- landing after the stretch, warm.
+    blocks = _names(_by_suffix("Wednesday"))
+    assert blocks[0] == ["Leg Press", "Hamstring Curl", "Couch Stretch"]
+    ss2 = blocks[1]
+    assert "ATG Split Squat" in ss2
+    # Tib/calf still precede the hyper for its rest pairing.
+    assert ss2.index("Tibialis Raise") < ss2.index("Hyperextension")
+    assert ss2.index("Seated Calf Raise") < ss2.index("Hyperextension")
 
 
 def test_calf_and_tib_are_equal_as_the_hyper_rest_pairing():
@@ -96,8 +109,9 @@ def test_external_rotation_is_not_a_standalone_block():
 
 
 def test_leg_superset_no_longer_contains_the_hyper():
-    # The leg superset is leg press / curl / split squat; hyper moved out.
-    for suffix in ("Monday", "Wednesday", "Friday"):
+    # Mon/Fri leg superset is leg press / curl / split squat; hyper moved out.
+    # (Wednesday's SS1 is leg press / curl / stretch -- covered separately.)
+    for suffix in ("Monday", "Friday"):
         blocks = _names(_by_suffix(suffix))
         assert ["Leg Press", "Hamstring Curl", "ATG Split Squat"] in blocks
         assert all("Hyperextension" not in b for b in blocks if "Leg Press" in b)
@@ -121,7 +135,7 @@ def test_split_squat_working_sets_by_day_plus_uncounted_warmups():
 
 
 def test_leg_press_carries_a_warmup_ramp():
-    # The big superset isn't hit cold -- matters most on Wednesday (no RDL block).
+    # Quick ramp to the 400 working weight so it isn't hit cold.
     for suffix in ("Monday", "Wednesday", "Friday"):
         press = next(
             ex
@@ -129,7 +143,8 @@ def test_leg_press_carries_a_warmup_ramp():
             for ex in ss["Exercises"]
             if ex["Definition"]["Name"] == "Leg Press"
         )
-        assert len(press["WarmupSetDetails"]) == 2
+        assert len(press["WarmupSetDetails"]) == 3
+        assert all(s["Secondary"] == 400 for s in press["SetDetails"])
 
 
 def test_wrist_prehab_runs_six_rounds_each_short_day():

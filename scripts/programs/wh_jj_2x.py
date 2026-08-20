@@ -107,13 +107,17 @@ _RDL = Move(
 )
 
 # Gluteal-biased leg press (feet high, deep stretch) -- stands in for squats
-# until the back is strong enough. 3 working rounds on each full day. Carries a
-# warm-up ramp so the big superset isn't hit cold -- matters most on Wednesday,
-# which has no RDL block to warm up inside. Warm-ups don't count toward volume.
+# until the back is strong enough. 3 working rounds on each full day @ 400.
+# Carries a quick warm-up ramp (~1 min to the working weight). Warm-ups don't
+# count toward volume.
 _LEG_PRESS = Move(
     "Leg Press",
-    [SetConfig(reps=12, weight=360) for _ in range(3)],
-    warmups=[SetConfig(reps=12, weight=180), SetConfig(reps=10, weight=270)],
+    [SetConfig(reps=12, weight=400) for _ in range(3)],
+    warmups=[
+        SetConfig(reps=10, weight=180),
+        SetConfig(reps=6, weight=280),
+        SetConfig(reps=3, weight=360),
+    ],
 )
 # Single-leg machine curl, logged as "Hamstring Curl" (same exercise as last
 # year, so history carries over). Reps per side; starting 12/side @ 100.
@@ -137,12 +141,11 @@ def _split_squat(working: int) -> Move:
 
 _SPLIT_SQUAT = _split_squat(3)
 _SPLIT_SQUAT_WED = _split_squat(2)
-# The leg superset (leg press / curl / split squat). Hyper is NOT here -- it moved
-# to its own block with calf/tib (see below), which spreads the low-back work (RDL
-# early, hyper late) and keeps the ankle work off the platform. Wednesday uses a
-# variant with the 2-set split squat.
+# The Mon/Fri leg superset (leg press / curl / split squat). Hyper is NOT here --
+# it moved to its own block with calf/tib (see below), which spreads the low-back
+# work (RDL early, hyper late) and keeps the ankle work off the platform. Wednesday
+# splits this up differently (stretch in SS1, split squat in SS2) -- see _days().
 _LEG_SUPERSET = [_LEG_PRESS, _CURL, _SPLIT_SQUAT]
-_LEG_SUPERSET_WED = [_LEG_PRESS, _CURL, _SPLIT_SQUAT_WED]
 
 # Bodyweight hyperextension -- the rehab progression driver, 3 sets on each full
 # day (Mon/Wed/Fri) = 9; +RDL erectors -> low back ~13. The 1-leg + curved-back
@@ -161,15 +164,22 @@ _CALF = _reps("Seated Calf Raise", reps=20, weight=90, count=4)
 # RDL platform, so the platform is never left unattended. (_EXT_ROTATION defined
 # below.)
 
-# Stretches riding the RDL rest, done AT the platform (so it's never abandoned) --
-# warms up the quads/hip flexors for the split squats. Couch stretch: per side,
-# 2 min, 3 sets = a stretch in three of the four RDL rests. 2 sides x 120s logged
-# as one set (counts once for volume).
-_COUCH = Move(
-    "Couch Stretch",
-    [SetConfig(reps=2, weight=120) for _ in range(3)],
-    secondary_focus="time",
-)
+
+# Couch stretch -- warms the quads/hip flexors for the split squats (per side,
+# 2 min = 4 min/set). Mon/Fri: 3 sets riding the RDL rest, at the platform (never
+# abandoned). Wednesday: 2 sets (~8 min) riding the leg-press/curl rests, since
+# there's no RDL block -- the split squats then come in the SECOND superset, warm.
+# 2 sides x 120s logged as one set (counts once for volume).
+def _couch(sets: int) -> Move:
+    return Move(
+        "Couch Stretch",
+        [SetConfig(reps=2, weight=120) for _ in range(sets)],
+        secondary_focus="time",
+    )
+
+
+_COUCH = _couch(3)
+_COUCH_WED = _couch(2)
 # Rotator-cuff prehab (shoulder health): external rotation, the antagonist to all
 # the internal-rotation gripping/pulling in JJ. Light, higher-rep (never heavy --
 # that's how a cuff gets tweaked). 2 sets x 3 full days = 6/wk, maintenance (not a
@@ -185,7 +195,7 @@ _HYPER_BLOCK = [_TIB, _CALF, _HYPER, _EXT_ROTATION]
 # Adductor can still take load; abductor is maxed at the machine's 140 ceiling,
 # so it progresses by reps only. 6 rounds each on Tue/Thu = 12/wk each. The whole
 # short session is this one dense antagonist machine circuit + tibialis filler.
-_HIP_ADDUCTION = _reps("Hip Adduction", reps=10, weight=110, count=6)
+_HIP_ADDUCTION = _reps("Hip Adduction", reps=10, weight=90, count=6)
 _HIP_ABDUCTION = _reps("Hip Abduction", reps=12, weight=140, count=6)
 # Wrist prehab (anti-flexion extensors + rotation) fills the rest during the 6
 # ad/ab rounds -- the machines sit next to each other, so it's free rest-work.
@@ -226,13 +236,16 @@ def _days() -> list[Day]:
     wednesday = Day(
         "Wednesday",
         [
-            # Leg superset (2-set split squat -- no RDL block to pre-warm the
-            # legs, so Wednesday spends session time on the leg warm-up and runs
-            # one fewer working set). No RDL mid-week: the back rests, and there's
-            # nothing to hinge-warm-up for since the hypers are very light.
-            list(_LEG_SUPERSET_WED),
-            # Hyper + calf + tibialis + cuff.
-            list(_HYPER_BLOCK),
+            # SS1: machines + the couch stretch (~8 min) to warm the hips/quads for
+            # the split squats -- no RDL block on Wednesday to stretch during, so
+            # the stretch rides the leg-press/curl rests here instead.
+            [_LEG_PRESS, _CURL, _COUCH_WED],
+            # SS2: split squats moved here so they land AFTER the stretch, warm and
+            # fresh (they were cold and poor in SS1). Then the ankle + hyper + cuff
+            # work fills the rest; tib/calf still precede each hyper. Split squat is
+            # 2 working sets on Wednesday. No RDL mid-week -- the back rests before
+            # Thursday JJ, and nothing needs a hinge warm-up (the hypers are light).
+            [_SPLIT_SQUAT_WED, _TIB, _CALF, _HYPER, _EXT_ROTATION],
         ],
     )
     thursday = Day("Thursday", [list(_HIP_CIRCUIT)])
