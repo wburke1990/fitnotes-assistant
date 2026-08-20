@@ -10,7 +10,8 @@ Now the split is:
     (not after JJ, so there's time and a fresh back).
   * Tue / Thu -- SHORT sessions right after the JJ class (shower at the gym
     anyway): one dense hip adduction/abduction machine circuit, with wrist
-    prehab (rotation + extension) filling the rest during the 6 ad/ab rounds.
+    prehab (rotation + extension) filling the rest during the 6 ad/ab rounds,
+    then a quick neck-machine block (front / back / sides) last.
 
 The WH machines the user doesn't have at home get the emphasis: the leg press
 (loaded for glutes), the hip adduction/abduction machine, and the tibialis
@@ -36,8 +37,8 @@ Programming principles (see scripts/programs/README.md):
   * Wrist prehab (rotation + extension) rides the Tue/Thu ad/ab rest -- free
     rest-work on adjacent machines. Rotator-cuff external rotation rides the
     Mon/Wed/Fri hyper block (cables next to the hyper), off the short days so the
-    tight T/Th circuit stays at the ad/ab machines. Band-neck work can still fold
-    in if wanted (see the companion note).
+    tight T/Th circuit stays at the ad/ab machines. Neck (machine, front/back/
+    sides) is done last on Tue/Thu -- grappling-durability prehab.
 
 Progression targets (>=12 sets/wk): Gluteals (leg press), Hamstrings (RDL +
 curl), Back (Lower) (hypers + RDL), Adductors, Abductors (reps only -- machine
@@ -205,6 +206,18 @@ _WRIST_ROTATION = _reps("Wrist Rotation", reps=15, weight=10, count=6)
 _WRIST_EXTENSION = _reps("Wrist Extension", reps=15, weight=15, count=6)
 _HIP_CIRCUIT = [_HIP_ADDUCTION, _HIP_ABDUCTION, _WRIST_ROTATION, _WRIST_EXTENSION]
 
+# Neck (machine): flexion (front) / extension (back) / lateral flexion (sides),
+# done LAST on Tue/Thu. Grappling-durability prehab. Starting 20 reps @ 30 for
+# each, 2 sets = 6 sets/day (the T/Th target). Lateral is one set = BOTH sides
+# (per-side counts once, per the builder README) -- log the per-side reps there.
+# Double progression: ramp reps to ~35, then the smallest weight bump and reset
+# reps. Ramp reps fast (far from failure), weight patiently -- the neck's
+# connective tissue lags the muscle and a tweak flares a day or two later.
+_NECK_FLEXION = _reps("Neck Flexion", reps=20, weight=30, count=2)
+_NECK_EXTENSION = _reps("Neck Extension", reps=20, weight=30, count=2)
+_NECK_LATERAL = _reps("Neck Lateral Flexion", reps=20, weight=30, count=2)
+_NECK_BLOCK = [_NECK_FLEXION, _NECK_EXTENSION, _NECK_LATERAL]
+
 
 @dataclass
 class Day:
@@ -232,7 +245,7 @@ def _days() -> list[Day]:
             list(_HYPER_BLOCK),
         ],
     )
-    tuesday = Day("Tuesday", [list(_HIP_CIRCUIT)])
+    tuesday = Day("Tuesday", [list(_HIP_CIRCUIT), list(_NECK_BLOCK)])
     wednesday = Day(
         "Wednesday",
         [
@@ -248,7 +261,7 @@ def _days() -> list[Day]:
             [_SPLIT_SQUAT_WED, _TIB, _CALF, _HYPER, _EXT_ROTATION],
         ],
     )
-    thursday = Day("Thursday", [list(_HIP_CIRCUIT)])
+    thursday = Day("Thursday", [list(_HIP_CIRCUIT), list(_NECK_BLOCK)])
     friday = Day(
         "Friday",
         [

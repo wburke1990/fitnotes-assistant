@@ -47,12 +47,27 @@ def test_each_superset_is_its_own_block():
         assert all(len(block["SuperSets"]) == 1 for block in blocks)
 
 
-def test_short_days_are_a_single_hip_and_wrist_circuit():
-    # Tue/Thu are short: one block, ad/ab with wrist prehab filling the rest.
+def test_short_days_are_hip_circuit_then_neck():
+    # Tue/Thu are short: the ad/ab + wrist circuit, then a neck block last.
     for suffix in ("Tuesday", "Thursday"):
         assert _names(_by_suffix(suffix)) == [
-            ["Hip Adduction", "Hip Abduction", "Wrist Rotation", "Wrist Extension"]
+            ["Hip Adduction", "Hip Abduction", "Wrist Rotation", "Wrist Extension"],
+            ["Neck Flexion", "Neck Extension", "Neck Lateral Flexion"],
         ]
+
+
+def test_neck_is_last_and_only_on_the_short_days():
+    # Neck-machine work (front/back/sides) is the final block on Tue/Thu, and
+    # nowhere on the full days.
+    for suffix in ("Tuesday", "Thursday"):
+        assert _names(_by_suffix(suffix))[-1] == [
+            "Neck Flexion",
+            "Neck Extension",
+            "Neck Lateral Flexion",
+        ]
+    for suffix in ("Monday", "Wednesday", "Friday"):
+        flat = [name for block in _names(_by_suffix(suffix)) for name in block]
+        assert not any(name.startswith("Neck ") for name in flat)
 
 
 def test_rdl_block_is_just_rdl_and_stretches_at_the_platform():
