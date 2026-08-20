@@ -207,15 +207,17 @@ _WRIST_EXTENSION = _reps("Wrist Extension", reps=15, weight=15, count=6)
 _HIP_CIRCUIT = [_HIP_ADDUCTION, _HIP_ABDUCTION, _WRIST_ROTATION, _WRIST_EXTENSION]
 
 # Neck (machine): flexion (front) / extension (back) / lateral flexion (sides),
-# done LAST on Tue/Thu. Grappling-durability prehab. Starting 20 reps @ 30 for
-# each, 2 sets = 6 sets/day (the T/Th target). Lateral is one set = BOTH sides
-# (per-side counts once, per the builder README) -- log the per-side reps there.
-# Double progression: ramp reps to ~35, then the smallest weight bump and reset
-# reps. Ramp reps fast (far from failure), weight patiently -- the neck's
-# connective tissue lags the muscle and a tweak flares a day or two later.
-_NECK_FLEXION = _reps("Neck Flexion", reps=20, weight=30, count=2)
-_NECK_EXTENSION = _reps("Neck Extension", reps=20, weight=30, count=2)
-_NECK_LATERAL = _reps("Neck Lateral Flexion", reps=20, weight=30, count=2)
+# done LAST on Tue/Thu. Grappling-durability prehab. 20 reps @ 30 each, 4 sets =
+# 12 sets/day (24/wk) -- matches what's actually being done. Lateral is one set =
+# BOTH sides (per-side counts once, per the builder README) -- log the per-side
+# reps there. Double progression: ramp reps to ~35, then the smallest weight bump
+# and reset reps. Ramp reps fast (far from failure), weight patiently -- the
+# neck's connective tissue lags the muscle and a tweak flares a day or two later.
+# 24 sets/wk is high for a new neck; the governor is delayed soreness, not
+# in-session failure -- trim if it leaves the neck tender for JJ or sleep.
+_NECK_FLEXION = _reps("Neck Flexion", reps=20, weight=30, count=4)
+_NECK_EXTENSION = _reps("Neck Extension", reps=20, weight=30, count=4)
+_NECK_LATERAL = _reps("Neck Lateral Flexion", reps=20, weight=30, count=4)
 _NECK_BLOCK = [_NECK_FLEXION, _NECK_EXTENSION, _NECK_LATERAL]
 
 
