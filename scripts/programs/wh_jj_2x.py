@@ -193,11 +193,11 @@ _EXT_ROTATION = _reps("Cable External Rotation", reps=15, weight=12, count=2)
 # -- one trailing pair instead of the two you'd get with hyper listed first.
 _HYPER_BLOCK = [_TIB, _CALF, _HYPER, _EXT_ROTATION]
 
-# Adductor can still take load; abductor is maxed at the machine's 140 ceiling,
-# so it progresses by reps only. 6 rounds each on Tue/Thu = 12/wk each. The whole
-# short session is this one dense antagonist machine circuit + tibialis filler.
-_HIP_ADDUCTION = _reps("Hip Adduction", reps=10, weight=90, count=6)
-_HIP_ABDUCTION = _reps("Hip Abduction", reps=12, weight=140, count=6)
+# Antagonist machine circuit, 6 rounds each on Tue/Thu = 12/wk each. Both are
+# ramping load back up right now: abduction 150, adduction 100 (starting targets).
+# Keep adding load; if abduction tops out the machine's plate, switch it to reps.
+_HIP_ADDUCTION = _reps("Hip Adduction", reps=10, weight=100, count=6)
+_HIP_ABDUCTION = _reps("Hip Abduction", reps=12, weight=150, count=6)
 # Wrist prehab (anti-flexion extensors + rotation) fills the rest during the 6
 # ad/ab rounds -- the machines sit next to each other, so it's free rest-work.
 # 6 each = 12/wk, balancing the heavy JJ gripping and the raw-grip RDLs. This
