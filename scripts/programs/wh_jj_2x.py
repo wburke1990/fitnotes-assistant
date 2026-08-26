@@ -181,11 +181,11 @@ def _couch(sets: int, minutes_per_side: int = 2) -> Move:
 
 # Mon/Fri: 3 sets x 2 min/side, riding the RDL rest at the platform.
 _COUCH = _couch(3)
-# Wednesday SS1: the stretch is SPLIT into 4 shorter bouts (1 min/side, ~8 min
-# total) that lead each round (stretch -> ham -> press), so a stretch fills each
-# rest -- and, being one set longer than the leg press, the block FINISHES on a
-# stretch, hips prepped for the squats in SS2.
-_COUCH_WED = _couch(4, minutes_per_side=1)
+# Wednesday SS1: the stretch is SPLIT into 4 bouts (2 min/side) that lead each
+# round (stretch -> ham -> press), so a stretch fills each rest -- and, being one
+# set longer than the leg press, the block FINISHES on a stretch, hips prepped for
+# the squats in SS2.
+_COUCH_WED = _couch(4)
 # Rotator-cuff prehab (shoulder health): external rotation, the antagonist to all
 # the internal-rotation gripping/pulling in JJ. Light, higher-rep (never heavy --
 # that's how a cuff gets tweaked). 2 sets x 3 full days = 6/wk, maintenance (not a
