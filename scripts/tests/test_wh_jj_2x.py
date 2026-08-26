@@ -93,15 +93,24 @@ def test_hyper_block_opens_with_ankle_work_then_hyper_then_cuff():
 
 
 def test_wednesday_stretches_before_the_split_squats():
-    # No RDL block on Wednesday, so the couch stretch rides SS1 (leg press/curl)
-    # and the split squats move to SS2 -- landing after the stretch, warm.
+    # No RDL block on Wednesday. SS1 leads with the stretch (stretch -> ham ->
+    # press, finishing on a stretch); the split squat moves to the BACK of SS2 so
+    # it lands warm and its 2 sets don't stack at the front.
     blocks = _names(_by_suffix("Wednesday"))
-    assert blocks[0] == ["Leg Press", "Hamstring Curl", "Couch Stretch"]
+    assert blocks[0] == ["Couch Stretch", "Hamstring Curl", "Leg Press"]
     ss2 = blocks[1]
-    assert "ATG Split Squat" in ss2
+    assert ss2[-1] == "ATG Split Squat"
     # Tib/calf still precede the hyper for its rest pairing.
     assert ss2.index("Tibialis Raise") < ss2.index("Hyperextension")
     assert ss2.index("Seated Calf Raise") < ss2.index("Hyperextension")
+
+
+def test_wednesday_ss1_finishes_on_a_stretch():
+    # The couch stretch has one more set than the leg press, so the round-robin
+    # ends SS1 on a stretch (the last exercise to still have a set left).
+    ss1 = _blocks(_by_suffix("Wednesday"))[0]
+    counts = {ex["Definition"]["Name"]: len(ex["SetDetails"]) for ex in ss1["Exercises"]}
+    assert counts["Couch Stretch"] > counts["Leg Press"]
 
 
 def test_calf_and_tib_are_equal_as_the_hyper_rest_pairing():

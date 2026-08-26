@@ -171,16 +171,21 @@ _CALF = _reps("Seated Calf Raise", reps=20, weight=90, count=4)
 # abandoned). Wednesday: 2 sets (~8 min) riding the leg-press/curl rests, since
 # there's no RDL block -- the split squats then come in the SECOND superset, warm.
 # 2 sides x 120s logged as one set (counts once for volume).
-def _couch(sets: int) -> Move:
+def _couch(sets: int, minutes_per_side: int = 2) -> Move:
     return Move(
         "Couch Stretch",
-        [SetConfig(reps=2, weight=120) for _ in range(sets)],
+        [SetConfig(reps=2, weight=minutes_per_side * 60) for _ in range(sets)],
         secondary_focus="time",
     )
 
 
+# Mon/Fri: 3 sets x 2 min/side, riding the RDL rest at the platform.
 _COUCH = _couch(3)
-_COUCH_WED = _couch(2)
+# Wednesday SS1: the stretch is SPLIT into 4 shorter bouts (1 min/side, ~8 min
+# total) that lead each round (stretch -> ham -> press), so a stretch fills each
+# rest -- and, being one set longer than the leg press, the block FINISHES on a
+# stretch, hips prepped for the squats in SS2.
+_COUCH_WED = _couch(4, minutes_per_side=1)
 # Rotator-cuff prehab (shoulder health): external rotation, the antagonist to all
 # the internal-rotation gripping/pulling in JJ. Light, higher-rep (never heavy --
 # that's how a cuff gets tweaked). 2 sets x 3 full days = 6/wk, maintenance (not a
@@ -255,16 +260,18 @@ def _days() -> list[Day]:
     wednesday = Day(
         "Wednesday",
         [
-            # SS1: machines + the couch stretch (~8 min) to warm the hips/quads for
-            # the split squats -- no RDL block on Wednesday to stretch during, so
-            # the stretch rides the leg-press/curl rests here instead.
-            [_LEG_PRESS, _CURL, _COUCH_WED],
-            # SS2: split squats moved here so they land AFTER the stretch, warm and
-            # fresh (they were cold and poor in SS1). Then the ankle + hyper + cuff
-            # work fills the rest; tib/calf still precede each hyper. Split squat is
-            # 2 working sets on Wednesday. No RDL mid-week -- the back rests before
-            # Thursday JJ, and nothing needs a hinge warm-up (the hypers are light).
-            [_SPLIT_SQUAT_WED, _TIB, _CALF, _HYPER, _EXT_ROTATION],
+            # SS1: stretch -> ham curl -> leg press. The couch stretch is split
+            # into 4 short bouts that lead each round, so a stretch fills every
+            # rest and the block finishes on a stretch (couch is one set longer
+            # than the press). Warms the hips for the squats -- no RDL block on
+            # Wednesday to stretch during.
+            [_COUCH_WED, _CURL, _LEG_PRESS],
+            # SS2: worked BACKWARDS to the split squat (listed last) so its 2 sets
+            # land mid-block, a round apart, instead of stacking at the front. Tib/
+            # calf still lead so they rest each hyper. Split squat is 2 working
+            # sets on Wednesday. No RDL mid-week -- the back rests before Thursday
+            # JJ, and nothing needs a hinge warm-up (the hypers are light).
+            [_TIB, _CALF, _HYPER, _EXT_ROTATION, _SPLIT_SQUAT_WED],
         ],
     )
     thursday = Day("Thursday", [list(_HIP_CIRCUIT), list(_NECK_BLOCK)])
