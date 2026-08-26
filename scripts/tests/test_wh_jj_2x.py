@@ -94,11 +94,10 @@ def test_hyper_block_opens_with_ankle_work_then_hyper_then_cuff():
 
 def test_wednesday_stretches_before_the_split_squats():
     # No RDL block on Wednesday. SS1 leads with the stretch (stretch -> ham ->
-    # press, finishing on a stretch); the split squat moves to the BACK of SS2 so
-    # it lands warm and its 2 sets don't stack at the front.
+    # press, finishing on a stretch); the working split squat sits last in SS2.
     blocks = _names(_by_suffix("Wednesday"))
     assert blocks[0] == ["Couch Stretch", "Hamstring Curl", "Leg Press"]
-    ss2 = blocks[1]
+    ss2 = next(b for b in blocks if len(b) == 5)
     assert ss2[-1] == "ATG Split Squat"
     # Tib/calf still precede the hyper for its rest pairing.
     assert ss2.index("Tibialis Raise") < ss2.index("Hyperextension")
@@ -159,16 +158,20 @@ def test_split_squat_mon_fri_are_working_sets_with_uncounted_warmups():
         assert len(split["WarmupSetDetails"]) == 2
 
 
-def test_split_squat_wednesday_ramps_one_set_per_round():
-    # Wednesday folds the warm-up into the round-robin as light regular sets
-    # (bodyweight -> 50 -> 90 -> 90) so the squat distributes one per round -- 4
-    # sets, ascending, no separate warm-ups. 4 == the block's max round count.
-    ss2 = next(ss for ss in _blocks(_by_suffix("Wednesday")) if len(ss["Exercises"]) == 5)
-    split = next(ex for ex in ss2["Exercises"] if ex["Definition"]["Name"] == "ATG Split Squat")
-    assert [s["Secondary"] for s in split["SetDetails"]] == [0, 50, 90, 90]
-    assert len(split["WarmupSetDetails"]) == 0
-    max_rounds = max(len(ex["SetDetails"]) for ex in ss2["Exercises"])
-    assert len(split["SetDetails"]) == max_rounds
+def test_wednesday_bodyweight_warmup_before_ss2_then_working_last():
+    # A standalone bodyweight split-squat set warms up before SS2; the working
+    # squats (2 x 90) sit last inside SS2.
+    supersets = _blocks(_by_suffix("Wednesday"))
+    names = [[e["Definition"]["Name"] for e in ss["Exercises"]] for ss in supersets]
+    warmup_idx = names.index(["ATG Split Squat"])  # the lone single-exercise block
+    ss2_idx = next(i for i, n in enumerate(names) if len(n) == 5)
+    assert warmup_idx < ss2_idx
+    warmup = supersets[warmup_idx]["Exercises"][0]
+    assert [s["Secondary"] for s in warmup["SetDetails"]] == [0]
+    squat = next(
+        e for e in supersets[ss2_idx]["Exercises"] if e["Definition"]["Name"] == "ATG Split Squat"
+    )
+    assert [s["Secondary"] for s in squat["SetDetails"]] == [90, 90]
 
 
 def test_leg_press_carries_a_warmup_ramp():

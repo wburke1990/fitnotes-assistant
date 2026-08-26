@@ -141,21 +141,11 @@ def _split_squat(working: int) -> Move:
 
 
 _SPLIT_SQUAT = _split_squat(3)
-# Wednesday: the warm-up ramp is folded INTO the round-robin as light regular sets
-# (bodyweight -> 50 -> 90 -> 90), one per round, so the squat distributes evenly
-# across SS2 -- no warm-up cluster at the start, and a squat in every round
-# including the last. (FitNotes does an exercise's separate warm-ups as a block up
-# front, which is why they can't spread; regular sets can.) Trade-off: all 4 count
-# toward volume, vs the 2 working + 2 uncounted warm-ups on Mon/Fri.
-_SPLIT_SQUAT_WED = Move(
-    "ATG Split Squat",
-    [
-        SetConfig(reps=12, weight=0),
-        SetConfig(reps=12, weight=50),
-        SetConfig(reps=12, weight=90),
-        SetConfig(reps=12, weight=90),
-    ],
-)
+# Wednesday: one bodyweight set done BEFORE SS2 (its own lead-in block) to warm up,
+# then the working squats LAST in SS2 (2 sets @ 90). Keeping the warm-up out of the
+# round-robin means no front cluster, and the two working sets stay clean at 90.
+_SPLIT_SQUAT_WED_WARMUP = Move("ATG Split Squat", [SetConfig(reps=12, weight=0)])
+_SPLIT_SQUAT_WED = Move("ATG Split Squat", [SetConfig(reps=12, weight=90) for _ in range(2)])
 # The Mon/Fri leg superset (leg press / curl / split squat). Hyper is NOT here --
 # it moved to its own block with calf/tib (see below), which spreads the low-back
 # work (RDL early, hyper late) and keeps the ankle work off the platform. Wednesday
@@ -280,11 +270,11 @@ def _days() -> list[Day]:
             # than the press). Warms the hips for the squats -- no RDL block on
             # Wednesday to stretch during.
             [_COUCH_WED, _CURL, _LEG_PRESS],
-            # SS2: the split squat (listed last, 4 sets: bodyweight -> 50 -> 90 ->
-            # 90) distributes ONE per round, so it warms up through the circuit and
-            # a squat lands in every round -- no warm-up cluster at the start. Tib/
-            # calf still lead so they rest each hyper. No RDL mid-week -- the back
-            # rests before Thursday JJ, and nothing needs a hinge warm-up.
+            # One bodyweight split-squat set to warm up, before SS2.
+            [_SPLIT_SQUAT_WED_WARMUP],
+            # SS2: tib/calf lead (rest each hyper); the working squats sit LAST.
+            # No RDL mid-week -- the back rests before Thursday JJ, and nothing
+            # needs a hinge warm-up (the hypers are light).
             [_TIB, _CALF, _HYPER, _EXT_ROTATION, _SPLIT_SQUAT_WED],
         ],
     )
