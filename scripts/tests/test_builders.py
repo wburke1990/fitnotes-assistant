@@ -70,6 +70,21 @@ def test_build_exercise_secondary_focus_weight_when_loaded():
     assert ex["Definition"]["MaxSecondary"] == 50
 
 
+def test_build_exercise_preserves_fractional_weight():
+    # FitNotes accepts fractions (real exports carry 12.5); don't truncate 22.5.
+    ex = build_exercise("ATG Split Squat", [SetConfig(reps=8, weight=22.5)], MAPPINGS)
+    assert ex["SetDetails"][0]["Secondary"] == 22.5
+    assert ex["Definition"]["MaxSecondary"] == 22.5
+
+
+def test_build_exercise_whole_weight_stays_int():
+    # Whole weights emit an int (400, not 400.0).
+    ex = build_exercise("ATG Split Squat", [SetConfig(reps=8, weight=90)], MAPPINGS)
+    secondary = ex["SetDetails"][0]["Secondary"]
+    assert secondary == 90
+    assert isinstance(secondary, int)
+
+
 def test_build_exercise_time_secondary_focus():
     # secondary_focus="time" -> SecondaryFocusId 3, seconds in the Secondary field.
     # Used for per-side holds logged as one set of "2 reps x 120s".

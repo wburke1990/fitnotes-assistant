@@ -104,12 +104,23 @@ def _build_equipment(name: str) -> dict[str, Any]:
     }
 
 
+def _weight_value(weight: float) -> float | int:
+    """Preserve fractional plate weights (e.g. 22.5) but keep whole numbers int.
+
+    FitNotes stores Secondary as a number and accepts fractions -- real exports
+    carry values like 12.5 -- so truncating to int silently dropped half-pound
+    increments. Keep the fraction when there is one; emit an int otherwise so
+    whole weights stay 400, not 400.0.
+    """
+    return int(weight) if float(weight).is_integer() else weight
+
+
 def _build_set_detail(reps: int, weight: float, rpe: float = 0) -> dict[str, Any]:
     """Build a single set detail object."""
     return {
         "Id": _generate_uuid(),
         "Primary": reps,
-        "Secondary": int(weight),
+        "Secondary": _weight_value(weight),
         "RPE": int(rpe),
         "Type": 0,
         "Status": 0,
@@ -199,7 +210,7 @@ def build_exercise(
             "Equipment": _build_equipment(mappings.equipment[name]),
             "Categories": categories,
             "MaxPrimary": max_reps,
-            "MaxSecondary": int(max_weight),
+            "MaxSecondary": _weight_value(max_weight),
             "PrimaryFocusId": primary_focus_id,
             "SecondaryFocusId": secondary_focus_id,
         },
