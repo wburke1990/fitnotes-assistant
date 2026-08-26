@@ -141,21 +141,34 @@ def test_leg_superset_no_longer_contains_the_hyper():
         assert all("Hyperextension" not in b for b in blocks if "Leg Press" in b)
 
 
-def test_split_squat_working_sets_by_day_plus_uncounted_warmups():
-    # 3 working sets on Mon/Fri (fully warm from the RDL block), 2 on Wednesday
-    # (leave session time to warm the legs up). Bodyweight/light on-ramp is stored
-    # as warm-ups that don't count toward volume.
-    expected = {"Monday": 3, "Wednesday": 2, "Friday": 3}
-    for suffix, working in expected.items():
-        split = next(
-            ex
-            for ss in _blocks(_by_suffix(suffix))
-            for ex in ss["Exercises"]
-            if ex["Definition"]["Name"] == "ATG Split Squat"
-        )
-        assert len(split["SetDetails"]) == working
-        assert all(s["Secondary"] == 90 for s in split["SetDetails"])
+def _find_split_squat(suffix):
+    return next(
+        ex
+        for ss in _blocks(_by_suffix(suffix))
+        for ex in ss["Exercises"]
+        if ex["Definition"]["Name"] == "ATG Split Squat"
+    )
+
+
+def test_split_squat_mon_fri_are_working_sets_with_uncounted_warmups():
+    # Mon/Fri: 3 working sets @ 90; the bodyweight/light on-ramp is a separate
+    # warm-up (done during the RDL rests) that doesn't count toward volume.
+    for suffix in ("Monday", "Friday"):
+        split = _find_split_squat(suffix)
+        assert [s["Secondary"] for s in split["SetDetails"]] == [90, 90, 90]
         assert len(split["WarmupSetDetails"]) == 2
+
+
+def test_split_squat_wednesday_ramps_one_set_per_round():
+    # Wednesday folds the warm-up into the round-robin as light regular sets
+    # (bodyweight -> 50 -> 90 -> 90) so the squat distributes one per round -- 4
+    # sets, ascending, no separate warm-ups. 4 == the block's max round count.
+    ss2 = next(ss for ss in _blocks(_by_suffix("Wednesday")) if len(ss["Exercises"]) == 5)
+    split = next(ex for ex in ss2["Exercises"] if ex["Definition"]["Name"] == "ATG Split Squat")
+    assert [s["Secondary"] for s in split["SetDetails"]] == [0, 50, 90, 90]
+    assert len(split["WarmupSetDetails"]) == 0
+    max_rounds = max(len(ex["SetDetails"]) for ex in ss2["Exercises"])
+    assert len(split["SetDetails"]) == max_rounds
 
 
 def test_leg_press_carries_a_warmup_ramp():

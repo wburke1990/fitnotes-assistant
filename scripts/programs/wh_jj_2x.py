@@ -141,7 +141,21 @@ def _split_squat(working: int) -> Move:
 
 
 _SPLIT_SQUAT = _split_squat(3)
-_SPLIT_SQUAT_WED = _split_squat(2)
+# Wednesday: the warm-up ramp is folded INTO the round-robin as light regular sets
+# (bodyweight -> 50 -> 90 -> 90), one per round, so the squat distributes evenly
+# across SS2 -- no warm-up cluster at the start, and a squat in every round
+# including the last. (FitNotes does an exercise's separate warm-ups as a block up
+# front, which is why they can't spread; regular sets can.) Trade-off: all 4 count
+# toward volume, vs the 2 working + 2 uncounted warm-ups on Mon/Fri.
+_SPLIT_SQUAT_WED = Move(
+    "ATG Split Squat",
+    [
+        SetConfig(reps=12, weight=0),
+        SetConfig(reps=12, weight=50),
+        SetConfig(reps=12, weight=90),
+        SetConfig(reps=12, weight=90),
+    ],
+)
 # The Mon/Fri leg superset (leg press / curl / split squat). Hyper is NOT here --
 # it moved to its own block with calf/tib (see below), which spreads the low-back
 # work (RDL early, hyper late) and keeps the ankle work off the platform. Wednesday
@@ -266,11 +280,11 @@ def _days() -> list[Day]:
             # than the press). Warms the hips for the squats -- no RDL block on
             # Wednesday to stretch during.
             [_COUCH_WED, _CURL, _LEG_PRESS],
-            # SS2: worked BACKWARDS to the split squat (listed last) so its 2 sets
-            # land mid-block, a round apart, instead of stacking at the front. Tib/
-            # calf still lead so they rest each hyper. Split squat is 2 working
-            # sets on Wednesday. No RDL mid-week -- the back rests before Thursday
-            # JJ, and nothing needs a hinge warm-up (the hypers are light).
+            # SS2: the split squat (listed last, 4 sets: bodyweight -> 50 -> 90 ->
+            # 90) distributes ONE per round, so it warms up through the circuit and
+            # a squat lands in every round -- no warm-up cluster at the start. Tib/
+            # calf still lead so they rest each hyper. No RDL mid-week -- the back
+            # rests before Thursday JJ, and nothing needs a hinge warm-up.
             [_TIB, _CALF, _HYPER, _EXT_ROTATION, _SPLIT_SQUAT_WED],
         ],
     )
