@@ -81,7 +81,7 @@ class Move:
     warmups: list[SetConfig] = field(default_factory=list)
 
 
-def _reps(name: str, reps: int, weight: int, count: int) -> Move:
+def _reps(name: str, reps: int, weight: float, count: int) -> Move:
     """A normal reps/weight lift repeated `count` sets."""
     return Move(name, [SetConfig(reps=reps, weight=weight) for _ in range(count)])
 
@@ -113,7 +113,7 @@ _RDL = Move(
 # count toward volume.
 _LEG_PRESS = Move(
     "Leg Press",
-    [SetConfig(reps=12, weight=400) for _ in range(3)],
+    [SetConfig(reps=12, weight=410) for _ in range(3)],
     warmups=[
         SetConfig(reps=10, weight=180),
         SetConfig(reps=6, weight=280),
@@ -156,8 +156,8 @@ _HYPER = _reps("Hyperextension", reps=35, weight=0, count=3)
 # (Mon/Wed/Fri) = 12/wk. Calf + tib are the REST between hyper sets, so they must
 # be EQUAL -- otherwise a hyper set has no filler to rest against. 4 each covers
 # all 3 hyper sets plus a trailing pair, and keeps tib at its 12 floor.
-_TIB = _reps("Tibialis Raise", reps=25, weight=20, count=4)
-_CALF = _reps("Seated Calf Raise", reps=20, weight=90, count=4)
+_TIB = _reps("Tibialis Raise", reps=25, weight=22.5, count=4)
+_CALF = _reps("Seated Calf Raise", reps=20, weight=100, count=4)
 # The hyper block: hyper paired with calf + tibialis + rotator-cuff external
 # rotation, whose machines (and the cables) all sit next to the hyper at WH.
 # Non-interfering (low back vs lower leg vs shoulder), and they fill the rest

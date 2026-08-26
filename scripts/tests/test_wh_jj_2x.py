@@ -168,7 +168,7 @@ def test_leg_press_carries_a_warmup_ramp():
             if ex["Definition"]["Name"] == "Leg Press"
         )
         assert len(press["WarmupSetDetails"]) == 3
-        assert all(s["Secondary"] == 400 for s in press["SetDetails"])
+        assert all(s["Secondary"] == 410 for s in press["SetDetails"])
 
 
 def test_wrist_prehab_runs_six_rounds_each_short_day():
