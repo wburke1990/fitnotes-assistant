@@ -171,21 +171,21 @@ _CALF = _reps("Seated Calf Raise", reps=20, weight=100, count=4)
 # abandoned). Wednesday: 2 sets (~8 min) riding the leg-press/curl rests, since
 # there's no RDL block -- the split squats then come in the SECOND superset, warm.
 # 2 sides x 120s logged as one set (counts once for volume).
-def _couch(sets: int, minutes_per_side: int = 2) -> Move:
+def _couch(sets: int, minutes_per_side: int = 2, sides_per_set: int = 2) -> Move:
     return Move(
         "Couch Stretch",
-        [SetConfig(reps=2, weight=minutes_per_side * 60) for _ in range(sets)],
+        [SetConfig(reps=sides_per_set, weight=minutes_per_side * 60) for _ in range(sets)],
         secondary_focus="time",
     )
 
 
-# Mon/Fri: 3 sets x 2 min/side, riding the RDL rest at the platform.
+# Mon/Fri: 3 sets, both sides x 2 min, riding the RDL rest at the platform.
 _COUCH = _couch(3)
-# Wednesday SS1: the stretch is SPLIT into 4 bouts (2 min/side) that lead each
-# round (stretch -> ham -> press), so a stretch fills each rest -- and, being one
-# set longer than the leg press, the block FINISHES on a stretch, hips prepped for
-# the squats in SS2.
-_COUCH_WED = _couch(4)
+# Wednesday SS1: the stretch is split ONE SIDE per superset round (2 min each),
+# 4 bouts leading each round (stretch -> ham -> press) -- alternate L/R/L/R. A
+# stretch fills every rest, and being one set longer than the leg press the block
+# FINISHES on a stretch. Same ~8 min total, just distributed one side at a time.
+_COUCH_WED = _couch(4, sides_per_set=1)
 # Rotator-cuff prehab (shoulder health): external rotation, the antagonist to all
 # the internal-rotation gripping/pulling in JJ. Light, higher-rep (never heavy --
 # that's how a cuff gets tweaked). 2 sets x 3 full days = 6/wk, maintenance (not a
