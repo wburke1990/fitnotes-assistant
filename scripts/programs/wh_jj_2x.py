@@ -141,11 +141,15 @@ def _split_squat(working: int) -> Move:
 
 
 _SPLIT_SQUAT = _split_squat(3)
-# Wednesday: one bodyweight set done BEFORE SS2 (its own lead-in block) to warm up,
-# then the working squats LAST in SS2 (2 sets @ 90). Keeping the warm-up out of the
-# round-robin means no front cluster, and the two working sets stay clean at 90.
-_SPLIT_SQUAT_WED_WARMUP = Move("ATG Split Squat", [SetConfig(reps=12, weight=0)])
-_SPLIT_SQUAT_WED = Move("ATG Split Squat", [SetConfig(reps=12, weight=90) for _ in range(2)])
+# Wednesday: 2 working sets @ 90, LAST in SS2, with ONE bodyweight WARM-UP set
+# (uncounted). FitNotes shows an exercise's warm-ups at the top of the superset,
+# so the bodyweight set lands before the SS2 working sets without counting toward
+# volume -- which is why it's a warm-up here, not a standalone counted set.
+_SPLIT_SQUAT_WED = Move(
+    "ATG Split Squat",
+    [SetConfig(reps=12, weight=90) for _ in range(2)],
+    warmups=[SetConfig(reps=12, weight=0)],
+)
 # The Mon/Fri leg superset (leg press / curl / split squat). Hyper is NOT here --
 # it moved to its own block with calf/tib (see below), which spreads the low-back
 # work (RDL early, hyper late) and keeps the ankle work off the platform. Wednesday
@@ -270,11 +274,10 @@ def _days() -> list[Day]:
             # than the press). Warms the hips for the squats -- no RDL block on
             # Wednesday to stretch during.
             [_COUCH_WED, _CURL, _LEG_PRESS],
-            # One bodyweight split-squat set to warm up, before SS2.
-            [_SPLIT_SQUAT_WED_WARMUP],
-            # SS2: tib/calf lead (rest each hyper); the working squats sit LAST.
-            # No RDL mid-week -- the back rests before Thursday JJ, and nothing
-            # needs a hinge warm-up (the hypers are light).
+            # SS2: tib/calf lead (rest each hyper); the working squats sit LAST,
+            # with a single bodyweight warm-up set (uncounted) that FitNotes shows
+            # before the SS2 working sets. No RDL mid-week -- the back rests before
+            # Thursday JJ, and nothing needs a hinge warm-up (the hypers are light).
             [_TIB, _CALF, _HYPER, _EXT_ROTATION, _SPLIT_SQUAT_WED],
         ],
     )

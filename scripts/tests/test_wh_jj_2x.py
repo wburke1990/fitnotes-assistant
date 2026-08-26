@@ -158,20 +158,19 @@ def test_split_squat_mon_fri_are_working_sets_with_uncounted_warmups():
         assert len(split["WarmupSetDetails"]) == 2
 
 
-def test_wednesday_bodyweight_warmup_before_ss2_then_working_last():
-    # A standalone bodyweight split-squat set warms up before SS2; the working
-    # squats (2 x 90) sit last inside SS2.
-    supersets = _blocks(_by_suffix("Wednesday"))
-    names = [[e["Definition"]["Name"] for e in ss["Exercises"]] for ss in supersets]
-    warmup_idx = names.index(["ATG Split Squat"])  # the lone single-exercise block
-    ss2_idx = next(i for i, n in enumerate(names) if len(n) == 5)
-    assert warmup_idx < ss2_idx
-    warmup = supersets[warmup_idx]["Exercises"][0]
-    assert [s["Secondary"] for s in warmup["SetDetails"]] == [0]
-    squat = next(
-        e for e in supersets[ss2_idx]["Exercises"] if e["Definition"]["Name"] == "ATG Split Squat"
-    )
+def test_wednesday_split_squat_working_last_with_bodyweight_warmup():
+    # SS2's split squat is 2 working sets @ 90 (counted), preceded by a single
+    # bodyweight warm-up set (uncounted -- WarmupSetDetails, not SetDetails).
+    ss2 = next(ss for ss in _blocks(_by_suffix("Wednesday")) if len(ss["Exercises"]) == 5)
+    squat = next(e for e in ss2["Exercises"] if e["Definition"]["Name"] == "ATG Split Squat")
     assert [s["Secondary"] for s in squat["SetDetails"]] == [90, 90]
+    assert [s["Secondary"] for s in squat["WarmupSetDetails"]] == [0]
+    # And no standalone split-squat block remains before SS2.
+    names = [
+        [e["Definition"]["Name"] for e in ss["Exercises"]]
+        for ss in _blocks(_by_suffix("Wednesday"))
+    ]
+    assert ["ATG Split Squat"] not in names
 
 
 def test_leg_press_carries_a_warmup_ramp():
