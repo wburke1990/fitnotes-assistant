@@ -108,12 +108,12 @@ _RDL = Move(
 )
 
 # Gluteal-biased leg press (feet high, deep stretch) -- stands in for squats
-# until the back is strong enough. 3 working rounds on each full day @ 400.
+# until the back is strong enough. 3 working rounds on each full day @ 430.
 # Carries a quick warm-up ramp (~1 min to the working weight). Warm-ups don't
 # count toward volume.
 _LEG_PRESS = Move(
     "Leg Press",
-    [SetConfig(reps=12, weight=410) for _ in range(3)],
+    [SetConfig(reps=12, weight=430) for _ in range(3)],
     warmups=[
         SetConfig(reps=10, weight=180),
         SetConfig(reps=6, weight=280),
