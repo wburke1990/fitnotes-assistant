@@ -164,7 +164,7 @@ def test_wednesday_split_squat_working_last_with_bodyweight_warmup():
     ss2 = next(ss for ss in _blocks(_by_suffix("Wednesday")) if len(ss["Exercises"]) == 5)
     squat = next(e for e in ss2["Exercises"] if e["Definition"]["Name"] == "ATG Split Squat")
     assert [s["Secondary"] for s in squat["SetDetails"]] == [90, 90]
-    assert [s["Secondary"] for s in squat["WarmupSetDetails"]] == [0]
+    assert [s["Secondary"] for s in squat["WarmupSetDetails"]] == [0, 50]
     # And no standalone split-squat block remains before SS2.
     names = [
         [e["Definition"]["Name"] for e in ss["Exercises"]]

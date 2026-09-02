@@ -141,14 +141,14 @@ def _split_squat(working: int) -> Move:
 
 
 _SPLIT_SQUAT = _split_squat(3)
-# Wednesday: 2 working sets @ 90, LAST in SS2, with ONE bodyweight WARM-UP set
-# (uncounted). FitNotes shows an exercise's warm-ups at the top of the superset,
-# so the bodyweight set lands before the SS2 working sets without counting toward
-# volume -- which is why it's a warm-up here, not a standalone counted set.
+# Wednesday: 2 working sets @ 90, LAST in SS2, with a WARM-UP ramp (bodyweight ->
+# 50 = two 25s), both uncounted. FitNotes shows an exercise's warm-ups at the top
+# of the superset, so the ramp lands before the SS2 working sets without counting
+# toward volume -- which is why they're warm-ups here, not standalone counted sets.
 _SPLIT_SQUAT_WED = Move(
     "ATG Split Squat",
     [SetConfig(reps=12, weight=90) for _ in range(2)],
-    warmups=[SetConfig(reps=12, weight=0)],
+    warmups=[SetConfig(reps=12, weight=0), SetConfig(reps=12, weight=50)],
 )
 # The Mon/Fri leg superset (leg press / curl / split squat). Hyper is NOT here --
 # it moved to its own block with calf/tib (see below), which spreads the low-back
@@ -275,7 +275,7 @@ def _days() -> list[Day]:
             # Wednesday to stretch during.
             [_COUCH_WED, _CURL, _LEG_PRESS],
             # SS2: tib/calf lead (rest each hyper); the working squats sit LAST,
-            # with a single bodyweight warm-up set (uncounted) that FitNotes shows
+            # with a bodyweight -> 50 warm-up ramp (uncounted) that FitNotes shows
             # before the SS2 working sets. No RDL mid-week -- the back rests before
             # Thursday JJ, and nothing needs a hinge warm-up (the hypers are light).
             [_TIB, _CALF, _HYPER, _EXT_ROTATION, _SPLIT_SQUAT_WED],
