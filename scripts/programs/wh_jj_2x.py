@@ -141,14 +141,20 @@ def _split_squat(working: int) -> Move:
 
 
 _SPLIT_SQUAT = _split_squat(3)
-# Wednesday: 2 working sets @ 90, LAST in SS2, with a WARM-UP ramp (bodyweight ->
-# 50 = two 25s), both uncounted. FitNotes shows an exercise's warm-ups at the top
-# of the superset, so the ramp lands before the SS2 working sets without counting
-# toward volume -- which is why they're warm-ups here, not standalone counted sets.
+# Wednesday: the split squat is LAST in SS2 and ramps across the round-robin as 4
+# regular sets -- bodyweight -> 50 (two 25s) -> 90 -> 90, one per round -- plus ONE
+# bodyweight WARM-UP set (uncounted) on top. So 3 sets sit below the 90 working
+# weight: the warm-up at 0, then the 0 and 50 that are the squat's first two sets.
+# The four round-robin sets count toward volume; the warm-up doesn't.
 _SPLIT_SQUAT_WED = Move(
     "ATG Split Squat",
-    [SetConfig(reps=12, weight=90) for _ in range(2)],
-    warmups=[SetConfig(reps=12, weight=0), SetConfig(reps=12, weight=50)],
+    [
+        SetConfig(reps=12, weight=0),
+        SetConfig(reps=12, weight=50),
+        SetConfig(reps=12, weight=90),
+        SetConfig(reps=12, weight=90),
+    ],
+    warmups=[SetConfig(reps=12, weight=0)],
 )
 # The Mon/Fri leg superset (leg press / curl / split squat). Hyper is NOT here --
 # it moved to its own block with calf/tib (see below), which spreads the low-back
@@ -274,10 +280,10 @@ def _days() -> list[Day]:
             # than the press). Warms the hips for the squats -- no RDL block on
             # Wednesday to stretch during.
             [_COUCH_WED, _CURL, _LEG_PRESS],
-            # SS2: tib/calf lead (rest each hyper); the working squats sit LAST,
-            # with a bodyweight -> 50 warm-up ramp (uncounted) that FitNotes shows
-            # before the SS2 working sets. No RDL mid-week -- the back rests before
-            # Thursday JJ, and nothing needs a hinge warm-up (the hypers are light).
+            # SS2: tib/calf lead (rest each hyper); the split squat is LAST and
+            # ramps one set per round (0 -> 50 -> 90 -> 90), with a bodyweight
+            # warm-up on top. No RDL mid-week -- the back rests before Thursday JJ,
+            # and nothing needs a hinge warm-up (the hypers are light).
             [_TIB, _CALF, _HYPER, _EXT_ROTATION, _SPLIT_SQUAT_WED],
         ],
     )

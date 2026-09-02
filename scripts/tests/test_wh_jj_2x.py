@@ -159,12 +159,13 @@ def test_split_squat_mon_fri_are_working_sets_with_uncounted_warmups():
 
 
 def test_wednesday_split_squat_working_last_with_bodyweight_warmup():
-    # SS2's split squat is 2 working sets @ 90 (counted), preceded by a single
-    # bodyweight warm-up set (uncounted -- WarmupSetDetails, not SetDetails).
+    # SS2's split squat is LAST and ramps 0 -> 50 -> 90 -> 90 as regular sets
+    # (counted), with a single bodyweight warm-up set on top (uncounted). So three
+    # sets sit below the 90 working weight: the warm-up, plus the 0 and 50 sets.
     ss2 = next(ss for ss in _blocks(_by_suffix("Wednesday")) if len(ss["Exercises"]) == 5)
     squat = next(e for e in ss2["Exercises"] if e["Definition"]["Name"] == "ATG Split Squat")
-    assert [s["Secondary"] for s in squat["SetDetails"]] == [90, 90]
-    assert [s["Secondary"] for s in squat["WarmupSetDetails"]] == [0, 50]
+    assert [s["Secondary"] for s in squat["SetDetails"]] == [0, 50, 90, 90]
+    assert [s["Secondary"] for s in squat["WarmupSetDetails"]] == [0]
     # And no standalone split-squat block remains before SS2.
     names = [
         [e["Definition"]["Name"] for e in ss["Exercises"]]
