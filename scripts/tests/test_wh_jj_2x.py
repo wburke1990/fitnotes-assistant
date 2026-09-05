@@ -151,11 +151,13 @@ def _find_split_squat(suffix):
 
 def test_split_squat_mon_fri_are_working_sets_with_uncounted_warmups():
     # Mon/Fri: 3 working sets @ 90; the bodyweight/light on-ramp is a separate
-    # warm-up (done during the RDL rests) that doesn't count toward volume.
-    for suffix in ("Monday", "Friday"):
+    # warm-up (done during the RDL rests) that doesn't count toward volume. Friday
+    # carries one extra warm-up rung (bodyweight -> 50 -> 70) vs Monday's two.
+    expected_warmups = {"Monday": [0, 50], "Friday": [0, 50, 70]}
+    for suffix, warmups in expected_warmups.items():
         split = _find_split_squat(suffix)
         assert [s["Secondary"] for s in split["SetDetails"]] == [90, 90, 90]
-        assert len(split["WarmupSetDetails"]) == 2
+        assert [s["Secondary"] for s in split["WarmupSetDetails"]] == warmups
 
 
 def test_wednesday_split_squat_working_last_with_bodyweight_warmup():

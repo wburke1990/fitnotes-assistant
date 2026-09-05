@@ -140,7 +140,18 @@ def _split_squat(working: int) -> Move:
     )
 
 
-_SPLIT_SQUAT = _split_squat(3)
+_SPLIT_SQUAT = _split_squat(3)  # Monday
+# Friday: one extra warm-up rung (bodyweight -> 50 -> 70) before the working 90s,
+# so the ramp to weight has an extra step. Warm-ups stay uncounted.
+_SPLIT_SQUAT_FRI = Move(
+    "ATG Split Squat",
+    [SetConfig(reps=12, weight=90) for _ in range(3)],
+    warmups=[
+        SetConfig(reps=12, weight=0),
+        SetConfig(reps=12, weight=50),
+        SetConfig(reps=12, weight=70),
+    ],
+)
 # Wednesday: the split squat is LAST in SS2 and ramps across the round-robin as 4
 # regular sets -- bodyweight -> 50 (two 25s) -> 90 -> 90, one per round -- plus ONE
 # bodyweight WARM-UP set (uncounted) on top. So 3 sets sit below the 90 working
@@ -160,7 +171,9 @@ _SPLIT_SQUAT_WED = Move(
 # it moved to its own block with calf/tib (see below), which spreads the low-back
 # work (RDL early, hyper late) and keeps the ankle work off the platform. Wednesday
 # splits this up differently (stretch in SS1, split squat in SS2) -- see _days().
+# Friday uses a variant whose split squat carries one extra warm-up rung.
 _LEG_SUPERSET = [_LEG_PRESS, _CURL, _SPLIT_SQUAT]
+_LEG_SUPERSET_FRI = [_LEG_PRESS, _CURL, _SPLIT_SQUAT_FRI]
 
 # Bodyweight hyperextension -- the rehab progression driver, 3 sets on each full
 # day (Mon/Wed/Fri) = 9; +RDL erectors -> low back ~13. The 1-leg + curved-back
@@ -293,8 +306,8 @@ def _days() -> list[Day]:
         [
             # RDL with stretches at the platform (mirrors Monday).
             [_RDL, _COUCH],
-            # Leg superset, 3 rounds.
-            list(_LEG_SUPERSET),
+            # Leg superset, 3 rounds (split squat carries an extra warm-up rung).
+            list(_LEG_SUPERSET_FRI),
             # Hyper + calf + tibialis + cuff.
             list(_HYPER_BLOCK),
             # Elephant walk to finish -- posterior-chain decompression.
