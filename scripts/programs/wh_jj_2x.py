@@ -214,11 +214,11 @@ _COUCH = _couch(3)
 # FINISHES on a stretch. Same ~8 min total, just distributed one side at a time.
 _COUCH_WED = _couch(4, sides_per_set=1)
 # Rotator-cuff prehab (shoulder health): external rotation, the antagonist to all
-# the internal-rotation gripping/pulling in JJ. Light, higher-rep (never heavy --
-# that's how a cuff gets tweaked). 2 sets x 3 full days = 6/wk, maintenance (not a
-# 12 floor). Rides the hyper block on the cables next to the hyper machine -- kept
-# off the short days so the tight T/Th circuit stays at the ad/ab machines.
-_EXT_ROTATION = _reps("Cable External Rotation", reps=30, weight=12, count=2)
+# the internal-rotation gripping/pulling in JJ. Light, higher-rep, taken TO FAILURE
+# (~25/side = 50 total; the rep number is a target, not a cap). 2 sets x 3 full
+# days = 6/wk, maintenance (not a 12 floor). Rides the hyper block on the cables
+# next to the hyper machine -- off the short days so the T/Th circuit stays put.
+_EXT_ROTATION = _reps("Cable External Rotation", reps=50, weight=12, count=2)
 # Order: tib + calf lead, so the block OPENS with them (they warm up the lower
 # leg) and each hyper set gets an ankle pair right before it as its rest. Because
 # tib/calf are 4 and hypers are 3, exactly one tib/calf pair lands at the very end
