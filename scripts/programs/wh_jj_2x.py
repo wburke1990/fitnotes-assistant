@@ -141,15 +141,15 @@ def _split_squat(working: int) -> Move:
 
 
 _SPLIT_SQUAT = _split_squat(3)  # Monday
-# Friday: one extra warm-up rung (bodyweight -> 50 -> 70) before the working 90s,
-# so the ramp to weight has an extra step. Warm-ups stay uncounted.
+# Friday: warm-up ramp matches Wednesday's two bodyweight sets -> 50 before the
+# working 90s (bodyweight, bodyweight, 50). Warm-ups stay uncounted.
 _SPLIT_SQUAT_FRI = Move(
     "ATG Split Squat",
     [SetConfig(reps=12, weight=90) for _ in range(3)],
     warmups=[
         SetConfig(reps=12, weight=0),
+        SetConfig(reps=12, weight=0),
         SetConfig(reps=12, weight=50),
-        SetConfig(reps=12, weight=70),
     ],
 )
 # Wednesday: the split squat is LAST in SS2 and ramps across the round-robin as 4
@@ -183,7 +183,7 @@ _HYPER = _reps("Hyperextension", reps=35, weight=0, count=3)
 # (Mon/Wed/Fri) = 12/wk. Calf + tib are the REST between hyper sets, so they must
 # be EQUAL -- otherwise a hyper set has no filler to rest against. 4 each covers
 # all 3 hyper sets plus a trailing pair, and keeps tib at its 12 floor.
-_TIB = _reps("Tibialis Raise", reps=25, weight=22.5, count=4)
+_TIB = _reps("Tibialis Raise", reps=35, weight=22.5, count=4)
 _CALF = _reps("Seated Calf Raise", reps=20, weight=100, count=4)
 # The hyper block: hyper paired with calf + tibialis + rotator-cuff external
 # rotation, whose machines (and the cables) all sit next to the hyper at WH.
