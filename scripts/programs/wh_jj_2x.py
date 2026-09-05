@@ -234,8 +234,8 @@ _HIP_ABDUCTION = _reps("Hip Abduction", reps=12, weight=150, count=6)
 # ad/ab rounds -- the machines sit next to each other, so it's free rest-work.
 # 6 each = 12/wk, balancing the heavy JJ gripping and the raw-grip RDLs. This
 # circuit is the whole short session.
-_WRIST_ROTATION = _reps("Wrist Rotation", reps=15, weight=10, count=6)
-_WRIST_EXTENSION = _reps("Wrist Extension", reps=15, weight=15, count=6)
+_WRIST_ROTATION = _reps("Wrist Rotation", reps=70, weight=10, count=6)
+_WRIST_EXTENSION = _reps("Wrist Extension", reps=70, weight=15, count=6)
 _HIP_CIRCUIT = [_HIP_ADDUCTION, _HIP_ABDUCTION, _WRIST_ROTATION, _WRIST_EXTENSION]
 
 # Neck (machine): flexion (front) / extension (back) / lateral flexion (sides),
