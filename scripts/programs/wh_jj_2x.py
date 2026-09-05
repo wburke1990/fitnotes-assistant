@@ -122,7 +122,7 @@ _LEG_PRESS = Move(
 )
 # Single-leg machine curl, logged as "Hamstring Curl" (same exercise as last
 # year, so history carries over). Reps per side; starting 12/side @ 100.
-_CURL = _reps("Hamstring Curl", reps=12, weight=100, count=3)
+_CURL = _reps("Hamstring Curl", reps=24, weight=100, count=3)
 
 
 # Quad / knee MAINTENANCE, two DBs at the sides (less low-back demand than a
@@ -135,8 +135,8 @@ _CURL = _reps("Hamstring Curl", reps=12, weight=100, count=3)
 def _split_squat(working: int) -> Move:
     return Move(
         "ATG Split Squat",
-        [SetConfig(reps=12, weight=90) for _ in range(working)],
-        warmups=[SetConfig(reps=12, weight=0), SetConfig(reps=12, weight=50)],
+        [SetConfig(reps=24, weight=90) for _ in range(working)],
+        warmups=[SetConfig(reps=24, weight=0), SetConfig(reps=24, weight=50)],
     )
 
 
@@ -145,11 +145,11 @@ _SPLIT_SQUAT = _split_squat(3)  # Monday
 # working 90s (bodyweight, bodyweight, 50). Warm-ups stay uncounted.
 _SPLIT_SQUAT_FRI = Move(
     "ATG Split Squat",
-    [SetConfig(reps=12, weight=90) for _ in range(3)],
+    [SetConfig(reps=24, weight=90) for _ in range(3)],
     warmups=[
-        SetConfig(reps=12, weight=0),
-        SetConfig(reps=12, weight=0),
-        SetConfig(reps=12, weight=50),
+        SetConfig(reps=24, weight=0),
+        SetConfig(reps=24, weight=0),
+        SetConfig(reps=24, weight=50),
     ],
 )
 # Wednesday: the split squat is LAST in SS2 and ramps across the round-robin as 4
@@ -160,12 +160,12 @@ _SPLIT_SQUAT_FRI = Move(
 _SPLIT_SQUAT_WED = Move(
     "ATG Split Squat",
     [
-        SetConfig(reps=12, weight=0),
-        SetConfig(reps=12, weight=50),
-        SetConfig(reps=12, weight=90),
-        SetConfig(reps=12, weight=90),
+        SetConfig(reps=24, weight=0),
+        SetConfig(reps=24, weight=50),
+        SetConfig(reps=24, weight=90),
+        SetConfig(reps=24, weight=90),
     ],
-    warmups=[SetConfig(reps=12, weight=0)],
+    warmups=[SetConfig(reps=24, weight=0)],
 )
 # The Mon/Fri leg superset (leg press / curl / split squat). Hyper is NOT here --
 # it moved to its own block with calf/tib (see below), which spreads the low-back
@@ -183,7 +183,7 @@ _HYPER = _reps("Hyperextension", reps=35, weight=0, count=3)
 # (Mon/Wed/Fri) = 12/wk. Calf + tib are the REST between hyper sets, so they must
 # be EQUAL -- otherwise a hyper set has no filler to rest against. 4 each covers
 # all 3 hyper sets plus a trailing pair, and keeps tib at its 12 floor.
-_TIB = _reps("Tibialis Raise", reps=35, weight=22.5, count=4)
+_TIB = _reps("Tibialis Raise", reps=70, weight=22.5, count=4)
 _CALF = _reps("Seated Calf Raise", reps=20, weight=100, count=4)
 # The hyper block: hyper paired with calf + tibialis + rotator-cuff external
 # rotation, whose machines (and the cables) all sit next to the hyper at WH.
@@ -218,7 +218,7 @@ _COUCH_WED = _couch(4, sides_per_set=1)
 # that's how a cuff gets tweaked). 2 sets x 3 full days = 6/wk, maintenance (not a
 # 12 floor). Rides the hyper block on the cables next to the hyper machine -- kept
 # off the short days so the tight T/Th circuit stays at the ad/ab machines.
-_EXT_ROTATION = _reps("Cable External Rotation", reps=15, weight=12, count=2)
+_EXT_ROTATION = _reps("Cable External Rotation", reps=30, weight=12, count=2)
 # Order: tib + calf lead, so the block OPENS with them (they warm up the lower
 # leg) and each hyper set gets an ankle pair right before it as its rest. Because
 # tib/calf are 4 and hypers are 3, exactly one tib/calf pair lands at the very end
@@ -253,7 +253,7 @@ _HIP_CIRCUIT = [_HIP_ADDUCTION, _HIP_ABDUCTION, _WRIST_ROTATION, _WRIST_EXTENSIO
 # so it reads ~36 at target -- fine, that's 12 per real muscle.
 _NECK_FLEXION = _reps("Neck Flexion", reps=20, weight=30, count=4)
 _NECK_EXTENSION = _reps("Neck Extension", reps=20, weight=30, count=4)
-_NECK_LATERAL = _reps("Neck Lateral Flexion", reps=20, weight=30, count=4)
+_NECK_LATERAL = _reps("Neck Lateral Flexion", reps=40, weight=30, count=4)
 _NECK_BLOCK = [_NECK_FLEXION, _NECK_EXTENSION, _NECK_LATERAL]
 
 
