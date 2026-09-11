@@ -47,11 +47,14 @@ def test_each_superset_is_its_own_block():
         assert all(len(block["SuperSets"]) == 1 for block in blocks)
 
 
-def test_short_days_are_hip_circuit_then_neck():
-    # Tue/Thu are short: the ad/ab + wrist circuit, then a neck block last.
+def test_short_days_are_hip_superset_wrists_straight_then_neck():
+    # Tue/Thu: ad/ab superset, then wrist rotation and wrist extension as their
+    # own straight-set blocks, then the neck block last.
     for suffix in ("Tuesday", "Thursday"):
         assert _names(_by_suffix(suffix)) == [
-            ["Hip Adduction", "Hip Abduction", "Wrist Rotation", "Wrist Extension"],
+            ["Hip Adduction", "Hip Abduction"],
+            ["Wrist Rotation"],
+            ["Wrist Extension"],
             ["Neck Flexion", "Neck Extension", "Neck Lateral Flexion"],
         ]
 
@@ -190,10 +193,14 @@ def test_leg_press_carries_a_warmup_ramp():
         assert all(s["Secondary"] == 430 for s in press["SetDetails"])
 
 
-def test_wrist_prehab_runs_six_rounds_each_short_day():
+def test_wrist_prehab_runs_six_straight_sets_each_short_day():
+    # Wrists are their own straight-set blocks now (not ad/ab fillers): 6 each.
     for suffix in ("Tuesday", "Thursday"):
-        ss1 = _blocks(_by_suffix(suffix))[0]
-        counts = {ex["Definition"]["Name"]: len(ex["SetDetails"]) for ex in ss1["Exercises"]}
+        counts = {
+            ex["Definition"]["Name"]: len(ex["SetDetails"])
+            for ss in _blocks(_by_suffix(suffix))
+            for ex in ss["Exercises"]
+        }
         assert counts["Wrist Rotation"] == 6
         assert counts["Wrist Extension"] == 6
 

@@ -9,8 +9,9 @@ Now the split is:
   * Mon / Wed / Fri -- FULL lower-body / posterior-chain / back-rehab days
     (not after JJ, so there's time and a fresh back).
   * Tue / Thu -- SHORT sessions right after the JJ class (shower at the gym
-    anyway): one dense hip adduction/abduction machine circuit, with wrist
-    prehab (rotation + extension) filling the rest during the 6 ad/ab rounds,
+    anyway): the hip adduction/abduction machine superset (6 rounds), then wrist
+    rotation and wrist extension as their own STRAIGHT-set blocks (6 each, minimal
+    rest -- the air machine can't add load, so cut rest to raise the challenge),
     then a quick neck-machine block (front / back / sides) last.
 
 The WH machines the user doesn't have at home get the emphasis: the leg press
@@ -207,7 +208,7 @@ def _couch(sets: int, minutes_per_side: int = 2, sides_per_set: int = 2) -> Move
 
 
 # Mon/Fri: 3 sets, both sides x 2 min, riding the RDL rest at the platform.
-_COUCH = _couch(3)
+_COUCH = _couch(4)
 # Wednesday SS1: the stretch is split ONE SIDE per superset round (2 min each),
 # 4 bouts leading each round (stretch -> ham -> press) -- alternate L/R/L/R. A
 # stretch fills every rest, and being one set longer than the leg press the block
@@ -225,18 +226,18 @@ _EXT_ROTATION = _reps("Cable External Rotation", reps=50, weight=12, count=2)
 # -- one trailing pair instead of the two you'd get with hyper listed first.
 _HYPER_BLOCK = [_TIB, _CALF, _HYPER, _EXT_ROTATION]
 
-# Antagonist machine circuit, 6 rounds each on Tue/Thu = 12/wk each. Both are
-# ramping load back up right now: abduction 150, adduction 100 (starting targets).
-# Keep adding load; if abduction tops out the machine's plate, switch it to reps.
-_HIP_ADDUCTION = _reps("Hip Adduction", reps=10, weight=100, count=6)
-_HIP_ABDUCTION = _reps("Hip Abduction", reps=12, weight=150, count=6)
-# Wrist prehab (anti-flexion extensors + rotation) fills the rest during the 6
-# ad/ab rounds -- the machines sit next to each other, so it's free rest-work.
-# 6 each = 12/wk, balancing the heavy JJ gripping and the raw-grip RDLs. This
-# circuit is the whole short session.
+# Antagonist machine superset (adduction ↔ abduction), 6 rounds each on Tue/Thu =
+# 12/wk each. Ramping load back up: abduction 155, adduction 105 (starting
+# targets). Keep adding load; if abduction tops out the plate, switch it to reps.
+_HIP_ADDUCTION = _reps("Hip Adduction", reps=10, weight=105, count=6)
+_HIP_ABDUCTION = _reps("Hip Abduction", reps=12, weight=155, count=6)
+_HIP_SUPERSET = [_HIP_ADDUCTION, _HIP_ABDUCTION]
+# Wrist prehab (anti-flexion extensors + rotation), 6 each = 12/wk, balancing the
+# heavy JJ gripping and the raw-grip RDLs. Done as STRAIGHT sets (each its own
+# block, back-to-back) rather than ad/ab rest-fillers -- on the velocity-dependent
+# air machine you can't add load, so cutting the rest is how the challenge goes up.
 _WRIST_ROTATION = _reps("Wrist Rotation", reps=70, weight=10, count=6)
 _WRIST_EXTENSION = _reps("Wrist Extension", reps=70, weight=15, count=6)
-_HIP_CIRCUIT = [_HIP_ADDUCTION, _HIP_ABDUCTION, _WRIST_ROTATION, _WRIST_EXTENSION]
 
 # Neck (machine): flexion (front) / extension (back) / lateral flexion (sides),
 # done LAST on Tue/Thu. Grappling-durability prehab. 20 reps @ 30, currently 4
@@ -283,7 +284,10 @@ def _days() -> list[Day]:
             list(_HYPER_BLOCK),
         ],
     )
-    tuesday = Day("Tuesday", [list(_HIP_CIRCUIT), list(_NECK_BLOCK)])
+    tuesday = Day(
+        "Tuesday",
+        [list(_HIP_SUPERSET), [_WRIST_ROTATION], [_WRIST_EXTENSION], list(_NECK_BLOCK)],
+    )
     wednesday = Day(
         "Wednesday",
         [
@@ -300,7 +304,10 @@ def _days() -> list[Day]:
             [_TIB, _CALF, _HYPER, _EXT_ROTATION, _SPLIT_SQUAT_WED],
         ],
     )
-    thursday = Day("Thursday", [list(_HIP_CIRCUIT), list(_NECK_BLOCK)])
+    thursday = Day(
+        "Thursday",
+        [list(_HIP_SUPERSET), [_WRIST_ROTATION], [_WRIST_EXTENSION], list(_NECK_BLOCK)],
+    )
     friday = Day(
         "Friday",
         [
