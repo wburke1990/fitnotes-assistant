@@ -109,12 +109,12 @@ _RDL = Move(
 )
 
 # Gluteal-biased leg press (feet high, deep stretch) -- stands in for squats
-# until the back is strong enough. 3 working rounds on each full day @ 430.
+# until the back is strong enough. 3 working rounds on each full day @ 440.
 # Carries a quick warm-up ramp (~1 min to the working weight). Warm-ups don't
 # count toward volume.
 _LEG_PRESS = Move(
     "Leg Press",
-    [SetConfig(reps=12, weight=430) for _ in range(3)],
+    [SetConfig(reps=12, weight=440) for _ in range(3)],
     warmups=[
         SetConfig(reps=10, weight=180),
         SetConfig(reps=6, weight=280),
@@ -184,8 +184,8 @@ _HYPER = _reps("Hyperextension", reps=35, weight=0, count=3)
 # (Mon/Wed/Fri) = 12/wk. Calf + tib are the REST between hyper sets, so they must
 # be EQUAL -- otherwise a hyper set has no filler to rest against. 4 each covers
 # all 3 hyper sets plus a trailing pair, and keeps tib at its 12 floor.
-_TIB = _reps("Tibialis Raise", reps=70, weight=22.5, count=4)
-_CALF = _reps("Seated Calf Raise", reps=35, weight=100, count=4)
+_TIB = _reps("Tibialis Raise", reps=70, weight=25, count=4)
+_CALF = _reps("Seated Calf Raise", reps=35, weight=110, count=4)
 # The hyper block: hyper paired with calf + tibialis + rotator-cuff external
 # rotation, whose machines (and the cables) all sit next to the hyper at WH.
 # Non-interfering (low back vs lower leg vs shoulder), and they fill the rest
