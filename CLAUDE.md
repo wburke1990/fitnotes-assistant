@@ -67,8 +67,24 @@ tool's output is printed and the commit is aborted.
 
 ## Repo layout
 
-- `plans/` — per-gym workout plans (`pa/`, `pit/`, `wh/`, …) used while
-  traveling
+- `plans/` — workout plans, one directory per gym. **The directory name does
+  not always say which gym it is**, so it is written down here:
+  - `chi/` — **Chicago. The home gym.** Barbell + plates to ~300, half rack
+    with an adjustable bench, kettlebells to 100, dumbbells only to 25, lat
+    pulldown, low row, cable ankle straps, rings, handstand bars, tib bar,
+    45-degree hyperextension bench. No leg press, no hamstring curl machine,
+    no neck machine.
+  - `pit/` — Pittsburgh. Dumbbells to 55, no machines.
+  - `pa/` — a byte-identical copy of `pit/`; treat as a duplicate until
+    someone says otherwise.
+  - `back_rehab/` (Back Rehab 1/2/3) and `back_rehab_jj/` — **also Pittsburgh**,
+    despite the name giving no hint. These are the older rehab blocks.
+  - `wh/` — the machine gym: leg press, hamstring curl, hip ad/abduction,
+    seated calf, tibialis and neck machines, cables, reverse sled.
+
+  When a plan references equipment, check the gym it belongs to before
+  assuming — a load that looks impossible (a 75 lb "dumbbell" where the rack
+  stops at 55) usually means the equipment tag is wrong, not the weight.
 - `exercises/` — exercise definitions and metadata
 - `scripts/` — uv-managed Python for parsing `.fnw` and generating programs.
   **Building a plan? Read `scripts/programs/README.md` first** — it documents
