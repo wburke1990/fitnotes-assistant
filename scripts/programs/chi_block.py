@@ -30,7 +30,9 @@ The result is three big days and two light ones:
   * TUE / THU -- everything that taxes NO hamstrings, NO spinal extension and no
     hard grip: ALL the pushing (incline, handstand push-ups, ring dips), plus the
     tib bar, side hypers, the light one-arm calf raise, cable abduction, QL
-    raises, face pulls, L-sits and neck.
+    raises, face pulls, wrist prehab, L-sits and neck. Wrist work belongs here
+    rather than with the grip cluster: the extensors and rotators are the
+    ANTAGONISTS to crush grip, not more of it.
 
 A big day is four blocks and nothing else: hinge, then the Nordic block, then the
 working split squat, then hypers to finish. Anything that could be done on a
@@ -223,12 +225,18 @@ _NORDIC = _reps("Nordic Hamstring Curl", reps=8, weight=0, count=4)
 _PULLDOWN = _reps("Lat Pulldown", reps=10, weight=120, count=3)
 _LOW_ROW = _reps("Low Row", reps=10, weight=120, count=3)
 
-# Hip/quad mobility riding the RDL rest, warming the deep position the split
-# squat is limited by -- done at the bar, so the platform is never abandoned.
-# 2 sides x 120 s logged as one set.
+# Hip/quad mobility, opening the deep position the split squat is limited by.
+# Done at the bar, so the platform is never abandoned.
+# It LEADS the block rather than trailing the RDL. FitNotes renders an exercise's
+# warm-up sets at the top of its entry, so a stretch listed second would land
+# before the ramp instead of inside it. Listed first, the round-robin runs
+# stretch -> RDL -> stretch -> RDL, which puts a 2-minute bout between the 135
+# warm-up and the first 155 working set -- and between every working set after.
+# ONE SIDE per bout (2 min), alternating L/R/L/R across the four rounds, so both
+# sides get two bouts across the block.
 _COUCH = Move(
     "Couch Stretch",
-    [SetConfig(reps=2, weight=120) for _ in range(3)],
+    [SetConfig(reps=1, weight=120) for _ in range(4)],
     secondary_focus="time",
 )
 
@@ -265,6 +273,17 @@ _INCLINE = _reps("Barbell Incline Bench Press", reps=8, weight=135, count=3)
 # days to save time there; 6 sets x 2 days keeps its 12/wk progression floor on
 # two exposures instead of three. Nothing about it needs a grip or posterior day.
 _TIB = _reps("Tibialis Raise", reps=70, weight=25, count=6)
+
+# Wrist prehab: anti-flexion extensors and rotation, the balance to raw-grip
+# RDLs and (from month two) heavy gripping in jujitsu. These are ANTAGONISTS to
+# the crush grip rather than more of it, and the loads are small, so they sit on
+# the light days. 15 reps/side = 30 total, 4 sets each x 2 days = 8/wk.
+# At the machine gym these ran 6 sets each because the air machine could not add
+# load, so volume was the only lever. Here they load, so they progress on weight
+# at half the sets. Rotation wants a BARBELL held at one end -- the long lever
+# beats a 25 lb dumbbell, and you adjust by choking up or down the shaft.
+_WRIST_EXTENSION = _reps("Wrist Extension", reps=30, weight=20, count=4)
+_WRIST_ROTATION = _reps("Wrist Rotation", reps=30, weight=25, count=4)
 
 # Face pull on the long cable handles -- rear delts, scapular retraction and
 # external rotation at 90 degrees. Shoulder-health work, the antagonist to all
@@ -322,9 +341,9 @@ def _big_day(suffix: str, *, light: bool) -> Day:
     return Day(
         suffix,
         [
-            # Hinge first, on the freshest back. The stretch rides its rest at
-            # the bar, opening the deep position the split squat needs.
-            [_RDL_LIGHT if light else _RDL, _COUCH],
+            # Hinge on the freshest back. The stretch LEADS so its bouts land
+            # between the RDL's sets rather than before its warm-up ramp.
+            [_COUCH, _RDL_LIGHT if light else _RDL],
             # The vertical pull rides the Nordic's rest -- the one slot costing
             # neither grip nor low back -- and the split-squat ramp rides it too,
             # one rung per round, so the bar is warm before its working block.
@@ -348,6 +367,8 @@ def _light_day(suffix: str) -> Day:
             # All the pushing, plus the tib bar and L-sits.
             [_INCLINE, _HSPU, _TIB, _L_SIT],
             [_ABDUCTION, _QL_RAISE, _FACE_PULL],
+            # Wrist prehab as an antagonist pair, back to back, little rest.
+            [_WRIST_EXTENSION, _WRIST_ROTATION],
             list(_NECK_BLOCK),
         ],
     )

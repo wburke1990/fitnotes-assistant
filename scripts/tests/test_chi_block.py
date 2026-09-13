@@ -269,14 +269,29 @@ def test_wednesday_cuts_rdl_volume_not_rdl_load():
     assert [s["Secondary"] for s in _find("Wednesday", _RDL)["SetDetails"]] == [155] * 2
 
 
-def test_hinge_leads_every_big_day_with_the_stretch_on_its_rest():
-    # Hinge first, on the freshest back; the couch stretch rides its rest at the
-    # bar and warms the deep position the split squat is limited by.
+def test_the_stretch_leads_the_hinge_block():
+    # FitNotes renders an exercise's warm-up sets at the top of its entry, so a
+    # stretch listed SECOND would land before the RDL's ramp instead of inside
+    # it. Listed first, the round-robin runs stretch -> RDL -> stretch -> RDL,
+    # which puts a bout between the 135 warm-up and the first 155 working set.
     for suffix in BIG_DAYS:
-        first = _names(_by_suffix(suffix))[0]
-        assert first == [_RDL, "Couch Stretch"]
-        split_block = next(i for i, b in enumerate(_names(_by_suffix(suffix))) if _SPLIT in b)
-        assert split_block > 0
+        assert _names(_by_suffix(suffix))[0] == ["Couch Stretch", _RDL]
+
+
+def test_the_stretch_is_four_one_sided_two_minute_bouts():
+    # One side per bout, alternating L/R/L/R across the four rounds, so both
+    # sides get two bouts and each RDL set is preceded by a stretch.
+    for suffix in BIG_DAYS:
+        stretch = _find(suffix, "Couch Stretch")
+        assert len(stretch["SetDetails"]) == 4
+        assert all(s["Primary"] == 1 and s["Secondary"] == 120 for s in stretch["SetDetails"])
+
+
+def test_the_stretch_covers_every_rdl_working_set():
+    # Four bouts against at most four RDL sets, so no working set goes unpaired.
+    for suffix in BIG_DAYS:
+        counts = _set_counts(suffix)
+        assert counts["Couch Stretch"] >= counts[_RDL]
 
 
 # ---------------------------------------------------------------------------
@@ -370,7 +385,6 @@ def test_filler_never_leads_a_block_on_a_big_day():
         "Lat Pulldown",
         "Low Row",
         "L-Sit",
-        "Couch Stretch",
     }
     for suffix in BIG_DAYS:
         for block in _names(_by_suffix(suffix)):
@@ -385,10 +399,22 @@ def test_timed_holds_use_time_focus():
 
 
 def test_couch_stretch_logs_per_side_time():
-    # 2 sides x 120 s stored as one set: Primary = sides, Secondary = seconds.
-    stretch = _find("Monday", "Couch Stretch")
-    assert stretch["Definition"]["SecondaryFocusId"] == 3
-    assert all(s["Primary"] == 2 and s["Secondary"] == 120 for s in stretch["SetDetails"])
+    # Sides in Primary, seconds in Secondary.
+    assert _find("Monday", "Couch Stretch")["Definition"]["SecondaryFocusId"] == 3
+
+
+def test_wrist_prehab_is_an_antagonist_pair_on_the_light_days():
+    # The extensors and rotators are the ANTAGONISTS to crush grip, not more of
+    # it, and the loads are small -- so they belong off the grip cluster. They
+    # load here (unlike the machine gym's air machine), so they progress on
+    # weight at 4 sets rather than needing 6.
+    for move in ("Wrist Extension", "Wrist Rotation"):
+        assert _days_with(move) == set(LIGHT_DAYS)
+        for suffix in LIGHT_DAYS:
+            assert _set_counts(suffix)[move] == 4
+    for suffix in LIGHT_DAYS:
+        pair = next(b for b in _names(_by_suffix(suffix)) if "Wrist Extension" in b)
+        assert pair == ["Wrist Extension", "Wrist Rotation"]
 
 
 def test_progression_targets_clear_the_floor():
