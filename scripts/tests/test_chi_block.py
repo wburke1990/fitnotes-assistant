@@ -190,13 +190,13 @@ def test_hyper_sets_never_fall_below_thirty_five_reps():
         assert all(s["Secondary"] == 0 for s in hyper["SetDetails"])
 
 
-def test_hypers_finish_every_big_day_alone():
-    # At 35+ reps a hyper set is long enough to need no filler to rest against,
-    # and it is the driver, so it gets the end of the session to itself. Friday's
-    # elephant walk is decompression after the work, not part of it.
+def test_hypers_finish_every_big_day_with_only_forearm_work_on_their_rest():
+    # The hyper block is last, and the only thing sharing it is the wrist prehab
+    # -- forearms only, so the low back gets a genuine break between sets.
+    # Friday's elephant walk is decompression after the work, not part of it.
     for suffix in BIG_DAYS:
         blocks = [b for b in _names(_by_suffix(suffix)) if b != ["Elephant Walk"]]
-        assert blocks[-1] == [_HYPER]
+        assert blocks[-1] == [_HYPER, "Wrist Extension", "Wrist Rotation"]
 
 
 def test_side_hyper_clears_its_floor_on_the_light_days():
@@ -403,18 +403,16 @@ def test_couch_stretch_logs_per_side_time():
     assert _find("Monday", "Couch Stretch")["Definition"]["SecondaryFocusId"] == 3
 
 
-def test_wrist_prehab_is_an_antagonist_pair_on_the_light_days():
-    # The extensors and rotators are the ANTAGONISTS to crush grip, not more of
-    # it, and the loads are small -- so they belong off the grip cluster. They
-    # load here (unlike the machine gym's air machine), so they progress on
-    # weight at 4 sets rather than needing 6.
+def test_wrist_prehab_fills_the_hyper_rest_on_the_grip_days():
+    # The extensors and rotators are ANTAGONISTS to crush grip, not more of it,
+    # so the day that grips is the day to balance. They also give the hyper
+    # block the rest-filler it otherwise lacked. They load here (unlike the
+    # machine gym's air machine), so they progress on weight at 3 sets, not 6.
     for move in ("Wrist Extension", "Wrist Rotation"):
-        assert _days_with(move) == set(LIGHT_DAYS)
-        for suffix in LIGHT_DAYS:
-            assert _set_counts(suffix)[move] == 4
-    for suffix in LIGHT_DAYS:
-        pair = next(b for b in _names(_by_suffix(suffix)) if "Wrist Extension" in b)
-        assert pair == ["Wrist Extension", "Wrist Rotation"]
+        assert _days_with(move) == set(BIG_DAYS)
+        for suffix in BIG_DAYS:
+            assert _set_counts(suffix)[move] == 3
+            assert _HYPER in next(b for b in _names(_by_suffix(suffix)) if move in b)
 
 
 def test_progression_targets_clear_the_floor():

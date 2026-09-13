@@ -30,9 +30,12 @@ The result is three big days and two light ones:
   * TUE / THU -- everything that taxes NO hamstrings, NO spinal extension and no
     hard grip: ALL the pushing (incline, handstand push-ups, ring dips), plus the
     tib bar, side hypers, the light one-arm calf raise, cable abduction, QL
-    raises, face pulls, wrist prehab, L-sits and neck. Wrist work belongs here
-    rather than with the grip cluster: the extensors and rotators are the
-    ANTAGONISTS to crush grip, not more of it.
+    raises, L-sits and neck.
+
+Wrist prehab is the exception that lives on the BIG days, filling the rest
+between hyper sets: the extensors and rotators are ANTAGONISTS to crush grip
+rather than more of it, so the day that grips is the day to balance, and they
+cost the hyper nothing.
 
 A big day is four blocks and nothing else: hinge, then the Nordic block, then the
 working split squat, then hypers to finish. Anything that could be done on a
@@ -275,15 +278,19 @@ _INCLINE = _reps("Barbell Incline Bench Press", reps=8, weight=135, count=3)
 _TIB = _reps("Tibialis Raise", reps=70, weight=25, count=6)
 
 # Wrist prehab: anti-flexion extensors and rotation, the balance to raw-grip
-# RDLs and (from month two) heavy gripping in jujitsu. These are ANTAGONISTS to
-# the crush grip rather than more of it, and the loads are small, so they sit on
-# the light days. 15 reps/side = 30 total, 4 sets each x 2 days = 8/wk.
+# RDLs and (from month two) heavy gripping in jujitsu. These fill the rest
+# between hyper sets, which is the one rest on a big day with nothing in it.
+# They are ANTAGONISTS to the crush grip rather than more of it, so putting them
+# on the grip day balances the day's gripping on the day it is incurred -- which
+# is the standard prehab placement, and better than the day in between.
+# They do not touch the low back or the hamstrings, so they cost the hyper
+# nothing. 15 reps/side = 30 total, 3 sets each x 3 days = 9/wk.
 # At the machine gym these ran 6 sets each because the air machine could not add
 # load, so volume was the only lever. Here they load, so they progress on weight
 # at half the sets. Rotation wants a BARBELL held at one end -- the long lever
 # beats a 25 lb dumbbell, and you adjust by choking up or down the shaft.
-_WRIST_EXTENSION = _reps("Wrist Extension", reps=30, weight=20, count=4)
-_WRIST_ROTATION = _reps("Wrist Rotation", reps=30, weight=25, count=4)
+_WRIST_EXTENSION = _reps("Wrist Extension", reps=30, weight=20, count=3)
+_WRIST_ROTATION = _reps("Wrist Rotation", reps=30, weight=25, count=3)
 
 # Face pull on the long cable handles -- rear delts, scapular retraction and
 # external rotation at 90 degrees. Shoulder-health work, the antagonist to all
@@ -351,9 +358,9 @@ def _big_day(suffix: str, *, light: bool) -> Day:
             # Working split squat, already warm. The horizontal pull rides its
             # rest: the split squat costs no grip, so the row can afford to.
             [_SPLIT_SQUAT_PAUSED if light else _SPLIT_SQUAT, _LOW_ROW],
-            # Hypers finish the day, alone: at 35+ reps a set is long enough to
-            # need no filler to rest against.
-            [_HYPER],
+            # Hypers finish the day, with the wrist prehab filling their rest --
+            # forearms only, so the low back gets a genuine break between sets.
+            [_HYPER, _WRIST_EXTENSION, _WRIST_ROTATION],
         ],
     )
 
@@ -367,8 +374,6 @@ def _light_day(suffix: str) -> Day:
             # All the pushing, plus the tib bar and L-sits.
             [_INCLINE, _HSPU, _TIB, _L_SIT],
             [_ABDUCTION, _QL_RAISE, _FACE_PULL],
-            # Wrist prehab as an antagonist pair, back to back, little rest.
-            [_WRIST_EXTENSION, _WRIST_ROTATION],
             list(_NECK_BLOCK),
         ],
     )
