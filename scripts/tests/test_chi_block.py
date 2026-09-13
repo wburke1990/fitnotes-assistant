@@ -126,12 +126,32 @@ def test_every_big_day_carries_the_full_cluster():
         assert _flat(suffix) >= HEAVY_MOVES, f"{suffix} is missing part of the cluster"
 
 
+def _heavy_in(superset):
+    """Heavy movements in a superset, ignoring the split-squat RAMP.
+
+    The ramp (bodyweight and the empty bar) deliberately rides the Nordic block
+    so it costs no extra time; it is not a heavy set and does not count against
+    the one-heavy-movement-per-block rule.
+    """
+    heavy = set()
+    for ex in superset["Exercises"]:
+        name = ex["Definition"]["Name"]
+        if name not in HEAVY_MOVES:
+            continue
+        if name == _SPLIT and max(s["Secondary"] for s in ex["SetDetails"]) <= 45:
+            continue
+        heavy.add(name)
+    return heavy
+
+
 def test_heavy_movements_never_share_a_superset():
     # Each of the four gets its own block, so none rests against another taxing
     # the same tissue.
     for day in DAYS:
-        for block in _names(day):
-            assert len(HEAVY_MOVES & set(block)) <= 1, block
+        for superset in _blocks(day):
+            assert len(_heavy_in(superset)) <= 1, [
+                ex["Definition"]["Name"] for ex in superset["Exercises"]
+            ]
 
 
 def test_the_pull_only_ever_rides_the_nordic_curl():
@@ -154,11 +174,25 @@ def test_low_back_never_on_consecutive_days():
 # ---------------------------------------------------------------------------
 
 
-def test_hyper_is_three_unloaded_sets_on_each_big_day():
-    # Reps ramp to 35/side before any load goes on, so every set is bodyweight.
+def test_hyper_sets_never_fall_below_thirty_five_reps():
+    # The convention is to TRANSFORM the reps, not shorten the set: the opening
+    # reps are the hardest variant currently owned, the rest are finished as
+    # regular reps, and every set totals at least 35. Progression is the hard
+    # fraction growing, so the logged count only ever goes up.
     for suffix in BIG_DAYS:
-        assert _set_counts(suffix)[_HYPER] == 3
-        assert all(s["Secondary"] == 0 for s in _find(suffix, _HYPER)["SetDetails"])
+        hyper = _find(suffix, _HYPER)
+        assert len(hyper["SetDetails"]) == 3
+        assert all(s["Primary"] >= 35 for s in hyper["SetDetails"])
+        assert all(s["Secondary"] == 0 for s in hyper["SetDetails"])
+
+
+def test_hypers_finish_every_big_day_alone():
+    # At 35+ reps a hyper set is long enough to need no filler to rest against,
+    # and it is the driver, so it gets the end of the session to itself. Friday's
+    # elephant walk is decompression after the work, not part of it.
+    for suffix in BIG_DAYS:
+        blocks = [b for b in _names(_by_suffix(suffix)) if b != ["Elephant Walk"]]
+        assert blocks[-1] == [_HYPER]
 
 
 def test_side_hyper_clears_its_floor_on_the_light_days():
@@ -170,14 +204,44 @@ def test_side_hyper_clears_its_floor_on_the_light_days():
         assert all(s["Secondary"] == 0 for s in _find(suffix, _SIDE_HYPER)["SetDetails"])
 
 
+def _split_entries(suffix):
+    """The split squat appears twice on a big day: the ramp, then the work."""
+    return [
+        ex
+        for ss in _blocks(_by_suffix(suffix))
+        for ex in ss["Exercises"]
+        if ex["Definition"]["Name"] == _SPLIT
+    ]
+
+
 def test_split_squat_runs_heavy_twice_and_paused_once():
     assert _days_with(_SPLIT) == set(BIG_DAYS)
     for suffix in ("Monday", "Friday"):
-        assert [s["Secondary"] for s in _find(suffix, _SPLIT)["SetDetails"]] == [70, 70, 70, 70]
-        assert [s["Secondary"] for s in _find(suffix, _SPLIT)["WarmupSetDetails"]] == [0, 45]
-    paused = _find("Wednesday", _SPLIT)
-    assert [s["Secondary"] for s in paused["SetDetails"]] == [50, 50, 50]
-    assert [s["Secondary"] for s in paused["WarmupSetDetails"]] == [0]
+        ramp, work = _split_entries(suffix)
+        assert [s["Secondary"] for s in ramp["SetDetails"]] == [0, 45]
+        assert [s["Secondary"] for s in work["SetDetails"]] == [70, 70, 70, 70]
+    ramp, work = _split_entries("Wednesday")
+    assert [s["Secondary"] for s in ramp["SetDetails"]] == [0]
+    assert [s["Secondary"] for s in work["SetDetails"]] == [50, 50, 50]
+
+
+def test_split_squat_ramp_rides_the_nordic_block():
+    # The ramp is not stacked on top of the working sets as warm-ups -- it goes
+    # one rung per round inside the Nordic/pull block, so it costs no extra time
+    # and the bar is warm when the working block starts.
+    for suffix in BIG_DAYS:
+        blocks = _names(_by_suffix(suffix))
+        nordic_block = next(b for b in blocks if _NORDIC in b)
+        assert _SPLIT in nordic_block
+        # And the working block comes after it, on its own.
+        assert blocks.index(nordic_block) < blocks.index([_SPLIT])
+
+
+def test_split_squat_carries_no_warmup_sets():
+    # The ramp is real, counted reps inside the Nordic block, not WarmupSetDetails.
+    for suffix in BIG_DAYS:
+        for entry in _split_entries(suffix):
+            assert entry["WarmupSetDetails"] == []
 
 
 def test_wednesday_cuts_rdl_volume_not_rdl_load():
@@ -223,10 +287,25 @@ def test_neck_is_last_and_only_on_the_light_days():
         assert not any(name.startswith("Neck ") for name in _flat(suffix))
 
 
-def test_tibialis_holds_its_twelve_set_floor():
-    assert _days_with("Tibialis Raise") == set(BIG_DAYS)
+def test_tibialis_holds_its_twelve_set_floor_on_the_light_days():
+    # Moved off the big days to save time there; 6 sets x 2 days still clears 12.
+    assert _days_with("Tibialis Raise") == set(LIGHT_DAYS)
+    for suffix in LIGHT_DAYS:
+        assert _set_counts(suffix)["Tibialis Raise"] == 6
+
+
+def test_all_pushing_lives_on_the_light_days():
+    # Pressing costs neither grip nor hamstrings, so it has no business taking
+    # up time on a big day.
+    for move in ("Barbell Incline Bench Press", "Handstand Push-Up", "Ring Dip"):
+        assert _days_with(move) == set(LIGHT_DAYS), f"{move} is on a big day"
+
+
+def test_big_days_are_four_blocks_of_work():
+    # Hinge, Nordic block, working split squat, hypers. Nothing else.
     for suffix in BIG_DAYS:
-        assert _set_counts(suffix)["Tibialis Raise"] == 4
+        blocks = [b for b in _names(_by_suffix(suffix)) if b != ["Elephant Walk"]]
+        assert len(blocks) == 4, blocks
 
 
 def test_abductors_are_a_maintenance_dose_at_load():
@@ -267,27 +346,28 @@ def test_pulling_is_thin_but_present_on_every_big_day():
         assert {"Lat Pulldown", "Low Row"} & _flat(suffix)
 
 
-def test_filler_never_leads_a_block():
-    # Accessories ride the rest between the driving sets; they never displace one.
+def test_filler_never_leads_a_block_on_a_big_day():
+    # On a big day every block is led by its driving movement; the accessories
+    # ride its rest. (Light days are the opposite by design -- the pushing block
+    # is led by the incline press, because there is no driver to displace.)
     filler = {
         "Barbell Incline Bench Press",
-        "Ring Dip",
         "Handstand Push-Up",
         "Lat Pulldown",
         "Low Row",
         "L-Sit",
-        "Tibialis Raise",
-        "Standing Calf Raise",
-        "Face Pull",
         "Couch Stretch",
+        _SPLIT,  # the ramp rides the Nordic; only the working block leads
     }
-    for day in DAYS:
-        for block in _names(day):
-            assert block[0] not in filler
+    for suffix in BIG_DAYS:
+        for block in _names(_by_suffix(suffix)):
+            if block == [_SPLIT]:  # the working split-squat block
+                continue
+            assert block[0] not in filler, block
 
 
 def test_timed_holds_use_time_focus():
-    for name, suffix in (("L-Sit", "Monday"), ("Elephant Walk", "Friday")):
+    for name, suffix in (("L-Sit", "Tuesday"), ("Elephant Walk", "Friday")):
         assert _find(suffix, name)["Definition"]["PrimaryFocusId"] == 3
 
 

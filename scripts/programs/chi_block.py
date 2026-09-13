@@ -27,17 +27,23 @@ The result is three big days and two light ones:
     is never trained on consecutive days. Wednesday is the reduced version: the
     RDL keeps its 155 and drops to two sets, and the split squat is the lighter
     paused one. Load is what maintains strength, so volume is what gets cut.
-  * TUE / THU -- short, deliberately carrying NO hamstring work, NO spinal
-    extension and nothing that has to be gripped hard. Side hypers, ring dips,
-    the light one-arm calf raise, cable abduction, QL raises, face pulls and neck.
+  * TUE / THU -- everything that taxes NO hamstrings, NO spinal extension and no
+    hard grip: ALL the pushing (incline, handstand push-ups, ring dips), plus the
+    tib bar, side hypers, the light one-arm calf raise, cable abduction, QL
+    raises, face pulls, L-sits and neck.
 
-Upper body is NOT a priority and rides the rest inside each block. It comes out
-push-heavy (incline, handstand push-ups, ring dips) against a thin 9 sets of
-pulling, because the grip cluster confines pulling to the big days and, within
-them, to the one rest slot that costs neither grip nor low back -- the Nordic's.
-Face pulls are the exception that earns a light-day slot: they are the only
-shoulder-health work here, the antagonist to all the grappling pulls and posts,
-and light enough that the rope costs no meaningful grip.
+A big day is four blocks and nothing else: hinge, then the Nordic block, then the
+working split squat, then hypers to finish. Anything that could be done on a
+light day was moved to one, because the big days are the ones short on time.
+Notably the split-squat RAMP rides the Nordic block one rung per round, instead
+of sitting on top of the working sets -- so it costs no extra time and the bar is
+warm when its own block starts.
+
+Upper body is NOT a priority. It comes out push-heavy (24 sets) against a thin
+9 sets of pulling, because the grip cluster confines pulling to the big days and,
+within them, to the Nordic's rest -- the one slot costing neither grip nor low
+back. Face pulls are the only shoulder-health work, the antagonist to the
+grappling pulls and posts, and light enough to sit on a no-grip day.
 
 Within a big day, the four heavy movements each get their OWN superset, so none
 of them rests against another that taxes the same tissue. The one deliberate
@@ -46,8 +52,10 @@ so the pull can ride their rest for free.
 
 Three progressions DRIVE the block (the user's own pick); everything else is held
 at a maintenance dose:
-  1. LOW BACK -- the hyperextension ladder, now on the one-legged CURVED-BACK
-     variant, ramping reps toward 3 sets x 35 per side before any load goes on.
+  1. LOW BACK -- the hyperextension ladder. Every set is at least 35 reps; what
+     progresses is the FRACTION of those reps done in the hardest variant you
+     own (one-legged curved-back), not the length of the set. Load goes on only
+     once all 35 per side are the hard variant.
   2. ADDUCTORS -- side-lying hyperextension adductor raises, same reps-then-load
      structure, starting from 8 per side. These live on the LIGHT days: no grip,
      no hamstrings, no extension, so they don't belong on the big days.
@@ -159,27 +167,36 @@ _RDL_LIGHT = Move(
 # DRIVER 3. Front rack split squat, +5 lb/week, 70 -> 135 over 13 weeks. The bar
 # sits in the rack position, so this costs no grip -- but it taxes the hamstrings
 # hard, which is why it belongs on the big days. 12 reps/side = 24 total.
-# Warm-ups (bodyweight, then the empty bar) add session time, not volume.
-_SPLIT_SQUAT = Move(
-    "Front Rack Split Squat",
-    [SetConfig(reps=24, weight=70) for _ in range(4)],
-    warmups=[SetConfig(reps=24, weight=0), SetConfig(reps=24, weight=45)],
-)
+_SPLIT_SQUAT = Move("Front Rack Split Squat", [SetConfig(reps=24, weight=70) for _ in range(4)])
 # Wednesday: the PAUSED exposure. Lighter load, 3-5 s held at full depth. The
 # limiter on this lift is strength in the deep position, not the rack, so pause
-# time and depth progress alongside the Mon/Fri load. Counted volume -- real work.
+# time and depth progress alongside the Mon/Fri load.
 _SPLIT_SQUAT_PAUSED = Move(
     "Front Rack Split Squat",
     [SetConfig(reps=16, weight=50) for _ in range(3)],
-    warmups=[SetConfig(reps=24, weight=0)],
 )
+# The ramp does NOT sit on top of the working sets as warm-up sets -- it rides
+# the Nordic/pull block instead, one rung per round, so it costs no extra time
+# and you arrive at the bar already warm. These are real reps and count.
+_SPLIT_RAMP = Move(
+    "Front Rack Split Squat",
+    [SetConfig(reps=24, weight=0), SetConfig(reps=24, weight=45)],
+)
+_SPLIT_RAMP_LIGHT = Move("Front Rack Split Squat", [SetConfig(reps=24, weight=0)])
 
-# DRIVER 1. One-legged CURVED-BACK hyperextension on the 45-degree bench -- the
-# rung above the one-legged work finished at the machine gym (whose bench is
-# flat, and therefore harder: peak load lands at full extension rather than
-# partway down, so that work transfers favourably here). Ramp reps to 35 PER SIDE
-# for 3 sets before adding any load. Starting 5/side = 10 total.
-_HYPER = _reps("Hyperextension", reps=10, weight=0, count=3)
+# DRIVER 1. Hyperextension on the 45-degree bench, TRANSFORMING the reps rather
+# than dropping the set short. Every set is at least 35 reps: the opening reps
+# are the hardest variant you currently own (one-legged curved-back, ~10 now),
+# and the remainder are finished as regular reps. Progression is the hard
+# fraction growing, NOT the set getting shorter -- so the logged rep count only
+# goes up, never down, and 35 is the floor for every set from day one.
+# The ladder's top rung is when all 35 per side are the hard variant (70 logged);
+# only then does load go on. The flat bench at the machine gym is the harder
+# version -- peak load lands at full extension rather than partway down -- so the
+# one-legged work finished there transfers favourably to the 45 here.
+# Finishes every big day, on its own: at 35+ reps a set is long enough that it
+# needs no filler to rest against.
+_HYPER = _reps("Hyperextension", reps=35, weight=0, count=3)
 
 # The hamstring TENDON slot. A slow heavy Nordic eccentric is the high-strain,
 # ~3-second loading tendons adapt to, and it needs nothing this gym lacks. Stays
@@ -202,16 +219,10 @@ _COUCH = Move(
     secondary_focus="time",
 )
 
-# Big-day fillers. None may tax the HAMSTRINGS or the LOW BACK, or it would
-# defeat the point of giving the heavy movements their own supersets. Grip is a
-# different matter: these are the grip days, so a grip-taxing filler belongs here
-# and nowhere else.
-# Tibialis on the tib bar, one-legged (35/side = 70 total): 4 sets x 3 days =
-# 12/wk, its progression floor. Handstand push-ups and the incline press are the
-# grip-free pressing.
-_TIB = _reps("Tibialis Raise", reps=70, weight=25, count=4)
-_HSPU = _reps("Handstand Push-Up", reps=5, weight=0, count=3)
-_INCLINE = _reps("Barbell Incline Bench Press", reps=8, weight=135, count=3)
+# The only filler left on a big day is the couch stretch (riding the RDL rest)
+# and the pull (riding the Nordic's). Everything else moved to the light days:
+# the big days are the ones short on time, and nothing that got moved needs to
+# be there.
 _L_SIT = _hold("L-Sit", 30, count=3)
 
 # --- The light days: no grip, no hamstrings, no spinal extension --------------
@@ -230,8 +241,17 @@ _ABDUCTION = _reps("Cable Hip Abduction", reps=24, weight=60, count=3)
 # QL raise -- lateral trunk, no grip, no hinge.
 _QL_RAISE = _reps("QL Raise", reps=16, weight=0, count=3)
 
-# Ring dips: support grip only, not the crush grip the RDL and the pulls tax.
+# The pushing. All of it lives here -- pressing costs neither grip nor hamstrings,
+# so it has no business taking up time on the big days. Ring dips are support
+# grip only, not the crush grip the RDL and the pulls tax.
 _RING_DIP = _reps("Ring Dip", reps=8, weight=0, count=3)
+_HSPU = _reps("Handstand Push-Up", reps=5, weight=0, count=3)
+_INCLINE = _reps("Barbell Incline Bench Press", reps=8, weight=135, count=3)
+
+# Tibialis on the tib bar, one-legged (35/side = 70 total). It moved off the big
+# days to save time there; 6 sets x 2 days keeps its 12/wk progression floor on
+# two exposures instead of three. Nothing about it needs a grip or posterior day.
+_TIB = _reps("Tibialis Raise", reps=70, weight=25, count=6)
 
 # Face pull on the long cable handles -- rear delts, scapular retraction and
 # external rotation at 90 degrees. Shoulder-health work, the antagonist to all
@@ -290,14 +310,21 @@ def _big_day(suffix: str, *, light: bool) -> Day:
         suffix,
         [
             # Hinge first, on the freshest back. The stretch rides its rest at
-            # the bar, warming the hips for the split squat that follows.
+            # the bar, opening the deep position the split squat needs.
             [_RDL_LIGHT if light else _RDL, _COUCH],
-            # The front rack ramp, with grip-free pressing and the tib bar.
-            [_SPLIT_SQUAT_PAUSED if light else _SPLIT_SQUAT, _INCLINE, _TIB],
-            # Hypers on their own, resting against grip-free, hamstring-free work.
-            [_HYPER, _HSPU, _L_SIT],
-            # The one deliberate pairing: the pull rides the Nordic's rest.
-            [_NORDIC, _LOW_ROW if light else _PULLDOWN],
+            # The pull rides the Nordic's rest -- the one slot costing neither
+            # grip nor low back -- and the split-squat ramp rides it too, one
+            # rung per round, so the bar is warm before its working block.
+            [
+                _NORDIC,
+                _LOW_ROW if light else _PULLDOWN,
+                _SPLIT_RAMP_LIGHT if light else _SPLIT_RAMP,
+            ],
+            # Working split squat, already warm, nothing else competing for it.
+            [_SPLIT_SQUAT_PAUSED if light else _SPLIT_SQUAT],
+            # Hypers finish the day, alone: at 35+ reps a set is long enough to
+            # need no filler to rest against.
+            [_HYPER],
         ],
     )
 
@@ -308,6 +335,8 @@ def _light_day(suffix: str) -> Day:
         suffix,
         [
             [_SIDE_HYPER, _RING_DIP, _CALF],
+            # All the pushing, plus the tib bar and L-sits.
+            [_INCLINE, _HSPU, _TIB, _L_SIT],
             [_ABDUCTION, _QL_RAISE, _FACE_PULL],
             list(_NECK_BLOCK),
         ],
