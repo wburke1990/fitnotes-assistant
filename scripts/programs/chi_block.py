@@ -39,11 +39,12 @@ Notably the split-squat RAMP rides the Nordic block one rung per round, instead
 of sitting on top of the working sets -- so it costs no extra time and the bar is
 warm when its own block starts.
 
-Upper body is NOT a priority. It comes out push-heavy (24 sets) against a thin
-9 sets of pulling, because the grip cluster confines pulling to the big days and,
-within them, to the Nordic's rest -- the one slot costing neither grip nor low
-back. Face pulls are the only shoulder-health work, the antagonist to the
-grappling pulls and posts, and light enough to sit on a no-grip day.
+Upper body is NOT a priority, and none of it gets a slot of its own. All the
+pushing (24 sets/wk) rides the light days; all the pulling (18 sets/wk) rides the
+big ones, since grip confines it there -- the pulldown on the Nordic's rest, the
+row on the split squat's. Face pulls are the only shoulder-health work, the
+antagonist to the grappling pulls and posts, and light enough to sit on a
+no-grip day.
 
 Within a big day, the four heavy movements each get their OWN superset, so none
 of them rests against another that taxes the same tissue. The one deliberate
@@ -177,12 +178,22 @@ _SPLIT_SQUAT_PAUSED = Move(
 )
 # The ramp does NOT sit on top of the working sets as warm-up sets -- it rides
 # the Nordic/pull block instead, one rung per round, so it costs no extra time
-# and you arrive at the bar already warm. These are real reps and count.
+# and you arrive at the bar already warm. These are real reps and count. Two
+# bodyweight rungs before the empty bar: the deep position needs more opening
+# than the load does, and the reps are free inside rest that was happening
+# anyway. Three rungs fit the Nordic's four rounds exactly.
 _SPLIT_RAMP = Move(
     "Front Rack Split Squat",
-    [SetConfig(reps=24, weight=0), SetConfig(reps=24, weight=45)],
+    [
+        SetConfig(reps=24, weight=0),
+        SetConfig(reps=24, weight=0),
+        SetConfig(reps=24, weight=45),
+    ],
 )
-_SPLIT_RAMP_LIGHT = Move("Front Rack Split Squat", [SetConfig(reps=24, weight=0)])
+_SPLIT_RAMP_LIGHT = Move(
+    "Front Rack Split Squat",
+    [SetConfig(reps=24, weight=0), SetConfig(reps=24, weight=0)],
+)
 
 # DRIVER 1. Hyperextension on the 45-degree bench, TRANSFORMING the reps rather
 # than dropping the set short. Every set is at least 35 reps: the opening reps
@@ -205,8 +216,10 @@ _HYPER = _reps("Hyperextension", reps=35, weight=0, count=3)
 # NEITHER grip NOR the low back, which is why the pull rides its rest.
 _NORDIC = _reps("Nordic Hamstring Curl", reps=8, weight=0, count=4)
 
-# The pull. Grip-heavy, so it only ever appears on the big days, supersetted with
-# the Nordic curl. Pulldown Mon/Fri, low row Wednesday, for a change of angle.
+# The pull. Grip-heavy, so it only ever appears on the big days -- but every big
+# day now gets both angles: the vertical pull rides the Nordic's rest, the
+# horizontal one rides the split squat's. 9 sets each, 18/wk, which is most of
+# the way to balancing the 24 sets of pressing on the light days.
 _PULLDOWN = _reps("Lat Pulldown", reps=10, weight=120, count=3)
 _LOW_ROW = _reps("Low Row", reps=10, weight=120, count=3)
 
@@ -312,16 +325,13 @@ def _big_day(suffix: str, *, light: bool) -> Day:
             # Hinge first, on the freshest back. The stretch rides its rest at
             # the bar, opening the deep position the split squat needs.
             [_RDL_LIGHT if light else _RDL, _COUCH],
-            # The pull rides the Nordic's rest -- the one slot costing neither
-            # grip nor low back -- and the split-squat ramp rides it too, one
-            # rung per round, so the bar is warm before its working block.
-            [
-                _NORDIC,
-                _LOW_ROW if light else _PULLDOWN,
-                _SPLIT_RAMP_LIGHT if light else _SPLIT_RAMP,
-            ],
-            # Working split squat, already warm, nothing else competing for it.
-            [_SPLIT_SQUAT_PAUSED if light else _SPLIT_SQUAT],
+            # The vertical pull rides the Nordic's rest -- the one slot costing
+            # neither grip nor low back -- and the split-squat ramp rides it too,
+            # one rung per round, so the bar is warm before its working block.
+            [_NORDIC, _PULLDOWN, _SPLIT_RAMP_LIGHT if light else _SPLIT_RAMP],
+            # Working split squat, already warm. The horizontal pull rides its
+            # rest: the split squat costs no grip, so the row can afford to.
+            [_SPLIT_SQUAT_PAUSED if light else _SPLIT_SQUAT, _LOW_ROW],
             # Hypers finish the day, alone: at 35+ reps a set is long enough to
             # need no filler to rest against.
             [_HYPER],

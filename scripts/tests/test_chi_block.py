@@ -154,14 +154,18 @@ def test_heavy_movements_never_share_a_superset():
             ]
 
 
-def test_the_pull_only_ever_rides_the_nordic_curl():
-    # The one deliberate pairing: Nordics tax neither grip nor low back, so the
-    # grip-heavy pull can rest against them for free.
-    for day in DAYS:
-        for block in _names(day):
-            pulls = {"Lat Pulldown", "Low Row"} & set(block)
-            if pulls:
-                assert _NORDIC in block, f"{pulls} paired with {block}"
+def test_both_pull_angles_ride_a_big_day_rest():
+    # Grip confines pulling to the big days. The vertical pull rides the Nordic's
+    # rest (Nordics cost neither grip nor low back); the horizontal one rides the
+    # split squat's (the front rack costs no grip either). Every big day gets both.
+    for suffix in BIG_DAYS:
+        blocks = _names(_by_suffix(suffix))
+        nordic_block = next(b for b in blocks if _NORDIC in b)
+        assert "Lat Pulldown" in nordic_block
+        work_block = next(b for b in blocks if _SPLIT in b and b is not nordic_block)
+        assert "Low Row" in work_block
+    for suffix in LIGHT_DAYS:
+        assert not ({"Lat Pulldown", "Low Row"} & _flat(suffix))
 
 
 def test_low_back_never_on_consecutive_days():
@@ -216,13 +220,22 @@ def _split_entries(suffix):
 
 def test_split_squat_runs_heavy_twice_and_paused_once():
     assert _days_with(_SPLIT) == set(BIG_DAYS)
+    # Two bodyweight rungs before the empty bar -- the deep position needs more
+    # opening than the load does, and the reps are free inside the Nordic's rest.
     for suffix in ("Monday", "Friday"):
         ramp, work = _split_entries(suffix)
-        assert [s["Secondary"] for s in ramp["SetDetails"]] == [0, 45]
+        assert [s["Secondary"] for s in ramp["SetDetails"]] == [0, 0, 45]
         assert [s["Secondary"] for s in work["SetDetails"]] == [70, 70, 70, 70]
     ramp, work = _split_entries("Wednesday")
-    assert [s["Secondary"] for s in ramp["SetDetails"]] == [0]
+    assert [s["Secondary"] for s in ramp["SetDetails"]] == [0, 0]
     assert [s["Secondary"] for s in work["SetDetails"]] == [50, 50, 50]
+
+
+def test_the_ramp_fits_inside_the_nordic_rounds():
+    # The ramp rides one rung per round, so it cannot be longer than the Nordic.
+    for suffix in BIG_DAYS:
+        ramp = _split_entries(suffix)[0]
+        assert len(ramp["SetDetails"]) <= _set_counts(suffix)[_NORDIC]
 
 
 def test_split_squat_ramp_rides_the_nordic_block():
@@ -231,10 +244,11 @@ def test_split_squat_ramp_rides_the_nordic_block():
     # and the bar is warm when the working block starts.
     for suffix in BIG_DAYS:
         blocks = _names(_by_suffix(suffix))
-        nordic_block = next(b for b in blocks if _NORDIC in b)
-        assert _SPLIT in nordic_block
-        # And the working block comes after it, on its own.
-        assert blocks.index(nordic_block) < blocks.index([_SPLIT])
+        nordic_at = next(i for i, b in enumerate(blocks) if _NORDIC in b)
+        assert _SPLIT in blocks[nordic_at]
+        # And the working block, which the split squat LEADS, comes after it.
+        work_at = next(i for i, b in enumerate(blocks) if b[0] == _SPLIT)
+        assert nordic_at < work_at
 
 
 def test_split_squat_carries_no_warmup_sets():
@@ -357,11 +371,10 @@ def test_filler_never_leads_a_block_on_a_big_day():
         "Low Row",
         "L-Sit",
         "Couch Stretch",
-        _SPLIT,  # the ramp rides the Nordic; only the working block leads
     }
     for suffix in BIG_DAYS:
         for block in _names(_by_suffix(suffix)):
-            if block == [_SPLIT]:  # the working split-squat block
+            if block[0] == _SPLIT:  # the working split-squat block leads its own
                 continue
             assert block[0] not in filler, block
 
