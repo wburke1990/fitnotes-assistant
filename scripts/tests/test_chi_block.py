@@ -16,9 +16,9 @@ _NORDIC = "Nordic Hamstring Curl"
 _SIDE_HYPER = "Side-Lying Hyperextension Adductor Raise"
 
 # Grip is a recovery limiter, so every grip-heavy movement clusters on the same
-# days. The RDL is trained raw (no straps) and is the biggest stressor. The calf
-# raise counts: a 40 lb kettlebell in one hand is a carry for the length of a set.
-GRIP_MOVES = {_RDL, "Lat Pulldown", "Low Row", "Standing Calf Raise"}
+# days. The RDL is trained raw (no straps) and is the biggest stressor. The 40 lb
+# one-arm calf raise is NOT on this list -- that weight doesn't tire the hands.
+GRIP_MOVES = {_RDL, "Lat Pulldown", "Low Row"}
 
 # The posterior chain is the same story: these cannot be spread across
 # alternating days and recovered, so they cluster too. The split squat is in the
@@ -180,10 +180,15 @@ def test_split_squat_runs_heavy_twice_and_paused_once():
     assert [s["Secondary"] for s in paused["WarmupSetDetails"]] == [0]
 
 
-def test_rdl_is_lighter_on_wednesday_but_never_dropped():
+def test_wednesday_cuts_rdl_volume_not_rdl_load():
+    # The RDL is a maintenance lift here (held steady while the hypers drive),
+    # and strength is maintained by training at the same LOAD, not the same
+    # volume. So Wednesday keeps 155 and drops two sets. A lighter bar would be
+    # neither heavy enough to hold anything nor light enough to be free, and
+    # high-rep RDL is off the table -- form degrades where the back is rehabbing.
     for suffix in ("Monday", "Friday"):
         assert [s["Secondary"] for s in _find(suffix, _RDL)["SetDetails"]] == [155] * 4
-    assert [s["Secondary"] for s in _find("Wednesday", _RDL)["SetDetails"]] == [135] * 3
+    assert [s["Secondary"] for s in _find("Wednesday", _RDL)["SetDetails"]] == [155] * 2
 
 
 def test_hinge_leads_every_big_day_with_the_stretch_on_its_rest():
@@ -233,12 +238,13 @@ def test_abductors_are_a_maintenance_dose_at_load():
     assert all(s["Secondary"] > 0 for s in _find("Tuesday", "Cable Hip Abduction")["SetDetails"])
 
 
-def test_calves_are_a_loaded_one_arm_carry_on_the_grip_days():
-    # 40 lb kettlebell in one hand, 35 reps per side (70 total). That is a carry
-    # for the length of a set, so it belongs with the grip cluster -- and it
-    # rests the hyper, which needs no grip of its own.
-    assert _days_with("Standing Calf Raise") == set(BIG_DAYS)
-    for suffix in BIG_DAYS:
+def test_calves_are_loaded_and_live_on_the_light_days():
+    # 40 lb kettlebell in one hand, 35 reps per side (70 total). It is a one-arm
+    # hold, but 40 lb does not tire the hands, so it is exempt from the grip
+    # cluster -- and keeping it here holds three sets off the time-pressured
+    # big days.
+    assert _days_with("Standing Calf Raise") == set(LIGHT_DAYS)
+    for suffix in LIGHT_DAYS:
         calf = _find(suffix, "Standing Calf Raise")
         assert all(s["Secondary"] == 40 for s in calf["SetDetails"])
         assert all(s["Primary"] == 70 for s in calf["SetDetails"])
@@ -263,7 +269,7 @@ def test_filler_never_leads_a_block():
 
 
 def test_timed_holds_use_time_focus():
-    for name, suffix in (("L-Sit", "Tuesday"), ("Elephant Walk", "Friday")):
+    for name, suffix in (("L-Sit", "Monday"), ("Elephant Walk", "Friday")):
         assert _find(suffix, name)["Definition"]["PrimaryFocusId"] == 3
 
 
