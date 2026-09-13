@@ -11,31 +11,44 @@ Context this plan is built for:
     lifting window of the block: no grappling soreness, no recovery tax, and no
     delayed-soreness gate on the neck ramp.
 
+TWO RECOVERY CONSTRAINTS SHAPE THE WHOLE WEEK, and they point the same way:
+  * GRIP is a long-standing limiter -- heavy grip on back-to-back days does not
+    recover. So every grip-heavy movement is CLUSTERED onto the same days:
+    the snatch-grip RDL, the pulldown and row, and any loaded carry.
+  * The POSTERIOR CHAIN is the same story -- RDLs, hamstring work and the hypers
+    cannot be spread across alternating days and recovered. So they cluster too.
+    The front rack split squat joins them: it taxes the hamstrings hard.
+
+The result is three big days and two light ones:
+  * MON / WED / FRI -- the big pulling + posterior-chain days, structurally
+    identical, Wednesday lighter across the board. RDL, split squat, hyper,
+    Nordic curl and the pull all land here, so grip and hamstrings get a full
+    day off between exposures and the low back is never trained on consecutive
+    days.
+  * TUE / THU -- short, deliberately carrying NO grip work, NO hamstring work and
+    NO spinal extension. Side hypers, cable abduction, calves and neck only.
+
+Within a big day, the four heavy movements each get their OWN superset, so none
+of them rests against another that taxes the same tissue. The one deliberate
+pairing is NORDIC CURL with the PULLDOWN: Nordics tax neither grip nor low back,
+so the pull can ride their rest for free.
+
 Three progressions DRIVE the block (the user's own pick); everything else is held
 at a maintenance dose:
   1. LOW BACK -- the hyperextension ladder, now on the one-legged CURVED-BACK
      variant, ramping reps toward 3 sets x 35 per side before any load goes on.
   2. ADDUCTORS -- side-lying hyperextension adductor raises, same reps-then-load
-     structure, starting from 8 per side.
+     structure, starting from 8 per side. These live on the LIGHT days: no grip,
+     no hamstrings, no extension, so they don't belong on the big days.
   3. FRONT RACK SPLIT SQUAT -- a linear load ramp, +5 lb/week from 70 to 135
      (13 weeks). The goal is not the 135 itself: it is to earn a MAINTENANCE
      weight worth holding. Strength is kept by training at the same load, not
      the same volume, so a heavier maintenance weight preserves more ability.
 
-Structure (Mon/Wed/Fri = back days, Tue/Thu = leg days):
-  * Low back is trained Mon/Wed/Fri only -- never on consecutive days. The heavy
-    snatch-grip RDL lands Mon + Fri (the freshest backs); Wednesday carries no
-    hinge at all.
-  * The front rack split squat runs Tue/Thu heavy plus a lighter PAUSED exposure
-    on Wednesday. The pause (3-5 s at full depth) is the end-range strength work:
-    the lift is limited by strength in the deep position, not by the rack, so
-    depth and pause time progress alongside load.
-  * One heavy-slow HAMSTRING TENDON slot, Tue/Thu: cable leg curl (ankle strap on
-    the low row), 5 x 5 at a 6RM, 3 s down / 3 s up. Tendon adaptation is driven
-    by strain magnitude held ~3 s, and saturates at a low volume -- so this stays
-    5 sets and never becomes a hypertrophy block.
-  * Upper body is explicitly NOT a priority: it rides the rest between the
-    driving sets, as the filler inside each superset.
+The hamstring TENDON work is the Nordic curl -- a slow, heavy eccentric is
+exactly the high-strain, ~3-second loading tendons adapt to, and it needs no
+equipment this gym lacks. It stays at 4 sets: tendon adaptation saturates at a
+low volume, so more buys nothing and costs recovery.
 
 Volume model (see scripts/programs/README.md): a muscle needs >=12 sets/week
 (secondaries at 0.5, pooled) to be PROGRESSED. Below 12 is maintenance.
@@ -97,44 +110,14 @@ def _hold(name: str, seconds: int, count: int = 1) -> Move:
 # TONNAGE (reps x weight x sets) needs the full rep count, so per-side reps would
 # halve it. Weights stay per-side / what is actually on the bar.
 
-# --- The three drivers --------------------------------------------------------
-
-# 1. LOW BACK. One-legged CURVED-BACK hyperextension on the 45-degree bench --
-# the rung above the one-legged work finished at the machine gym (whose bench is
-# flat, and therefore harder: peak load lands at full extension rather than
-# partway down, so the flat-bench work transfers favourably here). Ramp reps to
-# 35 PER SIDE for 3 sets before adding any load. Starting 5/side = 10 total.
-# 3 sets x 3 days = 9 direct; the RDL's erectors carry the rest of the floor.
-_HYPER = _reps("Hyperextension", reps=10, weight=0, count=3)
-
-# 2. ADDUCTORS. Side-lying hyperextension adductor raise, same bench. Same
-# reps-then-load structure: currently 8 per side (= 16 total), ramp reps first.
-# 4 sets x 3 days = 12/wk, clearing the floor on its own.
-_SIDE_HYPER = _reps("Side-Lying Hyperextension Adductor Raise", reps=16, weight=0, count=4)
-
-# 3. FRONT RACK SPLIT SQUAT. Barbell, +5 lb/week, 70 -> 135 over 13 weeks.
-# 12 reps/side = 24 total. Warm-ups (bodyweight, then the empty bar) are stored
-# as warm-up sets, so they add session time but not working volume.
-_SPLIT_WARMUPS = [SetConfig(reps=24, weight=0), SetConfig(reps=24, weight=45)]
-_SPLIT_SQUAT_HEAVY = Move(
-    "Front Rack Split Squat",
-    [SetConfig(reps=24, weight=70) for _ in range(4)],
-    warmups=list(_SPLIT_WARMUPS),
-)
-# Wednesday: the PAUSED exposure. Lighter load, 3-5 s held at full depth. The
-# limiter on this lift is strength in the deep position, so pause time and depth
-# progress alongside the Tue/Thu load. Counted volume -- it is real work.
-_SPLIT_SQUAT_PAUSED = Move(
-    "Front Rack Split Squat",
-    [SetConfig(reps=16, weight=50) for _ in range(3)],
-    warmups=[SetConfig(reps=24, weight=0)],
-)
-
-# --- Supporting lifts ---------------------------------------------------------
+# --- The big days: one superset per heavy movement ----------------------------
 
 # Snatch-grip RDL, NO straps (grip trained raw). HELD STEADY at 155 while the
 # hypers progress; the ceiling for this gym is 300 (past that means buying
-# plates, and 300 is well past what the back needs). Mon + Fri only.
+# plates, and 300 is well past what the back needs). This is the single biggest
+# grip stressor in the plan, which is why every other grip movement shares its
+# days. Wednesday runs a lighter version of the same lift rather than dropping
+# it -- alternating hinge days with non-hinge days is what does not recover.
 _RDL = Move(
     "Snatch-Grip Stiff-Legged RDL",
     [SetConfig(reps=8, weight=155) for _ in range(4)],
@@ -145,55 +128,94 @@ _RDL = Move(
         SetConfig(reps=8, weight=135),
     ],
 )
+_RDL_LIGHT = Move(
+    "Snatch-Grip Stiff-Legged RDL",
+    [SetConfig(reps=8, weight=135) for _ in range(3)],
+    warmups=[SetConfig(reps=12, weight=45), SetConfig(reps=12, weight=95)],
+)
 
-# The hamstring TENDON slot: cable leg curl off the low row with the ankle strap.
-# 5 sets x 5 reps/side (= 10 total) at a 6RM, 3 s down / 3 s up. Toes turned OUT
-# to bias biceps femoris, whose distal tendon shares the fibular head with the
-# LCL. Stays at 5 sets: tendon adaptation saturates at roughly a minute of
-# high-strain time per session, so more volume buys nothing and costs recovery.
-# Tue/Thu only -- heavy loading leaves a tendon in net collagen breakdown for
-# about a day, so it wants every-other-day, not daily.
-_CABLE_CURL = _reps("Cable Leg Curl", reps=10, weight=50, count=5)
+# DRIVER 3. Front rack split squat, +5 lb/week, 70 -> 135 over 13 weeks. The bar
+# sits in the rack position, so this costs no grip -- but it taxes the hamstrings
+# hard, which is why it belongs on the big days. 12 reps/side = 24 total.
+# Warm-ups (bodyweight, then the empty bar) add session time, not volume.
+_SPLIT_SQUAT = Move(
+    "Front Rack Split Squat",
+    [SetConfig(reps=24, weight=70) for _ in range(4)],
+    warmups=[SetConfig(reps=24, weight=0), SetConfig(reps=24, weight=45)],
+)
+# Wednesday: the PAUSED exposure. Lighter load, 3-5 s held at full depth. The
+# limiter on this lift is strength in the deep position, not the rack, so pause
+# time and depth progress alongside the Mon/Fri load. Counted volume -- real work.
+_SPLIT_SQUAT_PAUSED = Move(
+    "Front Rack Split Squat",
+    [SetConfig(reps=16, weight=50) for _ in range(3)],
+    warmups=[SetConfig(reps=24, weight=0)],
+)
 
-# Abductors: MAINTENANCE, not a driver. Cable abduction with the ankle strap,
-# 3 sets x 2 days = 6/wk. Keep the LOAD high -- strength is maintained by
-# training at the same weight, not the same volume, so a light maintenance dose
-# only works if it stays heavy.
-_ABDUCTION = _reps("Cable Hip Abduction", reps=24, weight=60, count=3)
+# DRIVER 1. One-legged CURVED-BACK hyperextension on the 45-degree bench -- the
+# rung above the one-legged work finished at the machine gym (whose bench is
+# flat, and therefore harder: peak load lands at full extension rather than
+# partway down, so that work transfers favourably here). Ramp reps to 35 PER SIDE
+# for 3 sets before adding any load. Starting 5/side = 10 total.
+_HYPER = _reps("Hyperextension", reps=10, weight=0, count=3)
 
-# QL raise -- lateral trunk, Wednesday only (the hinge-free back day).
-_QL_RAISE = _reps("QL Raise", reps=16, weight=0, count=3)
+# The hamstring TENDON slot. A slow heavy Nordic eccentric is the high-strain,
+# ~3-second loading tendons adapt to, and it needs nothing this gym lacks. Stays
+# at 4 sets -- tendon adaptation saturates at roughly a minute of high-strain
+# time per session, so more volume buys nothing and costs recovery. It taxes
+# NEITHER grip NOR the low back, which is why the pull rides its rest.
+_NORDIC = _reps("Nordic Hamstring Curl", reps=8, weight=0, count=4)
 
-# Tibialis on the tib bar, one-legged (the harder version). 35/side = 70 total,
-# 4 sets x 3 days = 12/wk, its progression floor.
-_TIB = _reps("Tibialis Raise", reps=70, weight=25, count=4)
-# Calves: maintenance, kettlebell in hand. 35/side = 70 total.
-_CALF = _reps("Standing Calf Raise", reps=70, weight=35, count=3)
+# The pull. Grip-heavy, so it only ever appears on the big days, supersetted with
+# the Nordic curl. Pulldown Mon/Fri, low row Wednesday, for a change of angle.
+_PULLDOWN = _reps("Lat Pulldown", reps=10, weight=120, count=3)
+_LOW_ROW = _reps("Low Row", reps=10, weight=120, count=3)
 
-# Hip/quad mobility opening the leg days, warming the deep position the split
-# squat is limited by. 2 sides x 120 s logged as one set.
+# Hip/quad mobility riding the RDL rest, warming the deep position the split
+# squat is limited by -- done at the bar, so the platform is never abandoned.
+# 2 sides x 120 s logged as one set.
 _COUCH = Move(
     "Couch Stretch",
-    [SetConfig(reps=2, weight=120) for _ in range(2)],
+    [SetConfig(reps=2, weight=120) for _ in range(3)],
     secondary_focus="time",
 )
 
-# --- Upper body: rest-filler, not a priority ----------------------------------
-# Every one of these rides the rest between the driving sets. Low counts on
-# purpose -- they are maintenance for a gym that finally has pulling again.
-_INCLINE = _reps("Barbell Incline Bench Press", reps=8, weight=135, count=3)
-_RING_DIP = _reps("Ring Dip", reps=8, weight=0, count=3)
-# Handstand push-up ramp -- currently around 80 degrees off the parallettes.
+# Big-day fillers. Each must tax NEITHER grip, NOR hamstrings, NOR the low back,
+# or it would defeat the point of giving the heavy movements their own supersets.
+# Tibialis on the tib bar, one-legged (35/side = 70 total): 4 sets x 3 days =
+# 12/wk, its progression floor. Handstand push-ups and the incline press are the
+# grip-free pressing.
+_TIB = _reps("Tibialis Raise", reps=70, weight=25, count=4)
 _HSPU = _reps("Handstand Push-Up", reps=5, weight=0, count=3)
-_PULLDOWN = _reps("Lat Pulldown", reps=10, weight=120, count=3)
-_LOW_ROW = _reps("Low Row", reps=10, weight=120, count=3)
-_FACE_PULL = _reps("Face Pull", reps=15, weight=40, count=3)
-# Compression / hip flexors off the same parallettes, 30 s holds.
+_INCLINE = _reps("Barbell Incline Bench Press", reps=8, weight=135, count=3)
 _L_SIT = _hold("L-Sit", 30, count=3)
 
-# Neck (harness on the cable). Front / back / sides, 20 reps @ 30, 4 sets each on
-# Tue/Thu. PROGRESSION IS BY SETS: each direction is its own muscle, so each gets
-# its own 12-set weekly floor -- ramp to 6 sets/session per direction. The gate is
+# --- The light days: no grip, no hamstrings, no spinal extension --------------
+
+# DRIVER 2. Side-lying hyperextension adductor raise. Same bench as the hyper but
+# a lateral movement, and it costs no grip and no hamstring -- so it lives here,
+# off the big days. Currently 8 per side (= 16 total); ramp reps before load.
+# 6 sets x 2 days = 12/wk, clearing the floor on its own.
+_SIDE_HYPER = _reps("Side-Lying Hyperextension Adductor Raise", reps=16, weight=0, count=6)
+
+# Abductors: MAINTENANCE, not a driver. Cable abduction with the ankle strap, so
+# no grip. 3 sets x 2 days = 6/wk. Keep the LOAD high -- strength is maintained
+# by training at the same weight, not the same volume.
+_ABDUCTION = _reps("Cable Hip Abduction", reps=24, weight=60, count=3)
+
+# QL raise -- lateral trunk, no grip, no hinge.
+_QL_RAISE = _reps("QL Raise", reps=16, weight=0, count=3)
+
+# Calves, bodyweight single-leg (35/side = 70 total) -- a loaded kettlebell
+# version would put a carry on a no-grip day.
+_CALF = _reps("Standing Calf Raise", reps=70, weight=0, count=3)
+
+# Ring dips: support grip only, not the crush grip the RDL and pulls tax.
+_RING_DIP = _reps("Ring Dip", reps=8, weight=0, count=3)
+
+# Neck (harness on the cable). Front / back / sides, 20 reps @ 30, 4 sets each.
+# PROGRESSION IS BY SETS: each direction is its own muscle, so each gets its own
+# 12-set weekly floor -- ramp to 6 sets/session per direction. The gate is
 # normally DELAYED soreness landing on a jujitsu day; with no jujitsu in month
 # one that gate is gone, so this is the month to ramp it fast. Lateral is one set
 # = BOTH sides, so its reps are the total (40).
@@ -216,65 +238,59 @@ class Day:
         return f"{PLAN_PREFIX} - {self.suffix}"
 
 
+def _big_day(suffix: str, *, light: bool) -> Day:
+    """A Mon/Wed/Fri day: one superset per heavy movement, plus the pull.
+
+    The four heavy movements (RDL, split squat, hyper, Nordic) each get their own
+    block so none of them rests against another taxing the same tissue. Only the
+    Nordic is paired with a grip movement, because it costs neither grip nor back.
+
+    Args:
+        suffix: Weekday name.
+        light: Wednesday runs the same shape at reduced load (lighter RDL, the
+            paused split squat) rather than dropping movements -- alternating
+            hinge and non-hinge days is what does not recover.
+    """
+    return Day(
+        suffix,
+        [
+            # Hinge first, on the freshest back. The stretch rides its rest at
+            # the bar, warming the hips for the split squat that follows.
+            [_RDL_LIGHT if light else _RDL, _COUCH],
+            # The front rack ramp, with grip-free pressing and the tib bar.
+            [_SPLIT_SQUAT_PAUSED if light else _SPLIT_SQUAT, _INCLINE, _TIB],
+            # Hypers on their own, resting against grip-free, hamstring-free work.
+            [_HYPER, _HSPU, _L_SIT],
+            # The one deliberate pairing: the pull rides the Nordic's rest.
+            [_NORDIC, _LOW_ROW if light else _PULLDOWN],
+        ],
+    )
+
+
+def _light_day(suffix: str) -> Day:
+    """A Tue/Thu day: short, and carrying no grip, hamstring or extension work."""
+    return Day(
+        suffix,
+        [
+            [_SIDE_HYPER, _RING_DIP, _CALF],
+            [_ABDUCTION, _QL_RAISE, _L_SIT],
+            list(_NECK_BLOCK),
+        ],
+    )
+
+
 def _days() -> list[Day]:
-    """Build the five-day program (Mon/Wed/Fri back, Tue/Thu legs)."""
-    monday = Day(
-        "Monday",
-        [
-            # RDL on a fresh back; the pulldown fills the rest (non-interfering).
-            [_RDL, _PULLDOWN],
-            # The hyper gets its own block so the side hyper is never stacked
-            # straight onto it -- same bench, and the trunk needs the rest.
-            # Incline + tib are the filler.
-            [_HYPER, _INCLINE, _TIB],
-            # Side hyper with upper-body and calf filler.
-            [_SIDE_HYPER, _FACE_PULL, _CALF],
-        ],
-    )
-    tuesday = Day(
-        "Tuesday",
-        [
-            # Open on the stretch -- the split squat is limited by the deep
-            # position, so the hips get warmed before it, not after.
-            [_COUCH, _LOW_ROW],
-            # The heavy front rack ramp, with compression + dips as filler.
-            [_SPLIT_SQUAT_HEAVY, _L_SIT, _RING_DIP],
-            # Tendon slot + abductor maintenance, both off the ankle strap.
-            [_CABLE_CURL, _ABDUCTION],
-            # Neck last.
-            list(_NECK_BLOCK),
-        ],
-    )
-    wednesday = Day(
-        "Wednesday",
-        [
-            # No hinge at all on Wednesday -- the back's mid-week rest.
-            [_HYPER, _HSPU, _TIB],
-            # The paused split squat: end-range strength for the deep position.
-            [_SPLIT_SQUAT_PAUSED, _PULLDOWN, _CALF],
-            [_SIDE_HYPER, _FACE_PULL, _QL_RAISE],
-        ],
-    )
-    thursday = Day(
-        "Thursday",
-        [
-            [_COUCH, _LOW_ROW],
-            [_SPLIT_SQUAT_HEAVY, _L_SIT, _INCLINE],
-            [_CABLE_CURL, _ABDUCTION],
-            list(_NECK_BLOCK),
-        ],
-    )
-    friday = Day(
-        "Friday",
-        [
-            [_RDL, _PULLDOWN],
-            [_HYPER, _RING_DIP, _TIB],
-            [_SIDE_HYPER, _FACE_PULL, _CALF],
-            # Posterior-chain decompression to finish the week.
-            [_hold("Elephant Walk", 240)],
-        ],
-    )
-    return [monday, tuesday, wednesday, thursday, friday]
+    """Build the five-day program (Mon/Wed/Fri big, Tue/Thu light)."""
+    friday = _big_day("Friday", light=False)
+    # Posterior-chain decompression to finish the week.
+    friday.blocks.append([_hold("Elephant Walk", 240)])
+    return [
+        _big_day("Monday", light=False),
+        _light_day("Tuesday"),
+        _big_day("Wednesday", light=True),
+        _light_day("Thursday"),
+        friday,
+    ]
 
 
 DAYS = _days()

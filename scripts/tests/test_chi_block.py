@@ -6,11 +6,30 @@ from programs.chi_block import DAYS, PLAN_PREFIX, build_all, build_day
 
 MAPPINGS = load_exercise_mappings()
 
-BACK_DAYS = ("Monday", "Wednesday", "Friday")
-LEG_DAYS = ("Tuesday", "Thursday")
+BIG_DAYS = ("Monday", "Wednesday", "Friday")
+LIGHT_DAYS = ("Tuesday", "Thursday")
 
-# The three drivers the block is built around, plus the two supporting
-# progressions that are also expected to clear the 12-set floor.
+_RDL = "Snatch-Grip Stiff-Legged RDL"
+_SPLIT = "Front Rack Split Squat"
+_HYPER = "Hyperextension"
+_NORDIC = "Nordic Hamstring Curl"
+_SIDE_HYPER = "Side-Lying Hyperextension Adductor Raise"
+
+# Grip is a recovery limiter, so every grip-heavy movement clusters on the same
+# days. The RDL is trained raw (no straps) and is the biggest stressor of the three.
+GRIP_MOVES = {_RDL, "Lat Pulldown", "Low Row"}
+
+# The posterior chain is the same story: these cannot be spread across
+# alternating days and recovered, so they cluster too. The split squat is in the
+# list because it taxes the hamstrings hard, even though it costs no grip.
+POSTERIOR_MOVES = {_RDL, _NORDIC, _SPLIT, _HYPER}
+
+# The four movements that each get their OWN superset on a big day, so none of
+# them rests against another taxing the same tissue.
+HEAVY_MOVES = {_RDL, _SPLIT, _HYPER, _NORDIC}
+
+# The three drivers, plus the two supporting progressions also expected to clear
+# the 12-set floor.
 _PROGRESSION_TARGETS = [
     "Back (Lower)",
     "Adductors",
@@ -18,11 +37,6 @@ _PROGRESSION_TARGETS = [
     "Hamstrings",
     "Tibialis",
 ]
-
-_HYPER = "Hyperextension"
-_SIDE_HYPER = "Side-Lying Hyperextension Adductor Raise"
-_SPLIT = "Front Rack Split Squat"
-_RDL = "Snatch-Grip Stiff-Legged RDL"
 
 
 def _blocks(day):
@@ -37,6 +51,10 @@ def _names(day):
 
 def _by_suffix(suffix):
     return next(d for d in DAYS if d.suffix == suffix)
+
+
+def _flat(suffix):
+    return {name for block in _names(_by_suffix(suffix)) for name in block}
 
 
 def _set_counts(suffix):
@@ -77,162 +95,174 @@ def test_each_superset_is_its_own_block():
 
 
 # ---------------------------------------------------------------------------
-# Low back -- the first driver
+# The two recovery constraints that shape the week
 # ---------------------------------------------------------------------------
 
 
+def test_grip_work_is_clustered_on_the_big_days():
+    # Heavy grip on back-to-back days does not recover, so every grip-heavy
+    # movement lands Mon/Wed/Fri and the light days carry none.
+    for move in GRIP_MOVES:
+        assert _days_with(move) <= set(BIG_DAYS), f"{move} escapes the grip cluster"
+    for suffix in LIGHT_DAYS:
+        assert not (GRIP_MOVES & _flat(suffix))
+
+
+def test_posterior_chain_is_clustered_on_the_big_days():
+    # Same reasoning: RDLs, hamstring work and the hypers cannot be spread across
+    # alternating days. The split squat joins them because it taxes hamstrings.
+    for move in POSTERIOR_MOVES:
+        assert _days_with(move) <= set(BIG_DAYS), f"{move} escapes the posterior cluster"
+    for suffix in LIGHT_DAYS:
+        assert not (POSTERIOR_MOVES & _flat(suffix))
+
+
+def test_every_big_day_carries_the_full_cluster():
+    # Wednesday runs the same shape at reduced load rather than dropping
+    # movements -- alternating hinge days with non-hinge days is the pattern that
+    # does not recover.
+    for suffix in BIG_DAYS:
+        assert _flat(suffix) >= HEAVY_MOVES, f"{suffix} is missing part of the cluster"
+
+
+def test_heavy_movements_never_share_a_superset():
+    # Each of the four gets its own block, so none rests against another taxing
+    # the same tissue.
+    for day in DAYS:
+        for block in _names(day):
+            assert len(HEAVY_MOVES & set(block)) <= 1, block
+
+
+def test_the_pull_only_ever_rides_the_nordic_curl():
+    # The one deliberate pairing: Nordics tax neither grip nor low back, so the
+    # grip-heavy pull can rest against them for free.
+    for day in DAYS:
+        for block in _names(day):
+            pulls = {"Lat Pulldown", "Low Row"} & set(block)
+            if pulls:
+                assert _NORDIC in block, f"{pulls} paired with {block}"
+
+
 def test_low_back_never_on_consecutive_days():
-    # Hyperextension lands Mon/Wed/Fri only, so no two adjacent weekdays both
-    # train the low back.
     trained = [any(_HYPER in block for block in _names(d)) for d in DAYS]  # Mon..Fri
     assert trained == [True, False, True, False, True]
 
 
-def test_rdl_only_on_the_fresh_days_and_never_midweek():
-    # The heavy hinge lands Mon + Fri. Wednesday carries no hinge at all -- it is
-    # the back's mid-week rest.
-    assert _days_with(_RDL) == {"Monday", "Friday"}
+# ---------------------------------------------------------------------------
+# The three drivers
+# ---------------------------------------------------------------------------
 
 
-def test_hyper_is_three_sets_on_each_back_day():
-    for suffix in BACK_DAYS:
+def test_hyper_is_three_unloaded_sets_on_each_big_day():
+    # Reps ramp to 35/side before any load goes on, so every set is bodyweight.
+    for suffix in BIG_DAYS:
         assert _set_counts(suffix)[_HYPER] == 3
+        assert all(s["Secondary"] == 0 for s in _find(suffix, _HYPER)["SetDetails"])
 
 
-def test_hyper_and_side_hyper_are_never_in_the_same_block():
-    # Same bench, same trunk. Stacking them in one round-robin would leave the
-    # low back no rest between them, so they get separate blocks.
-    for day in DAYS:
-        for block in _names(day):
-            assert not (_HYPER in block and _SIDE_HYPER in block)
-
-
-def test_hyper_starts_unloaded_for_the_rep_ramp():
-    # Reps ramp to 35/side before any load goes on, so every hyper set is
-    # bodyweight.
-    for suffix in BACK_DAYS:
-        hyper = _find(suffix, _HYPER)
-        assert all(s["Secondary"] == 0 for s in hyper["SetDetails"])
-
-
-# ---------------------------------------------------------------------------
-# Adductors -- the second driver
-# ---------------------------------------------------------------------------
-
-
-def test_side_hyper_clears_its_floor_on_the_back_days():
-    # 4 sets x 3 back days = 12/wk, the adductor progression floor on its own.
-    assert _days_with(_SIDE_HYPER) == set(BACK_DAYS)
-    for suffix in BACK_DAYS:
-        assert _set_counts(suffix)[_SIDE_HYPER] == 4
-
-
-def test_side_hyper_starts_unloaded_for_the_rep_ramp():
-    for suffix in BACK_DAYS:
-        side = _find(suffix, _SIDE_HYPER)
-        assert all(s["Secondary"] == 0 for s in side["SetDetails"])
-
-
-# ---------------------------------------------------------------------------
-# Front rack split squat -- the third driver
-# ---------------------------------------------------------------------------
+def test_side_hyper_clears_its_floor_on_the_light_days():
+    # 6 sets x 2 light days = 12/wk. It costs no grip and no hamstring, so it
+    # belongs off the big days.
+    assert _days_with(_SIDE_HYPER) == set(LIGHT_DAYS)
+    for suffix in LIGHT_DAYS:
+        assert _set_counts(suffix)[_SIDE_HYPER] == 6
+        assert all(s["Secondary"] == 0 for s in _find(suffix, _SIDE_HYPER)["SetDetails"])
 
 
 def test_split_squat_runs_heavy_twice_and_paused_once():
-    assert _days_with(_SPLIT) == {"Tuesday", "Wednesday", "Thursday"}
-    for suffix in LEG_DAYS:
-        split = _find(suffix, _SPLIT)
-        assert [s["Secondary"] for s in split["SetDetails"]] == [70, 70, 70, 70]
+    assert _days_with(_SPLIT) == set(BIG_DAYS)
+    for suffix in ("Monday", "Friday"):
+        assert [s["Secondary"] for s in _find(suffix, _SPLIT)["SetDetails"]] == [70, 70, 70, 70]
+        assert [s["Secondary"] for s in _find(suffix, _SPLIT)["WarmupSetDetails"]] == [0, 45]
     paused = _find("Wednesday", _SPLIT)
     assert [s["Secondary"] for s in paused["SetDetails"]] == [50, 50, 50]
+    assert [s["Secondary"] for s in paused["WarmupSetDetails"]] == [0]
 
 
-def test_split_squat_warmups_are_uncounted():
-    # Bodyweight -> empty bar on the heavy days; bodyweight only on the lighter
-    # paused day. Warm-ups live in WarmupSetDetails so they never inflate volume.
-    for suffix in LEG_DAYS:
-        assert [s["Secondary"] for s in _find(suffix, _SPLIT)["WarmupSetDetails"]] == [0, 45]
-    assert [s["Secondary"] for s in _find("Wednesday", _SPLIT)["WarmupSetDetails"]] == [0]
+def test_rdl_is_lighter_on_wednesday_but_never_dropped():
+    for suffix in ("Monday", "Friday"):
+        assert [s["Secondary"] for s in _find(suffix, _RDL)["SetDetails"]] == [155] * 4
+    assert [s["Secondary"] for s in _find("Wednesday", _RDL)["SetDetails"]] == [135] * 3
 
 
-def test_leg_days_stretch_before_the_split_squat():
-    # The lift is limited by strength in the deep position, so the hips are
-    # warmed in the opening block, before the squats.
-    for suffix in LEG_DAYS:
-        blocks = _names(_by_suffix(suffix))
-        assert "Couch Stretch" in blocks[0]
-        squat_block = next(i for i, b in enumerate(blocks) if _SPLIT in b)
-        assert squat_block > 0
-
-
-# ---------------------------------------------------------------------------
-# The hamstring tendon slot
-# ---------------------------------------------------------------------------
-
-
-def test_tendon_slot_is_five_sets_on_leg_days_only():
-    # 5 x 5 at a 6RM, 3s down / 3s up. Tendon adaptation saturates at a low
-    # volume, so this stays 5 sets and never grows into a hypertrophy block.
-    # Every-other-day only: heavy loading leaves a tendon in net collagen
-    # breakdown for about a day.
-    assert _days_with("Cable Leg Curl") == set(LEG_DAYS)
-    for suffix in LEG_DAYS:
-        assert _set_counts(suffix)["Cable Leg Curl"] == 5
+def test_hinge_leads_every_big_day_with_the_stretch_on_its_rest():
+    # Hinge first, on the freshest back; the couch stretch rides its rest at the
+    # bar and warms the deep position the split squat is limited by.
+    for suffix in BIG_DAYS:
+        first = _names(_by_suffix(suffix))[0]
+        assert first == [_RDL, "Couch Stretch"]
+        split_block = next(i for i, b in enumerate(_names(_by_suffix(suffix))) if _SPLIT in b)
+        assert split_block > 0
 
 
 # ---------------------------------------------------------------------------
-# Accessories and structure
+# Tendon slot and accessories
 # ---------------------------------------------------------------------------
 
 
-def test_neck_is_last_and_only_on_the_leg_days():
+def test_nordic_is_the_tendon_slot_at_four_sets():
+    # A slow heavy eccentric is the high-strain loading tendons adapt to, and it
+    # saturates at a low volume -- so this stays 4 sets and never grows into a
+    # hypertrophy block.
+    assert _days_with(_NORDIC) == set(BIG_DAYS)
+    for suffix in BIG_DAYS:
+        assert _set_counts(suffix)[_NORDIC] == 4
+
+
+def test_neck_is_last_and_only_on_the_light_days():
     neck = ["Neck Flexion", "Neck Extension", "Neck Lateral Flexion"]
-    for suffix in LEG_DAYS:
+    for suffix in LIGHT_DAYS:
         assert _names(_by_suffix(suffix))[-1] == neck
-    for suffix in BACK_DAYS:
-        flat = [name for block in _names(_by_suffix(suffix)) for name in block]
-        assert not any(name.startswith("Neck ") for name in flat)
+    for suffix in BIG_DAYS:
+        assert not any(name.startswith("Neck ") for name in _flat(suffix))
 
 
 def test_tibialis_holds_its_twelve_set_floor():
-    # 4 sets x 3 back days = 12/wk on the tib bar (one-legged).
-    assert _days_with("Tibialis Raise") == set(BACK_DAYS)
-    for suffix in BACK_DAYS:
+    assert _days_with("Tibialis Raise") == set(BIG_DAYS)
+    for suffix in BIG_DAYS:
         assert _set_counts(suffix)["Tibialis Raise"] == 4
 
 
 def test_abductors_are_a_maintenance_dose_at_load():
-    # Deliberately below the floor (3 x 2 days = 6/wk) -- held, not progressed.
-    assert _days_with("Cable Hip Abduction") == set(LEG_DAYS)
-    for suffix in LEG_DAYS:
+    # Deliberately below the floor (3 x 2 days = 6/wk) -- held, not progressed,
+    # which only works if the weight stays up.
+    assert _days_with("Cable Hip Abduction") == set(LIGHT_DAYS)
+    for suffix in LIGHT_DAYS:
         assert _set_counts(suffix)["Cable Hip Abduction"] == 3
     assert all(s["Secondary"] > 0 for s in _find("Tuesday", "Cable Hip Abduction")["SetDetails"])
 
 
-def test_upper_body_only_ever_rides_the_rest():
-    # Upper body is not a priority: it fills the rest inside a block and never
-    # leads one, so it can never displace a driving set.
-    upper = {
+def test_calves_are_unloaded_on_the_light_days():
+    # A loaded kettlebell calf raise would put a carry on a no-grip day.
+    for suffix in LIGHT_DAYS:
+        assert all(s["Secondary"] == 0 for s in _find(suffix, "Standing Calf Raise")["SetDetails"])
+
+
+def test_filler_never_leads_a_block():
+    # Accessories ride the rest between the driving sets; they never displace one.
+    filler = {
         "Barbell Incline Bench Press",
         "Ring Dip",
         "Handstand Push-Up",
         "Lat Pulldown",
         "Low Row",
-        "Face Pull",
+        "L-Sit",
+        "Tibialis Raise",
+        "Couch Stretch",
     }
     for day in DAYS:
         for block in _names(day):
-            assert block[0] not in upper
+            assert block[0] not in filler
 
 
 def test_timed_holds_use_time_focus():
-    for name, suffix in (("L-Sit", "Tuesday"), ("Elephant Walk", "Friday")):
+    for name, suffix in (("L-Sit", "Monday"), ("Elephant Walk", "Friday")):
         assert _find(suffix, name)["Definition"]["PrimaryFocusId"] == 3
 
 
 def test_couch_stretch_logs_per_side_time():
     # 2 sides x 120 s stored as one set: Primary = sides, Secondary = seconds.
-    stretch = _find("Tuesday", "Couch Stretch")
+    stretch = _find("Monday", "Couch Stretch")
     assert stretch["Definition"]["SecondaryFocusId"] == 3
     assert all(s["Primary"] == 2 and s["Secondary"] == 120 for s in stretch["SetDetails"])
 
