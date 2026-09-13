@@ -250,6 +250,23 @@ def test_calves_are_loaded_and_live_on_the_light_days():
         assert all(s["Primary"] == 70 for s in calf["SetDetails"])
 
 
+def test_shoulder_health_work_is_present_on_the_light_days():
+    # Face pulls are the only external-rotation / rear-delt work in the plan --
+    # the antagonist to the grappling pulls and posts, so they matter from month
+    # two on. Light enough that the rope costs no meaningful grip, which is what
+    # lets them sit on a no-grip day instead of competing for a big-day slot.
+    assert _days_with("Face Pull") == set(LIGHT_DAYS)
+    for suffix in LIGHT_DAYS:
+        assert _set_counts(suffix)["Face Pull"] == 3
+
+
+def test_pulling_is_thin_but_present_on_every_big_day():
+    # The grip cluster confines pulling to Mon/Wed/Fri and, within them, to the
+    # Nordic's rest. Guard that it does not vanish entirely in a later edit.
+    for suffix in BIG_DAYS:
+        assert {"Lat Pulldown", "Low Row"} & _flat(suffix)
+
+
 def test_filler_never_leads_a_block():
     # Accessories ride the rest between the driving sets; they never displace one.
     filler = {
@@ -261,6 +278,7 @@ def test_filler_never_leads_a_block():
         "L-Sit",
         "Tibialis Raise",
         "Standing Calf Raise",
+        "Face Pull",
         "Couch Stretch",
     }
     for day in DAYS:

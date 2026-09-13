@@ -29,7 +29,15 @@ The result is three big days and two light ones:
     paused one. Load is what maintains strength, so volume is what gets cut.
   * TUE / THU -- short, deliberately carrying NO hamstring work, NO spinal
     extension and nothing that has to be gripped hard. Side hypers, ring dips,
-    the light one-arm calf raise, cable abduction, QL raises and neck.
+    the light one-arm calf raise, cable abduction, QL raises, face pulls and neck.
+
+Upper body is NOT a priority and rides the rest inside each block. It comes out
+push-heavy (incline, handstand push-ups, ring dips) against a thin 9 sets of
+pulling, because the grip cluster confines pulling to the big days and, within
+them, to the one rest slot that costs neither grip nor low back -- the Nordic's.
+Face pulls are the exception that earns a light-day slot: they are the only
+shoulder-health work here, the antagonist to all the grappling pulls and posts,
+and light enough that the rope costs no meaningful grip.
 
 Within a big day, the four heavy movements each get their OWN superset, so none
 of them rests against another that taxes the same tissue. The one deliberate
@@ -225,6 +233,13 @@ _QL_RAISE = _reps("QL Raise", reps=16, weight=0, count=3)
 # Ring dips: support grip only, not the crush grip the RDL and the pulls tax.
 _RING_DIP = _reps("Ring Dip", reps=8, weight=0, count=3)
 
+# Face pull on the long cable handles -- rear delts, scapular retraction and
+# external rotation at 90 degrees. Shoulder-health work, the antagonist to all
+# the grappling pulls and posts, so it matters most from month two on. Light
+# enough that the rope costs no meaningful grip, which is why it can live here
+# rather than competing for a slot on the big days. 3 sets x 2 days = 6/wk.
+_FACE_PULL = _reps("Face Pull", reps=15, weight=40, count=3)
+
 # Calves: a 40 lb kettlebell held in ONE hand, 35 reps per side (70 total). It is
 # a one-arm hold, but 40 lb is not enough to tire the hands, so it does not count
 # against the grip cluster -- and putting it here keeps three sets off the big
@@ -293,7 +308,7 @@ def _light_day(suffix: str) -> Day:
         suffix,
         [
             [_SIDE_HYPER, _RING_DIP, _CALF],
-            [_ABDUCTION, _QL_RAISE],
+            [_ABDUCTION, _QL_RAISE, _FACE_PULL],
             list(_NECK_BLOCK),
         ],
     )
