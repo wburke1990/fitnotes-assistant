@@ -16,8 +16,9 @@ _NORDIC = "Nordic Hamstring Curl"
 _SIDE_HYPER = "Side-Lying Hyperextension Adductor Raise"
 
 # Grip is a recovery limiter, so every grip-heavy movement clusters on the same
-# days. The RDL is trained raw (no straps) and is the biggest stressor of the three.
-GRIP_MOVES = {_RDL, "Lat Pulldown", "Low Row"}
+# days. The RDL is trained raw (no straps) and is the biggest stressor. The calf
+# raise counts: a 40 lb kettlebell in one hand is a carry for the length of a set.
+GRIP_MOVES = {_RDL, "Lat Pulldown", "Low Row", "Standing Calf Raise"}
 
 # The posterior chain is the same story: these cannot be spread across
 # alternating days and recovered, so they cluster too. The split squat is in the
@@ -232,10 +233,15 @@ def test_abductors_are_a_maintenance_dose_at_load():
     assert all(s["Secondary"] > 0 for s in _find("Tuesday", "Cable Hip Abduction")["SetDetails"])
 
 
-def test_calves_are_unloaded_on_the_light_days():
-    # A loaded kettlebell calf raise would put a carry on a no-grip day.
-    for suffix in LIGHT_DAYS:
-        assert all(s["Secondary"] == 0 for s in _find(suffix, "Standing Calf Raise")["SetDetails"])
+def test_calves_are_a_loaded_one_arm_carry_on_the_grip_days():
+    # 40 lb kettlebell in one hand, 35 reps per side (70 total). That is a carry
+    # for the length of a set, so it belongs with the grip cluster -- and it
+    # rests the hyper, which needs no grip of its own.
+    assert _days_with("Standing Calf Raise") == set(BIG_DAYS)
+    for suffix in BIG_DAYS:
+        calf = _find(suffix, "Standing Calf Raise")
+        assert all(s["Secondary"] == 40 for s in calf["SetDetails"])
+        assert all(s["Primary"] == 70 for s in calf["SetDetails"])
 
 
 def test_filler_never_leads_a_block():
@@ -248,6 +254,7 @@ def test_filler_never_leads_a_block():
         "Low Row",
         "L-Sit",
         "Tibialis Raise",
+        "Standing Calf Raise",
         "Couch Stretch",
     }
     for day in DAYS:
@@ -256,7 +263,7 @@ def test_filler_never_leads_a_block():
 
 
 def test_timed_holds_use_time_focus():
-    for name, suffix in (("L-Sit", "Monday"), ("Elephant Walk", "Friday")):
+    for name, suffix in (("L-Sit", "Tuesday"), ("Elephant Walk", "Friday")):
         assert _find(suffix, name)["Definition"]["PrimaryFocusId"] == 3
 
 

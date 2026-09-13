@@ -14,7 +14,8 @@ Context this plan is built for:
 TWO RECOVERY CONSTRAINTS SHAPE THE WHOLE WEEK, and they point the same way:
   * GRIP is a long-standing limiter -- heavy grip on back-to-back days does not
     recover. So every grip-heavy movement is CLUSTERED onto the same days:
-    the snatch-grip RDL, the pulldown and row, and any loaded carry.
+    the snatch-grip RDL, the pulldown and row, and any loaded carry -- which
+    includes the calf raise, done with a 40 lb kettlebell in one hand.
   * The POSTERIOR CHAIN is the same story -- RDLs, hamstring work and the hypers
     cannot be spread across alternating days and recovered. So they cluster too.
     The front rack split squat joins them: it taxes the hamstrings hard.
@@ -26,7 +27,8 @@ The result is three big days and two light ones:
     day off between exposures and the low back is never trained on consecutive
     days.
   * TUE / THU -- short, deliberately carrying NO grip work, NO hamstring work and
-    NO spinal extension. Side hypers, cable abduction, calves and neck only.
+    NO spinal extension. Side hypers, cable abduction, QL raises, L-sits, ring
+    dips and neck only -- nothing that has to be held onto under load.
 
 Within a big day, the four heavy movements each get their OWN superset, so none
 of them rests against another that taxes the same tissue. The one deliberate
@@ -180,15 +182,20 @@ _COUCH = Move(
     secondary_focus="time",
 )
 
-# Big-day fillers. Each must tax NEITHER grip, NOR hamstrings, NOR the low back,
-# or it would defeat the point of giving the heavy movements their own supersets.
+# Big-day fillers. None may tax the HAMSTRINGS or the LOW BACK, or it would
+# defeat the point of giving the heavy movements their own supersets. Grip is a
+# different matter: these are the grip days, so a grip-taxing filler belongs here
+# and nowhere else.
 # Tibialis on the tib bar, one-legged (35/side = 70 total): 4 sets x 3 days =
 # 12/wk, its progression floor. Handstand push-ups and the incline press are the
 # grip-free pressing.
 _TIB = _reps("Tibialis Raise", reps=70, weight=25, count=4)
 _HSPU = _reps("Handstand Push-Up", reps=5, weight=0, count=3)
 _INCLINE = _reps("Barbell Incline Bench Press", reps=8, weight=135, count=3)
-_L_SIT = _hold("L-Sit", 30, count=3)
+# Calves: a 40 lb kettlebell held in ONE HAND, 35 reps per side (70 total). That
+# is a one-arm carry for the length of a set, so it is grip work and lives on the
+# grip days -- it rests the hyper, which needs no grip of its own.
+_CALF = _reps("Standing Calf Raise", reps=70, weight=40, count=3)
 
 # --- The light days: no grip, no hamstrings, no spinal extension --------------
 
@@ -206,12 +213,10 @@ _ABDUCTION = _reps("Cable Hip Abduction", reps=24, weight=60, count=3)
 # QL raise -- lateral trunk, no grip, no hinge.
 _QL_RAISE = _reps("QL Raise", reps=16, weight=0, count=3)
 
-# Calves, bodyweight single-leg (35/side = 70 total) -- a loaded kettlebell
-# version would put a carry on a no-grip day.
-_CALF = _reps("Standing Calf Raise", reps=70, weight=0, count=3)
-
-# Ring dips: support grip only, not the crush grip the RDL and pulls tax.
+# Ring dips and L-sits: support grip only, not the crush grip the RDL, the pulls
+# and the one-arm kettlebell calf raise tax.
 _RING_DIP = _reps("Ring Dip", reps=8, weight=0, count=3)
+_L_SIT = _hold("L-Sit", 30, count=3)
 
 # Neck (harness on the cable). Front / back / sides, 20 reps @ 30, 4 sets each.
 # PROGRESSION IS BY SETS: each direction is its own muscle, so each gets its own
@@ -259,8 +264,10 @@ def _big_day(suffix: str, *, light: bool) -> Day:
             [_RDL_LIGHT if light else _RDL, _COUCH],
             # The front rack ramp, with grip-free pressing and the tib bar.
             [_SPLIT_SQUAT_PAUSED if light else _SPLIT_SQUAT, _INCLINE, _TIB],
-            # Hypers on their own, resting against grip-free, hamstring-free work.
-            [_HYPER, _HSPU, _L_SIT],
+            # Hypers on their own, resting against hamstring-free work. The
+            # one-arm kettlebell calf raise is grip work, which is fine here --
+            # this is a grip day, and the hyper needs no grip of its own.
+            [_HYPER, _HSPU, _CALF],
             # The one deliberate pairing: the pull rides the Nordic's rest.
             [_NORDIC, _LOW_ROW if light else _PULLDOWN],
         ],
@@ -272,7 +279,7 @@ def _light_day(suffix: str) -> Day:
     return Day(
         suffix,
         [
-            [_SIDE_HYPER, _RING_DIP, _CALF],
+            [_SIDE_HYPER, _RING_DIP],
             [_ABDUCTION, _QL_RAISE, _L_SIT],
             list(_NECK_BLOCK),
         ],
